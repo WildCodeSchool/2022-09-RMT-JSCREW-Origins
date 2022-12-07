@@ -1,3 +1,4 @@
+// ---------- EXEMPLE DE MANAGER ------------
 const AbstractManager = require("./AbstractManager");
 
 class ItemManager extends AbstractManager {

@@ -1,3 +1,4 @@
+// ---------- EXEMPLE DE CONTROLLER ------------
 const models = require("../models");
 
 const browse = (req, res) => {
