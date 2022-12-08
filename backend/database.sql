@@ -3,7 +3,7 @@ CREATE DATABASE origin_database;
 USE origin_database;
 
 CREATE TABLE category (
-id INTEGER NOT NULL PRIMARY KEY,
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 Name VARCHAR(500) NOT NULL,
 Icon VARCHAR(1000),
 Description VARCHAR(1000) NOT NULL
@@ -15,12 +15,13 @@ INSERT INTO category (id,name,icon,description) VALUES (3,'FIFA',NULL,'Jeux de f
 INSERT INTO category (id,name,icon,description) VALUES (4,'Counter-strike: GO','https://w7.pngwing.com/pngs/25/642/png-transparent-counter-strike-global-offensive-counter-strike-source-dota-2-logo-others-emblem-text-orange-thumbnail.png','Jeux de tir Fromat 5v5');
 
 CREATE TABLE video (
-id INTEGER NOT NULL PRIMARY KEY,
-id_Game INTEGER NOT NULL,
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+id_Game INTEGER,
 Url VARCHAR(255) NOT NULL,
 Description VARCHAR(255),
 Premium TINYINT NOT NULL,
 Foreign Key (id_Game) REFERENCES category(id)
+ON DELETE SET NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO video (id,id_Game,Url,Description,premium) VALUES (1,1,'https://www.youtube.com/watch?v=OKL8BLAec1U','Top Play durant les worlds de LOL 2022',0);
