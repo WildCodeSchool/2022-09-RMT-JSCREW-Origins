@@ -1,57 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-function SearchBar() {
-  const [displayCategories, setDisplayCategories] = useState(false);
-  const [searchCategory, setSearchCategory] = useState("");
-  const [myCategories, setMyCategories] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/categories")
-      .then((response) => response.json())
-      .then((categories) => setMyCategories(categories))
-      .catch((error) => console.error(error));
-  }, []);
-  const handleDisplayCategories = (e) => {
-    setSearchCategory(e.target.value);
-    if (searchCategory.length >= 0) {
-      setDisplayCategories(true);
-    } else if (searchCategory.length === 0) {
-      setDisplayCategories(false);
+// eslint-disable-next-line react/prop-types
+function SearchBar({ data }) {
+  const [displayData, setDisplayData] = useState(false);
+  const [searchData, setSearchData] = useState("");
+  const handleDisplayData = (e) => {
+    setSearchData(e.target.value);
+    if (searchData.length >= 0) {
+      setDisplayData(true);
+    } else if (searchData.length === 0) {
+      setDisplayData(false);
     }
   };
   return (
     <form className="flex flex-col items-center w-full">
       <label className="border-solid border-primary border-2 rounded-md p-3 w-3/4 lg:w-7/12 relative">
         <input
-          onChange={handleDisplayCategories}
+          onChange={handleDisplayData}
           className="focus:outline-none"
           type="text"
-          placeholder="Search game"
-          value={searchCategory}
+          placeholder={`Search `}
+          value={searchData}
         />
         <button
-          onClick={() => setDisplayCategories(!displayCategories)}
+          onClick={() => setDisplayData(!displayData)}
           className={`bg-primary text-white text-base rounded-md p-2 absolute absolute right-1 bottom-1 hover:bg-secondary hover:text-primary ${
-            displayCategories && "focus:bg-secondary focus:text-primary"
+            displayData && "focus:bg-secondary focus:text-primary"
           }`}
           type="button"
         >
-          {!displayCategories ? "Show games" : "Hide games"}
+          {!displayData ? "Show" : "Hide"}
         </button>
       </label>
-      {displayCategories && (
+      {displayData && (
         <div className="bg-primary w-3/4 lg:w-7/12 rounded-md">
           <ul className="flex flex-col">
-            {myCategories
-              .filter((myCategory) =>
-                myCategory.Name.startsWith(searchCategory)
-              )
-              .map((myCategory) => (
+            {data
+              // eslint-disable-next-line react/prop-types
+              .filter((myData) => myData.Name.startsWith(searchData))
+              .map((myData) => (
                 <button
                   type="button"
-                  key={myCategory.id}
+                  key={myData.id}
                   className="text-white text-base self-start py-3 pl-5 hover:text-secondary hover:bg-white hover:bg-opacity-5 w-full flex"
                 >
-                  {myCategory.Name}
+                  {myData.Name}
                 </button>
               ))}
           </ul>
