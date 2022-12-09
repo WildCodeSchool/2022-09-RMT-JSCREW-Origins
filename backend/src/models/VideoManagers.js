@@ -1,6 +1,6 @@
 const AbstractManager = require("./AbstractManager");
 
-class VideoManager extends AbstractManager {
+class VideoControllers extends AbstractManager {
   constructor() {
     super({ table: "video" });
   }
@@ -20,4 +20,4 @@ class VideoManager extends AbstractManager {
   }
 }
 
-module.exports = VideoManager;
+module.exports = VideoControllers;
