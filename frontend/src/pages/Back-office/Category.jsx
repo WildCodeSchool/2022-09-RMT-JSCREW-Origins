@@ -3,7 +3,7 @@ import SearchBar from "@components/SearchBar";
 
 function Category() {
   return (
-    <div className="flex flex-col justify-center w-full">
+    <div className="flex flex-col w-full pt-10">
       <SearchBar />
     </div>
   );
