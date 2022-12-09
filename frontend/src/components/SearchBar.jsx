@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-
-const tests = ["tes1", "test2", "test3", "test4"];
+import React, { useEffect, useState } from "react";
 
 function SearchBar() {
   const [displayCategory, setDisplayCategory] = useState(false);
+  const [myCategories, setMyCategories] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/categories")
+      .then((response) => response.json())
+      .then((categories) => setMyCategories(categories))
+      .catch((error) => console.error(error));
+  }, []);
   return (
     <form className="flex flex-col items-center w-full">
       <label className="border-solid border-primary border-2 rounded-md p-3 w-3/4 relative">
@@ -23,9 +28,9 @@ function SearchBar() {
       {displayCategory && (
         <div className="bg-primary w-3/4 rounded-md">
           <ul className="flex flex-col">
-            {tests.map((test) => (
+            {myCategories.map((myCategory) => (
               <li className="text-white py-3 pl-5 hover:text-secondary">
-                {test}
+                {myCategory.Name}
               </li>
             ))}
           </ul>
