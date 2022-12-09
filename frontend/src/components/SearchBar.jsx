@@ -29,7 +29,10 @@ function SearchBar() {
         <div className="bg-primary w-3/4 rounded-md">
           <ul className="flex flex-col">
             {myCategories.map((myCategory) => (
-              <li className="text-white py-3 pl-5 hover:text-secondary">
+              <li
+                key={myCategory.id}
+                className="text-white py-3 pl-5 hover:text-secondary"
+              >
                 {myCategory.Name}
               </li>
             ))}
