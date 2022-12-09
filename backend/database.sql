@@ -34,7 +34,7 @@ INSERT INTO video (id,id_Game,Url,Description,premium) VALUES (7,4,'https://www.
 INSERT INTO video (id,id_Game,Url,Description,premium) VALUES (8,4,'https://www.youtube.com/watch?v=G1qhsp-HS80','Map 1 de la final ESL 2022 NAVY vs FAZE',1);
 
 CREATE TABLE user (
-id INT NOT NULL PRIMARY KEY,
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 isAdmin TINYINT NOT NULL,
 email VARCHAR(50) NOT NULL,
 password VARCHAR(20) NOT NULL
