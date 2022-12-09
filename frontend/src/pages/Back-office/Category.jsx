@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "@components/SearchBar";
+import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
+import TextareaTemplate from "@components/TextareaTemplate";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
@@ -12,7 +13,7 @@ function Category() {
   }, []);
   return (
     <div className="flex flex-col items-center w-full pt-10">
-      <SearchBar
+      <SearchBarTemplate
         data={myCategories}
         customWidth="w-3/4 lg:w-7/12"
         searchBarContainer="flex flex-col items-center w-full"
@@ -22,6 +23,10 @@ function Category() {
       <form className="mt-10 w-full flex flex-col items-center gap-y-7">
         <InputTemplate textPlaceholder="Title" customWidth="w-3/4 lg:w-7/12" />
         <InputTemplate textPlaceholder="URL" customWidth="w-3/4 lg:w-7/12" />
+        <TextareaTemplate
+          textPlaceholder="Description"
+          customWidth="w-3/4 lg:w-7/12"
+        />
       </form>
     </div>
   );
