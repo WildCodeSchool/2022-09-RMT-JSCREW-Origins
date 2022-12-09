@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-function SearchBar({ data }) {
+function SearchBar({ data, textPlaceholder, textButton }) {
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
   const handleDisplayData = (e) => {
@@ -19,17 +19,17 @@ function SearchBar({ data }) {
           onChange={handleDisplayData}
           className="focus:outline-none"
           type="text"
-          placeholder={`Search `}
+          placeholder={textPlaceholder}
           value={searchData}
         />
         <button
           onClick={() => setDisplayData(!displayData)}
-          className={`bg-primary text-white text-base rounded-md p-2 absolute absolute right-1 bottom-1 hover:bg-secondary hover:text-primary ${
+          className={`bg-primary text-white text-base rounded-md p-2 absolute right-1 bottom-1 hover:bg-secondary hover:text-primary ${
             displayData && "focus:bg-secondary focus:text-primary"
           }`}
           type="button"
         >
-          {!displayData ? "Show" : "Hide"}
+          {!displayData ? `Show ${textButton}` : `Hide ${textButton}`}
         </button>
       </label>
       {displayData && (

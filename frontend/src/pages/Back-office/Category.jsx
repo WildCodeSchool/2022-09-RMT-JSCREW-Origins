@@ -11,7 +11,11 @@ function Category() {
   }, []);
   return (
     <div className="flex flex-col w-full pt-10">
-      <SearchBar data={myCategories} />
+      <SearchBar
+        data={myCategories}
+        textPlaceholder="Search game"
+        textButton="category"
+      />
     </div>
   );
 }
