@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-function SearchBar({ data, textPlaceholder, textButton }) {
+function SearchBar({ data, textPlaceholder, textButton, searchBarContainer }) {
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
   const handleDisplayData = (e) => {
@@ -13,7 +13,7 @@ function SearchBar({ data, textPlaceholder, textButton }) {
     }
   };
   return (
-    <form className="flex flex-col items-center w-full">
+    <div className={searchBarContainer}>
       <label className="border-solid border-primary border-2 rounded-md p-3 w-3/4 lg:w-7/12 relative">
         <input
           onChange={handleDisplayData}
@@ -50,7 +50,7 @@ function SearchBar({ data, textPlaceholder, textButton }) {
           </ul>
         </div>
       )}
-    </form>
+    </div>
   );
 }
 
