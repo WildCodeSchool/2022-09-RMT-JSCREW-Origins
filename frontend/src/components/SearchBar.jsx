@@ -1,7 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
-function SearchBar({ data, textPlaceholder, textButton, searchBarContainer }) {
+function SearchBar({
+  data,
+  textPlaceholder,
+  textButton,
+  searchBarContainer,
+  customWidth,
+}) {
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
   const handleDisplayData = (e) => {
@@ -14,7 +20,9 @@ function SearchBar({ data, textPlaceholder, textButton, searchBarContainer }) {
   };
   return (
     <div className={searchBarContainer}>
-      <label className="border-solid border-primary border-2 rounded-md p-3 w-3/4 lg:w-7/12 relative">
+      <label
+        className={`border-solid border-primary border-2 rounded-md p-3 ${customWidth} relative`}
+      >
         <input
           onChange={handleDisplayData}
           className="focus:outline-none"
@@ -36,7 +44,6 @@ function SearchBar({ data, textPlaceholder, textButton, searchBarContainer }) {
         <div className="bg-primary w-3/4 lg:w-7/12 rounded-md">
           <ul className="flex flex-col">
             {data
-              // eslint-disable-next-line react/prop-types
               .filter((myData) => myData.Name.startsWith(searchData))
               .map((myData) => (
                 <button

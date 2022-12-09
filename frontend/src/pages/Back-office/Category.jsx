@@ -13,8 +13,9 @@ function Category() {
   return (
     <div className="flex flex-col items-center w-full pt-10">
       <SearchBar
-        searchBarContainer="flex flex-col items-center w-full"
         data={myCategories}
+        customWidth="w-3/4 lg:w-7/12"
+        searchBarContainer="flex flex-col items-center w-full"
         textPlaceholder="Search game"
         textButton="category"
       />
