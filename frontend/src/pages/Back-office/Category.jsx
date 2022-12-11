@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
+import ButtonTemplate from "@components/ButtonTemplate";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
@@ -12,23 +13,28 @@ function Category() {
       .catch((error) => console.error(error));
   }, []);
   return (
-    <div className="flex flex-col items-center w-full pt-10">
+    <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       <SearchBarTemplate
         data={myCategories}
-        customWidth="w-3/4 lg:w-7/12"
+        customWidth="xl_Input"
         searchBarContainer="flex flex-col items-center w-full"
         textPlaceholder="Search game"
         textButton="category"
       />
-      <form className="mt-10 w-full flex flex-col items-center gap-y-7">
-        <InputTemplate textPlaceholder="Title" customWidth="w-3/4 lg:w-7/12" />
-        <InputTemplate textPlaceholder="URL" customWidth="w-3/4 lg:w-7/12" />
+      <div className="mt-10 flex flex-col items-center w-full gap-y-7">
+        <InputTemplate textPlaceholder="Title" customWidth="xl_Input" />
+        <InputTemplate textPlaceholder="URL" customWidth="xl_Input" />
         <TextareaTemplate
           textPlaceholder="Description"
-          customWidth="w-3/4 lg:w-7/12"
+          customWidth="xl_Input"
         />
-      </form>
-    </div>
+      </div>
+      <div className="flex xl_Input justify-between">
+        <ButtonTemplate buttonType="ADD" buttonStyle="" />
+        <ButtonTemplate buttonType="UPDATE" buttonStyle="" />
+        <ButtonTemplate buttonType="DELETE" buttonStyle="" />
+      </div>
+    </form>
   );
 }
 
