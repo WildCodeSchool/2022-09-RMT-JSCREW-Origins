@@ -4,7 +4,7 @@ import React from "react";
 function TextareaTemplate({ textPlaceholder, customWidth }) {
   return (
     <textarea
-      className={`border-solid border-primary border-2 rounded-md p-3 ${customWidth}`}
+      className={`cstm_styleInput ${customWidth}`}
       placeholder={textPlaceholder}
       rows="5"
     />

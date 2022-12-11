@@ -20,9 +20,7 @@ function SearchBar({
   };
   return (
     <div className={searchBarContainer}>
-      <label
-        className={`border-solid border-primary border-2 rounded-md p-3 ${customWidth} relative`}
-      >
+      <label className={`cstm_styleInput ${customWidth} relative`}>
         <input
           onChange={handleDisplayData}
           className="focus:outline-none"
