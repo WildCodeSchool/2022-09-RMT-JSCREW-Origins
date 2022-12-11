@@ -7,6 +7,7 @@ function SearchBar({
   textButton,
   searchBarContainer,
   customWidth,
+  methodOnClick,
 }) {
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
@@ -45,6 +46,7 @@ function SearchBar({
               .filter((myData) => myData.Name.startsWith(searchData))
               .map((myData) => (
                 <button
+                  onClick={() => methodOnClick(myData)}
                   type="button"
                   key={myData.id}
                   className="text-white text-base self-start py-3 pl-5 hover:text-secondary hover:bg-white hover:bg-opacity-5 w-full flex"
