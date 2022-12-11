@@ -32,7 +32,7 @@ function SearchBar({
         />
         <button
           onClick={() => setDisplayData(!displayData)}
-          className={`bg-primary text-white text-base rounded-md p-2 absolute right-1 bottom-1 hover:bg-secondary hover:text-primary ${
+          className={`cstm_buttonPrimary absolute right-1 bottom-1 ${
             displayData && "focus:bg-secondary focus:text-primary"
           }`}
           type="button"

@@ -16,23 +16,32 @@ function Category() {
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       <SearchBarTemplate
         data={myCategories}
-        customWidth="xl_Input"
+        customWidth="cstm_xlInput"
         searchBarContainer="flex flex-col items-center w-full"
         textPlaceholder="Search game"
         textButton="category"
       />
       <div className="mt-10 flex flex-col items-center w-full gap-y-7">
-        <InputTemplate textPlaceholder="Title" customWidth="xl_Input" />
-        <InputTemplate textPlaceholder="URL" customWidth="xl_Input" />
+        <InputTemplate textPlaceholder="Title" customWidth="cstm_xlInput" />
+        <InputTemplate textPlaceholder="URL" customWidth="cstm_xlInput" />
         <TextareaTemplate
           textPlaceholder="Description"
-          customWidth="xl_Input"
+          customWidth="cstm_xlInput"
         />
       </div>
-      <div className="flex xl_Input justify-between">
-        <ButtonTemplate buttonType="ADD" buttonStyle="" />
-        <ButtonTemplate buttonType="UPDATE" buttonStyle="" />
-        <ButtonTemplate buttonType="DELETE" buttonStyle="" />
+      <div className="flex cstm_xlInput justify-between">
+        <ButtonTemplate
+          buttonType="ADD"
+          buttonStyle="cstm_buttonSecondaryNone"
+        />
+        <ButtonTemplate
+          buttonType="UPDATE"
+          buttonStyle="cstm_buttonSecondaryNone"
+        />
+        <ButtonTemplate
+          buttonType="DELETE"
+          buttonStyle="cstm_buttonSecondary"
+        />
       </div>
     </form>
   );

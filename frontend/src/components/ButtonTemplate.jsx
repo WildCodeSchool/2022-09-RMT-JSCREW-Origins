@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-function ButtonTemplate({ buttonType }) {
+function ButtonTemplate({ buttonType, buttonStyle }) {
   return (
     <div>
-      <button className="text-base" type="submit">
+      <button type="submit" className={`${buttonStyle}`}>
         {buttonType}
       </button>
     </div>
