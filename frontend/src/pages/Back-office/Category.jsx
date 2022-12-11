@@ -6,48 +6,69 @@ import ButtonTemplate from "@components/ButtonTemplate";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
+  const [displayForm, setDysplayForm] = useState(false);
   useEffect(() => {
     fetch("http://localhost:5000/categories")
       .then((response) => response.json())
       .then((categories) => setMyCategories(categories))
       .catch((error) => console.error(error));
   }, []);
+  // Affichage du form pour ajouter une categorie
+  const handleDisplayFormAdd = () => {
+    setDysplayForm(!displayForm);
+  };
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
-      <SearchBarTemplate
-        data={myCategories}
-        customWidth="cstm_width_XlInput"
-        searchBarContainer="flex flex-col items-center w-full"
-        textPlaceholder="Search game"
-        textButton="category"
-      />
-      <div className="mt-10 flex flex-col items-center w-full gap-y-7">
-        <InputTemplate
-          textPlaceholder="Title"
-          customWidth="cstm_width_XlInput"
+      {!displayForm && (
+        <ButtonTemplate
+          methodOnClick={handleDisplayFormAdd}
+          buttonType="button"
+          buttonText="+ Add new category"
+          buttonStyle="cstm_buttonSecondaryNone w-full"
         />
-        <InputTemplate textPlaceholder="URL" customWidth="cstm_width_XlInput" />
-        <TextareaTemplate
-          textPlaceholder="Description"
+      )}
+      {!displayForm && "OR"}
+      {!displayForm && (
+        <SearchBarTemplate
+          data={myCategories}
           customWidth="cstm_width_XlInput"
+          searchBarContainer="flex flex-col items-center w-full"
+          textPlaceholder="Search category"
+          textButton="Update category"
         />
-      </div>
+      )}
+      {displayForm && (
+        <div className="mt-10 flex flex-col items-center w-full gap-y-7">
+          <InputTemplate
+            textPlaceholder="Title"
+            customWidth="cstm_width_XlInput"
+          />
+          <InputTemplate
+            textPlaceholder="URL"
+            customWidth="cstm_width_XlInput"
+          />
+          <TextareaTemplate
+            textPlaceholder="Description"
+            customWidth="cstm_width_XlInput"
+          />
+        </div>
+      )}
       <div className="flex cstm_width_XlInput justify-between">
-        <ButtonTemplate
-          buttonType="submit"
-          buttonText="ADD"
-          buttonStyle="cstm_buttonSecondaryNone"
-        />
-        <ButtonTemplate
-          buttonType="submit"
-          buttonText="UPDATE"
-          buttonStyle="cstm_buttonSecondaryNone"
-        />
-        <ButtonTemplate
-          buttonType="submit"
-          buttonText="DELETE"
-          buttonStyle="cstm_buttonSecondary"
-        />
+        {displayForm && (
+          <>
+            <ButtonTemplate
+              buttonType="submit"
+              buttonText="VALIDATE"
+              buttonStyle="cstm_buttonSecondaryNone"
+            />
+            <ButtonTemplate
+              methodOnClick={handleDisplayFormAdd}
+              buttonType="button"
+              buttonText="CANCEL"
+              buttonStyle="cstm_buttonSecondaryNone"
+            />
+          </>
+        )}
       </div>
     </form>
   );

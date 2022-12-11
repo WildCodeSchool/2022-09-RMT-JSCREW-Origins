@@ -1,11 +1,20 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-function ButtonTemplate({ buttonType, buttonText, buttonStyle }) {
+function ButtonTemplate({
+  buttonType,
+  buttonText,
+  buttonStyle,
+  methodOnClick,
+}) {
   return (
     <div>
-      {/* eslint-disable-next-line react/button-has-type */}
-      <button type={buttonType} className={`${buttonStyle}`}>
+      <button
+        // eslint-disable-next-line react/button-has-type
+        type={buttonType}
+        onClick={methodOnClick}
+        className={`${buttonStyle}`}
+      >
         {buttonText}
       </button>
     </div>

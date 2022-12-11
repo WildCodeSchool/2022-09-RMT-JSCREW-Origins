@@ -35,7 +35,7 @@ function SearchBar({
           }`}
           type="button"
         >
-          {!displayData ? `Show ${textButton}` : `Hide ${textButton}`}
+          {textButton}
         </button>
       </label>
       {displayData && (
