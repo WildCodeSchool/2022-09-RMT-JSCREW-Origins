@@ -31,15 +31,18 @@ function Category() {
       </div>
       <div className="flex cstm_xlInput justify-between">
         <ButtonTemplate
-          buttonType="ADD"
+          buttonType="submit"
+          buttonText="ADD"
           buttonStyle="cstm_buttonSecondaryNone"
         />
         <ButtonTemplate
-          buttonType="UPDATE"
+          buttonType="submit"
+          buttonText="UPDATE"
           buttonStyle="cstm_buttonSecondaryNone"
         />
         <ButtonTemplate
-          buttonType="DELETE"
+          buttonType="submit"
+          buttonText="DELETE"
           buttonStyle="cstm_buttonSecondary"
         />
       </div>
