@@ -4,7 +4,7 @@ import ConnectForm from "@components/ConnectForm";
 
 function Setting() {
   return (
-    <div>
+    <div className="flex flex-col items-center w-full pt-10">
       <ConnectForm />
     </div>
   );
