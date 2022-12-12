@@ -1,6 +1,4 @@
 import React from "react";
-import ButtonDelete from "./ButtonDelete";
-import ButtonUpdate from "./ButtonUpdate";
 
 function ConnectForm() {
   return (
@@ -24,8 +22,8 @@ function ConnectForm() {
         />
       </div>
       <div className="flex justify-around pt-5">
-        <ButtonUpdate />
-        <ButtonDelete />
+        {/* <ButtonUpdate />
+        <ButtonDelete /> */}
       </div>
     </form>
   );
