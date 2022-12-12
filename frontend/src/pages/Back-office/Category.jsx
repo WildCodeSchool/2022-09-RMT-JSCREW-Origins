@@ -15,7 +15,7 @@ function Category() {
   });
   const { idCategory, categoryName, icon, description } = categoryToUpdate;
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/categories`)
       .then((response) => response.json())
       .then((categories) => setMyCategories(categories))
       .catch((error) => console.error(error));
