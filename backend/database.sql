@@ -41,6 +41,7 @@ password VARCHAR(20) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO user (id,isAdmin, email, password) VALUES (1,1, 'admin1@mail.com', 1234);
+INSERT INTO user (id,isAdmin, email, password) VALUES (2,1, 'admin2@mail.com', 12345);
 
 CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY,
