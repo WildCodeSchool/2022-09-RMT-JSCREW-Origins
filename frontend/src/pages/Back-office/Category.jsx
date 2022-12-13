@@ -87,7 +87,7 @@ function Category() {
           />
         </div>
       )}
-      <div className="flex cstm_width_XlInput justify-between">
+      <div className="flex justify-around space-x-8 pt-5">
         {displayForm && (
           <>
             {!idCategory && (
