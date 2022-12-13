@@ -20,21 +20,21 @@ function Category() {
       .then((categories) => setMyCategories(categories))
       .catch((error) => console.error(error));
   }, []);
-  // Affichage du form pour ajouter une categorie
+  // Affichage du form pour AJOUTER une categorie
   const handleDisplayFormAdd = () => {
     setDysplayForm(true);
   };
-  // Affichage du form plus remplissage des inputs pour éditer une categorie
-  const handleDisplayFormUpdate = (data) => {
+  // Affichage du form plus remplissage des inputs pour EDITER une categorie
+  const handleDisplayFormUpdate = (category) => {
     setDysplayForm(!displayForm);
     const newCategoryToUpdate = { ...categoryToUpdate };
-    newCategoryToUpdate.idCategory = data.id;
-    newCategoryToUpdate.categoryName = data.Name;
-    newCategoryToUpdate.icon = data.Icon;
-    newCategoryToUpdate.description = data.Description;
+    newCategoryToUpdate.idCategory = category.id;
+    newCategoryToUpdate.categoryName = category.Name;
+    newCategoryToUpdate.icon = category.Icon;
+    newCategoryToUpdate.description = category.Description;
     setCategoryToUpdate(newCategoryToUpdate);
   };
-  // Remise à zéro des inputs pour annuler l'édition ou l'ajout d'une catégorie
+  // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une catégorie
   const handleCancelButton = () => {
     const newCategoryToUpdate = { ...categoryToUpdate };
     newCategoryToUpdate.idCategory = "";
