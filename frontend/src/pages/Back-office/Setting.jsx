@@ -33,6 +33,14 @@ function Setting({ value }) {
           buttonType="submit"
           buttonText="DELETE"
           buttonStyle="cstm_buttonSecondary"
+          methodOnClick={() => {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, {
+              method: "DELETE",
+            })
+              .then((response) => response.json())
+              .then((user) => setMySetting(user))
+              .catch((error) => console.error(error));
+          }}
         />
       </div>
     </form>
