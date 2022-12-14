@@ -18,7 +18,7 @@ export default function App() {
         <Routes>
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Category" element={<Category />} />
-            <Route path="Setting" element={<Setting />} />
+            <Route path="Setting/:id" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
             <Route path="Slider_3" element={<Slider3 />} />

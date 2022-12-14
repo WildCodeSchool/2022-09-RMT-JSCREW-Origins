@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 const categoryControllers = require("./controllers/categoryControllers");
+const videoControllers = require("./controllers/videoControllers");
+const settingControllers = require("./controllers/settingControllers");
 
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
@@ -17,5 +19,17 @@ router.get("/categories/:id", categoryControllers.read);
 router.put("/categories/:id", categoryControllers.edit);
 router.post("/categories", categoryControllers.add);
 router.delete("/categories/:id", categoryControllers.destroy);
+
+router.get("/videos", videoControllers.browse);
+router.get("/videos/:id", videoControllers.read);
+router.put("/videos/:id", videoControllers.edit);
+router.post("/videos", videoControllers.add);
+router.delete("/videos/:id", videoControllers.destroy);
+
+router.get("/user", settingControllers.browse);
+router.get("/user/:id", settingControllers.read);
+router.put("/user/:id", settingControllers.edit);
+router.post("/user", settingControllers.add);
+router.delete("/user/:id", settingControllers.destroy);
 
 module.exports = router;
