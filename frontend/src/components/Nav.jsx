@@ -31,25 +31,25 @@ export default function Nav() {
                 {displaySlider && (
                   <>
                     <Link
-                      to="slider"
+                      to="Slider_1"
                       className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
                     >
                       <p className="text-base leading-4">Sliders 1</p>
                     </Link>
                     <Link
-                      to="slider"
+                      to="Slider_2"
                       className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
                     >
                       <p className="text-base leading-4">Sliders 2</p>
                     </Link>
                     <Link
-                      to="slider"
+                      to="Slider_3"
                       className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
                     >
                       <p className="text-base leading-4">Sliders 3</p>
                     </Link>
                     <Link
-                      to="slider"
+                      to="Grille"
                       className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
                     >
                       <p className="text-base leading-4">Grille</p>
