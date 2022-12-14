@@ -39,8 +39,8 @@ function Category() {
 
   // Fonction qui gère le changement d'état des inputs
   /**
-   * @param {key} place
-   * @param {value} value
+   * @param {string} place
+   * @param {string} value
    */
   const handleInputOnChange = (place, value) => {
     const newCategory = { ...category };
@@ -48,6 +48,7 @@ function Category() {
     setCategory(newCategory);
   };
 
+  // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
   const handleOneCategory = (cat) => {
     setCategory(cat);
   };
