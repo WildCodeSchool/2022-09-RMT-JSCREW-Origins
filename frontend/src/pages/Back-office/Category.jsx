@@ -98,7 +98,6 @@ function Category() {
         methodOnClick={handleOneCategory}
       />
       {/* FORM ADD OPTION */}
-      {/* {displayForm && ( */}
       <div className="mt-10 flex flex-col items-center w-full gap-y-7">
         <InputTemplate
           textPlaceholder="Title"
@@ -122,7 +121,6 @@ function Category() {
           name="Description"
         />
       </div>
-      {/* )} */}
       <div className="flex justify-around space-x-8 pt-5">
         {!category.id && (
           <ButtonTemplate
