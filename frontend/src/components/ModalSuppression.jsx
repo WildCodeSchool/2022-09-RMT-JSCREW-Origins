@@ -10,6 +10,15 @@ function Modal({ setDisplayModal }) {
     setDisplayModal(false);
   };
 
+  const settingDelete = () => {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((user) => setMySetting(user))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -45,14 +54,7 @@ function Modal({ setDisplayModal }) {
                 buttonType="submit"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={() => {
-                  fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, {
-                    method: "DELETE",
-                  })
-                    .then((response) => response.json())
-                    .then((user) => setMySetting(user))
-                    .catch((error) => console.error(error));
-                }}
+                methodOnClick={settingDelete}
               />
             </div>
           </div>
