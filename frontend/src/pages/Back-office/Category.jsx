@@ -14,6 +14,7 @@ function Category() {
     Description: "",
   });
 
+  // Fonction qui gère la récupération des données avec axios
   const getAllCategories = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
@@ -21,6 +22,7 @@ function Category() {
       .catch((error) => console.error(error));
   };
 
+  // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllCategories();
   }, []);
@@ -50,6 +52,7 @@ function Category() {
     setCategory(cat);
   };
 
+  // Fonction qui gère l'ajout d'une nouvelle catégorie
   const handleAddCategory = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
@@ -62,6 +65,7 @@ function Category() {
       .catch((error) => console.error(error));
   };
 
+  // Fonction qui gère la suppression d'une nouvelle catégorie
   const handleDeleteCategory = () => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
@@ -77,6 +81,7 @@ function Category() {
       .catch((error) => console.error(error));
   };
 
+  // Fonction qui gère la suppression d'une nouvelle catégorie
   const handleUpdateCategory = () => {
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
