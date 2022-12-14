@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 
 import ButtonTemplate from "./ButtonTemplate";
 
-function Modal({ setDysplayModal }) {
+function Modal({ setDisplayModal }) {
   const { id } = useParams();
   const [, setMySetting] = useState([]);
   const handleButtonCancel = () => {
-    setDysplayModal(false);
+    setDisplayModal(false);
   };
 
   return (

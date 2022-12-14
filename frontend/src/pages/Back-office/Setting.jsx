@@ -9,7 +9,7 @@ import ModalSuppression from "@components/ModalSuppression";
 function Setting({ value }) {
   const { id } = useParams();
   const [mySetting, setMySetting] = useState([]);
-  const [displayModal, setDysplayModal] = useState(false);
+  const [displayModal, setDisplayModal] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
@@ -36,9 +36,9 @@ function Setting({ value }) {
           buttonType="button"
           buttonText="DELETE"
           buttonStyle="cstm_buttonSecondary"
-          methodOnClick={setDysplayModal}
+          methodOnClick={setDisplayModal}
         />
-        {displayModal && <ModalSuppression setDysplayModal={setDysplayModal} />}
+        {displayModal && <ModalSuppression setDisplayModal={setDisplayModal} />}
       </div>
     </form>
   );
