@@ -8,27 +8,27 @@ export default function Nav() {
           <div className="flex flex-col space-y-5">
             <Link
               to="Setting"
-              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
             >
-              <p className="text-base leading-4 ">Settings</p>
+              <p className="text-base leading-4">Settings</p>
             </Link>
             <Link
               to="Slider"
-              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
             >
-              <p className="text-base leading-4 ">Sliders</p>
+              <p className="text-base leading-4">Sliders</p>
             </Link>
             <Link
               to="Video"
               className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
             >
-              <p className="text-base leading-4 ">Videos</p>
+              <p className="text-base leading-4">Videos</p>
             </Link>
             <Link
               to="Category"
-              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
             >
-              <p className="text-base leading-4 ">Categories</p>
+              <p className="text-base leading-4">Categories</p>
             </Link>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function Nav() {
             to="/"
             className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
           >
-            <p className="text-base leading-4  ">Deconnexion</p>
+            <p className="text-base leading-4">Deconnexion</p>
           </Link>
         </div>
       </div>
