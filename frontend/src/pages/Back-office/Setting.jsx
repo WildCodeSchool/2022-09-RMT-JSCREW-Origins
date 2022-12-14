@@ -8,7 +8,7 @@ import ModalSuppression from "@components/ModalSuppression";
 
 function Setting({ value }) {
   const { id } = useParams();
-  const [mySetting, setMySetting] = useState([]);
+  const [mySetting, setMySetting] = useState("");
   const [displayModal, setDisplayModal] = useState(false);
 
   useEffect(() => {
