@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
+import ModalSuppression from "@components/ModalSuppression";
 
 function Setting({ value }) {
   const { id } = useParams();
   const [mySetting, setMySetting] = useState([]);
+  const [displayForm, setDysplayForm] = useState(false);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
       .then((response) => response.json())
@@ -30,18 +32,12 @@ function Setting({ value }) {
           buttonStyle="cstm_buttonSecondaryNone"
         />
         <ButtonTemplate
-          buttonType="submit"
+          buttonType="button"
           buttonText="DELETE"
           buttonStyle="cstm_buttonSecondary"
-          methodOnClick={() => {
-            fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, {
-              method: "DELETE",
-            })
-              .then((response) => response.json())
-              .then((user) => setMySetting(user))
-              .catch((error) => console.error(error));
-          }}
+          methodOnClick={setDysplayForm}
         />
+        {displayForm && <ModalSuppression />}
       </div>
     </form>
   );
