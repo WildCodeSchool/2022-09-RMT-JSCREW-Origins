@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
@@ -6,119 +7,160 @@ import ButtonTemplate from "@components/ButtonTemplate";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
-  const [displayForm, setDysplayForm] = useState(false);
-  const [categoryToUpdate, setCategoryToUpdate] = useState({
-    idCategory: "",
-    categoryName: "",
-    icon: "",
-    description: "",
+  const [category, setCategory] = useState({
+    id: null,
+    Name: "",
+    Icon: "",
+    Description: "",
   });
-  const { idCategory, categoryName, icon, description } = categoryToUpdate;
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/categories`)
-      .then((response) => response.json())
-      .then((categories) => setMyCategories(categories))
+
+  // Fonction qui gère la récupération des données avec axios
+  const getAllCategories = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+      .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
+  };
+
+  // Pour que la donnée se mette à jour en live
+  useEffect(() => {
+    getAllCategories();
   }, []);
-  // Affichage du form pour ajouter une categorie
-  const handleDisplayFormAdd = () => {
-    setDysplayForm(true);
-  };
-  // Affichage du form plus remplissage des inputs pour éditer une categorie
-  const handleDisplayFormUpdate = (data) => {
-    setDysplayForm(!displayForm);
-    const newCategoryToUpdate = { ...categoryToUpdate };
-    newCategoryToUpdate.idCategory = data.id;
-    newCategoryToUpdate.categoryName = data.Name;
-    newCategoryToUpdate.icon = data.Icon;
-    newCategoryToUpdate.description = data.Description;
-    setCategoryToUpdate(newCategoryToUpdate);
-  };
-  // Remise à zéro des inputs pour annuler l'édition ou l'ajout d'une catégorie
+
+  // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une catégorie
   const handleCancelButton = () => {
-    const newCategoryToUpdate = { ...categoryToUpdate };
-    newCategoryToUpdate.idCategory = "";
-    newCategoryToUpdate.categoryName = "";
-    newCategoryToUpdate.icon = "";
-    newCategoryToUpdate.description = "";
-    setCategoryToUpdate(newCategoryToUpdate);
-    setDysplayForm(false);
+    setCategory({
+      id: null,
+      Name: "",
+      Icon: "",
+      Description: "",
+    });
+  };
+
+  // Fonction qui gère le changement d'état des inputs
+  /**
+   * @param {string} place
+   * @param {string} value
+   */
+  const handleInputOnChange = (place, value) => {
+    const newCategory = { ...category };
+    newCategory[place] = value;
+    setCategory(newCategory);
+  };
+
+  // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
+  /**
+   * @param {object} cat
+   */
+  const handleOneCategory = (cat) => {
+    setCategory(cat);
+  };
+
+  // Fonction qui gère l'ajout d'une nouvelle catégorie
+  const handleAddCategory = () => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
+        ...category,
+      })
+      .then((categories) => {
+        setCategory(categories.data);
+        getAllCategories();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  // Fonction qui gère la suppression d'une nouvelle catégorie
+  const handleDeleteCategory = () => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
+      .then(() => {
+        setCategory({
+          id: null,
+          Name: "",
+          Icon: "",
+          Description: "",
+        });
+        getAllCategories();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  // Fonction qui gère la suppression d'une nouvelle catégorie
+  const handleUpdateCategory = () => {
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+        ...category,
+      })
+      .then(() => getAllCategories())
+      .catch((error) => console.error(error));
   };
 
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
-      {!displayForm && (
-        <ButtonTemplate
-          methodOnClick={handleDisplayFormAdd}
-          buttonType="button"
-          buttonText="+ Add new category"
-          buttonStyle="cstm_buttonSecondaryNone w-full"
-        />
-      )}
-      {!displayForm && "OR"}
       {/* SEARCHBAR */}
-      {!displayForm && (
-        <SearchBarTemplate
-          methodOnClick={handleDisplayFormUpdate}
-          data={myCategories}
-          customWidth="cstm_width_XlInput"
-          searchBarContainer="flex flex-col items-center w-full"
-          textPlaceholder="Search category"
-          textButton="Update category"
-        />
-      )}
+      <SearchBarTemplate
+        data={myCategories}
+        customWidth="cstm_width_XlInput"
+        searchBarContainer="flex flex-col items-center w-full"
+        textPlaceholder="Search category"
+        textButton="Update category"
+        methodOnClick={handleOneCategory}
+      />
       {/* FORM ADD OPTION */}
-      {displayForm && (
-        <div className="mt-10 flex flex-col items-center w-full gap-y-7">
-          <InputTemplate
-            textPlaceholder="Title"
-            customWidth="cstm_width_XlInput"
-            value={idCategory ? categoryName : ""}
+      <div className="mt-10 flex flex-col items-center w-full gap-y-7">
+        <InputTemplate
+          textPlaceholder="Title"
+          customWidth="cstm_width_XlInput"
+          value={category.Name}
+          methodOnChange={handleInputOnChange}
+          name="Name"
+        />
+        <InputTemplate
+          textPlaceholder="URL"
+          customWidth="cstm_width_XlInput"
+          value={category.Icon}
+          methodOnChange={handleInputOnChange}
+          name="Icon"
+        />
+        <TextareaTemplate
+          textPlaceholder="Description"
+          customWidth="cstm_width_XlInput"
+          value={category.Description}
+          methodOnChange={handleInputOnChange}
+          name="Description"
+        />
+      </div>
+      <div className="flex justify-around space-x-8 pt-5">
+        {!category.id && (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="ADD"
+            buttonStyle="cstm_buttonSecondaryNone"
+            methodOnClick={handleAddCategory}
           />
-          <InputTemplate
-            textPlaceholder="URL"
-            customWidth="cstm_width_XlInput"
-            value={idCategory ? icon : ""}
-          />
-          <TextareaTemplate
-            textPlaceholder="Description"
-            customWidth="cstm_width_XlInput"
-            value={idCategory ? description : ""}
-          />
-        </div>
-      )}
-      <div className="flex cstm_width_XlInput justify-between">
-        {displayForm && (
+        )}
+        {category.id && (
           <>
-            {!idCategory && (
-              <ButtonTemplate
-                buttonType="submit"
-                buttonText="VALIDATE"
-                buttonStyle="cstm_buttonSecondaryNone"
-              />
-            )}
-            {idCategory && (
-              <>
-                <ButtonTemplate
-                  buttonType="submit"
-                  buttonText="UPDATE"
-                  buttonStyle="cstm_buttonSecondaryNone"
-                />
-                <ButtonTemplate
-                  buttonType="submit"
-                  buttonText="DELETE"
-                  buttonStyle="cstm_buttonSecondary"
-                />
-              </>
-            )}
             <ButtonTemplate
-              methodOnClick={handleCancelButton}
               buttonType="button"
-              buttonText="CANCEL"
-              buttonStyle="cstm_buttonSecondaryNone"
+              buttonText="UPDATE"
+              buttonStyle="cstm_buttonSecondary"
+              methodOnClick={handleUpdateCategory}
+            />
+            <ButtonTemplate
+              buttonType="button"
+              buttonText="DELETE"
+              buttonStyle="cstm_buttonSecondary"
+              methodOnClick={handleDeleteCategory}
             />
           </>
         )}
+        <ButtonTemplate
+          methodOnClick={handleCancelButton}
+          buttonType="button"
+          buttonText="CANCEL"
+          buttonStyle="cstm_buttonSecondaryNone"
+        />
       </div>
     </form>
   );
