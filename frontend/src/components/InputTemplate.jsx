@@ -5,6 +5,7 @@ textPlaceholder : infos à mettre dans les placeholder des inputs
 customWidth : la classe CSS qui gère la largeur des input
 value: la valeur des inputs qu'on reçoit en props
 methodOnChange : les fonctions associées aux input qu'on reçoit en props
+name: ici on reçoit en props le nom du champs de la table qu'on veut modifier
 */
 function InputTemplate({
   textPlaceholder,
