@@ -7,7 +7,6 @@ import ButtonTemplate from "@components/ButtonTemplate";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
-  const [displayForm, setDysplayForm] = useState(false);
   const [category, setCategory] = useState({
     id: null,
     Name: "",
@@ -15,11 +14,15 @@ function Category() {
     Description: "",
   });
 
-  useEffect(() => {
+  const getAllCategories = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
       .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getAllCategories();
   }, []);
 
   // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une catégorie
@@ -30,7 +33,6 @@ function Category() {
     newCategory.Icon = "";
     newCategory.Description = "";
     setCategory(newCategory);
-    setDysplayForm(false);
   };
 
   // Fonction qui gère le changement d'état des inputs
@@ -49,21 +51,25 @@ function Category() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
         ...category,
       })
-      .then((categories) => setCategory(categories.data))
+      .then((categories) => {
+        setCategory(categories.data);
+        getAllCategories();
+      })
       .catch((error) => console.error(error));
   };
 
   const handleDeleteCategory = () => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
-      .then(() =>
+      .then(() => {
         setCategory({
           id: null,
           Name: "",
           Icon: "",
           Description: "",
-        })
-      )
+        });
+        getAllCategories();
+      })
       .catch((error) => console.error(error));
   };
 
@@ -72,22 +78,20 @@ function Category() {
       .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
         ...category,
       })
-      .then((categories) => console.warn(categories.data))
+      .then(() => getAllCategories())
       .catch((error) => console.error(error));
   };
 
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {/* SEARCHBAR */}
-      {!displayForm && (
-        <SearchBarTemplate
-          data={myCategories}
-          customWidth="cstm_width_XlInput"
-          searchBarContainer="flex flex-col items-center w-full"
-          textPlaceholder="Search category"
-          textButton="Update category"
-        />
-      )}
+      <SearchBarTemplate
+        data={myCategories}
+        customWidth="cstm_width_XlInput"
+        searchBarContainer="flex flex-col items-center w-full"
+        textPlaceholder="Search category"
+        textButton="Update category"
+      />
       {/* FORM ADD OPTION */}
       {/* {displayForm && ( */}
       <div className="mt-10 flex flex-col items-center w-full gap-y-7">
