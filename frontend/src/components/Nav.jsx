@@ -2,43 +2,43 @@ import { Link } from "react-router-dom";
 
 export default function Nav() {
   return (
-    <div>
-      <div className="flexw-1/3 h-screen bg-gray-900 flex-col">
-        <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
-          <div>
-            <Link to="Setting">
-              <button
-                className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52"
-                type="button"
-              >
-                <p className="text-base leading-4  ">Setting</p>
-              </button>
+    <div className="bg-primary">
+      <div className="flex flex-col h-screen px-6 py-5 border-b justify-between">
+        <div className="flex flex-col">
+          <div className="flex flex-col space-y-5">
+            <Link
+              to="Setting"
+              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+            >
+              <p className="text-base leading-4 ">Settings</p>
             </Link>
-            <Link to="Slider">
-              <button
-                className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52"
-                type="button"
-              >
-                <p className="text-base leading-4  ">Slider</p>
-              </button>
+            <Link
+              to="Slider"
+              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+            >
+              <p className="text-base leading-4 ">Sliders</p>
             </Link>
-            <Link to="Video">
-              <button
-                className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52"
-                type="button"
-              >
-                <p className="text-base leading-4  ">Video</p>
-              </button>
+            <Link
+              to="Video"
+              className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
+            >
+              <p className="text-base leading-4 ">Videos</p>
             </Link>
-            <Link to="Category">
-              <button
-                className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52"
-                type="button"
-              >
-                <p className="text-base leading-4  ">Category</p>
-              </button>
+            <Link
+              to="Category"
+              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+            >
+              <p className="text-base leading-4 ">Categories</p>
             </Link>
           </div>
+        </div>
+        <div className="flex">
+          <Link
+            to="/"
+            className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2  w-full"
+          >
+            <p className="text-base leading-4  ">Deconnexion</p>
+          </Link>
         </div>
       </div>
     </div>
