@@ -47,7 +47,7 @@ function Category() {
   const handleAddCategory = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
-        body: category,
+        ...category,
       })
       .then((categories) => console.warn(categories))
       .catch((error) => console.error(error));
