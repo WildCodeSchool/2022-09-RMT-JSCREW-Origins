@@ -12,12 +12,40 @@ export default function Nav() {
             >
               <p className="text-base leading-4">Settings</p>
             </Link>
-            <Link
-              to="Slider"
-              className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
-            >
-              <p className="text-base leading-4">Sliders</p>
-            </Link>
+            <div className="flex flex-col">
+              <button
+                className="flex justify-start items-center space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
+                type="button"
+              >
+                <p className="text-base leading-4">Sliders</p>
+              </button>
+              <div className="hidden onclick:visible block">
+                <Link
+                  to="slider"
+                  className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
+                >
+                  <p className="text-base leading-4">Sliders 1</p>
+                </Link>
+                <Link
+                  to="slider"
+                  className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
+                >
+                  <p className="text-base leading-4">Sliders 2</p>
+                </Link>
+                <Link
+                  to="slider"
+                  className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
+                >
+                  <p className="text-base leading-4">Sliders 3</p>
+                </Link>
+                <Link
+                  to="slider"
+                  className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
+                >
+                  <p className="text-base leading-4">Grille</p>
+                </Link>
+              </div>
+            </div>
             <Link
               to="Video"
               className="flex place-self-end space-x-6 hover:text-secondary focus:text-secondary text-white rounded px-3 py-2 w-full"
