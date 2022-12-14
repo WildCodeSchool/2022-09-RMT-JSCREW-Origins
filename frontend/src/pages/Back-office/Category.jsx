@@ -18,7 +18,7 @@ function Category() {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
-      .then((categories) => setMyCategories(categories))
+      .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
   }, []);
 
@@ -49,7 +49,7 @@ function Category() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
         ...category,
       })
-      .then((categories) => console.warn(categories))
+      .then((categories) => setCategory(categories.data))
       .catch((error) => console.error(error));
   };
 
@@ -92,12 +92,14 @@ function Category() {
       </div>
       {/* )} */}
       <div className="flex justify-around space-x-8 pt-5">
-        <ButtonTemplate
-          buttonType="button"
-          buttonText="ADD"
-          buttonStyle="cstm_buttonSecondaryNone"
-          methodOnClick={handleAddCategory}
-        />
+        {!category.id && (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="ADD"
+            buttonStyle="cstm_buttonSecondaryNone"
+            methodOnClick={handleAddCategory}
+          />
+        )}
         <ButtonTemplate
           methodOnClick={handleCancelButton}
           buttonType="button"
