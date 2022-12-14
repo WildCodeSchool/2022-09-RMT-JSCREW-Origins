@@ -49,6 +49,9 @@ function Category() {
   };
 
   // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
+  /**
+   * @param {object} cat
+   */
   const handleOneCategory = (cat) => {
     setCategory(cat);
   };
