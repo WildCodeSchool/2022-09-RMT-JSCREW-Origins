@@ -16,6 +16,7 @@ INSERT INTO category (id,name,icon,description) VALUES (4,'Counter-strike: GO','
 
 CREATE TABLE video (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+Name VARCHAR(500) NOT NULL,
 id_Category INTEGER,
 Url VARCHAR(255) NOT NULL,
 Description VARCHAR(255),
@@ -24,14 +25,14 @@ Foreign Key (id_Category) REFERENCES category(id)
 ON DELETE SET NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (1,1,'https://www.youtube.com/watch?v=OKL8BLAec1U','Top Play durant les worlds de LOL 2022',0);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (2,1,'https://www.youtube.com/watch?v=UUOBtkiDrE8','World 2022 - finale T1 vs DRX',1);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (3,2,'https://www.youtube.com/watch?v=WVB6hpik6z8','Best Goal lors de la saison RLCS 2022',0);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (4,2,'https://www.youtube.com/watch?v=0-UxFn596zI','Finale World RLCS BDS vs G2',1);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (5,3,'https://www.youtube.com/watch?v=l6a57U84r1M','Resumé de la finale 2022 Lorien/Olympique de Marseille',0);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (6,3,'https://www.youtube.com/watch?v=vXtibpOjrHw','Video entière de la finale Lorient / Olympique de Marseille 2022',1);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (7,4,'https://www.youtube.com/watch?v=Xn-bGsnfu9w&t=132s','Highlight de la final ESL 2022 NAVI vs FAZE',0);
-INSERT INTO video (id,id_Category,Url,Description,premium) VALUES (8,4,'https://www.youtube.com/watch?v=G1qhsp-HS80','Map 1 de la final ESL 2022 NAVY vs FAZE',1);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (1,'Top Play LOL 2022',1,'https://www.youtube.com/watch?v=OKL8BLAec1U','Top Play durant les worlds de LOL 2022',0);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (2,'World 2022 finale',1,'https://www.youtube.com/watch?v=UUOBtkiDrE8','World 2022 - finale T1 vs DRX',1);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (3,'Best Goal saison 2022',2,'https://www.youtube.com/watch?v=WVB6hpik6z8','Best Goal lors de la saison RLCS 2022',0);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (4,'Finale World RLCS',2,'https://www.youtube.com/watch?v=0-UxFn596zI','Finale World RLCS BDS vs G2',1);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (5,'Finale 2022 Lorien/OM',3,'https://www.youtube.com/watch?v=l6a57U84r1M','Resumé de la finale 2022 Lorien/Olympique de Marseille',0);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (6,'Finale lorient/OM',3,'https://www.youtube.com/watch?v=vXtibpOjrHw','Video entière de la finale Lorient / Olympique de Marseille 2022',1);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (7,'Highlight final ESL 2022',4,'https://www.youtube.com/watch?v=Xn-bGsnfu9w&t=132s','Highlight de la final ESL 2022 NAVI vs FAZE',0);
+INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (8,'Map 1 final  ESL 2022',4,'https://www.youtube.com/watch?v=G1qhsp-HS80','Map 1 de la final ESL 2022 NAVY vs FAZE',1);
 
 CREATE TABLE user (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
