@@ -53,6 +53,20 @@ function Category() {
       .catch((error) => console.error(error));
   };
 
+  const handleDeleteCategory = () => {
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
+      .then(() =>
+        setCategory({
+          id: null,
+          Name: "",
+          Icon: "",
+          Description: "",
+        })
+      )
+      .catch((error) => console.error(error));
+  };
+
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {/* SEARCHBAR */}
@@ -111,6 +125,7 @@ function Category() {
             buttonType="button"
             buttonText="DELETE"
             buttonStyle="cstm_buttonSecondary"
+            methodOnClick={handleDeleteCategory}
           />
         )}
       </div>
