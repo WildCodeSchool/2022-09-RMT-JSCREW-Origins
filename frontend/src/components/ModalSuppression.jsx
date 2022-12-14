@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ButtonTemplate from "./ButtonTemplate";
 
 function Modal({ setDisplayModal }) {
   const { id } = useParams();
-  const [, setMySetting] = useState([]);
   const handleButtonCancel = () => {
     setDisplayModal(false);
   };
@@ -15,7 +13,7 @@ function Modal({ setDisplayModal }) {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then((user) => setMySetting(user))
+      .then((user) => user)
       .catch((error) => console.error(error));
   };
 
