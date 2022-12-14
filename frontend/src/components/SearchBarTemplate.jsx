@@ -6,7 +6,7 @@ textPlaceholder : infos à mettre dans les placeholder des inputs
 textButton : texte à mettre dans le bouton
 searchBarContainer : la classe CSS qu'on attribue à la searchBar
 customWidth : la classe CSS qui gère la largeur des input
-methodOnClick : les fonctions associées aux boutons
+methodOnClick : les fonctions associées aux boutons qu'on reçoit en props
 */
 function SearchBar({
   data,

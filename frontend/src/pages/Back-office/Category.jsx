@@ -46,6 +46,17 @@ function Category() {
     setDysplayForm(false);
   };
 
+  // Fonction qui gère le changement d'état des inputs
+  /**
+   * @param {key} place
+   * @param {value} value
+   */
+  const handleInputOnChange = (place, value) => {
+    const newCategoryToUpdate = { ...categoryToUpdate };
+    newCategoryToUpdate[place] = value;
+    setCategoryToUpdate(newCategoryToUpdate);
+  };
+
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {!displayForm && (
@@ -75,17 +86,26 @@ function Category() {
             textPlaceholder="Title"
             customWidth="cstm_width_XlInput"
             value={categoryToUpdate.Name}
+            methodOnChange={handleInputOnChange}
+            name="Name"
           />
+          {/* {console.log(categoryToUpdate.Name)} */}
           <InputTemplate
             textPlaceholder="URL"
             customWidth="cstm_width_XlInput"
             value={categoryToUpdate.Icon}
+            methodOnChange={handleInputOnChange}
+            name="Icon"
           />
+          {/* {console.log(categoryToUpdate.Icon)} */}
           <TextareaTemplate
             textPlaceholder="Description"
             customWidth="cstm_width_XlInput"
             value={categoryToUpdate.Description}
+            methodOnChange={handleInputOnChange}
+            name="Description"
           />
+          {/* {console.log(categoryToUpdate.Description)} */}
         </div>
       )}
       <div className="flex justify-around space-x-8 pt-5">
@@ -96,27 +116,19 @@ function Category() {
               buttonText={!categoryToUpdate.id ? `VALIDATE` : `UPDATE`}
               buttonStyle="cstm_buttonSecondaryNone"
             />
-
-            {categoryToUpdate.id && (
-              <>
-                {/* <ButtonTemplate
-                  buttonType="submit"
-                  buttonText="UPDATE"
-                  buttonStyle="cstm_buttonSecondaryNone"
-                /> */}
-                <ButtonTemplate
-                  buttonType="submit"
-                  buttonText="DELETE"
-                  buttonStyle="cstm_buttonSecondary"
-                />
-              </>
-            )}
             <ButtonTemplate
               methodOnClick={handleCancelButton}
               buttonType="button"
               buttonText="CANCEL"
               buttonStyle="cstm_buttonSecondaryNone"
             />
+            {categoryToUpdate.id && (
+              <ButtonTemplate
+                buttonType="submit"
+                buttonText="DELETE"
+                buttonStyle="cstm_buttonSecondary"
+              />
+            )}
           </>
         )}
       </div>
