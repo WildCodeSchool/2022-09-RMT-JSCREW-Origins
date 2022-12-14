@@ -46,6 +46,10 @@ function Category() {
     setCategory(newCategory);
   };
 
+  const handleOneCategory = (cat) => {
+    setCategory(cat);
+  };
+
   const handleAddCategory = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
@@ -91,6 +95,7 @@ function Category() {
         searchBarContainer="flex flex-col items-center w-full"
         textPlaceholder="Search category"
         textButton="Update category"
+        methodOnClick={handleOneCategory}
       />
       {/* FORM ADD OPTION */}
       {/* {displayForm && ( */}
