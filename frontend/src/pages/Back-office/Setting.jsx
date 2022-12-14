@@ -8,7 +8,7 @@ import ModalSuppression from "@components/ModalSuppression";
 
 function Setting({ value }) {
   const { id } = useParams();
-  const [mySetting, setMySetting] = useState("");
+  const [mySetting, setMySetting] = useState(null);
   const [displayModal, setDisplayModal] = useState(false);
 
   useEffect(() => {
@@ -19,27 +19,33 @@ function Setting({ value }) {
   }, []);
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
-      <ConnectForm dataUsers={mySetting} />
-      <InputTemplate
-        customWidth="cstm_width_XlInput"
-        inputType="password"
-        textPlaceholder="Confirm password"
-        value={value}
-      />
-      <div className="flex justify-around space-x-8 pt-5">
-        <ButtonTemplate
-          buttonType="submit"
-          buttonText="UPDATE"
-          buttonStyle="cstm_buttonSecondaryNone"
-        />
-        <ButtonTemplate
-          buttonType="button"
-          buttonText="DELETE"
-          buttonStyle="cstm_buttonSecondary"
-          methodOnClick={setDisplayModal}
-        />
-        {displayModal && <ModalSuppression setDisplayModal={setDisplayModal} />}
-      </div>
+      {mySetting && (
+        <>
+          <ConnectForm dataUsers={mySetting} />
+          <InputTemplate
+            customWidth="cstm_width_XlInput"
+            inputType="password"
+            textPlaceholder="Confirm password"
+            value={value}
+          />
+          <div className="flex justify-around space-x-8 pt-5">
+            <ButtonTemplate
+              buttonType="submit"
+              buttonText="UPDATE"
+              buttonStyle="cstm_buttonSecondaryNone"
+            />
+            <ButtonTemplate
+              buttonType="button"
+              buttonText="DELETE"
+              buttonStyle="cstm_buttonSecondary"
+              methodOnClick={setDisplayModal}
+            />
+            {displayModal && (
+              <ModalSuppression setDisplayModal={setDisplayModal} />
+            )}
+          </div>
+        </>
+      )}
     </form>
   );
 }
