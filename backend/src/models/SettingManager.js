@@ -1,6 +1,6 @@
 const AbstractManager = require("./AbstractManager");
 
-class SeetingManager extends AbstractManager {
+class SettingManager extends AbstractManager {
   constructor() {
     super({ table: "user" });
   }
@@ -20,4 +20,4 @@ class SeetingManager extends AbstractManager {
   }
 }
 
-module.exports = SeetingManager;
+module.exports = SettingManager;

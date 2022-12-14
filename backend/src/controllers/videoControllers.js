@@ -3,8 +3,8 @@ const models = require("../models");
 const browse = (req, res) => {
   models.video
     .findAll()
-    .then(([rows]) => {
-      res.send(rows);
+    .then(([videos]) => {
+      res.send(videos);
     })
     .catch((err) => {
       console.error(err);
@@ -15,11 +15,11 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.video
     .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
+    .then(([videos]) => {
+      if (videos[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(videos[0]);
       }
     })
     .catch((err) => {

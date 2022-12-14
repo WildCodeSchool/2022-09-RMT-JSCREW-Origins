@@ -4,7 +4,7 @@ const router = express.Router();
 
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
-const seetingControllers = require("./controllers/seetingControllers");
+const settingControllers = require("./controllers/settingControllers");
 
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
@@ -26,10 +26,10 @@ router.put("/videos/:id", videoControllers.edit);
 router.post("/videos", videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
 
-router.get("/user", seetingControllers.browse);
-router.get("/user/:id", seetingControllers.read);
-router.put("/user/:id", seetingControllers.edit);
-router.post("/user", seetingControllers.add);
-router.delete("/user/:id", seetingControllers.destroy);
+router.get("/user", settingControllers.browse);
+router.get("/user/:id", settingControllers.read);
+router.put("/user/:id", settingControllers.edit);
+router.post("/user", settingControllers.add);
+router.delete("/user/:id", settingControllers.destroy);
 
 module.exports = router;

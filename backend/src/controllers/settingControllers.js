@@ -3,8 +3,8 @@ const models = require("../models");
 const browse = (req, res) => {
   models.user
     .findAll()
-    .then(([rows]) => {
-      res.send(rows);
+    .then(([users]) => {
+      res.send(users);
     })
     .catch((err) => {
       console.error(err);
@@ -15,11 +15,11 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.user
     .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
+    .then(([users]) => {
+      if (users[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(users[0]);
       }
     })
     .catch((err) => {
