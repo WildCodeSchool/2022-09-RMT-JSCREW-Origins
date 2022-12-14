@@ -1,6 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-
+/* 
+data : les données qu'on reçoit
+textPlaceholder : infos à mettre dans les placeholder des inputs
+textButton : texte à mettre dans le bouton
+searchBarContainer : la classe CSS qu'on attribue à la searchBar
+customWidth : la classe CSS qui gère la largeur des input
+methodOnClick : les fonctions associées aux boutons
+*/
 function SearchBar({
   data,
   textPlaceholder,
@@ -12,12 +19,9 @@ function SearchBar({
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
   const handleDisplayData = (e) => {
+    // eslint-disable-next-line no-unused-expressions
+    searchData.length >= 0 && setDisplayData(true);
     setSearchData(e.target.value);
-    if (searchData.length >= 0) {
-      setDisplayData(true);
-    } else if (searchData.length === 0) {
-      setDisplayData(false);
-    }
   };
   return (
     <div className={searchBarContainer}>

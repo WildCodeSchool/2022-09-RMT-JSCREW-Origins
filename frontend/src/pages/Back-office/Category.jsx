@@ -8,39 +8,40 @@ function Category() {
   const [myCategories, setMyCategories] = useState([]);
   const [displayForm, setDysplayForm] = useState(false);
   const [categoryToUpdate, setCategoryToUpdate] = useState({
-    idCategory: "",
-    categoryName: "",
-    icon: "",
-    description: "",
+    id: "",
+    Name: "",
+    Icon: "",
+    Description: "",
   });
-  const { idCategory, categoryName, icon, description } = categoryToUpdate;
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/categories`)
       .then((response) => response.json())
       .then((categories) => setMyCategories(categories))
       .catch((error) => console.error(error));
   }, []);
+
   // Affichage du form pour AJOUTER une categorie
   const handleDisplayFormAdd = () => {
     setDysplayForm(true);
   };
+
   // Affichage du form plus remplissage des inputs pour EDITER une categorie
+  /**
+   * @param {object} category
+   */
   const handleDisplayFormUpdate = (category) => {
     setDysplayForm(!displayForm);
-    const newCategoryToUpdate = { ...categoryToUpdate };
-    newCategoryToUpdate.idCategory = category.id;
-    newCategoryToUpdate.categoryName = category.Name;
-    newCategoryToUpdate.icon = category.Icon;
-    newCategoryToUpdate.description = category.Description;
-    setCategoryToUpdate(newCategoryToUpdate);
+    setCategoryToUpdate(category);
   };
+
   // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une catégorie
   const handleCancelButton = () => {
     const newCategoryToUpdate = { ...categoryToUpdate };
-    newCategoryToUpdate.idCategory = "";
-    newCategoryToUpdate.categoryName = "";
-    newCategoryToUpdate.icon = "";
-    newCategoryToUpdate.description = "";
+    newCategoryToUpdate.id = "";
+    newCategoryToUpdate.Name = "";
+    newCategoryToUpdate.Icon = "";
+    newCategoryToUpdate.Description = "";
     setCategoryToUpdate(newCategoryToUpdate);
     setDysplayForm(false);
   };
@@ -73,37 +74,36 @@ function Category() {
           <InputTemplate
             textPlaceholder="Title"
             customWidth="cstm_width_XlInput"
-            value={idCategory ? categoryName : ""}
+            value={categoryToUpdate.Name}
           />
           <InputTemplate
             textPlaceholder="URL"
             customWidth="cstm_width_XlInput"
-            value={idCategory ? icon : ""}
+            value={categoryToUpdate.Icon}
           />
           <TextareaTemplate
             textPlaceholder="Description"
             customWidth="cstm_width_XlInput"
-            value={idCategory ? description : ""}
+            value={categoryToUpdate.Description}
           />
         </div>
       )}
       <div className="flex justify-around space-x-8 pt-5">
         {displayForm && (
           <>
-            {!idCategory && (
-              <ButtonTemplate
-                buttonType="submit"
-                buttonText="VALIDATE"
-                buttonStyle="cstm_buttonSecondaryNone"
-              />
-            )}
-            {idCategory && (
+            <ButtonTemplate
+              buttonType="submit"
+              buttonText={!categoryToUpdate.id ? `VALIDATE` : `UPDATE`}
+              buttonStyle="cstm_buttonSecondaryNone"
+            />
+
+            {categoryToUpdate.id && (
               <>
-                <ButtonTemplate
+                {/* <ButtonTemplate
                   buttonType="submit"
                   buttonText="UPDATE"
                   buttonStyle="cstm_buttonSecondaryNone"
-                />
+                /> */}
                 <ButtonTemplate
                   buttonType="submit"
                   buttonText="DELETE"
