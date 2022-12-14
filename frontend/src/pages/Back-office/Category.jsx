@@ -67,6 +67,15 @@ function Category() {
       .catch((error) => console.error(error));
   };
 
+  const handleUpdateCategory = () => {
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+        ...category,
+      })
+      .then((categories) => console.warn(categories.data))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {/* SEARCHBAR */}
@@ -114,20 +123,28 @@ function Category() {
             methodOnClick={handleAddCategory}
           />
         )}
+        {category.id && (
+          <>
+            <ButtonTemplate
+              buttonType="button"
+              buttonText="UPDATE"
+              buttonStyle="cstm_buttonSecondary"
+              methodOnClick={handleUpdateCategory}
+            />
+            <ButtonTemplate
+              buttonType="button"
+              buttonText="DELETE"
+              buttonStyle="cstm_buttonSecondary"
+              methodOnClick={handleDeleteCategory}
+            />
+          </>
+        )}
         <ButtonTemplate
           methodOnClick={handleCancelButton}
           buttonType="button"
           buttonText="CANCEL"
           buttonStyle="cstm_buttonSecondaryNone"
         />
-        {category.id && (
-          <ButtonTemplate
-            buttonType="button"
-            buttonText="DELETE"
-            buttonStyle="cstm_buttonSecondary"
-            methodOnClick={handleDeleteCategory}
-          />
-        )}
       </div>
     </form>
   );
