@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
 import Setting from "./pages/Back-office/Setting";
-import Slider from "./pages/Back-office/Slider";
+import Slider1 from "./pages/Back-office/Sliders/Slider_1";
+import Slider2 from "./pages/Back-office/Sliders/Slider_2";
+import Slider3 from "./pages/Back-office/Sliders/Slider_3";
+import Grille from "./pages/Back-office/Sliders/Grille";
 import Video from "./pages/Back-office/Video";
 
 import "./App.css";
@@ -16,7 +19,10 @@ export default function App() {
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Category" element={<Category />} />
             <Route path="Setting/:id" element={<Setting />} />
-            <Route path="Slider" element={<Slider />} />
+            <Route path="Slider_1" element={<Slider1 />} />
+            <Route path="Slider_2" element={<Slider2 />} />
+            <Route path="Slider_3" element={<Slider3 />} />
+            <Route path="Grille" element={<Grille />} />
             <Route path="Video" element={<Video />} />
           </Route>
         </Routes>

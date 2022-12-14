@@ -3,8 +3,8 @@ const models = require("../models");
 const browse = (req, res) => {
   models.category
     .findAll()
-    .then(([rows]) => {
-      res.send(rows);
+    .then(([categories]) => {
+      res.send(categories);
     })
     .catch((err) => {
       console.error(err);
@@ -15,11 +15,11 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.category
     .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
+    .then(([categories]) => {
+      if (categories[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(categories[0]);
       }
     })
     .catch((err) => {

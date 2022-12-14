@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+
 /* 
 textPlaceholder : infos à mettre dans les placeholder des inputs
 customWidth : la classe CSS qui gère la largeur des input
@@ -13,12 +14,13 @@ function InputTemplate({
   value,
   methodOnChange,
   name,
+  inputType
 }) {
   return (
     <label className={`cstm_styleInput ${customWidth}`}>
       <input
         className="focus:outline-none"
-        type="text"
+        type={inputType}
         placeholder={textPlaceholder}
         value={value}
         onChange={(e) => methodOnChange(e.target.name, e.target.value)}
