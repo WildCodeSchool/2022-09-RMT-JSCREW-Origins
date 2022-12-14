@@ -27,12 +27,12 @@ function Category() {
 
   // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une catégorie
   const handleCancelButton = () => {
-    const newCategory = { ...category };
-    newCategory.id = "";
-    newCategory.Name = "";
-    newCategory.Icon = "";
-    newCategory.Description = "";
-    setCategory(newCategory);
+    setCategory({
+      id: null,
+      Name: "",
+      Icon: "",
+      Description: "",
+    });
   };
 
   // Fonction qui gère le changement d'état des inputs
