@@ -10,10 +10,10 @@ function Video() {
   const [video, setVideo] = useState({
     id: null,
     Name: "",
-    id_Category: "",
+    id_Category: null,
     Url: "",
     Description: "",
-    Premium: "",
+    Premium: 0,
   });
 
   // Fonction qui gère la récupération des données avec axios
@@ -48,6 +48,12 @@ function Video() {
   const handleInputOnChange = (place, value) => {
     const newVideo = { ...video };
     newVideo[place] = value;
+    setVideo(newVideo);
+  };
+
+  const handlePremium = (bool) => {
+    const newVideo = { ...video };
+    newVideo.premium = bool;
     setVideo(newVideo);
   };
 
@@ -90,7 +96,7 @@ function Video() {
       .catch((error) => console.error(error));
   };
 
-  // Fonction qui gère la suppression d'une nouvelle catégorie
+  // Fonction qui gère la suppression d'une nouvelle video
   const handleUpdateVideo = () => {
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/videos/${video.id}`, {
@@ -136,18 +142,26 @@ function Video() {
         />
         <TextareaTemplate
           textPlaceholder="Description"
-          customWidth="cstm_width_XlInput"
+          customWidth="cstm_width_XlInput "
           value={video.Description}
           methodOnChange={handleInputOnChange}
           name="Description"
         />
-        <TextareaTemplate
-          textPlaceholder="Premium"
-          customWidth="cstm_width_XlInput"
-          value={video.Premium}
-          methodOnChange={handleInputOnChange}
-          name="Premium"
-        />
+        {!video.premium ? (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="Freemium"
+            buttonStyle="border-solid border-grey text-gray-300 border-2 rounded-md p-3"
+            methodOnClick={() => handlePremium(0)}
+          />
+        ) : (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="Premium"
+            buttonStyle="bg-primary border-solid border-primary border-2 rounded-md p-3 text-white"
+            methodOnClick={() => handlePremium(1)}
+          />
+        )}
       </div>
       <div className="flex justify-around space-x-8 pt-5">
         {!video.id && (
