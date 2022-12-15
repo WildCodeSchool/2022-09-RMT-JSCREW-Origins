@@ -47,7 +47,9 @@ function SearchBar({
         <div className="bg-primary w-3/4 lg:w-7/12 rounded-md">
           <ul className="flex flex-col">
             {data
-              .filter((myData) => myData.Name.startsWith(searchData))
+              .filter((myData) =>
+                myData.Name.toLowerCase().includes(searchData)
+              )
               .map((myData) => (
                 <button
                   onClick={() => methodOnClick(myData)}
