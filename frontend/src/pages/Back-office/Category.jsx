@@ -18,7 +18,15 @@ function Category() {
     Description: "",
   });
 
-  const notify = () => toast("Catégorie add !");
+  const notifyAdd = () => {
+    toast("Category add !");
+  };
+  const notifyUpdate = () => {
+    toast("Category update !");
+  };
+  const notifyDelete = () => {
+    toast("Category delete !");
+  };
 
   // Fonction qui gère la récupération des données avec axios
   const getAllCategories = () => {
@@ -70,7 +78,7 @@ function Category() {
       })
       .then((categories) => {
         setCategory(categories.data);
-        notify();
+        notifyAdd();
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -87,6 +95,7 @@ function Category() {
           Icon: "",
           Description: "",
         });
+        notifyDelete();
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -98,7 +107,10 @@ function Category() {
       .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
         ...category,
       })
-      .then(() => getAllCategories())
+      .then(() => {
+        notifyUpdate();
+        getAllCategories();
+      })
       .catch((error) => console.error(error));
   };
 
