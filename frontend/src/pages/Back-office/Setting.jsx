@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import ConnectForm from "@components/ConnectForm";
@@ -12,11 +13,12 @@ function Setting({ value }) {
   const [displayModal, setDisplayModal] = useState(false);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
-      .then((response) => response.json())
-      .then((user) => setMySetting(user))
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
+      .then((categories) => setMySetting(categories.data))
       .catch((error) => console.error(error));
   }, []);
+
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {mySetting && (
