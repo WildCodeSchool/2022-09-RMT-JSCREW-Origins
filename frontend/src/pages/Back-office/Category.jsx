@@ -18,14 +18,8 @@ function Category() {
     Description: "",
   });
 
-  const notifyAdd = () => {
-    toast("Category add !");
-  };
-  const notifyUpdate = () => {
-    toast("Category update !");
-  };
-  const notifyDelete = () => {
-    toast("Category delete !");
+  const notify = (msg) => {
+    toast(msg);
   };
 
   // Fonction qui gère la récupération des données avec axios
@@ -78,7 +72,7 @@ function Category() {
       })
       .then((categories) => {
         setCategory(categories.data);
-        notifyAdd();
+        notify("Category add!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -95,7 +89,7 @@ function Category() {
           Icon: "",
           Description: "",
         });
-        notifyDelete();
+        notify("Category delete!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -108,7 +102,7 @@ function Category() {
         ...category,
       })
       .then(() => {
-        notifyUpdate();
+        notify("Category update!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -118,7 +112,7 @@ function Category() {
     <>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -126,7 +120,7 @@ function Category() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
       <form className="flex flex-col items-center w-full pt-10 gap-y-7">
         {/* SEARCHBAR */}
