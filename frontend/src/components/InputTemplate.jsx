@@ -14,7 +14,7 @@ function InputTemplate({
   value,
   methodOnChange,
   name,
-  inputType
+  inputType,
 }) {
   return (
     <label className={`cstm_styleInput ${customWidth}`}>
