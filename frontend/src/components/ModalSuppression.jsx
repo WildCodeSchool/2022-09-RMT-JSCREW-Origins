@@ -15,7 +15,6 @@ function Modal({ setDisplayModal }) {
       .then((user) => user)
       .catch((error) => console.error(error));
   };
-
   return (
     <div>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
