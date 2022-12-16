@@ -18,16 +18,16 @@ function SearchBar({
 }) {
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
-  const handleDisplayData = (e) => {
-    // eslint-disable-next-line no-unused-expressions
-    searchData.length >= 0 && setDisplayData(true);
-    setSearchData(e.target.value);
-  };
+
+  const updateSearchBar = (data) => {
+    setSearchData(data.Name);
+    methodOnClick(data);
+  }
   return (
     <div className={searchBarContainer}>
       <label className={`cstm_styleInput ${customWidth} relative`}>
         <input
-          onChange={handleDisplayData}
+          onChange={(e) => setSearchData(e.target.value)}
           className="focus:outline-none"
           type="text"
           placeholder={textPlaceholder}
@@ -43,7 +43,7 @@ function SearchBar({
           {textButton}
         </button>
       </label>
-      {displayData && (
+      {(displayData || searchData.length > 0) && (
         <div className="bg-primary w-3/4 lg:w-7/12 rounded-md">
           <ul className="flex flex-col">
             {data
@@ -52,7 +52,7 @@ function SearchBar({
               )
               .map((myData) => (
                 <button
-                  onClick={() => methodOnClick(myData)}
+                  onClick={() => updateSearchBar(myData)}
                   type="button"
                   key={myData.id}
                   className="text-white text-base self-start py-3 pl-5 hover:text-secondary hover:bg-white hover:bg-opacity-5 w-full flex"
