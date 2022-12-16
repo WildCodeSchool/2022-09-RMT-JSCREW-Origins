@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import validateCategory from "@services/categoryValidators";
 import axios from "axios";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
@@ -59,6 +60,8 @@ function Category() {
   // Fonction qui gère l'ajout d'une nouvelle catégorie
   const handleAddCategory = () => {
     delete category.id;
+    const { status, errorMessage } = validateCategory(category);
+    console.warn(status, errorMessage);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
         ...category,
