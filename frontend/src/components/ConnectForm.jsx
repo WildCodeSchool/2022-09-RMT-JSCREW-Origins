@@ -14,14 +14,6 @@ function ConnectForm({ dataUsers, handleInputOnChange }) {
       <InputTemplate
         customWidth="cstm_width_XlInput"
         inputType="password"
-        textPlaceholder="******************"
-        value={dataUsers.password}
-        methodOnChange={handleInputOnChange}
-        name="password"
-      />
-      <InputTemplate
-        customWidth="cstm_width_XlInput"
-        inputType="password"
         textPlaceholder="New password"
         value={dataUsers.newPassword}
         methodOnChange={handleInputOnChange}
