@@ -58,15 +58,24 @@ function Category() {
 
   // Fonction qui gère l'ajout d'une nouvelle catégorie
   const handleAddCategory = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
-        ...category,
-      })
-      .then((categories) => {
-        setCategory(categories.data);
-        getAllCategories();
-      })
-      .catch((error) => console.error(error));
+    delete category.id;
+    const { status, errorMessage } = validateCategory(category);
+    if (status) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
+          ...category,
+        })
+        .then((categories) => {
+          notify("Category successfully added!");
+          setCategory(categories.data);
+          getAllCategories();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      // Ici remplacer le warn par un toastify
+      console.warn(errorMessage);
+      notify(errorMessage);
+    }
   };
 
   // Fonction qui gère la suppression d'une nouvelle catégorie
@@ -80,6 +89,7 @@ function Category() {
           Icon: "",
           Description: "",
         });
+        notify("Category deleted!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -87,12 +97,24 @@ function Category() {
 
   // Fonction qui gère la suppression d'une nouvelle catégorie
   const handleUpdateCategory = () => {
-    axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
-        ...category,
-      })
-      .then(() => getAllCategories())
-      .catch((error) => console.error(error));
+    const { status, errorMessage } = validateCategory(category);
+
+    const { Name, Icon, Description } = category;
+    if (status) {
+      axios
+        .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+          Name,
+          Icon,
+          Description,
+        })
+        .then(() => {
+          notify("Category successfully updated!");
+          getAllCategories();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      notify(errorMessage);
+    }
   };
 
   return (
