@@ -97,12 +97,22 @@ function Category() {
 
   // Fonction qui gère la suppression d'une nouvelle catégorie
   const handleUpdateCategory = () => {
-    axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
-        ...category,
-      })
-      .then(() => getAllCategories())
-      .catch((error) => console.error(error));
+    const { status, errorMessage } = validateCategory(category);
+    if (status) {
+      axios
+        .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+          ...category,
+        })
+        .then(() => {
+          // Ici remplacer le warn par un toastify
+          console.warn("Cattegory succesfully added!");
+          getAllCategories();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      // Ici remplacer le warn par un toastify
+      console.warn(errorMessage);
+    }
   };
 
   return (
