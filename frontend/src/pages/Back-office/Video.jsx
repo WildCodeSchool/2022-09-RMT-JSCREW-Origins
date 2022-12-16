@@ -64,7 +64,7 @@ function Video() {
 
   const handlePremium = (bool) => {
     const newVideo = { ...video };
-    newVideo.premium = bool;
+    newVideo.Premium = bool;
     setVideo(newVideo);
   };
 
@@ -89,7 +89,7 @@ function Video() {
   // Fonction qui gère l'ajout d'une nouvelle video
   const handleAddVideo = () => {
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/video`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/videos`, {
         ...video,
       })
       .then((videos) => {
