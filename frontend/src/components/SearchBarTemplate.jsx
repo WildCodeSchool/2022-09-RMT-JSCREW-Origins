@@ -19,10 +19,12 @@ function SearchBar({
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
 
+  // eslint-disable-next-line no-shadow
   const updateSearchBar = (data) => {
     setSearchData(data.Name);
     methodOnClick(data);
-  }
+  };
+
   return (
     <div className={searchBarContainer}>
       <label className={`cstm_styleInput ${customWidth} relative`}>
