@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import validateCategory from "@services/categoryValidators";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
@@ -14,6 +18,10 @@ function Category() {
     Icon: null,
     Description: null,
   });
+
+  const notify = (msg) => {
+    toast(msg);
+  };
 
   // Fonction qui gère la récupération des données avec axios
   const getAllCategories = () => {
@@ -67,8 +75,7 @@ function Category() {
           ...category,
         })
         .then((categories) => {
-          // Ici remplacer le warn par un toastify
-          console.warn("Cattegory succesfully added!");
+          notify("Cattegory succesfully added!");
           setCategory(categories.data);
           getAllCategories();
         })
@@ -76,10 +83,11 @@ function Category() {
     } else {
       // Ici remplacer le warn par un toastify
       console.warn(errorMessage);
+      notify(errorMessage);
     }
   };
 
-  // Fonction qui gère la suppression d'une nouvelle catégorie
+  // Fonction qui gère la suppression d'une catégorie
   const handleDeleteCategory = () => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
@@ -90,12 +98,13 @@ function Category() {
           Icon: "",
           Description: "",
         });
+        notify("Category delete!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
   };
 
-  // Fonction qui gère la suppression d'une nouvelle catégorie
+  // Fonction qui gère la modification d'une catégorie
   const handleUpdateCategory = () => {
     const { status, errorMessage } = validateCategory(category);
     if (status) {
@@ -104,85 +113,97 @@ function Category() {
           ...category,
         })
         .then(() => {
-          // Ici remplacer le warn par un toastify
-          console.warn("Cattegory succesfully added!");
+          notify("Cattegory succesfully update!");
           getAllCategories();
         })
         .catch((error) => console.error(error));
     } else {
-      // Ici remplacer le warn par un toastify
-      console.warn(errorMessage);
+      notify(errorMessage);
     }
   };
 
   return (
-    <form className="flex flex-col items-center w-full pt-10 gap-y-7">
-      {/* SEARCHBAR */}
-      <SearchBarTemplate
-        data={myCategories}
-        customWidth="cstm_width_XlInput"
-        searchBarContainer="flex flex-col items-center w-full"
-        textPlaceholder="Search category"
-        textButton="Update category"
-        methodOnClick={handleOneCategory}
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
       />
-      {/* FORM ADD OPTION */}
-      <div className="mt-10 flex flex-col items-center w-full gap-y-7">
-        <InputTemplate
-          textPlaceholder="Title"
+      <form className="flex flex-col items-center w-full pt-10 gap-y-7">
+        {/* SEARCHBAR */}
+        <SearchBarTemplate
+          data={myCategories}
           customWidth="cstm_width_XlInput"
-          value={category.Name}
-          methodOnChange={handleInputOnChange}
-          name="Name"
+          searchBarContainer="flex flex-col items-center w-full"
+          textPlaceholder="Search category"
+          textButton="Update category"
+          methodOnClick={handleOneCategory}
         />
-        <InputTemplate
-          textPlaceholder="URL"
-          customWidth="cstm_width_XlInput"
-          value={category.Icon}
-          methodOnChange={handleInputOnChange}
-          name="Icon"
-        />
-        <TextareaTemplate
-          textPlaceholder="Description"
-          customWidth="cstm_width_XlInput"
-          value={category.Description}
-          methodOnChange={handleInputOnChange}
-          name="Description"
-        />
-      </div>
-      <div className="flex justify-around space-x-8 pt-5">
-        {!category.id && (
-          <ButtonTemplate
-            buttonType="button"
-            buttonText="ADD"
-            buttonStyle="cstm_buttonSecondaryNone"
-            methodOnClick={handleAddCategory}
+        {/* FORM ADD OPTION */}
+        <div className="mt-10 flex flex-col items-center w-full gap-y-7">
+          <InputTemplate
+            textPlaceholder="Title"
+            customWidth="cstm_width_XlInput"
+            value={category.Name}
+            methodOnChange={handleInputOnChange}
+            name="Name"
           />
-        )}
-        {category.id && (
-          <>
+          <InputTemplate
+            textPlaceholder="URL"
+            customWidth="cstm_width_XlInput"
+            value={category.Icon}
+            methodOnChange={handleInputOnChange}
+            name="Icon"
+          />
+          <TextareaTemplate
+            textPlaceholder="Description"
+            customWidth="cstm_width_XlInput"
+            value={category.Description}
+            methodOnChange={handleInputOnChange}
+            name="Description"
+          />
+        </div>
+        <div className="flex justify-around space-x-8 pt-5">
+          {!category.id && (
             <ButtonTemplate
               buttonType="button"
-              buttonText="UPDATE"
-              buttonStyle="cstm_buttonSecondary"
-              methodOnClick={handleUpdateCategory}
+              buttonText="ADD"
+              buttonStyle="cstm_buttonSecondaryNone"
+              methodOnClick={handleAddCategory}
             />
-            <ButtonTemplate
-              buttonType="button"
-              buttonText="DELETE"
-              buttonStyle="cstm_buttonSecondary"
-              methodOnClick={handleDeleteCategory}
-            />
-          </>
-        )}
-        <ButtonTemplate
-          methodOnClick={handleCancelButton}
-          buttonType="button"
-          buttonText="CANCEL"
-          buttonStyle="cstm_buttonSecondaryNone"
-        />
-      </div>
-    </form>
+          )}
+          {category.id && (
+            <>
+              <ButtonTemplate
+                buttonType="button"
+                buttonText="UPDATE"
+                buttonStyle="cstm_buttonSecondary"
+                methodOnClick={handleUpdateCategory}
+              />
+              <ButtonTemplate
+                buttonType="button"
+                buttonText="DELETE"
+                buttonStyle="cstm_buttonSecondary"
+                methodOnClick={handleDeleteCategory}
+              />
+            </>
+          )}
+          <ButtonTemplate
+            methodOnClick={handleCancelButton}
+            buttonType="button"
+            buttonText="CANCEL"
+            buttonStyle="cstm_buttonSecondaryNone"
+          />
+        </div>
+      </form>
+    </>
   );
 }
 
