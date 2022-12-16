@@ -9,13 +9,13 @@ const validateCategory = (category) => {
       errorMessage: "2 characters minimum in Title field and must be a string",
     };
   }
-  if (category.Icon === null || typeof category.Icon !== "string") {
+  if (category.Icon.length === 0) {
     return {
       status: false,
       errorMessage: "Icon field cannot be empty and must be a string",
     };
   }
-  if (category.Description === null || typeof category.Icon !== "string") {
+  if (category.Description.length === 0) {
     return {
       status: false,
       errorMessage: "Description field cannot be empty and must be a string",

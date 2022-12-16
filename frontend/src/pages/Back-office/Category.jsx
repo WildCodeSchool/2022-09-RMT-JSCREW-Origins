@@ -14,9 +14,9 @@ function Category() {
   const [myCategories, setMyCategories] = useState([]);
   const [category, setCategory] = useState({
     id: null,
-    Name: null,
-    Icon: null,
-    Description: null,
+    Name: "",
+    Icon: "",
+    Description: "",
   });
 
   const notify = (msg) => {
@@ -75,7 +75,7 @@ function Category() {
           ...category,
         })
         .then((categories) => {
-          notify("Cattegory succesfully added!");
+          notify("Category successfully added!");
           setCategory(categories.data);
           getAllCategories();
         })
@@ -98,7 +98,7 @@ function Category() {
           Icon: "",
           Description: "",
         });
-        notify("Category delete!");
+        notify("Category deleted!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -107,13 +107,17 @@ function Category() {
   // Fonction qui gère la modification d'une catégorie
   const handleUpdateCategory = () => {
     const { status, errorMessage } = validateCategory(category);
+
+    const { Name, Icon, Description } = category;
     if (status) {
       axios
         .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
-          ...category,
+          Name,
+          Icon,
+          Description,
         })
         .then(() => {
-          notify("Cattegory succesfully update!");
+          notify("Category successfully updated!");
           getAllCategories();
         })
         .catch((error) => console.error(error));
