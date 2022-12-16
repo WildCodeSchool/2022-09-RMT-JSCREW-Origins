@@ -169,7 +169,7 @@ function Video() {
           methodOnChange={handleInputOnChange}
           name="Description"
         />
-        {!video.premium ? (
+        {!video.Premium ? (
           <ButtonTemplate
             buttonType="button"
             buttonText="Freemium"
