@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import ButtonTemplate from "./ButtonTemplate";
 
@@ -9,14 +10,11 @@ function Modal({ setDisplayModal }) {
   };
 
   const settingDelete = () => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
       .then((user) => user)
       .catch((error) => console.error(error));
   };
-
   return (
     <div>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
