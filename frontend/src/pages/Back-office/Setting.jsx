@@ -6,21 +6,18 @@ import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalSuppression from "@components/ModalSuppression";
 
-function Setting({ value }) {
+function Setting() {
   const { id } = useParams();
+  const [displayModal, setDisplayModal] = useState(false);
   const [mySetting, setMySetting] = useState({
     id: null,
+    isAdmin: "",
     email: "",
     password: "",
     newPassword: "",
     confirmNewPassword: "",
   });
-  const [displayModal, setDisplayModal] = useState(false);
-  // Fonction qui gère le changement d'état des inputs
-  /**
-   * @param {string} place
-   * @param {string} value
-   */
+
   const handleInputOnChange = (place, value) => {
     const newUser = { ...mySetting };
     newUser[place] = value;
@@ -30,8 +27,9 @@ function Setting({ value }) {
   const updateSetting = (data) => {
     setMySetting({
       id: data.id,
+      isAdmin: data.isAdmin,
       email: data.email,
-      password: "",
+      password: data.password,
       newPassword: "",
       confirmNewPassword: "",
     });
@@ -40,9 +38,16 @@ function Setting({ value }) {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
-      .then((categories) => updateSetting(categories.data))
+      .then((users) => updateSetting(users.data))
       .catch((error) => console.error(error));
   }, []);
+
+  const handleUpdateSetting = () => {
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, { ...mySetting })
+      .then(() => updateSetting())
+      .catch((error) => console.error(error));
+  };
 
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
@@ -57,6 +62,7 @@ function Setting({ value }) {
               buttonType="submit"
               buttonText="UPDATE"
               buttonStyle="cstm_buttonSecondaryNone"
+              methodOnClick={handleUpdateSetting}
             />
             <ButtonTemplate
               buttonType="button"
