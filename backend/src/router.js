@@ -6,6 +6,8 @@ const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
 
+const validators = require("../services/validators");
+
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
 // router.get("/items/:id", itemControllers.read);
@@ -16,8 +18,16 @@ const settingControllers = require("./controllers/settingControllers");
 
 router.get("/categories", categoryControllers.browse);
 router.get("/categories/:id", categoryControllers.read);
-router.put("/categories/:id", categoryControllers.edit);
-router.post("/categories", categoryControllers.add);
+router.post(
+  "/categories",
+  validators.validateCategory,
+  categoryControllers.add
+);
+router.put(
+  "/categories/:id",
+  validators.validateCategory,
+  categoryControllers.edit
+);
 router.delete("/categories/:id", categoryControllers.destroy);
 
 router.get("/videos", videoControllers.browse);

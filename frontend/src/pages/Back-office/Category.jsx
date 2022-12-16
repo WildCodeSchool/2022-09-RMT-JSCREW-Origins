@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import validateCategory from "@services/categoryValidators";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -13,9 +14,9 @@ function Category() {
   const [myCategories, setMyCategories] = useState([]);
   const [category, setCategory] = useState({
     id: null,
-    Name: "",
-    Icon: "",
-    Description: "",
+    Name: null,
+    Icon: null,
+    Description: null,
   });
 
   const notify = (msg) => {
@@ -66,16 +67,24 @@ function Category() {
 
   // Fonction qui gère l'ajout d'une nouvelle catégorie
   const handleAddCategory = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
-        ...category,
-      })
-      .then((categories) => {
-        setCategory(categories.data);
-        notify("Category add!");
-        getAllCategories();
-      })
-      .catch((error) => console.error(error));
+    delete category.id;
+    const { status, errorMessage } = validateCategory(category);
+    if (status) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
+          ...category,
+        })
+        .then((categories) => {
+          notify("Cattegory succesfully added!");
+          setCategory(categories.data);
+          getAllCategories();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      // Ici remplacer le warn par un toastify
+      console.warn(errorMessage);
+      notify(errorMessage);
+    }
   };
 
   // Fonction qui gère la suppression d'une catégorie
@@ -97,15 +106,20 @@ function Category() {
 
   // Fonction qui gère la modification d'une catégorie
   const handleUpdateCategory = () => {
-    axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
-        ...category,
-      })
-      .then(() => {
-        notify("Category update!");
-        getAllCategories();
-      })
-      .catch((error) => console.error(error));
+    const { status, errorMessage } = validateCategory(category);
+    if (status) {
+      axios
+        .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+          ...category,
+        })
+        .then(() => {
+          notify("Cattegory succesfully update!");
+          getAllCategories();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      notify(errorMessage);
+    }
   };
 
   return (
