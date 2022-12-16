@@ -75,7 +75,7 @@ function Category() {
           ...category,
         })
         .then((categories) => {
-          notify("Cattegory succesfully added!");
+          notify("Category successfully added!");
           setCategory(categories.data);
           getAllCategories();
         })
@@ -98,7 +98,7 @@ function Category() {
           Icon: "",
           Description: "",
         });
-        notify("Category delete!");
+        notify("Category deleted!");
         getAllCategories();
       })
       .catch((error) => console.error(error));
@@ -117,7 +117,7 @@ function Category() {
           Description,
         })
         .then(() => {
-          notify("Cattegory succesfully update!");
+          notify("Category successfully updated!");
           getAllCategories();
         })
         .catch((error) => console.error(error));
