@@ -1,18 +1,13 @@
 const Joi = require("joi");
 
 const categorySchema = Joi.object({
-  Name: Joi.string().max(500).required().min(2),
-  Icon: Joi.string().max(1000),
-  Description: Joi.string().max(1000),
+  Name: Joi.string().min(2).max(500).required(),
+  Icon: Joi.string().max(1000).required(),
+  Description: Joi.string().max(1000).required(),
 });
 
 const validateCategory = (req, res, next) => {
-  const { Name, Icon, Description } = req.body;
-
-  const { error } = categorySchema.validate(
-    { Name, Icon, Description },
-    { abortEarly: false }
-  );
+  const { error } = categorySchema.validate(req.body, { abortEarly: false });
 
   if (error) {
     res.status(422).json({ validationErrors: error.details });

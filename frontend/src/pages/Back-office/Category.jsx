@@ -9,9 +9,9 @@ function Category() {
   const [myCategories, setMyCategories] = useState([]);
   const [category, setCategory] = useState({
     id: null,
-    Name: "",
-    Icon: "",
-    Description: "",
+    Name: null,
+    Icon: null,
+    Description: null,
   });
 
   // Fonction qui gère la récupération des données avec axios
@@ -58,6 +58,7 @@ function Category() {
 
   // Fonction qui gère l'ajout d'une nouvelle catégorie
   const handleAddCategory = () => {
+    delete category.id;
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
         ...category,
