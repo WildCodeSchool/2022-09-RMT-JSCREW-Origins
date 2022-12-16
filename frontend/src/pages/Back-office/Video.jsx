@@ -7,6 +7,7 @@ import ButtonTemplate from "@components/ButtonTemplate";
 
 function Video() {
   const [myVideo, setMyVideos] = useState([]);
+  const [myCategory, setMyCategories] = useState([]);
   const [video, setVideo] = useState({
     id: null,
     Name: "",
@@ -16,16 +17,26 @@ function Video() {
     Premium: 0,
   });
 
-  // Fonction qui gère la récupération des données avec axios
+  // Fonction qui gère la récupération des données "video" avec axios
   const getAllVideos = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
       .then((videos) => setMyVideos(videos.data))
       .catch((error) => console.error(error));
   };
+
+  // Fonction qui gère la récupération des données avec axios
+  const getAllCategories = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+      .then((categories) => setMyCategories(categories.data))
+      .catch((error) => console.error(error));
+  };
+
   // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllVideos();
+    getAllCategories();
   }, []);
 
   // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une video
@@ -57,6 +68,12 @@ function Video() {
     setVideo(newVideo);
   };
 
+  // const handleCategoryVideo = (value) => {
+  //   const newVideo = { ...video };
+  //   newVideo.id_Category = value;
+  //   setVideo(newVideo.id_Category);
+  // };
+
   // La fonction pre-rempli les input quand on clique sur une video dans la searchBar
   /**
    * @param {object} cat
@@ -65,10 +82,14 @@ function Video() {
     setVideo(vid);
   };
 
+  const handleCategoryVideo = (videoCategory) => {
+    handleInputOnChange("id_Category", videoCategory.id);
+  };
+
   // Fonction qui gère l'ajout d'une nouvelle video
   const handleAddVideo = () => {
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/videos`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/video`, {
         ...video,
       })
       .then((videos) => {
@@ -126,12 +147,13 @@ function Video() {
           methodOnChange={handleInputOnChange}
           name="Name"
         />
-        <InputTemplate
-          textPlaceholder="id_Category"
+        <SearchBarTemplate
+          data={myCategory}
           customWidth="cstm_width_XlInput"
-          value={video.id_Category}
-          methodOnChange={handleInputOnChange}
-          name="id_Category"
+          searchBarContainer="flex flex-col items-center w-full"
+          textPlaceholder="Search category"
+          textButton="Update category"
+          methodOnClick={handleCategoryVideo}
         />
         <InputTemplate
           textPlaceholder="URL"
@@ -151,15 +173,15 @@ function Video() {
           <ButtonTemplate
             buttonType="button"
             buttonText="Freemium"
-            buttonStyle="border-solid border-grey text-gray-300 border-2 rounded-md p-3"
-            methodOnClick={() => handlePremium(0)}
+            buttonStyle="border-solid border-gray-400 text-gray-400 border-2 rounded-md p-3 hover:bg-primary hover:text-white hover:border-primary"
+            methodOnClick={() => handlePremium(1)}
           />
         ) : (
           <ButtonTemplate
             buttonType="button"
             buttonText="Premium"
-            buttonStyle="bg-primary border-solid border-primary border-2 rounded-md p-3 text-white"
-            methodOnClick={() => handlePremium(1)}
+            buttonStyle="bg-primary border-solid border-primary border-2 rounded-md p-3 text-white hover:bg-white hover:text-gray-400 hover:border-gray-400"
+            methodOnClick={() => handlePremium(0)}
           />
         )}
       </div>
