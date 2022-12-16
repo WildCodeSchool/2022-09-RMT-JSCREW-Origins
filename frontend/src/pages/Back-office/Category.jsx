@@ -61,16 +61,22 @@ function Category() {
   const handleAddCategory = () => {
     delete category.id;
     const { status, errorMessage } = validateCategory(category);
-    console.warn(status, errorMessage);
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
-        ...category,
-      })
-      .then((categories) => {
-        setCategory(categories.data);
-        getAllCategories();
-      })
-      .catch((error) => console.error(error));
+    if (status) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
+          ...category,
+        })
+        .then((categories) => {
+          // Ici remplacer le warn par un toastify
+          console.warn("Cattegory succesfully added!");
+          setCategory(categories.data);
+          getAllCategories();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      // Ici remplacer le warn par un toastify
+      console.warn(errorMessage);
+    }
   };
 
   // Fonction qui gère la suppression d'une nouvelle catégorie
