@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 /* 
 data : les données qu'on reçoit
@@ -19,10 +18,18 @@ function SearchBar({
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
 
+  const handleDisplayData = () => {
+    if (searchData.length > 0) {
+      setSearchData("");
+    }
+    setDisplayData(!displayData);
+  };
+
   // eslint-disable-next-line no-shadow
   const updateSearchBar = (data) => {
     setSearchData(data.Name);
     methodOnClick(data);
+    setDisplayData(false);
   };
 
   return (
@@ -36,7 +43,7 @@ function SearchBar({
           value={searchData}
         />
         <button
-          onClick={() => setDisplayData(!displayData)}
+          onClick={handleDisplayData}
           className={`cstm_buttonPrimary absolute right-1 bottom-1 ${
             displayData && "focus:bg-secondary focus:text-primary"
           }`}
