@@ -53,7 +53,7 @@ function SearchBar({
         </button>
       </label>
       {(displayData || searchData.length > 0) && (
-        <div className="bg-primary w-3/4 lg:w-7/12 rounded-md">
+        <div className="bg-primary w-3/4 lg:w-7/12 rounded-md absolute top-12 mt-1">
           <ul className="flex flex-col">
             {data
               .filter((myData) =>

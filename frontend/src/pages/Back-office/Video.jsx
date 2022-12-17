@@ -133,7 +133,7 @@ function Video() {
       <SearchBarTemplate
         data={myVideo}
         customWidth="cstm_width_XlInput"
-        searchBarContainer="flex flex-col items-center w-full"
+        searchBarContainer="flex flex-col items-center w-full relative"
         textPlaceholder="Search video"
         textButton="Update video"
         methodOnClick={handleOneVideo}
@@ -150,7 +150,7 @@ function Video() {
         <SearchBarTemplate
           data={myCategory}
           customWidth="cstm_width_XlInput"
-          searchBarContainer="flex flex-col items-center w-full"
+          searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search category"
           textButton="Update category"
           methodOnClick={handleCategoryVideo}

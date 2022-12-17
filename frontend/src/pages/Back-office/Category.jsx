@@ -142,7 +142,7 @@ function Category() {
         <SearchBarTemplate
           data={myCategories}
           customWidth="cstm_width_XlInput"
-          searchBarContainer="flex flex-col items-center w-full"
+          searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search category"
           textButton="Update category"
           methodOnClick={handleOneCategory}
