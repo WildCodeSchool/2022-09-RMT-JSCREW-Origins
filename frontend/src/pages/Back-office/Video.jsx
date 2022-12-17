@@ -135,7 +135,7 @@ function Video() {
         customWidth="cstm_width_XlInput"
         searchBarContainer="flex flex-col items-center w-full relative"
         textPlaceholder="Search video"
-        textButton="Update video"
+        textButton="Show videos"
         methodOnClick={handleOneVideo}
       />
       {/* FORM ADD OPTION */}
@@ -152,7 +152,7 @@ function Video() {
           customWidth="cstm_width_XlInput"
           searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search category"
-          textButton="Update category"
+          textButton="Choose category"
           methodOnClick={handleCategoryVideo}
         />
         <InputTemplate
