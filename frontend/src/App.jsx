@@ -25,6 +25,7 @@ export default function App() {
           <Route path="/Origins" element={<CustmrSite />}>
             <Route path="Home" element={<Home />} />
             <Route path="All-videos" element={<AllVideos />} />
+            <Route path="Dashboard" element={<Dashboard />} />
             <Route path="Login" element={<Login />} />
           </Route>
           <Route path="/Dashboard" element={<Dashboard />}>

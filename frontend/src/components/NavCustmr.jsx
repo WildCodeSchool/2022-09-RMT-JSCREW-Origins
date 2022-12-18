@@ -7,6 +7,7 @@ function NavCustmr() {
       <ul>
         <Link to="Home">Home</Link>
         <Link to="All-videos">All videos</Link>
+        <Link to="Dashboard">Back office</Link>
         <Link to="Login">Login</Link>
       </ul>
     </nav>
