@@ -74,7 +74,7 @@ export default function Nav() {
         </div>
         <div className="flex">
           <Link
-            to="/"
+            to="/Origins/Home"
             className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2  w-full"
           >
             <p className="text-base leading-4">Deconnexion</p>
