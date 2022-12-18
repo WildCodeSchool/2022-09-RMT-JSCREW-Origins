@@ -11,7 +11,13 @@ function NavCustmr() {
       <nav className="fixed text-white p-7 w-full">
         {/* Version Mobile */}
         <ul className="md:hidden flex justify-between w-full">
-          <Link to="Home">Home</Link>
+          <Link className="w-full" to="Home">
+            <img
+              className="w-32"
+              src="..\src\assets\logo-origins.png"
+              alt="logo origins"
+            />
+          </Link>
           <button
             onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
             type="button"
@@ -46,8 +52,14 @@ function NavCustmr() {
         )}
         {/* Version Desktop */}
         <ul className="hidden md:grid grid-cols-2 gap-4 w-full">
-          <Link to="Home">Home</Link>
-          <div className="flex justify-between">
+          <Link to="Home">
+            <img
+              className="w-32"
+              src="..\src\assets\logo-origins.png"
+              alt="logo origins"
+            />
+          </Link>
+          <div className="flex justify-between items-center">
             <Link to="All-videos">All videos</Link>
             <Link to="Dashboard">Back office</Link>
             <Link to="Login">Login</Link>
