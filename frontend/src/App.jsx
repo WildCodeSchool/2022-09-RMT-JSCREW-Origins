@@ -1,5 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import CustmrSite from "@pages/Layout/CustmrSite";
+import Home from "@pages/CustmrSite/Home";
+import Login from "@pages/CustmrSite/Login";
+import AllVideos from "@pages/CustmrSite/AllVideos";
+
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
 import Setting from "./pages/Back-office/Setting";
@@ -16,6 +22,11 @@ export default function App() {
     <Router>
       <div>
         <Routes>
+          <Route path="/Origins" element={<CustmrSite />}>
+            <Route path="Home" element={<Home />} />
+            <Route path="All-videos" element={<AllVideos />} />
+            <Route path="Login" element={<Login />} />
+          </Route>
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Category" element={<Category />} />
             <Route path="Setting/:id" element={<Setting />} />
