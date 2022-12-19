@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import validateCategory from "@services/categoryValidators";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
+import validateCategory from "@services/categoryValidators";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
@@ -81,8 +81,6 @@ function Category() {
         })
         .catch((error) => console.error(error));
     } else {
-      // Ici remplacer le warn par un toastify
-      console.warn(errorMessage);
       notify(errorMessage);
     }
   };
@@ -130,7 +128,7 @@ function Category() {
     <>
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -145,9 +143,9 @@ function Category() {
         <SearchBarTemplate
           data={myCategories}
           customWidth="cstm_width_XlInput"
-          searchBarContainer="flex flex-col items-center w-full"
+          searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search category"
-          textButton="Update category"
+          textButton="Show categories"
           methodOnClick={handleOneCategory}
         />
         {/* FORM ADD OPTION */}

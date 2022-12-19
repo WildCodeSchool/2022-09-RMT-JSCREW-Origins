@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 /* 
 data : les données qu'on reçoit
 textPlaceholder : infos à mettre dans les placeholder des inputs
@@ -16,15 +15,43 @@ function SearchBar({
   customWidth,
   methodOnClick,
 }) {
+  const ref = useRef();
   const [displayData, setDisplayData] = useState(false);
   const [searchData, setSearchData] = useState("");
-  const handleDisplayData = (e) => {
-    // eslint-disable-next-line no-unused-expressions
-    searchData.length >= 0 && setDisplayData(true);
-    setSearchData(e.target.value);
+
+  // useEffect qui gère la fermeture du menu quand on clique à l'exterieur du menu
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      // Si le menu est ouvert et qu'on clique à l'ext du menu, il se ferme
+      if (displayData && ref.current && !ref.current.contains(e.target)) {
+        setDisplayData(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      // Retire l'eventListsenner
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [displayData]);
+
+  const handleDisplayData = () => {
+    if (searchData.length > 0) {
+      setSearchData("");
+    }
+    setDisplayData(!displayData);
   };
+
+  // eslint-disable-next-line no-shadow
+  const updateSearchBar = (data) => {
+    setSearchData(data.Name);
+    methodOnClick(data);
+    setDisplayData(false);
+  };
+
   return (
-    <div className={searchBarContainer}>
+    <div className={searchBarContainer} ref={ref}>
       <label className={`cstm_styleInput ${customWidth} relative`}>
         <input
           onChange={handleDisplayData}
@@ -34,7 +61,7 @@ function SearchBar({
           value={searchData}
         />
         <button
-          onClick={() => setDisplayData(!displayData)}
+          onClick={handleDisplayData}
           className={`cstm_buttonPrimary absolute right-1 bottom-1 ${
             displayData && "focus:bg-secondary focus:text-primary"
           }`}
@@ -43,14 +70,16 @@ function SearchBar({
           {textButton}
         </button>
       </label>
-      {displayData && (
-        <div className="bg-primary w-3/4 lg:w-7/12 rounded-md">
+      {(displayData || searchData.length > 0) && (
+        <div className="bg-primary w-3/4 lg:w-7/12 rounded-md absolute z-10 top-12 mt-1">
           <ul className="flex flex-col">
             {data
-              .filter((myData) => myData.Name.startsWith(searchData))
+              .filter((myData) =>
+                myData.Name.toLowerCase().includes(searchData)
+              )
               .map((myData) => (
                 <button
-                  onClick={() => methodOnClick(myData)}
+                  onClick={() => updateSearchBar(myData)}
                   type="button"
                   key={myData.id}
                   className="text-white text-base self-start py-3 pl-5 hover:text-secondary hover:bg-white hover:bg-opacity-5 w-full flex"
