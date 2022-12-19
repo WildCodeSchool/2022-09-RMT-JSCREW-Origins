@@ -7,28 +7,15 @@ class VideoManager extends AbstractManager {
 
   insert(video) {
     return this.connection.query(
-      `insert into ${this.table} (Name, id_Category, Url, Description, Premium) values (?,?,?,?,?)`,
-      [
-        video.Name,
-        video.id_Category,
-        video.Url,
-        video.Description,
-        video.Premium,
-      ]
+      `insert into ${this.table} (id_Category, Url, Description, Premium) values (?,?,?,?)`,
+      [video.id_Category, video.Url, video.Description, video.Premium]
     );
   }
 
   update(video) {
     return this.connection.query(
-      `update ${this.table} set Name = ?, id_Category = ?, Url = ?, Description = ?, Premium = ? where id = ?`,
-      [
-        video.Name,
-        video.id_Category,
-        video.Url,
-        video.Description,
-        video.Premium,
-        video.id,
-      ]
+      `update ${this.table} set id_Category = ?, Url = ?, Description = ?, Premium = ? where id = ?`,
+      [video.id_Category, video.Url, video.Description, video.Premium, video.id]
     );
   }
 }
