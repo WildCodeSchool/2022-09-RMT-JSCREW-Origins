@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 function NavCustmr() {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const { pathname } = useLocation();
+  const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
@@ -22,7 +23,27 @@ function NavCustmr() {
             onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
             type="button"
           >
-            Burger
+            <div
+              className={`${genericHamburgerLine} ${
+                isMenuDisplayed
+                  ? "rotate-45 translate-y-2 opacity-95 group-hover:opacity-100"
+                  : "opacity-95 group-hover:opacity-100"
+              }`}
+            />
+            <div
+              className={`${genericHamburgerLine} ${
+                isMenuDisplayed
+                  ? "opacity-0"
+                  : "opacity-95 group-hover:opacity-100"
+              }`}
+            />
+            <div
+              className={`${genericHamburgerLine} ${
+                isMenuDisplayed
+                  ? "-rotate-45 -translate-y-2 opacity-95 group-hover:opacity-100"
+                  : "opacity-95 group-hover:opacity-100"
+              }`}
+            />
           </button>
         </ul>
         {isMenuDisplayed && (
