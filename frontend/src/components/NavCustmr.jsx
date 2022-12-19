@@ -8,7 +8,7 @@ function NavCustmr() {
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    pathname !== "/Origins/Dashboard" && (
+    !pathname.includes("/Origins/Dashboard") && (
       <nav className="fixed text-white p-7 w-full">
         {/* Version Mobile */}
         <ul className="md:hidden flex justify-between w-full">
