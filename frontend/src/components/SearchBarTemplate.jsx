@@ -54,7 +54,7 @@ function SearchBar({
     <div className={searchBarContainer} ref={ref}>
       <label className={`cstm_styleInput ${customWidth} relative`}>
         <input
-          onChange={(e) => setSearchData(e.target.value)}
+          onChange={handleDisplayData}
           className="focus:outline-none"
           type="text"
           placeholder={textPlaceholder}

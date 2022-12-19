@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
-import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+import TextareaTemplate from "@components/TextareaTemplate";
 
 function Video() {
   const [myVideo, setMyVideos] = useState([]);
@@ -17,7 +17,9 @@ function Video() {
     Premium: 0,
   });
 
-  // Fonction qui gère la récupération des données "video" avec axios
+  /**
+   * Fonction qui gère la récupération des données "video" avec axios
+   */
   const getAllVideos = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
@@ -25,7 +27,9 @@ function Video() {
       .catch((error) => console.error(error));
   };
 
-  // Fonction qui gère la récupération des données avec axios
+  /**
+   * Fonction qui gère la récupération des données avec axios
+   */
   const getAllCategories = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
@@ -39,7 +43,9 @@ function Video() {
     getAllCategories();
   }, []);
 
-  // Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une video
+  /**
+   * Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une video
+   */
   const handleCancelButton = () => {
     setVideo({
       id: null,
@@ -51,8 +57,8 @@ function Video() {
     });
   };
 
-  // Fonction qui gère le changement d'état des inputs
   /**
+   * Fonction qui gère le changement d'état des inputs
    * @param {string} place
    * @param {string} value
    */
@@ -68,14 +74,8 @@ function Video() {
     setVideo(newVideo);
   };
 
-  // const handleCategoryVideo = (value) => {
-  //   const newVideo = { ...video };
-  //   newVideo.id_Category = value;
-  //   setVideo(newVideo.id_Category);
-  // };
-
-  // La fonction pre-rempli les input quand on clique sur une video dans la searchBar
   /**
+   * La fonction pre-rempli les input quand on clique sur une video dans la searchBar
    * @param {object} cat
    */
   const handleOneVideo = (vid) => {
@@ -86,7 +86,9 @@ function Video() {
     handleInputOnChange("id_Category", videoCategory.id);
   };
 
-  // Fonction qui gère l'ajout d'une nouvelle video
+  /**
+   * Fonction qui gère l'ajout d'une nouvelle video
+   */
   const handleAddVideo = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/videos`, {

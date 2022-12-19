@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+
 import validateCategory from "@services/categoryValidators";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
@@ -84,7 +85,7 @@ function Category() {
     }
   };
 
-  // Fonction qui gère la suppression d'une nouvelle catégorie
+  // Fonction qui gère la suppression d'une catégorie
   const handleDeleteCategory = () => {
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
@@ -101,7 +102,7 @@ function Category() {
       .catch((error) => console.error(error));
   };
 
-  // Fonction qui gère la suppression d'une nouvelle catégorie
+  // Fonction qui gère la modification d'une catégorie
   const handleUpdateCategory = () => {
     const { status, errorMessage } = validateCategory(category);
 
