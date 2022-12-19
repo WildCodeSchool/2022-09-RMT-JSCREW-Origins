@@ -6,19 +6,19 @@ const validateCategory = (category) => {
   ) {
     return {
       status: false,
-      errorMessage: "2 characters minimum in Title field and must be a string",
+      errorMessage: "2 characters minimum in Title field",
     };
   }
   if (category.Icon.length === 0) {
     return {
       status: false,
-      errorMessage: "Icon field cannot be empty and must be a string",
+      errorMessage: "Icon field cannot be empty",
     };
   }
   if (category.Description.length === 0) {
     return {
       status: false,
-      errorMessage: "Description field cannot be empty and must be a string",
+      errorMessage: "Description field cannot be empty",
     };
   }
   return { status: true };
