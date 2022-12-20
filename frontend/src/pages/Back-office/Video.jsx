@@ -90,6 +90,7 @@ function Video() {
    * Fonction qui gère l'ajout d'une nouvelle video
    */
   const handleAddVideo = () => {
+    delete video.id;
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/videos`, {
         ...video,
