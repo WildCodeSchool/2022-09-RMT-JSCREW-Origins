@@ -53,11 +53,11 @@ function Setting() {
     if (!emailRegex.test(mySetting.email)) {
       return notify("Email is not correct");
     }
-    notify("Email is correct");
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, { ...mySetting })
       .then(() => updateSetting())
       .catch((error) => console.error(error));
+    return notify("Email has been successfully modified");
   };
 
   return (
