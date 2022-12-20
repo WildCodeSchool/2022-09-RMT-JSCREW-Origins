@@ -1,11 +1,10 @@
-// ---------- EXEMPLE DE CONTROLLER ------------
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.item
+  models.video
     .findAll()
-    .then(([rows]) => {
-      res.send(rows);
+    .then(([videos]) => {
+      res.send(videos);
     })
     .catch((err) => {
       console.error(err);
@@ -14,13 +13,13 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.item
+  models.video
     .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
+    .then(([videos]) => {
+      if (videos[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(videos[0]);
       }
     })
     .catch((err) => {
@@ -30,14 +29,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const item = req.body;
+  const video = req.body;
 
   // TODO validations (length, format...)
 
-  item.id = parseInt(req.params.id, 10);
+  video.id = parseInt(req.params.id, 10);
 
-  models.item
-    .update(item)
+  models.video
+    .update(video)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -52,14 +51,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const item = req.body;
+  const video = req.body;
 
-  // TODO validations (length, format...)
-
-  models.item
-    .insert(item)
+  models.video
+    .insert(video)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      res.location(`/video/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -68,7 +65,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
+  models.video
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
