@@ -11,11 +11,7 @@ function NavCustmr() {
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between w-full">
         <Link className="w-full" to="/">
-          <img
-            className="w-32"
-            src="..\src\assets\logo-origins.png"
-            alt="logo origins"
-          />
+          <img className="w-32" src=".\assets\logo.png" alt="logo origins" />
         </Link>
         <button
           onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
