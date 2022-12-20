@@ -22,20 +22,20 @@ export default function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/Origins" element={<CustmrSite />}>
-            <Route path="Home" element={<Home />} />
+          <Route path="/" element={<CustmrSite />}>
+            <Route path="" element={<Home />} />
             <Route path="All-videos" element={<AllVideos />} />
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="Login" element={<Login />} />
-            <Route path="Dashboard" element={<Dashboard />}>
-              <Route path="Category" element={<Category />} />
-              <Route path="Setting/:id" element={<Setting />} />
-              <Route path="Slider_1" element={<Slider1 />} />
-              <Route path="Slider_2" element={<Slider2 />} />
-              <Route path="Slider_3" element={<Slider3 />} />
-              <Route path="Grille" element={<Grille />} />
-              <Route path="Video" element={<Video />} />
-            </Route>
+          </Route>
+          <Route path="/Dashboard" element={<Dashboard />}>
+            <Route path="Category" element={<Category />} />
+            <Route path="Setting/:id" element={<Setting />} />
+            <Route path="Slider_1" element={<Slider1 />} />
+            <Route path="Slider_2" element={<Slider2 />} />
+            <Route path="Slider_3" element={<Slider3 />} />
+            <Route path="Grille" element={<Grille />} />
+            <Route path="Video" element={<Video />} />
           </Route>
         </Routes>
       </div>
