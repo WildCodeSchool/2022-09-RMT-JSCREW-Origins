@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import CustmrSite from "@pages/Layout/CustmrSite";
 import Home from "@pages/CustmrSite/Home";
-import Login from "@pages/CustmrSite/LogIn_old";
+import Login from "@pages/CustmrSite/Login";
 import AllVideos from "@pages/CustmrSite/AllVideos";
 
 import Dashboard from "./pages/Layout/Dashboard";
