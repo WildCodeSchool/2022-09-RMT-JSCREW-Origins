@@ -7,7 +7,6 @@ import InputTemplate from "@components/InputTemplate";
 function Slider1() {
   const [myVideo, setMyVideo] = useState([]);
   const [videoList, setVideoList] = useState([]);
-
   const getAllVideo = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
@@ -26,6 +25,10 @@ function Slider1() {
     if (videoList.length < 10) setVideoList((list) => [...list, vid]);
   };
 
+  const handleDeleteCard = (id) => {
+    setVideoList(videoList.filter((video) => video.id !== id));
+  };
+
   return (
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {/* SEARCHBAR */}
@@ -40,7 +43,11 @@ function Slider1() {
       />
       <div className="flex flex-wrap space-x-5 w-3/5 justify-center">
         {videoList.map((video) => (
-          <CardTemplate key={video.id} videoName={video.Name} />
+          <CardTemplate
+            key={video.id}
+            data={video}
+            handleDeleteCard={handleDeleteCard}
+          />
         ))}
       </div>
     </form>
