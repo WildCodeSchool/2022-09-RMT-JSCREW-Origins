@@ -69,13 +69,13 @@ function Video() {
     newVideo[place] = value;
     setVideo(newVideo);
   };
-  
+
   const handlePremium = (bool) => {
     const newVideo = { ...video };
     newVideo.Premium = bool;
     setVideo(newVideo);
   };
-  
+
   /**
    * La fonction pre-rempli les input quand on clique sur une video dans la searchBar
    * @param {object} vid
@@ -83,7 +83,7 @@ function Video() {
   const handleOneVideo = (vid) => {
     setVideo(vid);
   };
-  
+
   const handleCategoryVideo = (videoCategory) => {
     handleInputOnChange("id_Category", videoCategory.id);
   };
