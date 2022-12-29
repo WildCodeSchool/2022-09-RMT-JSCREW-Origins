@@ -13,10 +13,7 @@ function NavCustmr() {
     // Si on est dirigé vers le dashboard, la nav disparraît
     <nav className="fixed text-white p-7 w-full">
       {/* Version Mobile */}
-      <ul className="md:hidden flex justify-between w-full">
-        <Link className="w-full" to="/">
-          <img className="w-40" src={logoOrigins} alt="logo origins" />
-        </Link>
+      <ul className="md:hidden flex justify-between">
         <button
           onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
           type="button"
@@ -43,26 +40,30 @@ function NavCustmr() {
             }`}
           />
         </button>
+        <Link className="flex items-center" to="/">
+          <img className="w-40" src={logoOrigins} alt="logo origins" />
+        </Link>
+        <SearchBarLoupe />
       </ul>
       {isMenuDisplayed && (
-        <div className="flex">
+        <div className="flex flex-col text-xl pt-2">
           <Link
             onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold"
+            className="hover:text-secondary hover:font-bold mb-2"
             to="/All-videos"
           >
             All videos
           </Link>
           <Link
             onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold"
+            className="hover:text-secondary hover:font-bold mb-2"
             to="/Dashboard/Video"
           >
             Dashboard
           </Link>
           <Link
             onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold"
+            className="hover:text-secondary hover:font-bold mb-2"
             to="/Login"
           >
             Login
