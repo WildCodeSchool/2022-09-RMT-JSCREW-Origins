@@ -32,7 +32,7 @@ function SearchBarLoupe() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="text-gray-900 rounded p-1"
           />
-          <div>
+          <div className="absolute">
             {datas
               .filter((video) => {
                 return video.Name.toLowerCase().includes(
@@ -45,8 +45,9 @@ function SearchBarLoupe() {
                     type="button"
                     onClick={() => setShow(!show)}
                     key={video.Name}
+                    className="flex"
                   >
-                    <Link className="navbar-toggler" to={`/videos/${video.id}`}>
+                    <Link to={`/videos/${video.id}`}>
                       <img
                         className="img-fluid col-8"
                         src={video.Name}
