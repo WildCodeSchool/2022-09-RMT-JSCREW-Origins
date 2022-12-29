@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import logoOrigins from "@assets/logo-origins.png";
+
 function NavCustmr() {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
@@ -11,7 +13,7 @@ function NavCustmr() {
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between w-full">
         <Link className="w-full" to="/">
-          <img className="w-32" src=".\assets\logo.png" alt="logo origins" />
+          <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
         <button
           onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
@@ -68,11 +70,7 @@ function NavCustmr() {
       {/* Version Desktop */}
       <ul className="hidden md:grid grid-cols-2 gap-4 w-full">
         <Link to="/">
-          <img
-            className="w-32"
-            src="..\src\assets\logo-origins.png"
-            alt="logo origins"
-          />
+          <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
         <div className="flex justify-between items-center">
           <Link to="/All-videos">All videos</Link>
