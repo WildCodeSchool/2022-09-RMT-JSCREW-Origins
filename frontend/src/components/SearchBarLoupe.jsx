@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import iconeLoupe from "@assets/loupe.png";
 /*
@@ -32,22 +33,29 @@ function SearchBarLoupe() {
             className="text-gray-900 rounded p-1"
           />
           <div>
-            {
-              datas.filter((video) => {
+            {datas
+              .filter((video) => {
                 return video.Name.toLowerCase().includes(
                   searchTerm.toLowerCase() || !searchTerm
                 );
               })
-              //   .map((video) => {
-              //     return (
-              //       <button
-              //         type="button"
-              //         onClick={() => setShow(!show)}
-              //         key={video.Name}
-              //       />
-              //     );
-              //   })
-            }
+              .map((video) => {
+                return (
+                  <button
+                    type="button"
+                    onClick={() => setShow(!show)}
+                    key={video.Name}
+                  >
+                    <Link className="navbar-toggler" to={`/videos/${video.id}`}>
+                      <img
+                        className="img-fluid col-8"
+                        src={video.Name}
+                        alt={video.Name}
+                      />
+                    </Link>
+                  </button>
+                );
+              })}
           </div>
         </form>
       )}
