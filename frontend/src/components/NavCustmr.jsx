@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import logoOrigins from "@assets/logo-origins.png";
+import iconeLogin from "@assets/CompteClient.png";
 
 function NavCustmr() {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
@@ -68,14 +69,16 @@ function NavCustmr() {
         </div>
       )}
       {/* Version Desktop */}
-      <ul className="hidden md:grid grid-cols-2 gap-4 w-full">
+      <ul className="hidden md:grid grid-cols-2 w-full">
         <Link to="/">
           <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-end gap-6 items-center">
           <Link to="/All-videos">All videos</Link>
           <Link to="/Dashboard/Video">Back office</Link>
-          <Link to="/Login">Login</Link>
+          <Link to="/Login">
+            <img className="w-6" src={iconeLogin} alt="icone login" />
+          </Link>
         </div>
       </ul>
     </nav>
