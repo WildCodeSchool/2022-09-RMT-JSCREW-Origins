@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import logoOrigins from "@assets/logo-origins.png";
 import iconeLogin from "@assets/CompteClient.png";
+import SearchBarLoupe from "./SearchBarLoupe";
 
 function NavCustmr() {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
@@ -44,7 +45,7 @@ function NavCustmr() {
         </button>
       </ul>
       {isMenuDisplayed && (
-        <div className="flex flex-col w-full items-center mt-5 gap-3">
+        <div className="flex">
           <Link
             onClick={() => setIsMenuDisplayed(false)}
             className="hover:text-secondary hover:font-bold"
@@ -69,16 +70,17 @@ function NavCustmr() {
         </div>
       )}
       {/* Version Desktop */}
-      <ul className="hidden md:grid grid-cols-2 w-full">
+      <ul className="hidden md:flex justify-between row-span-full">
         <Link to="/">
           <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
-        <div className="flex justify-end gap-6 items-center">
+        <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
           <Link to="/Dashboard/Video">Back office</Link>
           <Link to="/Login">
             <img className="w-6" src={iconeLogin} alt="icone login" />
           </Link>
+          <SearchBarLoupe />
         </div>
       </ul>
     </nav>
