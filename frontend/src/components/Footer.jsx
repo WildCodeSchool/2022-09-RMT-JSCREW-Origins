@@ -6,10 +6,10 @@ import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
 import Facebook from "@assets/Icone_reseaux_s/facebook.png";
-import Instagram from "@assets/Icone_reseaux_s/Instagram.png";
-import Linkedin from "@assets/Icone_reseaux_s/Linkedin.png";
-import Twitter from "@assets/Icone_reseaux_s/Twitter.png";
-import Youtube from "@assets/Icone_reseaux_s/Youtube.png";
+import Instagram from "@assets/Icone_reseaux_s/instagram.png";
+import Linkedin from "@assets/Icone_reseaux_s/linkedin.png";
+import Twitter from "@assets/Icone_reseaux_s/twitter.png";
+import Youtube from "@assets/Icone_reseaux_s/youtube.png";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +17,8 @@ function Footer() {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  console.log(name)
 
   const notify = (msg) => {
     toast(msg);
