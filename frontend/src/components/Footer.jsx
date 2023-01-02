@@ -18,8 +18,6 @@ function Footer() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  console.log(name)
-
   const notify = (msg) => {
     toast(msg);
   };
