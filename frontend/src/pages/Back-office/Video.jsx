@@ -8,10 +8,11 @@ import TextareaTemplate from "@components/TextareaTemplate";
 function Video() {
   const [myVideo, setMyVideos] = useState([]);
   const [myCategory, setMyCategories] = useState([]);
+  const [reset, setReset] = useState(false);
   const [video, setVideo] = useState({
     id: null,
     Name: "",
-    id_Category: null,
+    id_Category: "",
     Url: "",
     Description: "",
     Premium: 0,
@@ -55,6 +56,7 @@ function Video() {
       Description: "",
       Premium: "",
     });
+    setReset(!reset);
   };
 
   /**
@@ -76,7 +78,7 @@ function Video() {
 
   /**
    * La fonction pre-rempli les input quand on clique sur une video dans la searchBar
-   * @param {object} cat
+   * @param {object} vid
    */
   const handleOneVideo = (vid) => {
     setVideo(vid);
@@ -134,6 +136,7 @@ function Video() {
     <form className="flex flex-col items-center w-full pt-10 gap-y-7">
       {/* SEARCHBAR */}
       <SearchBarTemplate
+        reset={reset}
         data={myVideo}
         customWidth="cstm_width_XlInput"
         searchBarContainer="flex flex-col items-center w-full relative"
@@ -151,6 +154,8 @@ function Video() {
           name="Name"
         />
         <SearchBarTemplate
+          name="id_Category"
+          reset={reset}
           data={myCategory}
           customWidth="cstm_width_XlInput"
           searchBarContainer="flex flex-col items-center w-full relative"
