@@ -46,28 +46,30 @@ function NavCustmr() {
         <SearchBarLoupe />
       </ul>
       {isMenuDisplayed && (
-        <div className="flex flex-col text-xl pt-2">
-          <Link
-            onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold mb-2"
-            to="/All-videos"
-          >
-            All videos
-          </Link>
-          <Link
-            onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold mb-2"
-            to="/Dashboard/Video"
-          >
-            Dashboard
-          </Link>
-          <Link
-            onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold mb-2"
-            to="/Login"
-          >
-            Login
-          </Link>
+        <div className="flex justify-center m-5">
+          <div className="flex flex-col items-center text-xl">
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-5"
+              to="/All-videos"
+            >
+              All videos
+            </Link>
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-5"
+              to="/Dashboard/Video"
+            >
+              Dashboard
+            </Link>
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-2"
+              to="/Login"
+            >
+              Login
+            </Link>
+          </div>
         </div>
       )}
       {/* Version Desktop */}

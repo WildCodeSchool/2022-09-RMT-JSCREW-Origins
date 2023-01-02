@@ -21,7 +21,6 @@ function SearchBarLoupe() {
   return (
     <div className="flex justify-end items-center">
       <button type="button" onClick={() => setShow(!show)}>
-        {show === true ? "" : ""}
         <img className="w-8 mr-2" src={iconeLoupe} alt="icone loupe" />
       </button>
       {show && (
@@ -32,7 +31,7 @@ function SearchBarLoupe() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="text-gray-900 rounded p-1"
           />
-          <div className="absolute">
+          <div className="absolute flex flex-col items-start gap-4 mt-4">
             {datas
               .filter((video) => {
                 return video.Name.toLowerCase().includes(
@@ -45,15 +44,9 @@ function SearchBarLoupe() {
                     type="button"
                     onClick={() => setShow(!show)}
                     key={video.Name}
-                    className="flex"
+                    className="hover:text-secondary"
                   >
-                    <Link to={`/videos/${video.id}`}>
-                      <img
-                        className="img-fluid col-8"
-                        src={video.Name}
-                        alt={video.Name}
-                      />
-                    </Link>
+                    <Link to={`/videos/${video.id}`}>{video.Name}</Link>
                   </button>
                 );
               })}
