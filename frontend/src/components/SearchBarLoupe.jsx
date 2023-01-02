@@ -12,11 +12,15 @@ function SearchBarLoupe() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
-      .then((videos) => setDatas(videos.data))
-      .catch((error) => console.error(error));
-  }, []);
+    if (searchTerm !== "") {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/videos?search=${searchTerm}`)
+        .then((videos) => setDatas(videos.data))
+        .catch((error) => console.error(error));
+    } else {
+      setDatas([]);
+    }
+  }, [searchTerm]);
 
   return (
     <div className="flex justify-end items-center">
@@ -32,24 +36,18 @@ function SearchBarLoupe() {
             className="text-gray-900 rounded p-1"
           />
           <div className="absolute flex flex-col items-start gap-4 mt-4">
-            {datas
-              .filter((video) => {
-                return video.Name.toLowerCase().includes(
-                  searchTerm.toLowerCase() || !searchTerm
-                );
-              })
-              .map((video) => {
-                return (
-                  <button
-                    type="button"
-                    onClick={() => setShow(!show)}
-                    key={video.Name}
-                    className="hover:text-secondary"
-                  >
-                    <Link to={`/videos/${video.id}`}>{video.Name}</Link>
-                  </button>
-                );
-              })}
+            {datas.map((video) => {
+              return (
+                <button
+                  type="button"
+                  onClick={() => setShow(!show)}
+                  key={video.Name}
+                  className="hover:text-secondary"
+                >
+                  <Link to={`/videos/${video.id}`}>{video.Name}</Link>
+                </button>
+              );
+            })}
           </div>
         </form>
       )}

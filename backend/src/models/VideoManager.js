@@ -5,6 +5,16 @@ class VideoManager extends AbstractManager {
     super({ table: "video" });
   }
 
+  findAll({ search }) {
+    let query = `select * from  ${this.table}`;
+    const value = [];
+    if (search) {
+      query += " where Name like ?";
+      value.push(`%${search}%`);
+    }
+    return this.connection.query(query, value);
+  }
+
   insert(video) {
     return this.connection.query(
       `insert into ${this.table} (id_Category, Url, Description, Premium) values (?,?,?,?)`,
