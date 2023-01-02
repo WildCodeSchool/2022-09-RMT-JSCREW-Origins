@@ -17,7 +17,7 @@ function InputTemplate({
   return (
     <label className={`cstm_styleInput ${customWidth}`}>
       <input
-        className="focus:outline-none w-full"
+        className="focus:outline-none w-full bg-white"
         type={inputType}
         placeholder={textPlaceholder}
         value={value}
