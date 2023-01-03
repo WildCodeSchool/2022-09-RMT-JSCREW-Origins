@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ConnectForm from "@components/ConnectForm";
+import ButtonTemplate from "@components/ButtonTemplate";
 
 function Login() {
   const [infos, setInfos] = useState({
@@ -16,13 +17,18 @@ function Login() {
     setInfos(newUser);
   };
   return (
-    <div className="h-screen bg-primary pt-20">
+    <form className="flex flex-col justify-center items-center h-screen bg-primary gap-y-7">
       <ConnectForm
         cstmStyle="bg-white"
         dataUsers={infos}
         handleInputOnChange={handleInputOnChange}
       />
-    </div>
+      <ButtonTemplate
+        buttonType="button"
+        buttonText="REGISTER"
+        buttonStyle="cstm_cstmrButton"
+      />
+    </form>
   );
 }
 
