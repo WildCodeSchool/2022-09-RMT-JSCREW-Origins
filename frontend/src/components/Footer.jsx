@@ -14,18 +14,27 @@ import Youtube from "@assets/Icone_reseaux_s/youtube.png";
 import "react-toastify/dist/ReactToastify.css";
 
 function Footer() {
-  const [message, setMessage] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [myMessage, setMyMessage] = useState({
+    id: null,
+    name: "",
+    Email: "",
+    Description: "",
+  });
+
+  const handleInputOnChange = (place, value) => {
+    const newMessage = { ...myMessage };
+    newMessage[place] = value;
+    setMyMessage(newMessage);
+  };
 
   const notify = (msg) => {
     toast(msg);
   };
 
   const submitForm = () => {
-    if (email.includes("@")) {
+    if (myMessage.Email.includes("@")) {
       notify(
-        `Hello ${name} your message ${message} and your registration have been taken into account, a confirmation email has been sent to the address ${email}`
+        `Hello ${myMessage.name} your message ${myMessage.Description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.Email}`
       );
     } else {
       notify(`Your email address isn't correct`);
@@ -58,22 +67,26 @@ function Footer() {
           </ul>
         </div>
         {/* -----------------------début du form --------------------------------------------------------------------- */}
-        <div className="flex justify-center w-full">
+        <form className="flex justify-center w-full">
           <div className="mt-4">
             <div className="flex justify-center">
               <div className="flex justify-end mr-1 w-6/12">
                 <InputTemplate
                   textPlaceholder="Name"
+                  inputType="text"
                   customWidth="cstm_width_XlInput bg-white"
-                  methodOnChange={setName}
+                  value={myMessage.name}
+                  methodOnChange={handleInputOnChange}
                   name="name"
                 />
               </div>
               <div className="flex justify-start ml-1 w-6/12">
                 <InputTemplate
                   textPlaceholder="Email"
+                  inputType="text"
                   customWidth="cstm_width_XlInput bg-white"
-                  methodOnChange={setEmail}
+                  value={myMessage.Email}
+                  methodOnChange={handleInputOnChange}
                   name="Email"
                 />
               </div>
@@ -81,8 +94,10 @@ function Footer() {
             <div className="flex justify-center w-screen mb-2 mt-2">
               <TextareaTemplate
                 textPlaceholder="Description"
+                inputType="text"
                 customWidth="cstm_width_XlInput"
-                methodOnChange={setMessage}
+                value={myMessage.Description}
+                methodOnChange={handleInputOnChange}
                 name="Description"
               />
             </div>
@@ -95,7 +110,7 @@ function Footer() {
               />
             </div>
           </div>
-        </div>
+        </form>
         {/* ------------------------debut service----------------------------------------------------------------------------------------------- */}
         <div className="text-white text-center m-5">
           <h1>Services</h1>
