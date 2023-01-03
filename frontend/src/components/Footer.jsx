@@ -32,7 +32,9 @@ function Footer() {
   };
 
   const submitForm = () => {
-    if (myMessage.Email.includes("@")) {
+    const emailRegex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailRegex.test(myMessage.Email)) {
       notify(
         `Hello ${myMessage.name} your message ${myMessage.Description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.Email}`
       );
