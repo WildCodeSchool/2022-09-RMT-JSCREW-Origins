@@ -17,7 +17,7 @@ function ConnectForm({ dataUsers, handleInputOnChange, cstmStyle }) {
         textPlaceholder="New password"
         value={dataUsers.newPassword}
         methodOnChange={handleInputOnChange}
-        name="newPassword"
+        name="password"
       />
       <InputTemplate
         customWidth={`cstm_width_XlInput ${cstmStyle}`}
@@ -25,7 +25,7 @@ function ConnectForm({ dataUsers, handleInputOnChange, cstmStyle }) {
         textPlaceholder="Confirm new password"
         value={dataUsers.confirmNewPassword}
         methodOnChange={handleInputOnChange}
-        name="confirmNewPassword"
+        name="confirmPassword"
       />
     </div>
   );
