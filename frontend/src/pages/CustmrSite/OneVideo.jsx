@@ -29,9 +29,9 @@ function OneVideo() {
               allowFullScreen
             />
             <div className="p-10">
-              <div className="text-3xl md:mb-5">{video.Name}</div>
-              <div className="text-xl md:mb-5">{video.Category}</div>
-              <div>{video.Description}</div>
+              <h1 className="text-3xl md:mb-5">{video.Name}</h1>
+              <h2 className="text-xl md:mb-5">{video.Category}</h2>
+              <p>{video.Description}</p>
             </div>
           </div>
         )}
