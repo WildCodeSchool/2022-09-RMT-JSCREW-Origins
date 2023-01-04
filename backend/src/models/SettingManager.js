@@ -7,8 +7,8 @@ class SettingManager extends AbstractManager {
 
   insert(user) {
     return this.connection.query(
-      `insert into ${this.table} (isAdmin, email, password) values (?, ?, ?)`,
-      [user.isAdmin, user.email, user.password]
+      `insert into ${this.table} (isAdmin, email, password) values (1, ?, ?)`,
+      [user.email, user.password]
     );
   }
 
