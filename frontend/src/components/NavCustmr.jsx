@@ -11,7 +11,7 @@ function NavCustmr() {
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="fixed text-white p-7 w-full">
+    <nav className="fixed z-[2] text-white p-7 w-full">
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between">
         <button
