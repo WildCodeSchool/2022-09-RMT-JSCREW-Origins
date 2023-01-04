@@ -76,6 +76,7 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-between items-center">
           <Link to="/All-videos">All videos</Link>
+          <Link to="/OneVideo">One Video</Link>
           <Link to="/Dashboard/Video">Back office</Link>
           <Link to="/Login">Login</Link>
         </div>
