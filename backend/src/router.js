@@ -5,6 +5,7 @@ const router = express.Router();
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
+const sliderControllers = require("./controllers/sliderContollers");
 
 const validators = require("../services/validators");
 
@@ -41,5 +42,10 @@ router.get("/user/:id", settingControllers.read);
 router.put("/user/:id", settingControllers.edit);
 router.post("/user", settingControllers.add);
 router.delete("/user/:id", settingControllers.destroy);
+
+router.get("/slider", sliderControllers.browse);
+router.post("/slider", sliderControllers.add);
+router.delete("/slider/:Type", sliderControllers.destroy);
+router.delete("/slider/:id", sliderControllers.destroyById);
 
 module.exports = router;
