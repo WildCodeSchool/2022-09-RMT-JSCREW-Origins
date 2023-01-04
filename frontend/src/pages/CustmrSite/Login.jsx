@@ -7,10 +7,8 @@ import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
 
 function Login() {
-  const [displayForm, setDisplayForm] = useState(false);
+  const [displayRegisterForm, setDisplayRegisterForm] = useState(false);
   const [infos, setInfos] = useState({
-    id: null,
-    isAdmin: 1,
     email: "",
     password: "",
     confirmPassword: "",
@@ -57,7 +55,7 @@ function Login() {
       })
       .then()
       .catch((err) => console.error(err));
-    return notify("Category successfully added!");
+    return notify("Account successfully created!");
   };
 
   return (
@@ -75,7 +73,7 @@ function Login() {
         theme="dark"
       />
       <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
-        {!displayForm && (
+        {!displayRegisterForm && (
           <>
             <p className="text-white">Enter your credentials to connect</p>
             <form className="flex flex-col items-center gap-y-7 w-full">
@@ -102,38 +100,37 @@ function Login() {
                 methodOnClick={handleLogin}
               />
             </form>
+            <p className="text-white">
+              If you don't have an account, you can{" "}
+              <button
+                type="button"
+                className="text-base hover:text-secondary"
+                onClick={() => setDisplayRegisterForm(true)}
+              >
+                Signup!
+              </button>
+            </p>
           </>
         )}
-        {!displayForm ? (
-          <p className="text-white">
-            If you don't have an account, you can{" "}
-            <button
-              type="button"
-              className="text-base hover:text-secondary"
-              onClick={() => setDisplayForm(true)}
-            >
-              Signup!
-            </button>
-          </p>
-        ) : (
-          <p className="text-white">
-            Enter your credentials to create your account
-          </p>
-        )}
-        {displayForm && (
-          <form className="flex flex-col items-center gap-y-7 w-full">
-            <ConnectForm
-              cstmStyle="bg-white"
-              dataUsers={infos}
-              handleInputOnChange={handleInputOnChange}
-            />
-            <ButtonTemplate
-              buttonType="button"
-              buttonText="REGISTER"
-              buttonStyle="cstm_cstmrButton"
-              methodOnClick={handleCreateAccount}
-            />
-          </form>
+        {displayRegisterForm && (
+          <>
+            <p className="text-white">
+              Enter your credentials to create your account
+            </p>
+            <form className="flex flex-col items-center gap-y-7 w-full">
+              <ConnectForm
+                cstmStyle="bg-white"
+                dataUsers={infos}
+                handleInputOnChange={handleInputOnChange}
+              />
+              <ButtonTemplate
+                buttonType="button"
+                buttonText="REGISTER"
+                buttonStyle="cstm_cstmrButton"
+                methodOnClick={handleCreateAccount}
+              />
+            </form>
+          </>
         )}
       </div>
     </>
