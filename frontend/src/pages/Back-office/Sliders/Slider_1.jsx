@@ -29,12 +29,6 @@ function Slider1() {
       .catch((error) => console.error(error));
   };
 
-  // Pour que la donnée se mette à jour en live
-  useEffect(() => {
-    getAllVideo();
-    getAllSlider();
-  }, []);
-
   // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
   /**
    * @param {object} vid
@@ -44,9 +38,14 @@ function Slider1() {
     if (videoList.length < 10) setVideoList((list) => [...list, vid]);
   };
 
-  // fonction permetant de delete une card
   const handleDeleteCard = (id) => {
-    setVideoList(videoList.filter((video) => video.id !== id));
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/slider/${id}`)
+      .then(() => {
+        notify("Video deleted!");
+        getAllSlider();
+      })
+      .catch((error) => console.error(error));
   };
 
   // fonction permetant de post dans la db la list choisi avec le type 1
@@ -59,17 +58,18 @@ function Slider1() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/slider`, {
         videoToPost,
       })
-      .then(() => notify("Slider successfully updated!"))
+      .then(() => {
+        notify("Slider successfully updated!");
+        getAllSlider();
+      })
       .catch((error) => console.error(error));
   };
 
-  // fonction permetant de reset la db selon le type
-  const handleResetButton = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/slider/1`)
-      .then(() => notify("Slider successfully reset!"))
-      .catch((error) => console.error(error));
-  };
+  // Pour que la donnée se mette à jour en live
+  useEffect(() => {
+    getAllVideo();
+    getAllSlider();
+  }, []);
 
   return (
     <>
@@ -109,12 +109,6 @@ function Slider1() {
           ))}
         </div>
         <div className="flex justify-around space-x-8 pt-5">
-          <ButtonTemplate
-            methodOnClick={handleResetButton}
-            buttonType="button"
-            buttonText="RESET SLIDER"
-            buttonStyle="cstm_buttonSecondaryNone"
-          />
           <ButtonTemplate
             methodOnClick={handleValidateButton}
             buttonType="button"

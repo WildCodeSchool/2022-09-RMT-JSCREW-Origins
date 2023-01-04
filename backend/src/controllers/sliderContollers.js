@@ -11,6 +11,21 @@ const browse = (req, res) => {
       res.sendStatus(500);
     });
 };
+const read = (req, res) => {
+  models.playbyid
+    .find(req.params.id)
+    .then(([playbyid]) => {
+      if (playbyid[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(playbyid[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 const add = (req, res) => {
   const playbyid = req.body.videoToPost;
@@ -26,9 +41,25 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
+// const destroy = (req, res) => {
+//   models.playbyid
+//     .delete(req.params.Type)
+//     .then(([result]) => {
+//       if (result.affectedRows === 0) {
+//         res.sendStatus(404);
+//       } else {
+//         res.sendStatus(204);
+//       }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// };
+
+const destroyByIdVideo = (req, res) => {
   models.playbyid
-    .delete(req.params.Type)
+    .deleteVideo(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -41,24 +72,11 @@ const destroy = (req, res) => {
       res.sendStatus(500);
     });
 };
-const destroyById = (req, res) => {
-  models.playbyid
-    .delete(req.params.Type)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
+
 module.exports = {
   browse,
   add,
-  destroy,
-  destroyById,
+  // destroy,
+  destroyByIdVideo,
+  read,
 };

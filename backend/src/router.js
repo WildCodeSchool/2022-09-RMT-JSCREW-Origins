@@ -44,8 +44,9 @@ router.post("/user", settingControllers.add);
 router.delete("/user/:id", settingControllers.destroy);
 
 router.get("/slider", sliderControllers.browse);
+router.get("/slider/:id", sliderControllers.read);
 router.post("/slider", sliderControllers.add);
-router.delete("/slider/:Type", sliderControllers.destroy);
-router.delete("/slider/:id", sliderControllers.destroyById);
+// router.delete("/slider/:Type", sliderControllers.destroy);
+router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
 
 module.exports = router;
