@@ -79,6 +79,7 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
+          <Link to="/OneVideo">One Video</Link>
           <Link to="/Dashboard/Video">Back office</Link>
           <Link to="/Login">
             <img className="w-6" src={iconeLogin} alt="icone login" />
