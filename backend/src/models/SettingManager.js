@@ -7,15 +7,15 @@ class SettingManager extends AbstractManager {
 
   insert(user) {
     return this.connection.query(
-      `insert into ${this.table} (isAdmin, email, password) values (1, ?, ?)`,
-      [user.email, user.password]
+      `insert into ${this.table} (isAdmin, email, hashedpassword) values (?, ?, ?)`,
+      [1, user.email, user.hashedpassword]
     );
   }
 
   update(user) {
     return this.connection.query(
-      `update ${this.table} set isAdmin = ?, email = ?, password = ? where id = ?`,
-      [user.isAdmin, user.email, user.password, user.id]
+      `update ${this.table} set isAdmin = ?, email = ?, hashedpassword = ? where id = ?`,
+      [user.isAdmin, user.email, user.hashedpassword, user.id]
     );
   }
 }

@@ -42,7 +42,7 @@ router.get("/user/:id", settingControllers.read);
 router.put("/user/:id", settingControllers.edit);
 router.delete("/user/:id", settingControllers.destroy);
 
-router.post("/user", validators.checkUser, settingControllers.add);
+router.post("/user", settingControllers.add);
 router.post("/login", validators.checkUser, settingControllers.validateUser);
 
 module.exports = router;

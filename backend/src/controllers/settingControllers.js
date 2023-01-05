@@ -1,5 +1,7 @@
 const models = require("../models");
 
+const { hashPass } = require("../../services/auth");
+
 const user1 = {
   email: "admin1@mail.com",
   password: "Password1234",
@@ -17,6 +19,21 @@ const validateUser = (req, res) => {
   } else {
     res.status(500).send("Wrongs credentials");
   }
+};
+
+const add = async (req, res) => {
+  const hashedpassword = await hashPass(req.body.password);
+  // TODO validations (length, format...)
+  delete req.body.password;
+  models.user
+    .insert({ ...req.body, hashedpassword })
+    .then(([result]) => {
+      res.location(`/user/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 const browse = (req, res) => {
@@ -62,22 +79,6 @@ const edit = (req, res) => {
       } else {
         res.sendStatus(204);
       }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const add = (req, res) => {
-  const user = req.body;
-
-  // TODO validations (length, format...)
-
-  models.user
-    .insert(user)
-    .then(([result]) => {
-      res.location(`/user/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
