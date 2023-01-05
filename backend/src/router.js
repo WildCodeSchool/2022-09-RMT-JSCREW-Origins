@@ -31,7 +31,7 @@ router.put(
 router.delete("/categories/:id", categoryControllers.destroy);
 
 router.get("/videos", videoControllers.browse);
-router.get("/videos/:id", videoControllers.read);
+router.get("/videos/:id", videoControllers.readvideo);
 router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
 router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);

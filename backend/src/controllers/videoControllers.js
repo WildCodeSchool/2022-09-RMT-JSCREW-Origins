@@ -28,6 +28,22 @@ const read = (req, res) => {
     });
 };
 
+const readvideo = (req, res) => {
+  models.video
+    .findCategory(req.params.id)
+    .then(([videos]) => {
+      if (videos[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(videos[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const video = req.body;
 
@@ -86,6 +102,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
+  readvideo,
   edit,
   add,
   destroy,

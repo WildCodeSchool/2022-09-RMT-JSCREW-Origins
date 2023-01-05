@@ -41,6 +41,13 @@ class VideoManager extends AbstractManager {
       ]
     );
   }
+
+  findCategory(id) {
+    return this.connection.query(
+      `select video.id, video.Name, video.Url, video.Description, video.Premium , category.Name as Category from video inner join category on video.id_category = category.id where video.id = ?`,
+      [id]
+    );
+  }
 }
 
 module.exports = VideoManager;
