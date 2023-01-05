@@ -17,7 +17,7 @@ class VideoManager extends AbstractManager {
 
   insert(video) {
     return this.connection.query(
-      `insert into ${this.table} (Name, id_Category, Url, Description, Premium) values (?,?,?,?,?)`,
+      `insert into ${this.table} (Name, id_Category, Url, Description, Premium) values (?,?,?,?,0)`,
       [
         video.Name,
         video.id_Category,
