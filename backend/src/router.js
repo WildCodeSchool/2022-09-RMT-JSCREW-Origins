@@ -8,6 +8,8 @@ const settingControllers = require("./controllers/settingControllers");
 
 const validators = require("../services/validators");
 
+const checkAuth = require("./middleware/auth");
+
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
 // router.get("/items/:id", itemControllers.read);
@@ -20,22 +22,24 @@ router.get("/categories", categoryControllers.browse);
 router.get("/categories/:id", categoryControllers.read);
 router.post(
   "/categories",
+  checkAuth,
   validators.validateCategory,
   categoryControllers.add
 );
 router.put(
   "/categories/:id",
+  checkAuth,
   validators.validateCategory,
   categoryControllers.edit
 );
 
-router.delete("/categories/:id", categoryControllers.destroy);
+router.delete("/categories/:id", checkAuth, categoryControllers.destroy);
 
 router.get("/videos", videoControllers.browse);
 router.get("/videos/:id", videoControllers.readvideo);
-router.put("/videos/:id", videoControllers.edit);
-router.post("/videos", videoControllers.add);
-router.delete("/videos/:id", videoControllers.destroy);
+router.put("/videos/:id", checkAuth, videoControllers.edit);
+router.post("/videos", checkAuth, videoControllers.add);
+router.delete("/videos/:id", checkAuth, videoControllers.destroy);
 
 router.get("/user", settingControllers.browse);
 router.get("/user/:id", settingControllers.read);
