@@ -37,12 +37,12 @@ INSERT INTO video (id,Name,id_Category,Url,Description,premium) VALUES (8,'Map 1
 CREATE TABLE user (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 isAdmin TINYINT NOT NULL,
-email VARCHAR(200) NOT NULL,
-password VARCHAR(100) NOT NULL
+email VARCHAR(200) NOT NULL UNIQUE,
+hashedpassword VARCHAR(255) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO user (id,isAdmin, email, password) VALUES (1,1, 'admin1@mail.com', 1234);
-INSERT INTO user (id,isAdmin, email, password) VALUES (2,1, 'admin2@mail.com', 12345);
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (1,1, 'admin1@mail.com', 1234);
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (2,1, 'admin2@mail.com', 12345);
 
 CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY,
