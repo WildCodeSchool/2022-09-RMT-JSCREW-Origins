@@ -9,6 +9,7 @@ const settingControllers = require("./controllers/settingControllers");
 const validators = require("../services/validators");
 
 const checkAuth = require("./middleware/auth");
+// const { application } = require("express");
 
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
@@ -20,26 +21,9 @@ const checkAuth = require("./middleware/auth");
 
 router.get("/categories", categoryControllers.browse);
 router.get("/categories/:id", categoryControllers.read);
-router.post(
-  "/categories",
-  checkAuth,
-  validators.validateCategory,
-  categoryControllers.add
-);
-router.put(
-  "/categories/:id",
-  checkAuth,
-  validators.validateCategory,
-  categoryControllers.edit
-);
-
-router.delete("/categories/:id", checkAuth, categoryControllers.destroy);
 
 router.get("/videos", videoControllers.browse);
 router.get("/videos/:id", videoControllers.readvideo);
-router.put("/videos/:id", checkAuth, videoControllers.edit);
-router.post("/videos", checkAuth, videoControllers.add);
-router.delete("/videos/:id", checkAuth, videoControllers.destroy);
 
 router.get("/user", settingControllers.browse);
 router.get("/user/:id", settingControllers.read);
@@ -48,5 +32,23 @@ router.delete("/user/:id", settingControllers.destroy);
 
 router.post("/user", settingControllers.add);
 router.post("/login", validators.checkUser, settingControllers.validateUser);
+
+router.use(checkAuth);
+
+router.post(
+  "/categories",
+  validators.validateCategory,
+  categoryControllers.add
+);
+router.put(
+  "/categories/:id",
+  validators.validateCategory,
+  categoryControllers.edit
+);
+
+router.delete("/categories/:id", categoryControllers.destroy);
+router.put("/videos/:id", videoControllers.edit);
+router.post("/videos", videoControllers.add);
+router.delete("/videos/:id", videoControllers.destroy);
 
 module.exports = router;
