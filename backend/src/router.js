@@ -28,6 +28,7 @@ router.put(
   validators.validateCategory,
   categoryControllers.edit
 );
+
 router.delete("/categories/:id", categoryControllers.destroy);
 
 router.get("/videos", videoControllers.browse);
@@ -39,7 +40,9 @@ router.delete("/videos/:id", videoControllers.destroy);
 router.get("/user", settingControllers.browse);
 router.get("/user/:id", settingControllers.read);
 router.put("/user/:id", settingControllers.edit);
-router.post("/user", settingControllers.add);
 router.delete("/user/:id", settingControllers.destroy);
+
+router.post("/user", validators.checkUser, settingControllers.add);
+router.post("/login", validators.checkUser, settingControllers.validateUser);
 
 module.exports = router;

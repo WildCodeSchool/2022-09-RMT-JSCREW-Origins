@@ -1,5 +1,24 @@
 const models = require("../models");
 
+const user1 = {
+  email: "admin1@mail.com",
+  password: "Password1234",
+  role: 1,
+};
+
+const validateUser = (req, res) => {
+  if (req.body.email === user1.email && req.body.password === user1.password) {
+    res
+      .status(201)
+      .cookie("access_token", "connexion validated", {
+        httpOnly: true,
+      })
+      .json({ role: user1.role, email: user1.email });
+  } else {
+    res.status(500).send("Wrongs credentials");
+  }
+};
+
 const browse = (req, res) => {
   models.user
     .findAll()
@@ -88,4 +107,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  validateUser,
 };
