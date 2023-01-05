@@ -2,23 +2,30 @@ const models = require("../models");
 
 const { hashPass } = require("../../services/auth");
 
-const user1 = {
-  email: "admin1@mail.com",
-  password: "Password1234",
-  role: 1,
-};
-
 const validateUser = (req, res) => {
-  if (req.body.email === user1.email && req.body.password === user1.password) {
-    res
-      .status(201)
-      .cookie("access_token", "connexion validated", {
-        httpOnly: true,
-      })
-      .json({ role: user1.role, email: user1.email });
-  } else {
-    res.status(500).send("Wrongs credentials");
-  }
+  models.user
+    .findOne(req.body)
+    .then(([user]) => {
+      if (user[0]) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+  // if (req.body.email === user1.email && req.body.password === user1.password) {
+  //   res
+  //     .status(201)
+  //     .cookie("access_token", "connexion validated", {
+  //       httpOnly: true,
+  //     })
+  //     .json({ role: user1.role, email: user1.email });
+  // } else {
+  //   res.status(500).send("Wrongs credentials");
+  // }
 };
 
 const add = async (req, res) => {

@@ -18,6 +18,13 @@ class SettingManager extends AbstractManager {
       [user.isAdmin, user.email, user.hashedpassword, user.id]
     );
   }
+
+  findOne(user) {
+    return this.connection.query(
+      `select * from  ${this.table} where email = ?`,
+      [user.email]
+    );
+  }
 }
 
 module.exports = SettingManager;
