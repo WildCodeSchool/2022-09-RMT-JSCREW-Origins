@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
+import apiConnection from "@services/apiConnection";
 import validateVideo from "@services/videoValidators";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
@@ -31,8 +31,8 @@ function Video() {
    * Fonction qui gère la récupération des données "video" avec axios
    */
   const getAllVideos = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
+    apiConnection
+      .get(`/videos`)
       .then((videos) => setMyVideos(videos.data))
       .catch((error) => console.error(error));
   };
@@ -41,8 +41,8 @@ function Video() {
    * Fonction qui gère la récupération des données avec axios
    */
   const getAllCategories = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+    apiConnection
+      .get(`/categories`)
       .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
   };
@@ -104,8 +104,8 @@ function Video() {
     delete video.id;
     const { status, errorMessage } = validateVideo(video);
     if (status) {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/videos`, video)
+      apiConnection
+        .post(`/videos`, video)
         .then((videos) => {
           notify("Video successfully added!");
           setVideo(videos.data);
@@ -121,8 +121,8 @@ function Video() {
    * Fonction qui gère la suppression d'une video
    */
   const handleDeleteVideo = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/videos/${video.id}`)
+    apiConnection
+      .delete(`/videos/${video.id}`)
       .then(() => {
         setVideo({
           id: null,
@@ -145,8 +145,8 @@ function Video() {
     const { status, errorMessage } = validateVideo(video);
 
     if (status) {
-      axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/videos/${video.id}`, video)
+      apiConnection
+        .put(`/videos/${video.id}`, video)
         .then(() => {
           notify("video successfully updated!");
           getAllVideos();
