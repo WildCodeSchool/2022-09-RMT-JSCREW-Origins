@@ -85,3 +85,8 @@ code {
 button {
   font-size: calc(10px + 2vmin);
 }
+
+/* Modificaiton de la couleur initiale pour les flèches du carrousel du header */
+:root {
+  --swiper-theme-color: #ff680a !important;
+}
