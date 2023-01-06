@@ -31,16 +31,6 @@ const validateUser = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
-  // if (req.body.email === user1.email && req.body.password === user1.password) {
-  //   res
-  //     .status(201)
-  //     .cookie("access_token", "connexion validated", {
-  //       httpOnly: true,
-  //     })
-  //     .json({ role: user1.role, email: user1.email });
-  // } else {
-  //   res.status(500).send("Wrongs credentials");
-  // }
 };
 
 const add = async (req, res) => {

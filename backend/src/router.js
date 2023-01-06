@@ -9,7 +9,6 @@ const settingControllers = require("./controllers/settingControllers");
 const validators = require("../services/validators");
 
 const checkAuth = require("./middleware/auth");
-// const { application } = require("express");
 
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
