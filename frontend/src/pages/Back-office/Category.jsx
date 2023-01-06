@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
+import apiConnection from "@services/apiConnection";
 import validateCategory from "@services/categoryValidators";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
@@ -25,8 +25,8 @@ function Category() {
 
   // Fonction qui gère la récupération des données avec axios
   const getAllCategories = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+    apiConnection
+      .get(`/categories`)
       .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
   };
@@ -70,8 +70,8 @@ function Category() {
     delete category.id;
     const { status, errorMessage } = validateCategory(category);
     if (status) {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
+      apiConnection
+        .post(`/categories`, {
           ...category,
         })
         .then((categories) => {
@@ -87,8 +87,8 @@ function Category() {
 
   // Fonction qui gère la suppression d'une catégorie
   const handleDeleteCategory = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
+    apiConnection
+      .delete(`/categories/${category.id}`)
       .then(() => {
         setCategory({
           id: null,
@@ -108,8 +108,8 @@ function Category() {
 
     const { Name, Icon, Description } = category;
     if (status) {
-      axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+      apiConnection
+        .put(`/categories/${category.id}`, {
           Name,
           Icon,
           Description,

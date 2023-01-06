@@ -16,7 +16,6 @@ const validateCategory = (req, res, next) => {
   }
 };
 
-
 const checkUser = (req, res, next) => {
   const { error } = Joi.object({
     email: Joi.string().email({
@@ -30,6 +29,8 @@ const checkUser = (req, res, next) => {
     next();
   } else {
     res.sendStatus(401);
+  }
+};
 
 const videoSchema = Joi.object({
   Name: Joi.string().min(2).max(500).required(),
