@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
+import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
@@ -36,6 +36,13 @@ function Login() {
     if (!validatePassword.test(infos.password)) {
       return notify("Password is not correct");
     }
+    delete infos.confirmPassword;
+    apiConnection
+      .post(`/login`, {
+        ...infos,
+      })
+      .then()
+      .catch((err) => console.error(err));
     return notify("Connected!");
   };
 
@@ -49,8 +56,8 @@ function Login() {
     if (infos.password !== infos.confirmPassword) {
       return notify("Passwords are not the same");
     }
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/user`, {
+    apiConnection
+      .post(`/user`, {
         ...infos,
       })
       .then()
