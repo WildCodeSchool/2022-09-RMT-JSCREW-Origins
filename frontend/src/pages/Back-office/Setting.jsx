@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
+import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalSuppression from "@components/ModalSuppression";
@@ -41,8 +41,8 @@ function Setting() {
   };
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
+    apiConnection
+      .get(`/user/${id}`)
       .then((users) => updateSetting(users.data))
       .catch((error) => console.error(error));
   }, []);
@@ -53,8 +53,8 @@ function Setting() {
     if (!emailRegex.test(mySetting.email)) {
       return notify("Email is not correct");
     }
-    axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`, { ...mySetting })
+    apiConnection
+      .put(`/user/${id}`, { ...mySetting })
       .then(() => updateSetting())
       .catch((error) => console.error(error));
     return notify("Email has been successfully modified");

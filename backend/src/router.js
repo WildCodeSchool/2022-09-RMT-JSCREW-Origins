@@ -8,6 +8,8 @@ const settingControllers = require("./controllers/settingControllers");
 
 const validators = require("../services/validators");
 
+const checkAuth = require("./middleware/auth");
+
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
 // router.get("/items/:id", itemControllers.read);
@@ -18,6 +20,20 @@ const validators = require("../services/validators");
 
 router.get("/categories", categoryControllers.browse);
 router.get("/categories/:id", categoryControllers.read);
+
+router.get("/videos", videoControllers.browse);
+router.get("/videos/:id", videoControllers.readvideo);
+
+router.get("/user", settingControllers.browse);
+router.get("/user/:id", settingControllers.read);
+router.put("/user/:id", settingControllers.edit);
+router.delete("/user/:id", settingControllers.destroy);
+
+router.post("/user", settingControllers.add);
+router.post("/login", validators.checkUser, settingControllers.validateUser);
+
+router.use(checkAuth);
+
 router.post(
   "/categories",
   validators.validateCategory,
@@ -28,18 +44,14 @@ router.put(
   validators.validateCategory,
   categoryControllers.edit
 );
-router.delete("/categories/:id", categoryControllers.destroy);
 
-router.get("/videos", videoControllers.browse);
-router.get("/videos/:id", videoControllers.read);
+router.delete("/categories/:id", categoryControllers.destroy);
 router.put("/videos/:id", videoControllers.edit);
 router.post("/videos", videoControllers.add);
+router.get("/videos", videoControllers.browse);
+router.get("/videos/:id", videoControllers.readvideo);
+router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
+router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
-
-router.get("/user", settingControllers.browse);
-router.get("/user/:id", settingControllers.read);
-router.put("/user/:id", settingControllers.edit);
-router.post("/user", settingControllers.add);
-router.delete("/user/:id", settingControllers.destroy);
 
 module.exports = router;

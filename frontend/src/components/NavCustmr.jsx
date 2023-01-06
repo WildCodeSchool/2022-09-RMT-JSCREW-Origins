@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import logoOrigins from "@assets/logo-origins.png";
+import iconeLogin from "@assets/CompteClient.png";
+import SearchBarLoupe from "./SearchBarLoupe";
+
 function NavCustmr() {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="fixed text-white p-7 w-full">
+    <nav className="fixed z-[2] text-white p-7 w-full">
       {/* Version Mobile */}
-      <ul className="md:hidden flex justify-between w-full">
-        <Link className="w-full" to="/">
-          <img className="w-32" src=".\assets\logo.png" alt="logo origins" />
-        </Link>
+      <ul className="md:hidden flex justify-between">
         <button
           onClick={() => setIsMenuDisplayed(!isMenuDisplayed)}
           type="button"
@@ -39,45 +40,51 @@ function NavCustmr() {
             }`}
           />
         </button>
+        <Link className="flex items-center" to="/">
+          <img className="w-40" src={logoOrigins} alt="logo origins" />
+        </Link>
+        <SearchBarLoupe />
       </ul>
       {isMenuDisplayed && (
-        <div className="flex flex-col w-full items-center mt-5 gap-3">
-          <Link
-            onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold"
-            to="/All-videos"
-          >
-            All videos
-          </Link>
-          <Link
-            onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold"
-            to="/Dashboard/Video"
-          >
-            Dashboard
-          </Link>
-          <Link
-            onClick={() => setIsMenuDisplayed(false)}
-            className="hover:text-secondary hover:font-bold"
-            to="/Login"
-          >
-            Login
-          </Link>
+        <div className="flex justify-center m-5">
+          <div className="flex flex-col items-center text-xl">
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-5"
+              to="/All-videos"
+            >
+              All videos
+            </Link>
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-5"
+              to="/Dashboard/Video"
+            >
+              Dashboard
+            </Link>
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-2"
+              to="/Login"
+            >
+              Login
+            </Link>
+          </div>
         </div>
       )}
       {/* Version Desktop */}
-      <ul className="hidden md:grid grid-cols-2 gap-4 w-full">
+      <ul className="hidden md:flex justify-between row-span-full">
         <Link to="/">
-          <img
-            className="w-32"
-            src="..\src\assets\logo-origins.png"
-            alt="logo origins"
-          />
+          <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
+          <Link to="/OneVideo">One Video</Link>
           <Link to="/Dashboard/Video">Back office</Link>
-          <Link to="/Login">Login</Link>
+          <Link to="/Login">
+            <img className="w-6" src={iconeLogin} alt="icone login" />
+          </Link>
+          <SearchBarLoupe />
         </div>
       </ul>
     </nav>

@@ -14,6 +14,7 @@ function SearchBar({
   searchBarContainer,
   customWidth,
   methodOnClick,
+  reset,
 }) {
   const ref = useRef();
   const [displayData, setDisplayData] = useState(false);
@@ -35,6 +36,10 @@ function SearchBar({
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [displayData]);
+
+  useEffect(() => {
+    setSearchData("");
+  }, [reset]);
 
   const handleDisplayData = () => {
     if (searchData.length > 0) {
