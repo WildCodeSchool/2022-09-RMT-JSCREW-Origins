@@ -7,10 +7,12 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+import ModalSuppression from "@components/ModalSuppression";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
+  const [displayModal, setDisplayModal] = useState(false);
   const [myCategories, setMyCategories] = useState([]);
   const [category, setCategory] = useState({
     id: null,
@@ -193,7 +195,7 @@ function Category() {
                 buttonType="button"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={handleDeleteCategory}
+                methodOnClick={setDisplayModal}
               />
             </>
           )}
@@ -203,6 +205,12 @@ function Category() {
             buttonText="CANCEL"
             buttonStyle="cstm_buttonSecondaryNone"
           />
+          {displayModal && (
+            <ModalSuppression
+              setDisplayModal={setDisplayModal}
+              confirmDelete={handleDeleteCategory}
+            />
+          )}
         </div>
       </form>
     </>
