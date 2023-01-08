@@ -134,6 +134,7 @@ function Category() {
           name="description"
           content="Manage the categories on your website from this page of your back office dashboard. Add, edit, or delete categories, and assign videos to each category."
         />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <ToastContainer
         position="top-right"
