@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
 
+import User from "../../contexts/UserContext";
+
 function Login() {
+  const { user, handleUser } = useContext(User.UserContext);
   const [displayRegisterForm, setDisplayRegisterForm] = useState(false);
   const [infos, setInfos] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const validateEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -41,9 +46,16 @@ function Login() {
       .post(`/login`, {
         ...infos,
       })
-      .then()
+      .then((curentUser) => {
+        handleUser(curentUser.data);
+        navigate("/");
+      })
       .catch((err) => console.error(err));
     return notify("Connected!");
+  };
+
+  const handleLogOut = () => {
+    handleUser("");
   };
 
   const handleCreateAccount = () => {
@@ -80,7 +92,17 @@ function Login() {
         theme="dark"
       />
       <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
-        {!displayRegisterForm && (
+        <h2 className="text-white text-xl">Your informations :</h2>
+        <div>
+          <p className="text-white text-md">{user?.email}</p>
+        </div>
+        <ButtonTemplate
+          buttonType="button"
+          buttonText="LOG OUT"
+          buttonStyle="cstm_cstmrButton"
+          methodOnClick={handleLogOut}
+        />
+        {!displayRegisterForm && !user && (
           <>
             <p className="text-white">Enter your credentials to connect</p>
             <form className="flex flex-col items-center gap-y-7 w-full">
