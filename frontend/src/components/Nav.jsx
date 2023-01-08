@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import User from "../contexts/UserContext";
+
 export default function Nav() {
+  const { handleUser } = useContext(User.UserContext);
   const [displaySlider, setDisplaySlider] = useState(false);
 
   const handleDisplaymenu = () => {
     setDisplaySlider(!displaySlider);
+  };
+
+  const handleLogOut = () => {
+    handleUser("");
   };
 
   return (
@@ -70,12 +77,19 @@ export default function Nav() {
             >
               <p className="text-base leading-4">Categories</p>
             </Link>
+            <Link
+              to="/"
+              className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2  w-full"
+            >
+              <p className="text-base leading-4">Website</p>
+            </Link>
           </div>
         </div>
         <div className="flex">
           <Link
             to="/"
             className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2  w-full"
+            onClick={handleLogOut}
           >
             <p className="text-base leading-4">Log out</p>
           </Link>
