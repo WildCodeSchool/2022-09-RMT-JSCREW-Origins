@@ -20,10 +20,7 @@ function OneVideo() {
       <Helmet>
         <meta charSet="utf-8" />
         <title>{video?.Name}</title>
-        <meta
-          name="description"
-          content="Configure the settings for your website from this page of your back office dashboard. Edit your account information, set up security, and customize the appearance of your site."
-        />
+        <meta name="description" content={video?.Description} />
         <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <div className="h-screen bg-primary">
