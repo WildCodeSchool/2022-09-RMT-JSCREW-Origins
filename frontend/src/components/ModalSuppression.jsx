@@ -1,20 +1,10 @@
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
 import ButtonTemplate from "./ButtonTemplate";
 
-function Modal({ setDisplayModal }) {
-  const { id } = useParams();
+function Modal({ setDisplayModal, confirmDelete }) {
   const handleButtonCancel = () => {
     setDisplayModal(false);
   };
 
-  const settingDelete = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
-      .then((user) => user)
-      .catch((error) => console.error(error));
-  };
   return (
     <div>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -50,7 +40,7 @@ function Modal({ setDisplayModal }) {
                 buttonType="submit"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={settingDelete}
+                methodOnClick={confirmDelete}
               />
             </div>
           </div>
