@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 
@@ -7,14 +6,15 @@ import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalSuppression from "@components/ModalSuppression";
+import User from "../../contexts/UserContext";
 
 function Setting() {
-  const { id } = useParams();
+  const { user } = useContext(User.UserContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [mySetting, setMySetting] = useState({
     id: null,
     isAdmin: "",
-    email: "",
+    email: user.email,
     password: "",
     newPassword: "",
     confirmNewPassword: "",
@@ -43,7 +43,7 @@ function Setting() {
 
   useEffect(() => {
     apiConnection
-      .get(`/user/${id}`)
+      .get(`/user`)
       .then((users) => updateSetting(users.data))
       .catch((error) => console.error(error));
   }, []);
@@ -55,7 +55,7 @@ function Setting() {
       return notify("Email is not correct");
     }
     apiConnection
-      .put(`/user/${id}`, { ...mySetting })
+      .put(`/user`, { ...mySetting })
       .then(() => updateSetting())
       .catch((error) => console.error(error));
     return notify("Email has been successfully modified");
@@ -63,8 +63,8 @@ function Setting() {
 
   const settingDelete = () => {
     apiConnection
-      .delete(`/user/${id}`)
-      .then((user) => user)
+      .delete(`/user`)
+      .then((oneUser) => oneUser)
       .catch((error) => console.error(error));
   };
 

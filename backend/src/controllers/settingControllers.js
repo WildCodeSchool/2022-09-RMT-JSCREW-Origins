@@ -62,7 +62,7 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   models.user
-    .find(req.params.id)
+    .find(req.auth.id)
     .then(([users]) => {
       if (users[0] == null) {
         res.sendStatus(404);

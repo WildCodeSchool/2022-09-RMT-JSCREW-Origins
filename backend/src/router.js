@@ -24,15 +24,14 @@ router.get("/categories/:id", categoryControllers.read);
 router.get("/videos", videoControllers.browse);
 router.get("/videos/:id", videoControllers.readvideo);
 
-router.get("/user", settingControllers.browse);
-router.get("/user/:id", settingControllers.read);
-router.put("/user/:id", settingControllers.edit);
-router.delete("/user/:id", settingControllers.destroy);
-
 router.post("/user", settingControllers.add);
 router.post("/login", validators.checkUser, settingControllers.validateUser);
 
 router.use(checkAuth);
+
+router.get("/user", settingControllers.read);
+router.put("/user/:id", settingControllers.edit);
+router.delete("/user/:id", settingControllers.destroy);
 
 router.post(
   "/categories",
