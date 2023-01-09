@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
@@ -9,6 +10,7 @@ import ModalSuppression from "@components/ModalSuppression";
 import User from "../../contexts/UserContext";
 
 function Setting() {
+  const navigate = useNavigate();
   const { user } = useContext(User.UserContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [mySetting, setMySetting] = useState({
@@ -64,7 +66,9 @@ function Setting() {
   const settingDelete = () => {
     apiConnection
       .delete(`/user`)
-      .then((oneUser) => oneUser)
+      .then(() => {
+        navigate("/");
+      })
       .catch((error) => console.error(error));
   };
 
