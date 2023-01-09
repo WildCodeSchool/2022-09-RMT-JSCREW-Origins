@@ -34,6 +34,7 @@ function Login() {
     setInfos(newUser);
   };
 
+  // eslint-disable-next-line consistent-return
   const handleLogin = () => {
     if (!validateEmail.test(infos.email)) {
       return notify("Email is not correct");
@@ -48,10 +49,13 @@ function Login() {
       })
       .then((curentUser) => {
         handleUser(curentUser.data);
+        notify("Connected!");
         navigate("/");
       })
-      .catch((err) => console.error(err));
-    return notify("Connected!");
+      .catch((err) => {
+        notify("Wrong Credentials!");
+        console.error(err);
+      });
   };
 
   const handleLogOut = () => {
