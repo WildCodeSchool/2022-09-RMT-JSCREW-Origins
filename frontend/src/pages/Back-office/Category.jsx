@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
   const [myCategories, setMyCategories] = useState([]);
+  const [reset, setReset] = useState(false);
   const [category, setCategory] = useState({
     id: null,
     Name: "",
@@ -45,6 +46,7 @@ function Category() {
       Icon: "",
       Description: "",
     });
+    setReset(!reset);
   };
 
   // Fonction qui gère le changement d'état des inputs
@@ -151,6 +153,7 @@ function Category() {
       <form className="flex flex-col items-center w-full pt-10 gap-y-7">
         {/* SEARCHBAR */}
         <SearchBarTemplate
+          reset={reset}
           data={myCategories}
           customWidth="cstm_width_XlInput"
           searchBarContainer="flex flex-col items-center w-full relative"
