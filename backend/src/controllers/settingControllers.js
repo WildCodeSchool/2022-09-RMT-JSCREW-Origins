@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
-const { hashPass, verifyHash } = require("../../services/auth");
+const { hashPass, verifyHash } = require("../services/auth");
 
 const validateUser = (req, res) => {
   models.user

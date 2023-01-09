@@ -7,7 +7,7 @@ const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
 const sendMailControllers = require("./controllers/sendMailControllers");
 
-const validators = require("../services/validators");
+const validators = require("./services/validators");
 
 const checkAuth = require("./middleware/auth");
 
