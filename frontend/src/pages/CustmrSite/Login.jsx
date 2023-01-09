@@ -3,7 +3,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -61,7 +60,7 @@ function Login() {
   };
 
   const handleLogOut = () => {
-    handleUser("");
+    handleUser({});
   };
 
   const handleCreateAccount = () => {

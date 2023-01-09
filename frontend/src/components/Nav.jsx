@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import User from "../contexts/UserContext";
 
 export default function Nav() {
-  const { handleUser } = useContext(User.UserContext);
+  const { user, handleUser } = useContext(User.UserContext);
   const [displaySlider, setDisplaySlider] = useState(false);
 
   const handleDisplaymenu = () => {
@@ -21,7 +21,7 @@ export default function Nav() {
         <div className="flex flex-col">
           <div className="flex flex-col space-y-5">
             <Link
-              to="Setting"
+              to={`Setting/${user.id}`}
               className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
             >
               <p className="text-base leading-4">Settings</p>
