@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
@@ -60,8 +61,24 @@ function Setting() {
     return notify("Email has been successfully modified");
   };
 
+  const settingDelete = () => {
+    apiConnection
+      .delete(`/user/${id}`)
+      .then((user) => user)
+      .catch((error) => console.error(error));
+  };
+
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Setting</title>
+        <meta
+          name="description"
+          content="Configure the settings for your website from this page of your back office dashboard. Edit your account information, set up security, and customize the appearance of your site."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -95,7 +112,10 @@ function Setting() {
                 methodOnClick={setDisplayModal}
               />
               {displayModal && (
-                <ModalSuppression setDisplayModal={setDisplayModal} />
+                <ModalSuppression
+                  setDisplayModal={setDisplayModal}
+                  confirmDelete={settingDelete}
+                />
               )}
             </div>
           </>

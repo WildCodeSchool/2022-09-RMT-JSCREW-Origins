@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
@@ -83,6 +85,15 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Login</title>
+        <meta
+          name="Login"
+          content="Log in to your back-office dashboard to manage your website and its content. Keep your account information up to date and customize the appearance and functionality of your site."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}

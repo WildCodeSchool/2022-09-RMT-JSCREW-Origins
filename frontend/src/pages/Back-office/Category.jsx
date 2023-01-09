@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import validateCategory from "@services/categoryValidators";
@@ -7,10 +8,12 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+import ModalSuppression from "@components/ModalSuppression";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
+  const [displayModal, setDisplayModal] = useState(false);
   const [myCategories, setMyCategories] = useState([]);
   const [category, setCategory] = useState({
     id: null,
@@ -126,6 +129,15 @@ function Category() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Category</title>
+        <meta
+          name="description"
+          content="Manage the categories on your website from this page of your back office dashboard. Add, edit, or delete categories, and assign videos to each category."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
@@ -193,7 +205,7 @@ function Category() {
                 buttonType="button"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={handleDeleteCategory}
+                methodOnClick={setDisplayModal}
               />
             </>
           )}
@@ -203,6 +215,12 @@ function Category() {
             buttonText="CANCEL"
             buttonStyle="cstm_buttonSecondaryNone"
           />
+          {displayModal && (
+            <ModalSuppression
+              setDisplayModal={setDisplayModal}
+              confirmDelete={handleDeleteCategory}
+            />
+          )}
         </div>
       </form>
     </>
