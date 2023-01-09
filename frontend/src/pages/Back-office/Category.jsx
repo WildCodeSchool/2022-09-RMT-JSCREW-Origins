@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import validateCategory from "@services/categoryValidators";
@@ -128,6 +129,15 @@ function Category() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Category</title>
+        <meta
+          name="description"
+          content="Manage the categories on your website from this page of your back office dashboard. Add, edit, or delete categories, and assign videos to each category."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}

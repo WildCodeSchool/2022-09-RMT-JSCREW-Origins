@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import validateVideo from "@services/videoValidators";
@@ -161,6 +162,15 @@ function Video() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Video</title>
+        <meta
+          name="description"
+          content="Manage the videos on your website from this page of your back office dashboard. Add, edit, or delete videos, and configure their settings."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
