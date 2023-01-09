@@ -62,7 +62,7 @@ function NavCustmr() {
               <Link
                 onClick={() => setIsMenuDisplayed(false)}
                 className="hover:text-secondary hover:font-bold mb-5"
-                to={`/Dashboard/Setting/${user.id}`}
+                to="Dashboard/Setting"
               >
                 Dashboard
               </Link>
@@ -85,9 +85,7 @@ function NavCustmr() {
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
           <Link to="/OneVideo">One Video</Link>
-          {user?.isAdmin === 1 && (
-            <Link to={`/Dashboard/Setting/${user.id}`}>Dashboard</Link>
-          )}
+          {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
           <Link to="/Login">
             <img className="w-6" src={iconeLogin} alt="icone login" />
           </Link>
