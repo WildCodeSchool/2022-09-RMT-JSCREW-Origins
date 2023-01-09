@@ -58,7 +58,7 @@ function Setting() {
       .put(`/user/${id}`, { ...mySetting })
       .then(() => updateSetting())
       .catch((error) => console.error(error));
-    return notify("Email has been successfully modified");
+    return notify("Email has been successfully updated");
   };
 
   const settingDelete = () => {
