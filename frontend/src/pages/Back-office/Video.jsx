@@ -7,10 +7,12 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
+import ModalSuppression from "@components/ModalSuppression";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function Video() {
+  const [displayModal, setDisplayModal] = useState(false);
   const [myVideo, setMyVideos] = useState([]);
   const [myCategory, setMyCategories] = useState([]);
   const [reset, setReset] = useState(false);
@@ -253,7 +255,7 @@ function Video() {
                 buttonType="button"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={handleDeleteVideo}
+                methodOnClick={setDisplayModal}
               />
             </>
           )}
@@ -263,6 +265,12 @@ function Video() {
             buttonText="CANCEL"
             buttonStyle="cstm_buttonSecondaryNone"
           />
+          {displayModal && (
+            <ModalSuppression
+              setDisplayModal={setDisplayModal}
+              confirmDelete={handleDeleteVideo}
+            />
+          )}
         </div>
       </form>
     </>

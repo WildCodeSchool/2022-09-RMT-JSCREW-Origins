@@ -60,6 +60,13 @@ function Setting() {
     return notify("Email has been successfully modified");
   };
 
+  const settingDelete = () => {
+    apiConnection
+      .delete(`/user/${id}`)
+      .then((user) => user)
+      .catch((error) => console.error(error));
+  };
+
   return (
     <>
       <ToastContainer
@@ -95,7 +102,10 @@ function Setting() {
                 methodOnClick={setDisplayModal}
               />
               {displayModal && (
-                <ModalSuppression setDisplayModal={setDisplayModal} />
+                <ModalSuppression
+                  setDisplayModal={setDisplayModal}
+                  confirmDelete={settingDelete}
+                />
               )}
             </div>
           </>
