@@ -30,8 +30,8 @@ router.post("/login", validators.checkUser, settingControllers.validateUser);
 router.use(checkAuth);
 
 router.get("/user", settingControllers.read);
-router.put("/user/:id", settingControllers.edit);
-router.delete("/user/:id", settingControllers.destroy);
+router.put("/user", settingControllers.edit);
+router.delete("/user", settingControllers.destroy);
 
 router.post(
   "/categories",
