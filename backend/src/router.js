@@ -5,6 +5,7 @@ const router = express.Router();
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
+const sendMailControllers = require("./controllers/sendMailControllers");
 
 const validators = require("../services/validators");
 
@@ -31,6 +32,8 @@ router.delete("/user/:id", settingControllers.destroy);
 
 router.post("/user", settingControllers.add);
 router.post("/login", validators.checkUser, settingControllers.validateUser);
+
+router.post("/sendEmail", sendMailControllers.sendMail);
 
 router.use(checkAuth);
 
