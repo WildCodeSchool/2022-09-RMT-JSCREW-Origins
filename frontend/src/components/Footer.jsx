@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
+import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -17,8 +18,8 @@ function Footer() {
   const [myMessage, setMyMessage] = useState({
     id: null,
     name: "",
-    Email: "",
-    Description: "",
+    email: "",
+    description: "",
   });
 
   const handleInputOnChange = (place, value) => {
@@ -34,10 +35,16 @@ function Footer() {
   const submitForm = () => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRegex.test(myMessage.Email)) {
-      notify(
-        `Hello ${myMessage.name} your message ${myMessage.Description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.Email}`
-      );
+    if (emailRegex.test(myMessage.email)) {
+      apiConnection
+        .post(`/sendEmail`, {
+          ...myMessage,
+        })
+        .then(() => {
+          notify(
+            `Hello ${myMessage.name} your message ${myMessage.description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.email}`
+          );
+        });
     } else {
       notify(`Your email address isn't correct`);
     }
@@ -87,9 +94,9 @@ function Footer() {
                   textPlaceholder="Email"
                   inputType="text"
                   customWidth="cstm_width_XlInput bg-white"
-                  value={myMessage.Email}
+                  value={myMessage.email}
                   methodOnChange={handleInputOnChange}
-                  name="Email"
+                  name="email"
                 />
               </div>
             </div>
@@ -98,9 +105,9 @@ function Footer() {
                 textPlaceholder="Description"
                 inputType="text"
                 customWidth="cstm_width_XlInput"
-                value={myMessage.Description}
+                value={myMessage.description}
                 methodOnChange={handleInputOnChange}
-                name="Description"
+                name="description"
               />
             </div>
             <div className="flex justify-center">

@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const sendMail = (req, res) => {
-  const { name, surname, phone, email, message } = req.body;
+  const { name, email, description } = req.body;
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_SENDIN,
@@ -18,8 +18,8 @@ const sendMail = (req, res) => {
     from: "jordan.vaxelaire@hotmail.fr",
     to: "charlie.piancatelli@gmail.com", // this is the address to which the email will be sent
     subject: "New message from contact form",
-    text: `${message} \n\n Phone: ${phone} \n\n Name: ${name} \n\n Surname: ${surname} \n\n Email: ${email}`,
-    html: `<p>${message}</p> <p>Phone: ${phone}</p> <p>Name: ${name}</p> <p>Surname: ${surname}</p> <p>Email: ${email}</p>`,
+    text: `${description} \n\n Name: ${name} \n\n Email: ${email}`,
+    html: `<p>${description}</p> <p>Name: ${name}</p> <p>Email: ${email}</p>`,
   };
 
   return transporter
