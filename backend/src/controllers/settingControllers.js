@@ -100,7 +100,7 @@ const edit = (req, res) => {
 
 const destroy = (req, res) => {
   models.user
-    .delete(req.params.id)
+    .deleteUser(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
