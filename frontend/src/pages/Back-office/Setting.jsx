@@ -14,13 +14,13 @@ function Setting() {
   const { user } = useContext(User.UserContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [mySetting, setMySetting] = useState({
-  id: null,
-  isAdmin: "",
-  email: user.email,
-  password: "",
-  newPassword: "",
-  confirmNewPassword: "",
-});
+    id: null,
+    isAdmin: "",
+    email: user.email,
+    password: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
 
   const notify = (msg) => {
     toast(msg);
