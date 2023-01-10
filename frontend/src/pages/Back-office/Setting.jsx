@@ -58,18 +58,27 @@ function Setting() {
     }
     apiConnection
       .put(`/user`, { ...mySetting })
-      .then(() => updateSetting())
+      .then(() => {
+        notify("Email has been successfully updated");
+        updateSetting();
+      })
       .catch((error) => console.error(error));
     return notify("Email has been successfully updated");
   };
 
   const settingDelete = () => {
-    apiConnection
-      .delete(`/user`)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => console.error(error));
+    if (mySetting.email !== "admin1@mail.com") {
+      apiConnection
+        .delete(`/user`)
+        .then(() => {
+          notify("User has been successfully Deleted");
+          navigate("/");
+        })
+        .catch((error) => console.error(error));
+    } else {
+      setDisplayModal(false);
+      notify("unable to delete the superadmin");
+    }
   };
 
   return (
@@ -95,7 +104,7 @@ function Setting() {
         pauseOnHover
         theme="dark"
       />
-      <form className="flex flex-col items-center w-full pt-10 gap-y-7">
+      <div className="flex flex-col items-center w-full pt-10 gap-y-7">
         {mySetting && (
           <>
             <ConnectForm
@@ -124,7 +133,7 @@ function Setting() {
             </div>
           </>
         )}
-      </form>
+      </div>
     </>
   );
 }
