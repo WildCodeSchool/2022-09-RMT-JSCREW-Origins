@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalSuppression from "@components/ModalSuppression";
+import User from "../../contexts/UserContext";
 
-const userData = {
+function Setting() {
+  const navigate = useNavigate();
+  const { user } = useContext(User.UserContext);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [mySetting, setMySetting] = useState({
   id: null,
   isAdmin: "",
-  email: "",
+  email: user.email,
   password: "",
   newPassword: "",
   confirmNewPassword: "",
-};
-
-function Setting() {
-  const { id } = useParams();
-  const [displayModal, setDisplayModal] = useState(false);
-  const [mySetting, setMySetting] = useState(userData);
+});
 
   const notify = (msg) => {
     toast(msg);
@@ -45,7 +45,7 @@ function Setting() {
 
   useEffect(() => {
     apiConnection
-      .get(`/user/${id}`)
+      .get(`/user`)
       .then((users) => updateSetting(users.data))
       .catch((error) => console.error(error));
   }, []);
@@ -57,7 +57,7 @@ function Setting() {
       return notify("Email is not correct");
     }
     apiConnection
-      .put(`/user/${id}`, { ...mySetting })
+      .put(`/user`, { ...mySetting })
       .then(() => {
         notify("Email has been successfully updated");
         updateSetting();
@@ -69,11 +69,10 @@ function Setting() {
   const settingDelete = () => {
     if (mySetting.email !== "admin1@mail.com") {
       apiConnection
-        .delete(`/user/${id}`)
+        .delete(`/user`)
         .then(() => {
-          setDisplayModal(false);
-          setMySetting(userData);
           notify("User has been successfully Deleted");
+          navigate("/");
         })
         .catch((error) => console.error(error));
     } else {

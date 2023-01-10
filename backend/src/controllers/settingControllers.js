@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
-const { hashPass, verifyHash } = require("../../services/auth");
+const { hashPass, verifyHash } = require("../services/auth");
 
 const validateUser = (req, res) => {
   models.user
@@ -62,7 +62,7 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   models.user
-    .find(req.params.id)
+    .find(req.auth.id)
     .then(([users]) => {
       if (users[0] == null) {
         res.sendStatus(404);
@@ -77,25 +77,21 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const user = req.body;
-
-  // TODO validations (length, format...)
-
-  user.id = parseInt(req.params.id, 10);
-
-  models.user
-    .update(user)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.auth.id)
+    models.user
+      .update(req.auth)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  else res.sendStatus(401);
 };
 
 const destroy = (req, res) => {

@@ -5,8 +5,9 @@ const router = express.Router();
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
+const sendMailControllers = require("./controllers/sendMailControllers");
 
-const validators = require("../services/validators");
+const validators = require("./services/validators");
 
 const checkAuth = require("./middleware/auth");
 
@@ -24,15 +25,16 @@ router.get("/categories/:id", categoryControllers.read);
 router.get("/videos", videoControllers.browse);
 router.get("/videos/:id", videoControllers.readvideo);
 
-router.get("/user", settingControllers.browse);
-router.get("/user/:id", settingControllers.read);
-router.put("/user/:id", settingControllers.edit);
-router.delete("/user/:id", settingControllers.destroy);
-
 router.post("/user", settingControllers.add);
 router.post("/login", validators.checkUser, settingControllers.validateUser);
 
+router.post("/sendEmail", sendMailControllers.sendMail);
+
 router.use(checkAuth);
+
+router.get("/user", settingControllers.read);
+router.put("/user", settingControllers.edit);
+router.delete("/user", settingControllers.destroy);
 
 router.post(
   "/categories",
