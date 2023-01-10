@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import logoOrigins from "@assets/logo-origins.png";
 import iconeLogin from "@assets/CompteClient.png";
 import SearchBarLoupe from "./SearchBarLoupe";
 
+import User from "../contexts/UserContext";
+
 function NavCustmr() {
+  const { user } = useContext(User.UserContext);
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
 
@@ -55,13 +58,15 @@ function NavCustmr() {
             >
               All videos
             </Link>
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
-              className="hover:text-secondary hover:font-bold mb-5"
-              to="/Dashboard/Video"
-            >
-              Dashboard
-            </Link>
+            {user?.isAdmin === 1 && (
+              <Link
+                onClick={() => setIsMenuDisplayed(false)}
+                className="hover:text-secondary hover:font-bold mb-5"
+                to="Dashboard/Setting"
+              >
+                Dashboard
+              </Link>
+            )}
             <Link
               onClick={() => setIsMenuDisplayed(false)}
               className="hover:text-secondary hover:font-bold mb-2"
@@ -80,7 +85,7 @@ function NavCustmr() {
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
           <Link to="/OneVideo">One Video</Link>
-          <Link to="/Dashboard/Video">Back office</Link>
+          {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
           <Link to="/Login">
             <img className="w-6" src={iconeLogin} alt="icone login" />
           </Link>
