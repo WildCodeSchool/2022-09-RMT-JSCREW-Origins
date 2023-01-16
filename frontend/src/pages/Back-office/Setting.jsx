@@ -54,22 +54,30 @@ function Setting() {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegex.test(mySetting.email)) {
-      return notify("Email is not correct");
-    }
-    apiConnection
-      .put(`/user`, { ...mySetting })
-      .then(() => updateSetting())
-      .catch((error) => console.error(error));
-    return notify("Email has been successfully updated");
+      notify("Email is not correct");
+    } else
+      apiConnection
+        .put(`/user`, { ...mySetting })
+        .then(() => {
+          notify("Email has been successfully updated");
+          updateSetting();
+        })
+        .catch((error) => console.error(error));
   };
 
   const settingDelete = () => {
-    apiConnection
-      .delete(`/user`)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => console.error(error));
+    if (mySetting.email !== "admin1@mail.com") {
+      apiConnection
+        .delete(`/user`)
+        .then(() => {
+          notify("User has been successfully Deleted");
+          navigate("/");
+        })
+        .catch((error) => console.error(error));
+    } else {
+      setDisplayModal(false);
+      notify("unable to delete the superadmin");
+    }
   };
 
   return (
@@ -95,7 +103,7 @@ function Setting() {
         pauseOnHover
         theme="dark"
       />
-      <form className="flex flex-col items-center w-full pt-10 gap-y-7">
+      <div className="flex flex-col items-center w-full pt-10 gap-y-7">
         {mySetting && (
           <>
             <ConnectForm
@@ -124,7 +132,7 @@ function Setting() {
             </div>
           </>
         )}
-      </form>
+      </div>
     </>
   );
 }

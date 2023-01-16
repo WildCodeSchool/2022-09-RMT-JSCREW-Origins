@@ -25,6 +25,13 @@ class SettingManager extends AbstractManager {
       [user.email]
     );
   }
+
+  deleteUser(id) {
+    return this.connection.query(
+      `delete from ${this.table} where id = ? and isDeletable is null`,
+      [id]
+    );
+  }
 }
 
 module.exports = SettingManager;
