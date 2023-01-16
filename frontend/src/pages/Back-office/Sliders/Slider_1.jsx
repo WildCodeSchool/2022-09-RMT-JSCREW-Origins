@@ -51,7 +51,6 @@ function Slider1() {
   };
   // fonction permet de suprime slider dnas la base de donnée et en dur avant de post.
   const handleDeleteCard = (id) => {
-    setVideoList(videoList.filter((video) => video.id !== id));
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/slider/${id}`)
       .then(() => {
@@ -67,15 +66,18 @@ function Slider1() {
     for (const video of videoList) {
       if (video.toAdd) videoToPost.push([video.video_id, 1]);
     }
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/slider`, {
-        videoToPost,
-      })
-      .then(() => {
-        notify("Slider successfully updated!");
-        getAllSlider();
-      })
-      .catch((error) => console.error(error));
+    if (videoToPost.length > 0) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/slider`, {
+          videoToPost,
+        })
+        .then(() => {
+          notify("Slider successfully updated!");
+          getAllSlider();
+        })
+        .catch((error) => console.error(error));
+    }
+    notify("No updated data detected!");
   };
 
   // Pour que la donnée se mette à jour en live

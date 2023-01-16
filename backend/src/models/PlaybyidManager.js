@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class PlaybyidManager extends AbstractManager {
   constructor() {
-    super({ table: "playbyid" });
+    super({ table: "play_by_id" });
   }
 
   insertBatch(playsbyid) {
@@ -14,7 +14,7 @@ class PlaybyidManager extends AbstractManager {
 
   browseSlider1() {
     return this.connection.query(
-      `SELECT playbyid.id, video.id AS video_id, video.Name FROM ${this.table} INNER JOIN video ON video.id = id_Video WHERE Type = 1`
+      `SELECT play_by_id.id, video.id AS video_id, video.Name FROM ${this.table} INNER JOIN video ON video.id = id_Video WHERE Type = 1`
     );
   }
 

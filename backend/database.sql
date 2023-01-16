@@ -1,3 +1,5 @@
+-- SQLBook: Code
+
 DROP DATABASE IF EXISTS origin_database;
 
 CREATE DATABASE origin_database;
@@ -74,7 +76,7 @@ VALUES (
         1,
         'Top Play LOL 2022',
         1,
-        'https://www.youtube.com/watch?v=OKL8BLAec1U',
+        'https://www.youtube.com/embed/OKL8BLAec1U',
         'Top Play during the worlds of LOL 2022',
         0
     );
@@ -92,7 +94,7 @@ VALUES (
         2,
         'World 2022 final',
         1,
-        'https://www.youtube.com/watch?v=UUOBtkiDrE8',
+        'https://www.youtube.com/embed/UUOBtkiDrE8',
         'World 2022 - final T1 vs DRX',
         1
     );
@@ -110,7 +112,7 @@ VALUES (
         3,
         'Best Goal saison 2022',
         2,
-        'https://www.youtube.com/watch?v=WVB6hpik6z8',
+        'https://www.youtube.com/embed/WVB6hpik6z8',
         'Best Goal during the seasons RLCS 2022',
         0
     );
@@ -128,7 +130,7 @@ VALUES (
         4,
         'Finale World RLCS',
         2,
-        'https://www.youtube.com/watch?v=0-UxFn596zI',
+        'https://www.youtube.com/embed/0-UxFn596zI',
         'RLCS 2021-2022 Grand Finals commented by Bachi & Lifeiscool !',
         1
     );
@@ -144,11 +146,11 @@ INSERT INTO
     )
 VALUES (
         5,
-        'Summary Final 2022 Lorien/OM',
+        'Match Finale eChampions League 2022',
         3,
-        'https://www.youtube.com/watch?v=l6a57U84r1M',
-        'Relive the back-to-back of FC Lorient in this great eLigue 1 final against Olympique de Marseille! ',
-        0
+        'https://www.youtube.com/embed/Da63ohdBFQo',
+        'Two TITANS of the FIFA eSports scene - Tekkz and Nicolas99FC - go head-to-head in the Winners Final of the FIFA 22 eChampions League. Whoever wins guarantees their spot in the Grand Final.',
+        1
     );
 
 INSERT INTO
@@ -162,11 +164,11 @@ INSERT INTO
     )
 VALUES (
         6,
-        'Finale lorient/OM',
+        'Finale eChampions League 2022',
         3,
-        'https://www.youtube.com/watch?v=vXtibpOjrHw',
-        'eLigue 1 Final 2022: The defending champion puts his title back on the line! The Merlus of FCL, title holder, meet the Marseillais of OM in a match that promises to be very high. For the occasion, the Peixoto brothers face each other in a duel that holds all its promises! Guest of honour, Jean-Pierre Papin will present the trophy to the winners of the competition!',
-        1
+        'https://www.youtube.com/embed/Ez4FCB7aJng',
+        'The FIFA 22 eChampions League Finals are finally here - and featuring legendary icons as well as heroes! Who do YOU think will walk away with the $280,000, eChampions League Trophy, and the coveted spot at the Global Series Playoffs? Also watch Kaká, Ashley Cole, Fernando Morientes, and Henrik Larsson compete in the Icon Faceoff, presented by Playstation.',
+        0
     );
 
 INSERT INTO
@@ -182,7 +184,7 @@ VALUES (
         7,
         'Highlight final ESL 2022',
         4,
-        'https://www.youtube.com/watch?v=Xn-bGsnfu9w&t=132s',
+        'https://www.youtube.com/embed/Xn-bGsnfu9w',
         'Best moments & highlights is the video where all the the best CS:GO clips, best moments, pro highlights,',
         0
     );
@@ -200,7 +202,7 @@ VALUES (
         8,
         'Map 1 final ESL 2022',
         4,
-        'https://www.youtube.com/watch?v=G1qhsp-HS80',
+        'https://www.youtube.com/embed/G1qhsp-HS80',
         'Map 1 of the final ESL 2022 NAVY vs FAZE',
         1
     );
@@ -209,32 +211,40 @@ CREATE TABLE
     user (
         id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
         isAdmin TINYINT NOT NULL,
-        email VARCHAR(200) NOT NULL,
-        password VARCHAR(100) NOT NULL
+        email VARCHAR(200) NOT NULL UNIQUE,
+        hashedpassword VARCHAR(255) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
 INSERT INTO
-    user (id, isAdmin, email, password)
-VALUES (1, 1, 'admin1@mail.com', 1234);
-
-INSERT INTO
-    user (id, isAdmin, email, password)
-VALUES (2, 1, 'admin2@mail.com', 12345);
+    user (
+        id,
+        isAdmin,
+        email,
+        hashedpassword
+    )
+VALUES (
+        1,
+        1,
+        'admin1@mail.com',
+        "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA"
+    );
 
 CREATE TABLE
-    playbyid (
+    play_by_id (
         id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
         id_Video INT NOT NULL,
         Type INT NOT NULL,
         Foreign Key (id_Video) REFERENCES video(id)
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
+INSERT INTO
+    play_by_id (id_Video, Type)
+VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1);
+
 CREATE TABLE
     display_by_id (
-        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        id INT NOT NULL PRIMARY KEY,
         id_Category INT NOT NULL,
         Number INT NOT NULL,
         Foreign Key (id_Category) REFERENCES category(id)
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
-
-INSERT INTO playbyid (id_Video, Type) VALUES (2, 1);
