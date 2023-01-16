@@ -36,7 +36,6 @@ function Slider1() {
 
   // Fonction permetant de définir le nombre de video dans le carousel
   const handleOneVideo = (vid) => {
-    // if (videoList.find((video) => video.id === vid.id)) return;
     if (
       videoList.length < 10 &&
       videoList.every((video) => video.video_id !== vid.id)
@@ -50,7 +49,7 @@ function Slider1() {
       setVideoList((list) => [...list, vidToAdd]);
     }
   };
-
+  // fonction permet de suprime slider dnas la base de donnée et en dur avant de post.
   const handleDeleteCard = (id) => {
     setVideoList(videoList.filter((video) => video.id !== id));
     axios
