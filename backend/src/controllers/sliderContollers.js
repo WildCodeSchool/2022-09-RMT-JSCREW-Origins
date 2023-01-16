@@ -76,7 +76,6 @@ const destroyByIdVideo = (req, res) => {
 module.exports = {
   browse,
   add,
-  // destroy,
   destroyByIdVideo,
   read,
 };

@@ -33,12 +33,26 @@ function Slider1() {
   /**
    * @param {object} vid
    */
+
   // Fonction permetant de définir le nombre de video dans le carousel
   const handleOneVideo = (vid) => {
-    if (videoList.length < 10) setVideoList((list) => [...list, vid]);
+    // if (videoList.find((video) => video.id === vid.id)) return;
+    if (
+      videoList.length < 10 &&
+      videoList.every((video) => video.video_id !== vid.id)
+    ) {
+      const vidToAdd = {
+        id: videoList.length + 100,
+        video_id: vid.id,
+        Name: vid.Name,
+        toAdd: true,
+      };
+      setVideoList((list) => [...list, vidToAdd]);
+    }
   };
 
   const handleDeleteCard = (id) => {
+    setVideoList(videoList.filter((video) => video.id !== id));
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/slider/${id}`)
       .then(() => {
@@ -52,7 +66,7 @@ function Slider1() {
   const handleValidateButton = () => {
     const videoToPost = [];
     for (const video of videoList) {
-      videoToPost.push([video.id, 1]);
+      if (video.toAdd) videoToPost.push([video.video_id, 1]);
     }
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/slider`, {

@@ -12,13 +12,6 @@ class PlaybyidManager extends AbstractManager {
     );
   }
 
-  // delete(Type) {
-  //   return this.connection.query(
-  //     `Delete FROM ${this.table} WHERE Type = ?`,
-  //     Type
-  //   );
-  // }
-
   browseSlider1() {
     return this.connection.query(
       `SELECT playbyid.id, video.id AS video_id, video.Name FROM ${this.table} INNER JOIN video ON video.id = id_Video WHERE Type = 1`
