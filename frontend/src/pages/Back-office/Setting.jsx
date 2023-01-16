@@ -54,16 +54,15 @@ function Setting() {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegex.test(mySetting.email)) {
-      return notify("Email is not correct");
-    }
-    apiConnection
-      .put(`/user`, { ...mySetting })
-      .then(() => {
-        notify("Email has been successfully updated");
-        updateSetting();
-      })
-      .catch((error) => console.error(error));
-    return notify("Email has been successfully updated");
+      notify("Email is not correct");
+    } else
+      apiConnection
+        .put(`/user`, { ...mySetting })
+        .then(() => {
+          notify("Email has been successfully updated");
+          updateSetting();
+        })
+        .catch((error) => console.error(error));
   };
 
   const settingDelete = () => {
