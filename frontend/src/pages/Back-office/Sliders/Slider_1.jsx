@@ -76,8 +76,9 @@ function Slider1() {
           getAllSlider();
         })
         .catch((error) => console.error(error));
+    } else {
+      notify("No updated data detected!");
     }
-    notify("No updated data detected!");
   };
 
   // Pour que la donnée se mette à jour en live
