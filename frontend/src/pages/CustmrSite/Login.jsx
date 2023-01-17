@@ -83,8 +83,8 @@ function Login() {
       return notify("Passwords are not the same");
     }
     handleCreateAccount(infos);
-    delete infos.confirmPassword;
-    setTimeout(() => handleLogin(infos), 2000);
+    navigate("/");
+    setTimeout(() => navigate("/Login"), 2000);
   };
 
   const handleLogOut = () => {
