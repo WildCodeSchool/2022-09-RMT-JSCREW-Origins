@@ -44,7 +44,8 @@ isDeletable TINYINT
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO user (id,isAdmin, email, hashedpassword, isDeletable) VALUES (1,1, 'admin1@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA", 1);
-INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (2,0, 'admin2@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (2,1, 'admin2@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (3,0, 'admin3@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
 
 CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY,

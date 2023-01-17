@@ -18,9 +18,12 @@ function Setting() {
     isAdmin: "",
     email: user.email,
     password: "",
-    newPassword: "",
-    confirmNewPassword: "",
+    confirmPassword: "",
   });
+
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
   const notify = (msg) => {
     toast(msg);
@@ -38,8 +41,7 @@ function Setting() {
       isAdmin: data.isAdmin,
       email: data.email,
       password: data.password,
-      newPassword: "",
-      confirmNewPassword: "",
+      confirmPassword: data.confirmPassword,
     });
   };
 
@@ -50,19 +52,24 @@ function Setting() {
       .catch((error) => console.error(error));
   }, []);
 
+  // eslint-disable-next-line consistent-return
   const handleUpdateSetting = () => {
-    const emailRegex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegex.test(mySetting.email)) {
-      notify("Email is not correct");
-    } else
-      apiConnection
-        .put(`/user`, { ...mySetting })
-        .then(() => {
-          notify("Email has been successfully updated");
-          updateSetting();
-        })
-        .catch((error) => console.error(error));
+      return notify("Email is not correct");
+    }
+    if (!passwordRegex.test(mySetting.password)) {
+      return notify("Password is not correct");
+    }
+    if (mySetting.password !== mySetting.confirmPassword) {
+      return notify("Passwords are not the same");
+    }
+    apiConnection
+      .put(`/user`, { ...mySetting })
+      .then(() => {
+        notify("Updated has been successfully");
+        updateSetting();
+      })
+      .catch((error) => console.error(error));
   };
 
   const settingDelete = () => {
