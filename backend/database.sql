@@ -39,7 +39,6 @@ CREATE TABLE user (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 isAdmin TINYINT NOT NULL,
 email VARCHAR(200) NOT NULL UNIQUE,
-
 hashedpassword VARCHAR(255) NOT NULL,
 isDeletable TINYINT
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,7 +47,7 @@ INSERT INTO user (id,isAdmin, email, hashedpassword, isDeletable) VALUES (1,1, '
 INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (2,0, 'admin2@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
 
 CREATE TABLE play_by_id (
-id INT NOT NULL PRIMARY KEY,
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_Video INT NOT NULL,
 Type INT NOT NULL,
 Foreign Key (id_Video) REFERENCES video(id)

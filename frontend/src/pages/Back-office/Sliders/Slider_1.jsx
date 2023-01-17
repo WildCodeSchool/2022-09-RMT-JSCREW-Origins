@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import apiConnection from "@services/apiConnection";
 import { ToastContainer, toast } from "react-toastify";
 
 import CardTemplate from "@components/CardTemplate";
@@ -16,15 +16,15 @@ function Slider1() {
   };
 
   const getAllVideo = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
+    apiConnection
+      .get(`/videos`)
       .then((videos) => setMyVideo(videos.data))
       .catch((error) => console.error(error));
   };
 
   const getAllSlider = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/slider`)
+    apiConnection
+      .get(`/slider`)
       .then((slider) => setVideoList(slider.data))
       .catch((error) => console.error(error));
   };
@@ -51,8 +51,8 @@ function Slider1() {
   };
   // fonction permet de suprime slider dnas la base de donnée et en dur avant de post.
   const handleDeleteCard = (id) => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/slider/${id}`)
+    apiConnection
+      .delete(`/slider/${id}`)
       .then(() => {
         notify("Video deleted!");
         getAllSlider();
@@ -67,8 +67,8 @@ function Slider1() {
       if (video.toAdd) videoToPost.push([video.video_id, 1]);
     }
     if (videoToPost.length > 0) {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/slider`, {
+      apiConnection
+        .post(`/slider`, {
           videoToPost,
         })
         .then(() => {
