@@ -63,9 +63,9 @@ function Slider1() {
   // fonction permetant de post dans la db la list choisi avec le type 1
   const handleValidateButton = () => {
     const videoToPost = [];
-    for (const video of videoList) {
-      if (video.toAdd) videoToPost.push([video.video_id, 1]);
-    }
+    videoList.filter(
+      (video) => video.toAdd && videoToPost.push([video.video_id, 1])
+    );
     if (videoToPost.length > 0) {
       apiConnection
         .post(`/slider`, {
