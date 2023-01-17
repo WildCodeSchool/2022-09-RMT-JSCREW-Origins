@@ -53,13 +53,12 @@ function Login() {
 
   const validateLogin = () => {
     if (!validateEmail.test(infos.email)) {
-      return notify("Email is not correct");
-    }
-    if (!validatePassword.test(infos.password)) {
-      return notify("Password is not correct");
+      notify("Email is not correct");
+    } else if (!validatePassword.test(infos.password)) {
+      notify("Password is not correct");
     }
     delete infos.confirmPassword;
-    return handleLogin(infos);
+    handleLogin(infos);
   };
 
   const handleCreateAccount = (createInfo) => {
@@ -71,20 +70,17 @@ function Login() {
       .catch((err) => console.error(err));
   };
 
-  // eslint-disable-next-line consistent-return
   const validateCreateAccount = async () => {
     if (!validateEmail.test(infos.email)) {
-      return notify("Email is not correct");
-    }
-    if (!validatePassword.test(infos.password)) {
-      return notify("Password is not correct");
-    }
-    if (infos.password !== infos.confirmPassword) {
-      return notify("Passwords are not the same");
+      notify("Email is not correct");
+    } else if (!validatePassword.test(infos.password)) {
+      notify("Password is not correct");
+    } else if (infos.password !== infos.confirmPassword) {
+      notify("Passwords are not the same");
     }
     handleCreateAccount(infos);
-    navigate("/");
-    setTimeout(() => navigate("/Login"), 2000);
+    setDisplayRegisterForm(false);
+    setInfos({});
   };
 
   const handleLogOut = () => {
