@@ -5,6 +5,7 @@ import CustmrSite from "@pages/Layout/CustmrSite";
 import Home from "@pages/CustmrSite/Home";
 import Login from "@pages/CustmrSite/Login";
 import AllVideos from "@pages/CustmrSite/AllVideos";
+import OneVideo from "@pages/CustmrSite/OneVideo";
 
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
@@ -25,12 +26,13 @@ export default function App() {
           <Route path="/" element={<CustmrSite />}>
             <Route path="" element={<Home />} />
             <Route path="All-videos" element={<AllVideos />} />
+            <Route path="OneVideo" element={<OneVideo />} />
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="Login" element={<Login />} />
           </Route>
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Category" element={<Category />} />
-            <Route path="Setting/:id" element={<Setting />} />
+            <Route path="Setting" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
             <Route path="Slider_3" element={<Slider3 />} />

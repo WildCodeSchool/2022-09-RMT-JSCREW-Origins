@@ -14,6 +14,7 @@ function SearchBar({
   searchBarContainer,
   customWidth,
   methodOnClick,
+  reset,
 }) {
   const ref = useRef();
   const [displayData, setDisplayData] = useState(false);
@@ -36,6 +37,10 @@ function SearchBar({
     };
   }, [displayData]);
 
+  useEffect(() => {
+    setSearchData("");
+  }, [reset]);
+
   const handleDisplayData = () => {
     if (searchData.length > 0) {
       setSearchData("");
@@ -54,7 +59,7 @@ function SearchBar({
     <div className={searchBarContainer} ref={ref}>
       <label className={`cstm_styleInput ${customWidth} relative`}>
         <input
-          onChange={handleDisplayData}
+          onChange={(e) => setSearchData(e.target.value)}
           className="focus:outline-none"
           type="text"
           placeholder={textPlaceholder}

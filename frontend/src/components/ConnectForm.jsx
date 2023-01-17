@@ -1,10 +1,10 @@
 import InputTemplate from "./InputTemplate";
 
-function ConnectForm({ dataUsers, handleInputOnChange }) {
+function ConnectForm({ dataUsers, handleInputOnChange, cstmStyle }) {
   return (
-    <div className="flex flex-col items-center w-full pt-10 gap-y-7">
+    <div className="flex flex-col items-center w-full gap-y-7">
       <InputTemplate
-        customWidth="cstm_width_XlInput"
+        customWidth={`cstm_width_XlInput ${cstmStyle}`}
         inputType="text"
         textPlaceholder="Email"
         value={dataUsers.email}
@@ -12,20 +12,20 @@ function ConnectForm({ dataUsers, handleInputOnChange }) {
         name="email"
       />
       <InputTemplate
-        customWidth="cstm_width_XlInput"
+        customWidth={`cstm_width_XlInput ${cstmStyle}`}
         inputType="password"
-        textPlaceholder="New password"
+        textPlaceholder="Password"
         value={dataUsers.newPassword}
         methodOnChange={handleInputOnChange}
-        name="newPassword"
+        name="password"
       />
       <InputTemplate
-        customWidth="cstm_width_XlInput"
+        customWidth={`cstm_width_XlInput ${cstmStyle}`}
         inputType="password"
-        textPlaceholder="Confirm new password"
+        textPlaceholder="Confirm password"
         value={dataUsers.confirmNewPassword}
         methodOnChange={handleInputOnChange}
-        name="confirmNewPassword"
+        name="confirmPassword"
       />
     </div>
   );

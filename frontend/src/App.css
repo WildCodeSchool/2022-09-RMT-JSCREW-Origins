@@ -23,6 +23,10 @@
   .cstm_buttonSecondaryNone {
     @apply border-solid border-secondary border-2 text-secondary text-base rounded-md p-2 w-32 hover:bg-secondary hover:text-white;
   }
+  /* style des boutons orange sur le site */
+  .cstm_cstmrButton {
+    @apply bg-secondary border-solid border-secondary border-2 text-primary text-base rounded-md p-2 w-32 hover:text-secondary hover:border-secondary hover:bg-transparent;
+  }
 }
 
 body {
@@ -80,4 +84,9 @@ code {
 
 button {
   font-size: calc(10px + 2vmin);
+}
+
+/* Modificaiton de la couleur initiale pour les flèches du carrousel du header */
+:root {
+  --swiper-theme-color: #ff680a !important;
 }

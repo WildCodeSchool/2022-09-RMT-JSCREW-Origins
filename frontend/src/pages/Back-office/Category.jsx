@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
+import apiConnection from "@services/apiConnection";
 import validateCategory from "@services/categoryValidators";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+import ModalSuppression from "@components/ModalSuppression";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function Category() {
+  const [displayModal, setDisplayModal] = useState(false);
   const [myCategories, setMyCategories] = useState([]);
+  const [reset, setReset] = useState(false);
   const [category, setCategory] = useState({
     id: null,
     Name: "",
@@ -25,8 +29,8 @@ function Category() {
 
   // Fonction qui gère la récupération des données avec axios
   const getAllCategories = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/categories`)
+    apiConnection
+      .get(`/categories`)
       .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
   };
@@ -44,6 +48,7 @@ function Category() {
       Icon: "",
       Description: "",
     });
+    setReset(!reset);
   };
 
   // Fonction qui gère le changement d'état des inputs
@@ -70,8 +75,8 @@ function Category() {
     delete category.id;
     const { status, errorMessage } = validateCategory(category);
     if (status) {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/categories`, {
+      apiConnection
+        .post(`/categories`, {
           ...category,
         })
         .then((categories) => {
@@ -87,8 +92,8 @@ function Category() {
 
   // Fonction qui gère la suppression d'une catégorie
   const handleDeleteCategory = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`)
+    apiConnection
+      .delete(`/categories/${category.id}`)
       .then(() => {
         setCategory({
           id: null,
@@ -108,8 +113,8 @@ function Category() {
 
     const { Name, Icon, Description } = category;
     if (status) {
-      axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/categories/${category.id}`, {
+      apiConnection
+        .put(`/categories/${category.id}`, {
           Name,
           Icon,
           Description,
@@ -126,6 +131,15 @@ function Category() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Category</title>
+        <meta
+          name="description"
+          content="Manage the categories on your website from this page of your back office dashboard. Add, edit, or delete categories, and assign videos to each category."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
@@ -141,6 +155,7 @@ function Category() {
       <form className="flex flex-col items-center w-full pt-10 gap-y-7">
         {/* SEARCHBAR */}
         <SearchBarTemplate
+          reset={reset}
           data={myCategories}
           customWidth="cstm_width_XlInput"
           searchBarContainer="flex flex-col items-center w-full relative"
@@ -193,7 +208,7 @@ function Category() {
                 buttonType="button"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={handleDeleteCategory}
+                methodOnClick={setDisplayModal}
               />
             </>
           )}
@@ -203,6 +218,12 @@ function Category() {
             buttonText="CANCEL"
             buttonStyle="cstm_buttonSecondaryNone"
           />
+          {displayModal && (
+            <ModalSuppression
+              setDisplayModal={setDisplayModal}
+              confirmDelete={handleDeleteCategory}
+            />
+          )}
         </div>
       </form>
     </>

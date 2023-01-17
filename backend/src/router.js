@@ -6,8 +6,11 @@ const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
 const sliderControllers = require("./controllers/sliderContollers");
+const sendMailControllers = require("./controllers/sendMailControllers");
 
-const validators = require("../services/validators");
+const validators = require("./services/validators");
+
+const checkAuth = require("./middleware/auth");
 
 // ----------- EXEMPLE DES ROUTES ------------
 // router.get("/items", itemControllers.browse);
@@ -19,6 +22,21 @@ const validators = require("../services/validators");
 
 router.get("/categories", categoryControllers.browse);
 router.get("/categories/:id", categoryControllers.read);
+
+router.get("/videos", videoControllers.browse);
+router.get("/videos/:id", videoControllers.readvideo);
+
+router.post("/user", settingControllers.add);
+router.post("/login", validators.checkUser, settingControllers.validateUser);
+
+router.post("/sendEmail", sendMailControllers.sendMail);
+
+router.use(checkAuth);
+
+router.get("/user", settingControllers.read);
+router.put("/user", settingControllers.edit);
+router.delete("/user", settingControllers.destroy);
+
 router.post(
   "/categories",
   validators.validateCategory,
@@ -29,19 +47,15 @@ router.put(
   validators.validateCategory,
   categoryControllers.edit
 );
-router.delete("/categories/:id", categoryControllers.destroy);
 
-router.get("/videos", videoControllers.browse);
-router.get("/videos/:id", videoControllers.read);
+router.delete("/categories/:id", categoryControllers.destroy);
 router.put("/videos/:id", videoControllers.edit);
 router.post("/videos", videoControllers.add);
+router.get("/videos", videoControllers.browse);
+router.get("/videos/:id", videoControllers.readvideo);
+router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
+router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
-
-router.get("/user", settingControllers.browse);
-router.get("/user/:id", settingControllers.read);
-router.put("/user/:id", settingControllers.edit);
-router.post("/user", settingControllers.add);
-router.delete("/user/:id", settingControllers.destroy);
 
 router.get("/slider", sliderControllers.browse);
 router.get("/slider/:id", sliderControllers.read);

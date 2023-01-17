@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.video
-    .findAll()
+    .findAll(req.query)
     .then(([videos]) => {
       res.send(videos);
     })
@@ -15,6 +15,22 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.video
     .find(req.params.id)
+    .then(([videos]) => {
+      if (videos[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(videos[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const readvideo = (req, res) => {
+  models.video
+    .findCategory(req.params.id)
     .then(([videos]) => {
       if (videos[0] == null) {
         res.sendStatus(404);
@@ -56,7 +72,10 @@ const add = (req, res) => {
   models.video
     .insert(video)
     .then(([result]) => {
-      res.location(`/video/${result.insertId}`).sendStatus(201);
+      res
+        .location(`/video/${result.insertId}`)
+        .status(201)
+        .json({ ...video, id: result.insertId });
     })
     .catch((err) => {
       console.error(err);
@@ -83,6 +102,7 @@ const destroy = (req, res) => {
 module.exports = {
   browse,
   read,
+  readvideo,
   edit,
   add,
   destroy,
