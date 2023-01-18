@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import apiConnection from "@services/apiConnection";
 import { Link } from "react-router-dom";
 
 import iconeLoupe from "@assets/loupe.png";
@@ -13,8 +13,8 @@ function SearchBarLoupe() {
 
   useEffect(() => {
     if (searchTerm !== "") {
-      axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/videos?search=${searchTerm}`)
+      apiConnection
+        .get(`/videos?search=${searchTerm}`)
         .then((videos) => setDatas(videos.data))
         .catch((error) => console.error(error));
     } else {
