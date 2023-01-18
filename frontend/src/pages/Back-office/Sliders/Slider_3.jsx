@@ -45,13 +45,13 @@ function Slider3() {
     handleInputOnChange("id_Category", cat.id);
   };
 
-  const handleAddCategory = () => {
+  const handleAddCategory = (nb) => {
     apiConnection
-      .put(`/sliderCategory/${1}`, {
+      .put(`/sliderCategory/${nb}`, {
         ...sliderInfos,
       })
       .then((categories) => {
-        notify("Category successfully added!");
+        notify("Slider successfully created!");
         setSliderInfos(categories.data);
       })
       .catch((error) => console.error(error));
@@ -92,7 +92,7 @@ function Slider3() {
           buttonType="button"
           buttonText="UPDATE"
           buttonStyle="cstm_buttonSecondary"
-          methodOnClick={handleAddCategory}
+          methodOnClick={() => handleAddCategory(1)}
         />
       </form>
     </>
