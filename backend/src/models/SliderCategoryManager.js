@@ -9,10 +9,10 @@ class SliderCategory extends AbstractManager {
     return this.connection.query(`select * from ${this.table}`);
   }
 
-  insert(displayById) {
+  update(displayById) {
     return this.connection.query(
-      `insert into ${this.table} (id_Category, Number) values (?, ?)`,
-      [displayById.id_Category, displayById.Number]
+      `update ${this.table} set id_Category = ?, Number = ? where id = ?`,
+      [displayById.id_Category, displayById.Number, displayById.id]
     );
   }
 }

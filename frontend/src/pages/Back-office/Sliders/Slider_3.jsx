@@ -9,7 +9,7 @@ import InputTemplate from "@components/InputTemplate";
 function Slider3() {
   const [myCategories, setMyCategories] = useState([]);
   const [sliderInfos, setSliderInfos] = useState({
-    id: null,
+    id: 1,
     id_Category: "",
     Number: "",
   });
@@ -47,7 +47,7 @@ function Slider3() {
 
   const handleAddCategory = () => {
     apiConnection
-      .post(`/sliderCategory`, {
+      .put(`/sliderCategory/${1}`, {
         ...sliderInfos,
       })
       .then((categories) => {

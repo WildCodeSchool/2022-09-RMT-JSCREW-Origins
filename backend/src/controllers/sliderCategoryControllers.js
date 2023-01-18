@@ -12,16 +12,16 @@ const browse = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const edit = (req, res) => {
   const sliderCategory = req.body;
 
   models.display_by_id
-    .insert(sliderCategory)
+    .update(sliderCategory)
     .then(([result]) => {
       res
         .location(`/sliderCategory/${result.insertId}`)
         .status(201)
-        .json({ ...sliderCategory, id: result.insertId });
+        .json({ ...sliderCategory });
     })
     .catch((err) => {
       console.error(err);
@@ -30,6 +30,6 @@ const add = (req, res) => {
 };
 
 module.exports = {
-  add,
+  edit,
   browse,
 };

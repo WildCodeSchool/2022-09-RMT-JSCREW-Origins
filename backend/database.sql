@@ -56,10 +56,10 @@ Foreign Key (id_Video) REFERENCES video(id)
 INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1);
 
 CREATE TABLE display_by_id (
-id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+id INT NOT NULL PRIMARY KEY,
 id_Category INT NOT NULL,
 Number INT NOT NULL,
 Foreign Key (id_Category) REFERENCES category(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO display_by_id (id_Category, Number) VALUES (2, 8), (4, 10);
+INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8);
