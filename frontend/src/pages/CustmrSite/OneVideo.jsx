@@ -81,7 +81,7 @@ function OneVideo() {
                   <a
                     href={`https://twitter.com/intent/tweet?text=https%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8/`}
+                    }/videos/8`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -94,7 +94,7 @@ function OneVideo() {
                   <a
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8/`}
+                    }/videos/8`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
