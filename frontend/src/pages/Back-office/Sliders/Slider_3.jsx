@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import apiConnection from "@services/apiConnection";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
-import validateCategory from "@services/categoryValidators";
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+import InputTemplate from "@components/InputTemplate";
 
 function Slider3() {
   const [myCategories, setMyCategories] = useState([]);
-  const [category, setCategory] = useState({
+  const [sliderInfos, setSliderInfos] = useState({
     id: null,
-    Name: "",
-    Icon: "",
-    Description: "",
+    id_Category: "",
+    Number: "",
   });
 
-  const notify = (msg) => {
-    toast(msg);
+  // const notify = (msg) => {
+  //   toast(msg);
+  // };
+
+  const handleInputOnChange = (place, value) => {
+    const newNumber = { ...sliderInfos };
+    newNumber[place] = value;
+    setSliderInfos(newNumber);
   };
 
   // Fonction qui gère la récupération des données avec axios
@@ -32,33 +37,12 @@ function Slider3() {
     getAllCategories();
   }, []);
 
-  const handleUpdateCategory = () => {
-    const { status, errorMessage } = validateCategory(category);
-
-    const { Name, Icon, Description } = category;
-    if (status) {
-      apiConnection
-        .put(`/categories/${category.id}`, {
-          Name,
-          Icon,
-          Description,
-        })
-        .then(() => {
-          notify("Category successfully updated!");
-          getAllCategories();
-        })
-        .catch((error) => console.error(error));
-    } else {
-      notify(errorMessage);
-    }
-  };
-
   // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
   /**
    * @param {object} cat
    */
   const handleOneCategory = (cat) => {
-    setCategory(cat);
+    handleInputOnChange("id_Category", cat.id);
   };
 
   return (
@@ -84,11 +68,19 @@ function Slider3() {
           textButton="Show categories"
           methodOnClick={handleOneCategory}
         />
+        <InputTemplate
+          textPlaceholder="Number"
+          inputType="number"
+          customWidth="w-1/4"
+          value={sliderInfos.Number}
+          methodOnChange={handleInputOnChange}
+          name="Number"
+        />
         <ButtonTemplate
           buttonType="button"
           buttonText="UPDATE"
           buttonStyle="cstm_buttonSecondary"
-          methodOnClick={handleUpdateCategory}
+          methodOnClick="{}"
         />
       </form>
     </>
