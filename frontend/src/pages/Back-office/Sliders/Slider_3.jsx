@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import apiConnection from "@services/apiConnection";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import SearchBarTemplate from "@components/SearchBarTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -14,9 +14,9 @@ function Slider3() {
     Number: "",
   });
 
-  // const notify = (msg) => {
-  //   toast(msg);
-  // };
+  const notify = (msg) => {
+    toast(msg);
+  };
 
   const handleInputOnChange = (place, value) => {
     const newNumber = { ...sliderInfos };
@@ -43,6 +43,18 @@ function Slider3() {
    */
   const handleOneCategory = (cat) => {
     handleInputOnChange("id_Category", cat.id);
+  };
+
+  const handleAddCategory = () => {
+    apiConnection
+      .post(`/sliderCategory`, {
+        ...sliderInfos,
+      })
+      .then((categories) => {
+        notify("Category successfully added!");
+        setSliderInfos(categories.data);
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -80,7 +92,7 @@ function Slider3() {
           buttonType="button"
           buttonText="UPDATE"
           buttonStyle="cstm_buttonSecondary"
-          methodOnClick="{}"
+          methodOnClick={handleAddCategory}
         />
       </form>
     </>
