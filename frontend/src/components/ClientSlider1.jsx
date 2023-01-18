@@ -12,7 +12,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 function ClientSlider1() {
   const [videos, setVideos] = useState([]);
 
-  const getAllVideos = () => {
+  const getSlider = () => {
     apiConnection
       .get(`/slider`)
       .then((video) => setVideos(video.data))
@@ -20,7 +20,7 @@ function ClientSlider1() {
   };
 
   useEffect(() => {
-    getAllVideos();
+    getSlider();
   }, []);
 
   return (
