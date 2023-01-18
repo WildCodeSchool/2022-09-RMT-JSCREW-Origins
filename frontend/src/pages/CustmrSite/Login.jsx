@@ -35,18 +35,10 @@ function Login() {
     setInfos(newUser);
   };
 
-  // eslint-disable-next-line consistent-return
-  const handleLogin = () => {
-    if (!validateEmail.test(infos.email)) {
-      return notify("Email is not correct");
-    }
-    if (!validatePassword.test(infos.password)) {
-      return notify("Password is not correct");
-    }
-    delete infos.confirmPassword;
+  const handleLogin = (loginInfo) => {
     apiConnection
       .post(`/login`, {
-        ...infos,
+        ...loginInfo,
       })
       .then((curentUser) => {
         handleUser(curentUser.data);
@@ -59,27 +51,43 @@ function Login() {
       });
   };
 
-  const handleLogOut = () => {
-    handleUser({});
+  const validateLogin = () => {
+    if (!validateEmail.test(infos.email)) {
+      notify("Email is not correct");
+    } else if (!validatePassword.test(infos.password)) {
+      notify("Password is not correct");
+    } else {
+      delete infos.confirmPassword;
+      handleLogin(infos);
+    }
   };
 
-  const handleCreateAccount = () => {
-    if (!validateEmail.test(infos.email)) {
-      return notify("Email is not correct");
-    }
-    if (!validatePassword.test(infos.password)) {
-      return notify("Password is not correct");
-    }
-    if (infos.password !== infos.confirmPassword) {
-      return notify("Passwords are not the same");
-    }
+  const handleCreateAccount = (createInfo) => {
     apiConnection
       .post(`/user`, {
-        ...infos,
+        ...createInfo,
       })
-      .then()
+      .then(() => notify("Account successfully created!"))
       .catch((err) => console.error(err));
-    return notify("Account successfully created!");
+  };
+
+  const validateCreateAccount = async () => {
+    if (!validateEmail.test(infos.email)) {
+      notify("Email is not correct");
+    } else if (!validatePassword.test(infos.password)) {
+      notify("Password is not correct");
+    } else if (infos.password !== infos.confirmPassword) {
+      notify("Passwords are not the same");
+    } else {
+      handleCreateAccount(infos);
+      setDisplayRegisterForm(false);
+      setInfos({});
+    }
+  };
+
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
   };
 
   return (
@@ -144,7 +152,7 @@ function Login() {
                 buttonType="button"
                 buttonText="CONNECT"
                 buttonStyle="cstm_cstmrButton"
-                methodOnClick={handleLogin}
+                methodOnClick={validateLogin}
               />
             </form>
             <p className="text-white">
@@ -174,7 +182,7 @@ function Login() {
                 buttonType="button"
                 buttonText="REGISTER"
                 buttonStyle="cstm_cstmrButton"
-                methodOnClick={handleCreateAccount}
+                methodOnClick={validateCreateAccount}
               />
             </form>
           </>
