@@ -52,24 +52,22 @@ function Setting() {
       .catch((error) => console.error(error));
   }, []);
 
-  // eslint-disable-next-line consistent-return
   const handleUpdateSetting = () => {
     if (!emailRegex.test(mySetting.email)) {
-      return notify("Email is not correct");
+      notify("Email is not correct");
+    } else if (!passwordRegex.test(mySetting.password)) {
+      notify("Password is not correct");
+    } else if (mySetting.password !== mySetting.confirmPassword) {
+      notify("Passwords are not the same");
+    } else {
+      apiConnection
+        .put(`/user`, { ...mySetting })
+        .then(() => {
+          notify("Updated has been successfully");
+          updateSetting();
+        })
+        .catch((error) => console.error(error));
     }
-    if (!passwordRegex.test(mySetting.password)) {
-      return notify("Password is not correct");
-    }
-    if (mySetting.password !== mySetting.confirmPassword) {
-      return notify("Passwords are not the same");
-    }
-    apiConnection
-      .put(`/user`, { ...mySetting })
-      .then(() => {
-        notify("Updated has been successfully");
-        updateSetting();
-      })
-      .catch((error) => console.error(error));
   };
 
   const settingDelete = () => {
