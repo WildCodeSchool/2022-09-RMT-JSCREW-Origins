@@ -7,6 +7,7 @@ const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
 const sliderControllers = require("./controllers/sliderContollers");
 const sendMailControllers = require("./controllers/sendMailControllers");
+const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
 
 const validators = require("./services/validators");
 
@@ -57,5 +58,8 @@ router.get("/slider", sliderControllers.browse);
 router.get("/slider/:id", sliderControllers.read);
 router.post("/slider", sliderControllers.add);
 router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
+
+router.get("/sliderCategory", sliderCategoryControllers.browse);
+router.post("/sliderCategory", sliderCategoryControllers.add);
 
 module.exports = router;
