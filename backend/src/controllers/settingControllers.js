@@ -76,10 +76,11 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
+  const hashedpassword = await hashPass(req.body.password);
   if (req.auth.id)
     models.user
-      .update(req.auth)
+      .update({ ...req.body, hashedpassword })
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
