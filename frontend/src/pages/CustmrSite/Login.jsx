@@ -56,9 +56,10 @@ function Login() {
       notify("Email is not correct");
     } else if (!validatePassword.test(infos.password)) {
       notify("Password is not correct");
+    } else {
+      delete infos.confirmPassword;
+      handleLogin(infos);
     }
-    delete infos.confirmPassword;
-    handleLogin(infos);
   };
 
   const handleCreateAccount = (createInfo) => {
@@ -77,10 +78,11 @@ function Login() {
       notify("Password is not correct");
     } else if (infos.password !== infos.confirmPassword) {
       notify("Passwords are not the same");
+    } else {
+      handleCreateAccount(infos);
+      setDisplayRegisterForm(false);
+      setInfos({});
     }
-    handleCreateAccount(infos);
-    setDisplayRegisterForm(false);
-    setInfos({});
   };
 
   const handleLogOut = () => {
