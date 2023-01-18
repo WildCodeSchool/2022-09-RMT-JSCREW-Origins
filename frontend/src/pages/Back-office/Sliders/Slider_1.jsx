@@ -22,10 +22,15 @@ function Slider1() {
       .catch((error) => console.error(error));
   };
 
-  const getAllSlider = () => {
+  const getAllSlider = (callBack) => {
     apiConnection
       .get(`/slider`)
-      .then((slider) => setVideoList(slider.data))
+      .then((slider) => {
+        setVideoList(slider.data);
+        if (callBack) {
+          callBack();
+        }
+      })
       .catch((error) => console.error(error));
   };
 
@@ -41,23 +46,12 @@ function Slider1() {
       videoList.every((video) => video.video_id !== vid.id)
     ) {
       const vidToAdd = {
-        id: videoList.length + 100,
         video_id: vid.id,
         Name: vid.Name,
         toAdd: true,
       };
       setVideoList((list) => [...list, vidToAdd]);
     }
-  };
-  // fonction permet de suprime slider dnas la base de donnée et en dur avant de post.
-  const handleDeleteCard = (id) => {
-    apiConnection
-      .delete(`/slider/${id}`)
-      .then(() => {
-        notify("Video deleted!");
-        getAllSlider();
-      })
-      .catch((error) => console.error(error));
   };
 
   // fonction permetant de post dans la db la list choisi avec le type 1
@@ -78,6 +72,25 @@ function Slider1() {
         .catch((error) => console.error(error));
     } else {
       notify("No updated data detected!");
+    }
+  };
+
+  // fonction permet de suprime slider dnas la base de donnée et en dur avant de post.
+  const handleDeleteCard = (id, videoId) => {
+    if (id) {
+      apiConnection
+        .delete(`/slider/${id}`)
+        .then(() => {
+          notify("Video deleted!");
+          // recupération des video non validée
+          const videosToAdd = videoList.filter((video) => video.toAdd);
+          getAllSlider(() => {
+            setVideoList((list) => [...list, ...videosToAdd]);
+          });
+        })
+        .catch((error) => console.error(error));
+    } else if (videoId) {
+      setVideoList((list) => list.filter((vid) => vid.video_id !== videoId));
     }
   };
 

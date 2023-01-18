@@ -9,7 +9,7 @@ function cardTemplate({ data, handleDeleteCard }) {
       <button
         type="button"
         className="bg-secondary absolute rounded-full p-1 w-6 h-6 -top-4 -right-4 border-2 border-white"
-        onClick={() => handleDeleteCard(data.id)}
+        onClick={() => handleDeleteCard(data.id, data.video_id)}
       >
         <div className={`${genericLine} rotate-45 translate-y-0 opacity-95`} />
         <div
