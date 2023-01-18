@@ -14,7 +14,7 @@ function NavCustmr() {
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="fixed z-[2] text-white p-7 w-full">
+    <nav className="flex flex-col fixed z-[2] text-white p-7 w-full bg-primary/75">
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between">
         <button
@@ -44,12 +44,12 @@ function NavCustmr() {
           />
         </button>
         <Link className="flex items-center" to="/">
-          <img className="w-40" src={logoOrigins} alt="logo origins" />
+          <img className="w-28" src={logoOrigins} alt="logo origins" />
         </Link>
         <SearchBarLoupe />
       </ul>
       {isMenuDisplayed && (
-        <div className="flex justify-center m-5">
+        <div className="flex justify-center self-center py-5 w-screen">
           <div className="flex flex-col items-center text-xl">
             <Link
               onClick={() => setIsMenuDisplayed(false)}
