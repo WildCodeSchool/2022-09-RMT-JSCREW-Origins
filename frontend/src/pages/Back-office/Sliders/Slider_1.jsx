@@ -8,8 +8,8 @@ import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
 function Slider1() {
-  const [myVideo, setMyVideo] = useState([]);
-  const [videoList, setVideoList] = useState([]);
+  const [myVideo, setMyVideo] = useState([]); // Liste des videos
+  const [videoList, setVideoList] = useState([]); // Liste des videos en slider
 
   const notify = (msg) => {
     toast(msg);
@@ -22,24 +22,29 @@ function Slider1() {
       .catch((error) => console.error(error));
   };
 
-  const getAllSlider = (callBack) => {
+  /**
+   * Récupération des vidéos en slides
+   * @params {bool} persistance => on garde les vidéos non mémorisées en BDD si true
+   */
+  const getAllSlider = (persistance) => {
     apiConnection
       .get(`/slider`)
       .then((slider) => {
-        setVideoList(slider.data);
-        if (callBack) {
-          callBack();
+        if (persistance) {
+          // recupération des videos non validée
+          const videosToAdd = videoList.filter((video) => video.toAdd);
+          setVideoList([...slider.data, ...videosToAdd]);
+        } else {
+          setVideoList(slider.data);
         }
       })
       .catch((error) => console.error(error));
   };
 
-  // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
   /**
+   * Fonction permetant de définir le nombre de video dans le carousel
    * @param {object} vid
    */
-
-  // Fonction permetant de définir le nombre de video dans le carousel
   const handleOneVideo = (vid) => {
     if (
       videoList.length < 10 &&
@@ -54,7 +59,7 @@ function Slider1() {
     }
   };
 
-  // fonction permetant de post dans la db la list choisi avec le type 1
+  // fonction permetant de post dans la db la liste choisie avec le type 1
   const handleValidateButton = () => {
     const videoToPost = [];
     videoList.filter(
@@ -75,18 +80,18 @@ function Slider1() {
     }
   };
 
-  // fonction permet de suprime slider dnas la base de donnée et en dur avant de post.
+  /**
+   * fonction permet de supprimer le slider dans la base de donnée et en dur avant de post.
+   * @param {number} id
+   * @param {number} videoId
+   */
   const handleDeleteCard = (id, videoId) => {
     if (id) {
       apiConnection
         .delete(`/slider/${id}`)
         .then(() => {
           notify("Video deleted!");
-          // recupération des video non validée
-          const videosToAdd = videoList.filter((video) => video.toAdd);
-          getAllSlider(() => {
-            setVideoList((list) => [...list, ...videosToAdd]);
-          });
+          getAllSlider(true);
         })
         .catch((error) => console.error(error));
     } else if (videoId) {
@@ -97,7 +102,7 @@ function Slider1() {
   // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllVideo();
-    getAllSlider();
+    getAllSlider(false);
   }, []);
 
   return (
