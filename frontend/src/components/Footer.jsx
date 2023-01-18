@@ -42,7 +42,7 @@ function Footer() {
         })
         .then(() => {
           notify(
-            `Hello ${myMessage.name} your message ${myMessage.description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.email}`
+            `Hello ${myMessage.name} your message have been taken into account, a confirmation email has been sent to ${myMessage.email}`
           );
         });
     } else {
