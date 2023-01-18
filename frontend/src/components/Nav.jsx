@@ -16,7 +16,7 @@ export default function Nav() {
   };
 
   return (
-    <div className="bg-primary">
+    <div className="bg-primary w-2/6 md:w-1/4">
       <div className="flex flex-col h-screen px-6 py-5 border-b justify-between">
         <div className="flex flex-col">
           <div className="flex flex-col space-y-5">
