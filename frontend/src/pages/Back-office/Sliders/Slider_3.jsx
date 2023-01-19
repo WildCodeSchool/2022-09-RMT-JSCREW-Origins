@@ -36,9 +36,18 @@ function Slider3() {
       .catch((error) => console.error(error));
   };
 
+  // Fonction qui gère la récupération des données avec axios
+  const displaySliderInfos = (id) => {
+    apiConnection
+      .get(`/sliderCategory/${id}`)
+      .then((infos) => setSliderInfos(infos.data))
+      .catch((error) => console.error(error));
+  };
+
   // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllCategories();
+    displaySliderInfos(sliderInfos.id);
   }, []);
 
   // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
