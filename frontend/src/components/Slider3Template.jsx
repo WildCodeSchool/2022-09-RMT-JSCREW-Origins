@@ -63,9 +63,9 @@ function Slider3Template({ sliderId }) {
       .put(`/sliderCategory/${id}`, {
         ...sliderInfos,
       })
-      .then((categories) => {
+      .then((slider) => {
         notify("Slider successfully created!");
-        setSliderInfos(categories.data);
+        setSliderInfos(slider.data);
       })
       .catch((error) => console.error(error));
   };

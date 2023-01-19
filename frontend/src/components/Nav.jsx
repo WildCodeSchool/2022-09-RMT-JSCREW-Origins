@@ -73,14 +73,14 @@ export default function Nav() {
                       <p className="text-base leading-4">Sliders 3</p>
                     </Link>
                     <Link
-                      to="Grille"
+                      to="Grid"
                       className={`flex ${
-                        location.pathname.endsWith("Dashboard/Grille")
+                        location.pathname.endsWith("Dashboard/Grid")
                           ? "text-secondary"
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Grille</p>
+                      <p className="text-base leading-4">Grid</p>
                     </Link>
                   </>
                 )}
