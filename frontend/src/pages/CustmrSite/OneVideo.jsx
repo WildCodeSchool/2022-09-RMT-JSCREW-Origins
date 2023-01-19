@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useParams } from "react";
 import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
@@ -8,10 +8,11 @@ import { SiLinkedin } from "react-icons/si";
 
 function OneVideo() {
   const [video, setVideo] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     apiConnection
-      .get(`/videos/8`)
+      .get(`/videos/${id}`)
       .then((oneVideo) => {
         setVideo(oneVideo.data);
       })
