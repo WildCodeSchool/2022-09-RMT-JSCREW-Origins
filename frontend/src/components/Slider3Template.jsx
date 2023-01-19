@@ -9,9 +9,9 @@ import InputTemplate from "@components/InputTemplate";
 function Slider3Template({ sliderId }) {
   const [myCategories, setMyCategories] = useState([]);
   const [sliderInfos, setSliderInfos] = useState({
-    id: sliderId,
-    id_Category: "",
-    Number: "",
+    id: null,
+    id_Category: null,
+    Number: null,
   });
 
   const notify = (msg) => {
@@ -47,7 +47,7 @@ function Slider3Template({ sliderId }) {
   // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllCategories();
-    displaySliderInfos(sliderInfos.id);
+    displaySliderInfos(sliderId);
   }, []);
 
   // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
@@ -58,13 +58,26 @@ function Slider3Template({ sliderId }) {
     handleInputOnChange("id_Category", cat.id);
   };
 
-  const handleAddCategory = (id) => {
+  const handleAddCategory = (idNbr) => {
     apiConnection
-      .put(`/sliderCategory/${id}`, {
+      .post(`/sliderCategory/${idNbr}`, {
         ...sliderInfos,
+        id: idNbr,
       })
       .then((slider) => {
         notify("Slider successfully created!");
+        setSliderInfos(slider.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleEditCategory = (idNbr) => {
+    apiConnection
+      .put(`/sliderCategory/${idNbr}`, {
+        ...sliderInfos,
+      })
+      .then((slider) => {
+        notify("Slider successfully updated!");
         setSliderInfos(slider.data);
       })
       .catch((error) => console.error(error));
@@ -101,12 +114,23 @@ function Slider3Template({ sliderId }) {
           methodOnChange={handleInputOnChange}
           name="Number"
         />
-        <ButtonTemplate
-          buttonType="button"
-          buttonText="UPDATE"
-          buttonStyle="cstm_buttonSecondary"
-          methodOnClick={() => handleAddCategory(sliderId)}
-        />
+        {sliderInfos.id && (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="UPDATE"
+            buttonStyle="cstm_buttonSecondary"
+            methodOnClick={() => handleEditCategory(sliderId)}
+          />
+        )}
+
+        {!sliderInfos.id && (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="ADD"
+            buttonStyle="cstm_buttonSecondary"
+            methodOnClick={() => handleAddCategory(sliderId)}
+          />
+        )}
       </form>
     </>
   );
