@@ -15,11 +15,11 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.display_by_id
     .find(req.params.id)
-    .then(([videos]) => {
-      if (videos[0] == null) {
+    .then(([slider]) => {
+      if (slider[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(videos[0]);
+        res.send(slider[0]);
       }
     })
     .catch((err) => {
