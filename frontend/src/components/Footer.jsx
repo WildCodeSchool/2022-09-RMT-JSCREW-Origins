@@ -42,7 +42,7 @@ function Footer() {
         })
         .then(() => {
           notify(
-            `Hello ${myMessage.name} your message ${myMessage.description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.email}`
+            `Hello ${myMessage.name} your message have been taken into account, a confirmation email has been sent to ${myMessage.email}`
           );
         });
     } else {
@@ -64,7 +64,7 @@ function Footer() {
         pauseOnHover
         theme="dark"
       />
-      <div className="bg-gray-900">
+      <div className="flex flex-col items-center bg-gray-900">
         {/* -----------------------début contact et reseaux--------------------------------------------------------------------- */}
         <div className="flex justify-center pt-5">
           <ul className="flex flex-row">
@@ -76,7 +76,7 @@ function Footer() {
           </ul>
         </div>
         {/* -----------------------début du form --------------------------------------------------------------------- */}
-        <form className="flex justify-center w-full">
+        {/* <form className="flex">
           <div className="mt-4">
             <div className="flex justify-center">
               <div className="flex justify-end mr-1 w-6/12">
@@ -119,6 +119,40 @@ function Footer() {
               />
             </div>
           </div>
+        </form> */}
+        <form className="flex flex-col items-center mt-5 gap-5 w-full lg:w-10/12">
+          <div className="flex w-3/4 gap-5">
+            <InputTemplate
+              textPlaceholder="Name"
+              inputType="text"
+              customWidth="bg-white w-3/4"
+              value={myMessage.name}
+              methodOnChange={handleInputOnChange}
+              name="name"
+            />
+            <InputTemplate
+              textPlaceholder="Email"
+              inputType="text"
+              customWidth="bg-white w-3/4"
+              value={myMessage.email}
+              methodOnChange={handleInputOnChange}
+              name="email"
+            />
+          </div>
+          <TextareaTemplate
+            textPlaceholder="Description"
+            inputType="text"
+            customWidth="bg-white w-3/4 "
+            value={myMessage.description}
+            methodOnChange={handleInputOnChange}
+            name="description"
+          />
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="SEND"
+            buttonStyle="cstm_buttonSecondary"
+            methodOnClick={submitForm}
+          />
         </form>
         {/* ------------------------debut service----------------------------------------------------------------------------------------------- */}
         <div className="text-white text-center m-5">
