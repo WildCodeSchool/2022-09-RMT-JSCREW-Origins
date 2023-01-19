@@ -62,7 +62,7 @@ function OneVideo() {
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-              <div className="p-10">
+              <div className="p-10 md:w-2/5">
                 <h1 className="text-3xl md:mb-5">{video.Name}</h1>
                 <h2 className="text-xl md:mb-5">{video.Category}</h2>
                 <p>{video.Description}</p>

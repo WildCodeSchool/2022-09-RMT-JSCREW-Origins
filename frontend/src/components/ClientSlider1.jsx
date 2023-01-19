@@ -71,18 +71,18 @@ function ClientSlider1() {
                     {videos.map((video) => (
                       <Slide>
                         <Link to={`/Videos/${video.id}`}>
-                          <div className="flex flex-shrink-0 relative sm:w-auto">
+                          <div className="flex flex-shrink-0 relative sm:w-auto ">
                             <iframe
-                              className="w-full h-2/4"
+                              className="w-full h-2/4 align-baseline"
                               title={video.Name}
                               src={video.Url}
                               frameBorder="0"
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                             />
-                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                              <div className="flex h-full items-end pb-6">
-                                <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
+                            <div className="bg-gray-800 bg-opacity-10 absolute w-full h-full p-6">
+                              <div className="flex h-full items-end ">
+                                <h3 className="bg-gray-800 bg-opacity-80 font-semibold leading-5 lg:leading-6 text-white">
                                   {video.Name}
                                 </h3>
                               </div>
