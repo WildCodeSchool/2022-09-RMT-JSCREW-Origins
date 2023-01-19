@@ -19,6 +19,10 @@ function Slider3() {
   };
 
   const handleInputOnChange = (place, value) => {
+    if (value > 20) {
+      notify("Please enter a value less than 20");
+      return;
+    }
     const newNumber = { ...sliderInfos };
     newNumber[place] = value;
     setSliderInfos(newNumber);
