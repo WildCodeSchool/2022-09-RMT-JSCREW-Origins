@@ -13,7 +13,7 @@ import Setting from "./pages/Back-office/Setting";
 import Slider1 from "./pages/Back-office/Sliders/Slider_1";
 import Slider2 from "./pages/Back-office/Sliders/Slider_2";
 import Slider3 from "./pages/Back-office/Sliders/Slider_3";
-import Grille from "./pages/Back-office/Sliders/Grille";
+import Grid from "./pages/Back-office/Sliders/Grid";
 import Video from "./pages/Back-office/Video";
 
 import "./App.css";
@@ -36,7 +36,7 @@ export default function App() {
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
             <Route path="Slider_3" element={<Slider3 />} />
-            <Route path="Grille" element={<Grille />} />
+            <Route path="Grid" element={<Grid />} />
             <Route path="Video" element={<Video />} />
           </Route>
         </Routes>

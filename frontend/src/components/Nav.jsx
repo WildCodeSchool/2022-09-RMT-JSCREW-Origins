@@ -39,7 +39,7 @@ export default function Nav() {
               >
                 <p className="text-base leading-4">Sliders</p>
               </button>
-              <div className="block pl-5">
+              <div className="block pl-2">
                 {displaySlider && (
                   <>
                     <Link
@@ -50,7 +50,7 @@ export default function Nav() {
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Sliders 1</p>
+                      <p className="text-base leading-4">1: By videos</p>
                     </Link>
                     <Link
                       to="Slider_2"
@@ -60,7 +60,7 @@ export default function Nav() {
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Sliders 2</p>
+                      <p className="text-base leading-4">2: By videos</p>
                     </Link>
                     <Link
                       to="Slider_3"
@@ -70,17 +70,17 @@ export default function Nav() {
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Sliders 3</p>
+                      <p className="text-base leading-4">By Category</p>
                     </Link>
                     <Link
-                      to="Grille"
+                      to="Grid"
                       className={`flex ${
-                        location.pathname.endsWith("Dashboard/Grille")
+                        location.pathname.endsWith("Dashboard/Grid")
                           ? "text-secondary"
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Grille</p>
+                      <p className="text-base leading-4">Grid</p>
                     </Link>
                   </>
                 )}
