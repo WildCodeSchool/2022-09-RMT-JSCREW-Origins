@@ -69,8 +69,8 @@ function ClientSlider1() {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {videos.map((video) => (
-                      <Link to={`/Videos/${video.id}`}>
-                        <Slide>
+                      <Slide>
+                        <Link to={`/Videos/${video.id}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto">
                             <iframe
                               className="w-full h-2/4"
@@ -88,8 +88,8 @@ function ClientSlider1() {
                               </div>
                             </div>
                           </div>
-                        </Slide>
-                      </Link>
+                        </Link>
+                      </Slide>
                     ))}
                   </div>
                 </Slider>

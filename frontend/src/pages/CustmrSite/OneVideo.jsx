@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useParams } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-
-import apiConnection from "@services/apiConnection";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
+
+import apiConnection from "@services/apiConnection";
 
 function OneVideo() {
   const [video, setVideo] = useState();
@@ -69,7 +70,7 @@ function OneVideo() {
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }/videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
