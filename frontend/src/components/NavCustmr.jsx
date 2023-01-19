@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logoOrigins from "@assets/logo-origins.png";
 import iconeLogin from "@assets/CompteClient.png";
@@ -11,6 +11,11 @@ function NavCustmr() {
   const { user } = useContext(User.UserContext);
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
+  const navigate = useNavigate();
+  const navToPages = (link) => {
+    setIsMenuDisplayed(false);
+    navigate(link);
+  };
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
@@ -51,44 +56,36 @@ function NavCustmr() {
       {isMenuDisplayed && (
         <div className="flex justify-center m-5">
           <div className="flex flex-col items-center text-xl">
-            <Link to="/All-videos">
-              <button
-                type="button"
-                onClick={() => setIsMenuDisplayed(false)}
-                className="hover:text-secondary hover:font-bold mb-5"
-              >
-                All videos
-              </button>
-            </Link>
-            <Link to="/OneVideo">
-              <button
-                type="button"
-                onClick={() => setIsMenuDisplayed(false)}
-                className="hover:text-secondary hover:font-bold mb-5"
-              >
-                One video
-              </button>
-            </Link>
+            <button
+              type="button"
+              onClick={() => navToPages("/All-videos")}
+              className="hover:text-secondary hover:font-bold mb-5"
+            >
+              All videos
+            </button>
+            <button
+              type="button"
+              onClick={() => navToPages("/OneVideo")}
+              className="hover:text-secondary hover:font-bold mb-5"
+            >
+              One video
+            </button>
             {user?.isAdmin === 1 && (
-              <Link to="/Dashboard/Setting">
-                <button
-                  type="button"
-                  onClick={() => setIsMenuDisplayed(false)}
-                  className="hover:text-secondary hover:font-bold mb-5"
-                >
-                  Dashboard
-                </button>
-              </Link>
-            )}
-            <Link to="/Dashboard/Login">
               <button
                 type="button"
-                onClick={() => setIsMenuDisplayed(false)}
-                className="hover:text-secondary hover:font-bold mb-2"
+                onClick={() => navToPages("/Dashboard/Setting")}
+                className="hover:text-secondary hover:font-bold mb-5"
               >
-                Login
+                Dashboard
               </button>
-            </Link>
+            )}
+            <button
+              type="button"
+              onClick={() => navToPages("/Login")}
+              className="hover:text-secondary hover:font-bold mb-2"
+            >
+              Login
+            </button>
           </div>
         </div>
       )}
