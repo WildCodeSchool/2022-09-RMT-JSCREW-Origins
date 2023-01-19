@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
@@ -68,15 +69,17 @@ function OneVideo() {
               )}
               {!user && (
                 <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
-                  <RiLock2Fill className="text-9xl mt-5 md:mt-20" />
+                  <RiLock2Fill className="text-7xl md:text-9xl mt-5 md:mt-20" />
                   <p className="text-1xl mt-3 md:text-4xl md:mt-10">
                     This video is only available in premium
                   </p>
-                  <ButtonTemplate
-                    buttonType="button"
-                    buttonText="SUBSCRIBE"
-                    buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
-                  />
+                  <Link to="/Login">
+                    <ButtonTemplate
+                      buttonType="button"
+                      buttonText="SUBSCRIBE"
+                      buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                    />
+                  </Link>
                 </div>
               )}
               <div className="p-10">
