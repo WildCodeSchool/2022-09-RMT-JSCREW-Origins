@@ -45,8 +45,26 @@ const edit = (req, res) => {
     });
 };
 
+const add = (req, res) => {
+  const sliderCategory = req.body;
+
+  models.display_by_id
+    .insert(sliderCategory)
+    .then(([result]) => {
+      res
+        .location(`/sliderCategory/${result.insertId}`)
+        .status(201)
+        .json({ ...sliderCategory });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   edit,
   browse,
   read,
+  add,
 };

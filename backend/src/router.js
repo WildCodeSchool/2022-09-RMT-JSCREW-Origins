@@ -62,5 +62,6 @@ router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
 router.get("/sliderCategory", sliderCategoryControllers.browse);
 router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
+router.post("/sliderCategory/:id", sliderCategoryControllers.add);
 
 module.exports = router;
