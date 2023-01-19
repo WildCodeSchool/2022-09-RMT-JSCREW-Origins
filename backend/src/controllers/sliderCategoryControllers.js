@@ -12,6 +12,22 @@ const browse = (req, res) => {
     });
 };
 
+const read = (req, res) => {
+  models.display_by_id
+    .find(req.params.id)
+    .then(([videos]) => {
+      if (videos[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(videos[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const sliderCategory = req.body;
 
@@ -32,4 +48,5 @@ const edit = (req, res) => {
 module.exports = {
   edit,
   browse,
+  read,
 };
