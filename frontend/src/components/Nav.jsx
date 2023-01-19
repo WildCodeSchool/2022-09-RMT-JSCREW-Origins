@@ -107,6 +107,16 @@ export default function Nav() {
               <p className="text-base leading-4">Categories</p>
             </Link>
             <Link
+              to="Users"
+              className={`flex ${
+                location.pathname.endsWith("Dashboard/Users")
+                  ? "text-secondary"
+                  : "hover:text-secondary focus:text-secondary"
+              } text-white px-3 py-2 w-full`}
+            >
+              <p className="text-base leading-4">Users</p>
+            </Link>
+            <Link
               to="/"
               className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2  w-full"
             >
