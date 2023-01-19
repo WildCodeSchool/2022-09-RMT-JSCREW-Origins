@@ -1,7 +1,10 @@
 -- SQLBook: Code
-DROP DATABASE IF EXISTS origin_database;
-CREATE DATABASE origin_database;
 USE origin_database;
+DROP TABLE IF EXISTS display_by_id;
+DROP TABLE IF EXISTS play_by_id;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS video;
+DROP TABLE IF EXISTS category;
 
 CREATE TABLE category (
 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
