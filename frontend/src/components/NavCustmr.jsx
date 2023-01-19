@@ -51,35 +51,43 @@ function NavCustmr() {
       {isMenuDisplayed && (
         <div className="flex justify-center m-5">
           <div className="flex flex-col items-center text-xl">
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
-              className="hover:text-secondary hover:font-bold mb-5"
-              to="/All-videos"
-            >
-              All videos
-            </Link>
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
-              className="hover:text-secondary hover:font-bold mb-5"
-              to="/OneVideo"
-            >
-              One video
-            </Link>
-            {user?.isAdmin === 1 && (
-              <Link
+            <Link to="/All-videos">
+              <button
+                type="button"
                 onClick={() => setIsMenuDisplayed(false)}
                 className="hover:text-secondary hover:font-bold mb-5"
-                to="Dashboard/Setting"
               >
-                Dashboard
+                All videos
+              </button>
+            </Link>
+            <Link to="/OneVideo">
+              <button
+                type="button"
+                onClick={() => setIsMenuDisplayed(false)}
+                className="hover:text-secondary hover:font-bold mb-5"
+              >
+                One video
+              </button>
+            </Link>
+            {user?.isAdmin === 1 && (
+              <Link to="/Dashboard/Setting">
+                <button
+                  type="button"
+                  onClick={() => setIsMenuDisplayed(false)}
+                  className="hover:text-secondary hover:font-bold mb-5"
+                >
+                  Dashboard
+                </button>
               </Link>
             )}
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
-              className="hover:text-secondary hover:font-bold mb-2"
-              to="/Login"
-            >
-              Login
+            <Link to="/Dashboard/Login">
+              <button
+                type="button"
+                onClick={() => setIsMenuDisplayed(false)}
+                className="hover:text-secondary hover:font-bold mb-2"
+              >
+                Login
+              </button>
             </Link>
           </div>
         </div>
