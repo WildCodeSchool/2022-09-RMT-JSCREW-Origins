@@ -97,7 +97,7 @@ function Slider3Template({ sliderId }) {
         pauseOnHover
         theme="dark"
       />
-      <form className="flex flex-col items-center w-full pt-10 gap-y-7">
+      <form className="flex flex-col items-center w-full gap-y-7">
         <SearchBarTemplate
           data={myCategories}
           customWidth="cstm_width_XlInput"
