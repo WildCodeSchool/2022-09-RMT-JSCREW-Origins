@@ -58,6 +58,13 @@ function NavCustmr() {
             >
               All videos
             </Link>
+            <Link
+              onClick={() => setIsMenuDisplayed(false)}
+              className="hover:text-secondary hover:font-bold mb-5"
+              to="/OneVideo"
+            >
+              One video
+            </Link>
             {user?.isAdmin === 1 && (
               <Link
                 onClick={() => setIsMenuDisplayed(false)}

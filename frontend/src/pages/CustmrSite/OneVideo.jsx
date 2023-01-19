@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
-
-import apiConnection from "@services/apiConnection";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
+import { RiLock2Fill } from "react-icons/ri";
+
+import apiConnection from "@services/apiConnection";
+import ButtonTemplate from "../../components/ButtonTemplate";
+import User from "../../contexts/UserContext";
 
 function OneVideo() {
+  const { user } = useContext(User.UserContext);
   const [video, setVideo] = useState();
 
   useEffect(() => {
@@ -51,15 +55,30 @@ function OneVideo() {
       <div className="h-screen bg-primary">
         <div className="pt-20 text-white h-full">
           {video && (
-            <div className="md:flex h-full">
-              <iframe
-                className="w-full h-2/4 md:w-3/5 md:h-4/6 md:pl-10"
-                title={video.Name}
-                src={video.Url}
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="md:flex md:pl-10 h-full">
+              {user && (
+                <iframe
+                  className="w-full h-2/4 md:w-3/5 md:h-4/6 md:pl-10"
+                  title={video.Name}
+                  src={video.Url}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              )}
+              {!user && (
+                <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
+                  <RiLock2Fill className="text-9xl mt-5 md:mt-20" />
+                  <p className="text-1xl mt-3 md:text-4xl md:mt-10">
+                    This video is only available in premium
+                  </p>
+                  <ButtonTemplate
+                    buttonType="button"
+                    buttonText="SUBSCRIBE"
+                    buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                  />
+                </div>
+              )}
               <div className="p-10">
                 <h1 className="text-3xl md:mb-5">{video.Name}</h1>
                 <h2 className="text-xl md:mb-5">{video.Category}</h2>
