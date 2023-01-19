@@ -6,7 +6,7 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
 
-function Slider3Template({ sliderId }) {
+function Slider3Template({ sliderId, searchBarWidth }) {
   const [myCategories, setMyCategories] = useState([]);
   const [sliderInfos, setSliderInfos] = useState({
     id: null,
@@ -100,7 +100,7 @@ function Slider3Template({ sliderId }) {
       <form className="flex flex-col items-center w-full gap-y-7">
         <SearchBarTemplate
           data={myCategories}
-          customWidth="cstm_width_XlInput"
+          customWidth={searchBarWidth}
           searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search category"
           textButton="Show categories"
