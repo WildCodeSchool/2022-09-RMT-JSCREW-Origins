@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,6 +10,7 @@ import "swiper/css/navigation";
 import ButtonTemplate from "./ButtonTemplate";
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <Swiper
       spaceBetween={30}
@@ -36,7 +38,8 @@ function Header() {
             <ButtonTemplate
               buttonType="button"
               buttonText="SUBSCRIBE"
-              buttonStyle="cstm_buttonSecondary"
+              buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+              methodOnClick={() => navigate("/Login")}
             />
           </div>
         </div>
@@ -54,7 +57,8 @@ function Header() {
             <ButtonTemplate
               buttonType="button"
               buttonText="SUBSCRIBE"
-              buttonStyle="cstm_buttonSecondary"
+              buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+              methodOnClick={() => navigate("/Login")}
             />
           </div>
         </div>
@@ -72,7 +76,8 @@ function Header() {
             <ButtonTemplate
               buttonType="button"
               buttonText="SUBSCRIBE"
-              buttonStyle="cstm_buttonSecondary"
+              buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+              methodOnClick={() => navigate("/Login")}
             />
           </div>
         </div>
