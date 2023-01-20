@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
@@ -10,14 +11,17 @@ import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "../../components/ButtonTemplate";
 import User from "../../contexts/UserContext";
 
+import apiConnection from "@services/apiConnection";
+
 function OneVideo() {
   const { user } = useContext(User.UserContext);
   const [video, setVideo] = useState();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     apiConnection
-      .get(`/videos/8`)
+      .get(`/videos/${id}`)
       .then((oneVideo) => {
         setVideo(oneVideo.data);
       })
@@ -90,7 +94,7 @@ function OneVideo() {
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }/videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{

@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import User from "../contexts/UserContext";
 
 export default function Nav() {
   const { handleUser } = useContext(User.UserContext);
   const [displaySlider, setDisplaySlider] = useState(false);
+  const location = useLocation();
 
   const handleDisplaymenu = () => {
     setDisplaySlider(!displaySlider);
@@ -16,13 +17,17 @@ export default function Nav() {
   };
 
   return (
-    <div className="bg-primary">
+    <div className="bg-primary w-2/6 md:w-1/4">
       <div className="flex flex-col h-screen px-6 py-5 border-b justify-between">
         <div className="flex flex-col">
           <div className="flex flex-col space-y-5">
             <Link
               to="Setting"
-              className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+              className={`flex ${
+                location.pathname.endsWith("Dashboard/Setting")
+                  ? "text-secondary"
+                  : "hover:text-secondary focus:text-secondary"
+              } text-white px-3 py-2 w-full`}
             >
               <p className="text-base leading-4">Settings</p>
             </Link>
@@ -34,32 +39,48 @@ export default function Nav() {
               >
                 <p className="text-base leading-4">Sliders</p>
               </button>
-              <div className="block pl-5">
+              <div className="block pl-2">
                 {displaySlider && (
                   <>
                     <Link
                       to="Slider_1"
-                      className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+                      className={`flex ${
+                        location.pathname.endsWith("Dashboard/Slider_1")
+                          ? "text-secondary"
+                          : "hover:text-secondary focus:text-secondary"
+                      } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Sliders 1</p>
+                      <p className="text-base leading-4">1: By videos</p>
                     </Link>
                     <Link
                       to="Slider_2"
-                      className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+                      className={`flex ${
+                        location.pathname.endsWith("Dashboard/Slider_2")
+                          ? "text-secondary"
+                          : "hover:text-secondary focus:text-secondary"
+                      } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Sliders 2</p>
+                      <p className="text-base leading-4">2: By videos</p>
                     </Link>
                     <Link
                       to="Slider_3"
-                      className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+                      className={`flex ${
+                        location.pathname.endsWith("Dashboard/Slider_3")
+                          ? "text-secondary"
+                          : "hover:text-secondary focus:text-secondary"
+                      } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Sliders 3</p>
+                      <p className="text-base leading-4">By Category</p>
                     </Link>
                     <Link
-                      to="Grille"
-                      className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+                      to="Grid"
+                      className={`flex ${
+                        location.pathname.endsWith("Dashboard/Grid")
+                          ? "text-secondary"
+                          : "hover:text-secondary focus:text-secondary"
+                      } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">Grille</p>
+                      <p className="text-base leading-4">Grid</p>
                     </Link>
                   </>
                 )}
@@ -67,13 +88,21 @@ export default function Nav() {
             </div>
             <Link
               to="Video"
-              className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+              className={`flex ${
+                location.pathname.endsWith("Dashboard/Video")
+                  ? "text-secondary"
+                  : "hover:text-secondary focus:text-secondary"
+              } text-white px-3 py-2 w-full`}
             >
               <p className="text-base leading-4">Videos</p>
             </Link>
             <Link
               to="Category"
-              className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2 w-full"
+              className={`flex ${
+                location.pathname.endsWith("Dashboard/Category")
+                  ? "text-secondary"
+                  : "hover:text-secondary focus:text-secondary"
+              } text-white px-3 py-2 w-full`}
             >
               <p className="text-base leading-4">Categories</p>
             </Link>
