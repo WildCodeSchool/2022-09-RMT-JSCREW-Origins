@@ -1,8 +1,8 @@
 /* eslint-disable import/no-unresolved */
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,6 +14,7 @@ import User from "../contexts/UserContext";
 function Header() {
   const { user } = useContext(User.UserContext);
   const navigate = useNavigate();
+  
   return (
     <Swiper
       spaceBetween={30}
