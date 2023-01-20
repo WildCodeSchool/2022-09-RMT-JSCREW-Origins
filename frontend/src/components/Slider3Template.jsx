@@ -13,14 +13,13 @@ function Slider3Template({ sliderId, searchBarWidth }) {
     id_Category: null,
     Number: null,
   });
-
   const notify = (msg) => {
     toast(msg);
   };
 
   const handleInputOnChange = (place, value) => {
-    if (value > 20) {
-      notify("Please enter a value less than 20");
+    if (value > 20 || value < 0) {
+      notify("Please enter a value between 0 and 20");
       return;
     }
     const newNumber = { ...sliderInfos };
@@ -38,10 +37,12 @@ function Slider3Template({ sliderId, searchBarWidth }) {
 
   // Fonction qui gère la récupération des données avec axios
   const displaySliderInfos = (id) => {
-    apiConnection
-      .get(`/sliderCategory/${id}`)
-      .then((infos) => setSliderInfos(infos.data))
-      .catch((error) => console.error(error));
+    if (id) {
+      apiConnection
+        .get(`/sliderCategory/${id}`)
+        .then((infos) => setSliderInfos(infos.data))
+        .catch((error) => console.error(error));
+    }
   };
 
   // Pour que la donnée se mette à jour en live
