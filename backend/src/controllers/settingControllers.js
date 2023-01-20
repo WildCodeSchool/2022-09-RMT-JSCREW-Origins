@@ -95,6 +95,24 @@ const edit = async (req, res) => {
   else res.sendStatus(401);
 };
 
+const editRole = (req, res) => {
+  if (req.auth.id)
+    models.user
+      .updateRole({ ...req.auth })
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  else res.sendStatus(401);
+};
+
 const destroy = (req, res) => {
   if (req.auth.id)
     models.user
@@ -117,6 +135,7 @@ module.exports = {
   browse,
   read,
   edit,
+  editRole,
   add,
   destroy,
   validateUser,

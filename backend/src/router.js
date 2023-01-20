@@ -39,6 +39,8 @@ router.get("/users", settingControllers.browse);
 router.put("/user", settingControllers.edit);
 router.delete("/user", settingControllers.destroy);
 
+router.put("/userRole", settingControllers.editRole);
+
 router.post(
   "/categories",
   validators.validateCategory,
