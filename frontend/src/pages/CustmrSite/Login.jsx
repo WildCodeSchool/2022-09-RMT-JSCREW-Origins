@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
 
+import User from "../../contexts/UserContext";
+
 function Login() {
+  const { user, handleUser } = useContext(User.UserContext);
   const [displayRegisterForm, setDisplayRegisterForm] = useState(false);
   const [infos, setInfos] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const validateEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -29,44 +35,72 @@ function Login() {
     setInfos(newUser);
   };
 
-  const handleLogin = () => {
-    if (!validateEmail.test(infos.email)) {
-      return notify("Email is not correct");
-    }
-    if (!validatePassword.test(infos.password)) {
-      return notify("Password is not correct");
-    }
-    delete infos.confirmPassword;
+  const handleLogin = (loginInfo) => {
     apiConnection
       .post(`/login`, {
-        ...infos,
+        ...loginInfo,
       })
-      .then()
-      .catch((err) => console.error(err));
-    return notify("Connected!");
+      .then((curentUser) => {
+        handleUser(curentUser.data);
+        notify("Connected!");
+        navigate("/");
+      })
+      .catch((err) => {
+        notify("Wrong Credentials!");
+        console.error(err);
+      });
   };
 
-  const handleCreateAccount = () => {
+  const validateLogin = () => {
     if (!validateEmail.test(infos.email)) {
-      return notify("Email is not correct");
+      notify("Email is not correct");
+    } else if (!validatePassword.test(infos.password)) {
+      notify("Password is not correct");
+    } else {
+      delete infos.confirmPassword;
+      handleLogin(infos);
     }
-    if (!validatePassword.test(infos.password)) {
-      return notify("Password is not correct");
-    }
-    if (infos.password !== infos.confirmPassword) {
-      return notify("Passwords are not the same");
-    }
+  };
+
+  const handleCreateAccount = (createInfo) => {
     apiConnection
       .post(`/user`, {
-        ...infos,
+        ...createInfo,
       })
-      .then()
+      .then(() => notify("Account successfully created!"))
       .catch((err) => console.error(err));
-    return notify("Account successfully created!");
+  };
+
+  const validateCreateAccount = async () => {
+    if (!validateEmail.test(infos.email)) {
+      notify("Email is not correct");
+    } else if (!validatePassword.test(infos.password)) {
+      notify("Password is not correct");
+    } else if (infos.password !== infos.confirmPassword) {
+      notify("Passwords are not the same");
+    } else {
+      handleCreateAccount(infos);
+      setDisplayRegisterForm(false);
+      setInfos({});
+    }
+  };
+
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
   };
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Login</title>
+        <meta
+          name="Login"
+          content="Log in to your back-office dashboard to manage your website and its content. Keep your account information up to date and customize the appearance and functionality of your site."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
@@ -80,7 +114,21 @@ function Login() {
         theme="dark"
       />
       <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
-        {!displayRegisterForm && (
+        {user && (
+          <>
+            <h2 className="text-white text-xl">Your informations :</h2>
+            <div>
+              <p className="text-white text-md">{user?.email}</p>
+            </div>
+            <ButtonTemplate
+              buttonType="button"
+              buttonText="LOG OUT"
+              buttonStyle="cstm_cstmrButton"
+              methodOnClick={handleLogOut}
+            />
+          </>
+        )}
+        {!displayRegisterForm && !user && (
           <>
             <p className="text-white">Enter your credentials to connect</p>
             <form className="flex flex-col items-center gap-y-7 w-full">
@@ -104,7 +152,7 @@ function Login() {
                 buttonType="button"
                 buttonText="CONNECT"
                 buttonStyle="cstm_cstmrButton"
-                methodOnClick={handleLogin}
+                methodOnClick={validateLogin}
               />
             </form>
             <p className="text-white">
@@ -134,7 +182,7 @@ function Login() {
                 buttonType="button"
                 buttonText="REGISTER"
                 buttonStyle="cstm_cstmrButton"
-                methodOnClick={handleCreateAccount}
+                methodOnClick={validateCreateAccount}
               />
             </form>
           </>

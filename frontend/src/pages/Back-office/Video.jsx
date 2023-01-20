@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import validateVideo from "@services/videoValidators";
@@ -7,10 +8,12 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
+import ModalSuppression from "@components/ModalSuppression";
 
 import "react-toastify/dist/ReactToastify.css";
 
 function Video() {
+  const [displayModal, setDisplayModal] = useState(false);
   const [myVideo, setMyVideos] = useState([]);
   const [myCategory, setMyCategories] = useState([]);
   const [reset, setReset] = useState(false);
@@ -159,6 +162,15 @@ function Video() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Video</title>
+        <meta
+          name="description"
+          content="Manage the videos on your website from this page of your back office dashboard. Add, edit, or delete videos, and configure their settings."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
@@ -253,7 +265,7 @@ function Video() {
                 buttonType="button"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={handleDeleteVideo}
+                methodOnClick={setDisplayModal}
               />
             </>
           )}
@@ -263,6 +275,12 @@ function Video() {
             buttonText="CANCEL"
             buttonStyle="cstm_buttonSecondaryNone"
           />
+          {displayModal && (
+            <ModalSuppression
+              setDisplayModal={setDisplayModal}
+              confirmDelete={handleDeleteVideo}
+            />
+          )}
         </div>
       </form>
     </>

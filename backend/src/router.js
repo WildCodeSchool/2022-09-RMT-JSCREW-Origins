@@ -5,8 +5,11 @@ const router = express.Router();
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
+const sliderControllers = require("./controllers/sliderContollers");
+const sendMailControllers = require("./controllers/sendMailControllers");
+const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
 
-const validators = require("../services/validators");
+const validators = require("./services/validators");
 
 const checkAuth = require("./middleware/auth");
 
@@ -24,15 +27,18 @@ router.get("/categories/:id", categoryControllers.read);
 router.get("/videos", videoControllers.browse);
 router.get("/videos/:id", videoControllers.readvideo);
 
-router.get("/user", settingControllers.browse);
-router.get("/user/:id", settingControllers.read);
-router.put("/user/:id", settingControllers.edit);
-router.delete("/user/:id", settingControllers.destroy);
-
 router.post("/user", settingControllers.add);
 router.post("/login", validators.checkUser, settingControllers.validateUser);
 
+router.post("/sendEmail", sendMailControllers.sendMail);
+
+router.get("/slider", sliderControllers.browse);
+
 router.use(checkAuth);
+
+router.get("/user", settingControllers.read);
+router.put("/user", settingControllers.edit);
+router.delete("/user", settingControllers.destroy);
 
 router.post(
   "/categories",
@@ -46,12 +52,17 @@ router.put(
 );
 
 router.delete("/categories/:id", categoryControllers.destroy);
-router.put("/videos/:id", videoControllers.edit);
-router.post("/videos", videoControllers.add);
-router.get("/videos", videoControllers.browse);
-router.get("/videos/:id", videoControllers.readvideo);
 router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
 router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
+
+router.get("/slider/:id", sliderControllers.read);
+router.post("/slider", sliderControllers.add);
+router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
+
+router.get("/sliderCategory", sliderCategoryControllers.browse);
+router.get("/sliderCategory/:id", sliderCategoryControllers.read);
+router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
+router.post("/sliderCategory/:id", sliderCategoryControllers.add);
 
 module.exports = router;

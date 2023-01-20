@@ -1,23 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalSuppression from "@components/ModalSuppression";
+import User from "../../contexts/UserContext";
 
 function Setting() {
-  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useContext(User.UserContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [mySetting, setMySetting] = useState({
     id: null,
     isAdmin: "",
-    email: "",
+    email: user.email,
     password: "",
-    newPassword: "",
-    confirmNewPassword: "",
+    confirmPassword: "",
   });
+
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
   const notify = (msg) => {
     toast(msg);
@@ -35,33 +41,61 @@ function Setting() {
       isAdmin: data.isAdmin,
       email: data.email,
       password: data.password,
-      newPassword: "",
-      confirmNewPassword: "",
+      confirmPassword: data.confirmPassword,
     });
   };
 
   useEffect(() => {
     apiConnection
-      .get(`/user/${id}`)
+      .get(`/user`)
       .then((users) => updateSetting(users.data))
       .catch((error) => console.error(error));
   }, []);
 
   const handleUpdateSetting = () => {
-    const emailRegex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailRegex.test(mySetting.email)) {
-      return notify("Email is not correct");
+      notify("Email is not correct");
+    } else if (!passwordRegex.test(mySetting.password)) {
+      notify("Password is not correct");
+    } else if (mySetting.password !== mySetting.confirmPassword) {
+      notify("Passwords are not the same");
+    } else {
+      apiConnection
+        .put(`/user`, { ...mySetting })
+        .then(() => {
+          notify("Updated has been successfully");
+          updateSetting();
+        })
+        .catch((error) => console.error(error));
     }
-    apiConnection
-      .put(`/user/${id}`, { ...mySetting })
-      .then(() => updateSetting())
-      .catch((error) => console.error(error));
-    return notify("Email has been successfully modified");
+  };
+
+  const settingDelete = () => {
+    if (mySetting.email !== "admin1@mail.com") {
+      apiConnection
+        .delete(`/user`)
+        .then(() => {
+          notify("User has been successfully Deleted");
+          navigate("/");
+        })
+        .catch((error) => console.error(error));
+    } else {
+      setDisplayModal(false);
+      notify("unable to delete the superadmin");
+    }
   };
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Setting</title>
+        <meta
+          name="description"
+          content="Configure the settings for your website from this page of your back office dashboard. Edit your account information, set up security, and customize the appearance of your site."
+        />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -74,7 +108,7 @@ function Setting() {
         pauseOnHover
         theme="dark"
       />
-      <form className="flex flex-col items-center w-full pt-10 gap-y-7">
+      <div className="flex flex-col items-center w-full pt-10 gap-y-7">
         {mySetting && (
           <>
             <ConnectForm
@@ -95,12 +129,15 @@ function Setting() {
                 methodOnClick={setDisplayModal}
               />
               {displayModal && (
-                <ModalSuppression setDisplayModal={setDisplayModal} />
+                <ModalSuppression
+                  setDisplayModal={setDisplayModal}
+                  confirmDelete={settingDelete}
+                />
               )}
             </div>
           </>
         )}
-      </form>
+      </div>
     </>
   );
 }

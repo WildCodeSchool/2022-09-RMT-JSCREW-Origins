@@ -1,17 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import logoOrigins from "@assets/logo-origins.png";
 import iconeLogin from "@assets/CompteClient.png";
 import SearchBarLoupe from "./SearchBarLoupe";
 
+import User from "../contexts/UserContext";
+
 function NavCustmr() {
+  const { user } = useContext(User.UserContext);
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
+  const navigate = useNavigate();
+  const navToPages = (link) => {
+    setIsMenuDisplayed(false);
+    navigate(link);
+  };
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="fixed z-[2] text-white p-7 w-full">
+    <nav className="flex flex-col fixed z-[2] text-white p-7 w-full bg-primary/75 md:bg-transparent">
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between">
         <button
@@ -41,34 +49,36 @@ function NavCustmr() {
           />
         </button>
         <Link className="flex items-center" to="/">
-          <img className="w-40" src={logoOrigins} alt="logo origins" />
+          <img className="w-28" src={logoOrigins} alt="logo origins" />
         </Link>
         <SearchBarLoupe />
       </ul>
       {isMenuDisplayed && (
-        <div className="flex justify-center m-5">
+        <div className="flex justify-center self-center py-5 w-screen">
           <div className="flex flex-col items-center text-xl">
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
+            <button
+              type="button"
+              onClick={() => navToPages("/All-videos")}
               className="hover:text-secondary hover:font-bold mb-5"
-              to="/All-videos"
             >
               All videos
-            </Link>
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
-              className="hover:text-secondary hover:font-bold mb-5"
-              to="/Dashboard/Video"
-            >
-              Dashboard
-            </Link>
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
+            </button>
+            {user?.isAdmin === 1 && (
+              <button
+                type="button"
+                onClick={() => navToPages("/Dashboard/Setting")}
+                className="hover:text-secondary hover:font-bold mb-5"
+              >
+                Dashboard
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => navToPages("/Login")}
               className="hover:text-secondary hover:font-bold mb-2"
-              to="/Login"
             >
               Login
-            </Link>
+            </button>
           </div>
         </div>
       )}
@@ -79,8 +89,7 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
-          <Link to="/OneVideo">One Video</Link>
-          <Link to="/Dashboard/Video">Back office</Link>
+          {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
           <Link to="/Login">
             <img className="w-6" src={iconeLogin} alt="icone login" />
           </Link>

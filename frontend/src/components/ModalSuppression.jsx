@@ -1,20 +1,10 @@
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
 import ButtonTemplate from "./ButtonTemplate";
 
-function Modal({ setDisplayModal }) {
-  const { id } = useParams();
+function Modal({ setDisplayModal, confirmDelete }) {
   const handleButtonCancel = () => {
     setDisplayModal(false);
   };
 
-  const settingDelete = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/user/${id}`)
-      .then((user) => user)
-      .catch((error) => console.error(error));
-  };
   return (
     <div>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -27,13 +17,16 @@ function Modal({ setDisplayModal }) {
                   className="text-lg font-medium leading-6 text-gray-900"
                   id="modal-title"
                 >
-                  ⛔ Deactivate account
+                  ⚠️ WARNING
                 </h3>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Are you sure you want to deactivate your account? All of
-                    your data will be permanently removed. This action cannot be
-                    undone.
+                  <p className="text-md text-gray-500">
+                    This action will be permanent.{" "}
+                    <span className="font-bold text-secondary">
+                      All deleted data cannot be restored.
+                    </span>
+                    <br />
+                    Are you sure you want to do this?
                   </p>
                 </div>
               </div>
@@ -50,7 +43,7 @@ function Modal({ setDisplayModal }) {
                 buttonType="submit"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
-                methodOnClick={settingDelete}
+                methodOnClick={confirmDelete}
               />
             </div>
           </div>

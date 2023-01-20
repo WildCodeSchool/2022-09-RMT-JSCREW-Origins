@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
+import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -17,8 +18,8 @@ function Footer() {
   const [myMessage, setMyMessage] = useState({
     id: null,
     name: "",
-    Email: "",
-    Description: "",
+    email: "",
+    description: "",
   });
 
   const handleInputOnChange = (place, value) => {
@@ -34,10 +35,16 @@ function Footer() {
   const submitForm = () => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRegex.test(myMessage.Email)) {
-      notify(
-        `Hello ${myMessage.name} your message ${myMessage.Description} and your registration have been taken into account, a confirmation email has been sent to the address ${myMessage.Email}`
-      );
+    if (emailRegex.test(myMessage.email)) {
+      apiConnection
+        .post(`/sendEmail`, {
+          ...myMessage,
+        })
+        .then(() => {
+          notify(
+            `Hello ${myMessage.name} your message have been taken into account, a confirmation email has been sent to ${myMessage.email}`
+          );
+        });
     } else {
       notify(`Your email address isn't correct`);
     }
@@ -57,7 +64,7 @@ function Footer() {
         pauseOnHover
         theme="dark"
       />
-      <div className="bg-gray-900">
+      <div className="flex flex-col items-center bg-gray-900">
         {/* -----------------------début contact et reseaux--------------------------------------------------------------------- */}
         <div className="flex justify-center pt-5">
           <ul className="flex flex-row">
@@ -69,7 +76,7 @@ function Footer() {
           </ul>
         </div>
         {/* -----------------------début du form --------------------------------------------------------------------- */}
-        <form className="flex justify-center w-full">
+        {/* <form className="flex">
           <div className="mt-4">
             <div className="flex justify-center">
               <div className="flex justify-end mr-1 w-6/12">
@@ -87,9 +94,9 @@ function Footer() {
                   textPlaceholder="Email"
                   inputType="text"
                   customWidth="cstm_width_XlInput bg-white"
-                  value={myMessage.Email}
+                  value={myMessage.email}
                   methodOnChange={handleInputOnChange}
-                  name="Email"
+                  name="email"
                 />
               </div>
             </div>
@@ -98,9 +105,9 @@ function Footer() {
                 textPlaceholder="Description"
                 inputType="text"
                 customWidth="cstm_width_XlInput"
-                value={myMessage.Description}
+                value={myMessage.description}
                 methodOnChange={handleInputOnChange}
-                name="Description"
+                name="description"
               />
             </div>
             <div className="flex justify-center">
@@ -112,6 +119,40 @@ function Footer() {
               />
             </div>
           </div>
+        </form> */}
+        <form className="flex flex-col items-center mt-5 gap-5 w-full lg:w-10/12">
+          <div className="flex w-3/4 gap-5">
+            <InputTemplate
+              textPlaceholder="Name"
+              inputType="text"
+              customWidth="bg-white w-3/4"
+              value={myMessage.name}
+              methodOnChange={handleInputOnChange}
+              name="name"
+            />
+            <InputTemplate
+              textPlaceholder="Email"
+              inputType="text"
+              customWidth="bg-white w-3/4"
+              value={myMessage.email}
+              methodOnChange={handleInputOnChange}
+              name="email"
+            />
+          </div>
+          <TextareaTemplate
+            textPlaceholder="Description"
+            inputType="text"
+            customWidth="bg-white w-3/4 "
+            value={myMessage.description}
+            methodOnChange={handleInputOnChange}
+            name="description"
+          />
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="SEND"
+            buttonStyle="cstm_buttonSecondary"
+            methodOnClick={submitForm}
+          />
         </form>
         {/* ------------------------debut service----------------------------------------------------------------------------------------------- */}
         <div className="text-white text-center m-5">
