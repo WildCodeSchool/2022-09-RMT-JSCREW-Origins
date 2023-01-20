@@ -66,4 +66,4 @@ Number INT NOT NULL,
 Foreign Key (id_Category) REFERENCES category(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8);
+INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8), (2, 1, 8), (3, 2, 8), (4, 3, 8), (5, 4, 8);
