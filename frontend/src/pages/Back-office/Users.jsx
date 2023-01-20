@@ -32,11 +32,11 @@ function Users() {
     <div className="flex flex-col items-center w-full m-4 pt-10">
       <div className="flex flex-col items-center lg:w-6/12">
         <table className="min-w-full text-center">
-          <thead className="border-b bg-gray-800">
+          <thead className="bg-gray-800">
             <tr>
               <th
                 scope="col"
-                className="text-xl font-medium text-white px-6 py-4"
+                className="text-xl rounded-tl-lg font-medium text-white px-6 py-4"
               >
                 ID
               </th>
@@ -48,7 +48,7 @@ function Users() {
               </th>
               <th
                 scope="col"
-                className="text-xl font-medium text-white px-6 py-4"
+                className="text-xl rounded-tr-lg font-medium text-white px-6 py-4"
               >
                 Role
               </th>
@@ -56,14 +56,14 @@ function Users() {
           </thead>
           <tbody>
             {myUsers.map((user, index) => (
-              <tr key={user.id} className="bg-white border-b">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <tr key={user.id}>
+                <td className="bg-gray-50 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {user.id}
                 </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <td className="bg-gray-50 text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   {user.email}
                 </td>
-                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <td className="bg-gray-50 text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   {user.isAdmin === 0 && (
                     <ButtonTemplate
                       buttonType="button"
@@ -81,7 +81,7 @@ function Users() {
                     />
                   )}
                 </td>
-                <td className="">
+                <td>
                   <button type="button" className="m-3 w-5">
                     <img src={corbeille} alt="corbeille" />
                   </button>
