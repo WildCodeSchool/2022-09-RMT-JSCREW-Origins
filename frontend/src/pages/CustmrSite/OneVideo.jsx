@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
@@ -13,6 +13,7 @@ import User from "../../contexts/UserContext";
 function OneVideo() {
   const { user } = useContext(User.UserContext);
   const [video, setVideo] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     apiConnection
@@ -73,13 +74,12 @@ function OneVideo() {
                   <p className="text-1xl mt-3 md:text-4xl md:mt-10">
                     This video is only available in premium
                   </p>
-                  <Link to="/Login">
-                    <ButtonTemplate
-                      buttonType="button"
-                      buttonText="SUBSCRIBE"
-                      buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
-                    />
-                  </Link>
+                  <ButtonTemplate
+                    buttonType="button"
+                    buttonText="SUBSCRIBE"
+                    buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                    methodOnClick={() => navigate("/Login")}
+                  />
                 </div>
               )}
               <div className="p-10">
