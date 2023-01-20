@@ -14,7 +14,7 @@ import User from "../contexts/UserContext";
 function Header() {
   const { user } = useContext(User.UserContext);
   const navigate = useNavigate();
-  
+
   return (
     <Swiper
       spaceBetween={30}
