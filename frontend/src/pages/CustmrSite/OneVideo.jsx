@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
@@ -10,8 +9,6 @@ import { RiLock2Fill } from "react-icons/ri";
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "../../components/ButtonTemplate";
 import User from "../../contexts/UserContext";
-
-import apiConnection from "@services/apiConnection";
 
 function OneVideo() {
   const { user } = useContext(User.UserContext);
@@ -86,7 +83,7 @@ function OneVideo() {
                   />
                 </div>
               )}
-              <div className="p-10">
+              <div className="p-10 md:w-2/5">
                 <h1 className="text-3xl md:mb-5">{video.Name}</h1>
                 <h2 className="text-xl md:mb-5">{video.Category}</h2>
                 <p>{video.Description}</p>
