@@ -2,14 +2,17 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import ButtonTemplate from "./ButtonTemplate";
+import User from "../../src/contexts/UserContext";
 
 function Header() {
+  const { user } = useContext(User.UserContext);
   const navigate = useNavigate();
   return (
     <Swiper
@@ -34,12 +37,14 @@ function Header() {
         />
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
+          {!user && (
             <ButtonTemplate
               buttonType="button"
               buttonText="SUBSCRIBE"
               buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
               methodOnClick={() => navigate("/Login")}
             />
+            )}
           </div>
         </div>
       </SwiperSlide>
@@ -53,12 +58,14 @@ function Header() {
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
             <h1 className="mb-5">Rocket League World Championship</h1>
+            {!user && (
             <ButtonTemplate
               buttonType="button"
               buttonText="SUBSCRIBE"
               buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
               methodOnClick={() => navigate("/Login")}
             />
+            )}
           </div>
         </div>
       </SwiperSlide>
@@ -72,12 +79,14 @@ function Header() {
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
             <h1 className="mb-5">World Championship C S - G O 2022</h1>
-            <ButtonTemplate
-              buttonType="button"
-              buttonText="SUBSCRIBE"
-              buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
-              methodOnClick={() => navigate("/Login")}
-            />
+            {!user && (
+              <ButtonTemplate
+                buttonType="button"
+                buttonText="SUBSCRIBE"
+                buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                methodOnClick={() => navigate("/Login")}
+              />
+            )}
           </div>
         </div>
       </SwiperSlide>
