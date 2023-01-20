@@ -69,7 +69,7 @@ function ClientSlider1() {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {videos.map((video) => (
-                      <Slide>
+                      <Slide key={video.id}>
                         <Link to={`/Videos/${video.id}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
                             <iframe
@@ -159,24 +159,26 @@ function ClientSlider1() {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {videos.map((video) => (
-                      <Slide>
-                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                          <iframe
-                            className="object-cover object-center w-full"
-                            title={video.Name}
-                            src={video.Url}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                          <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                            <div className="flex h-full items-end pb-6">
-                              <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
-                                {video.Name}
-                              </h3>
+                      <Slide key={video.id}>
+                        <Link to={`/Videos/${video.id}`}>
+                          <div className="flex flex-shrink-0 relative w-full sm:w-auto">
+                            <iframe
+                              className="object-cover object-center w-full"
+                              title={video.Name}
+                              src={video.Url}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+                              <div className="flex h-full items-end pb-6">
+                                <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
+                                  {video.Name}
+                                </h3>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </Slide>
                     ))}
                   </div>
@@ -247,24 +249,26 @@ function ClientSlider1() {
                     className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                   >
                     {videos.map((video) => (
-                      <Slide>
-                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                          <iframe
-                            className="object-cover object-center w-full"
-                            title={video.Name}
-                            src={video.Url}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                          <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                            <div className="flex h-full items-end pb-6">
-                              <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
-                                {video.Name}
-                              </h3>
+                      <Slide key={video.id}>
+                        <Link to={`/Videos/${video.id}`}>
+                          <div className="flex flex-shrink-0 relative w-full sm:w-auto">
+                            <iframe
+                              className="object-cover object-center w-full"
+                              title={video.Name}
+                              src={video.Url}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+                              <div className="flex h-full items-end pb-6">
+                                <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
+                                  {video.Name}
+                                </h3>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </Slide>
                     ))}
                   </div>
