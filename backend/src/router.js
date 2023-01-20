@@ -35,6 +35,7 @@ router.post("/sendEmail", sendMailControllers.sendMail);
 router.use(checkAuth);
 
 router.get("/user", settingControllers.read);
+router.get("/users", settingControllers.browse);
 router.put("/user", settingControllers.edit);
 router.delete("/user", settingControllers.destroy);
 
