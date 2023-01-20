@@ -1,8 +1,8 @@
 const models = require("../models");
 
-const browse = (req, res) => {
-  models.play_by_id
-    .browseSlider1()
+const browse1 = (req, res) => {
+  models.slider_by_video
+    .browseSlider1(req.params.type)
     .then(([playbyid]) => {
       res.send(playbyid);
     })
@@ -11,8 +11,9 @@ const browse = (req, res) => {
       res.sendStatus(500);
     });
 };
+
 const read = (req, res) => {
-  models.play_by_id
+  models.slider_by_video
     .find(req.params.id)
     .then(([playbyid]) => {
       if (playbyid[0] == null) {
@@ -30,7 +31,7 @@ const read = (req, res) => {
 const add = (req, res) => {
   const playbyid = req.body.videoToPost;
 
-  models.play_by_id
+  models.slider_by_video
     .insertBatch(playbyid)
     .then(([result]) => {
       res.location(`/slider/${result.insertId}`).sendStatus(201);
@@ -42,7 +43,7 @@ const add = (req, res) => {
 };
 
 const destroyByIdVideo = (req, res) => {
-  models.play_by_id
+  models.slider_by_video
     .deleteVideo(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -58,7 +59,8 @@ const destroyByIdVideo = (req, res) => {
 };
 
 module.exports = {
-  browse,
+  browse1,
+  // browse2,
   add,
   destroyByIdVideo,
   read,

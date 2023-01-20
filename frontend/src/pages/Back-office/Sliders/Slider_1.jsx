@@ -28,7 +28,7 @@ function Slider1() {
    */
   const getAllSlider = (persistance) => {
     apiConnection
-      .get(`/slider`)
+      .get(`/slider/1`)
       .then((slider) => {
         if (persistance) {
           // recupération des videos non validée

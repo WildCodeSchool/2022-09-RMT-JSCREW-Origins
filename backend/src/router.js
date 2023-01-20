@@ -53,7 +53,7 @@ router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
 router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
 
-router.get("/slider", sliderControllers.browse);
+router.get("/slider/:type", sliderControllers.browse1);
 router.get("/slider/:id", sliderControllers.read);
 router.post("/slider", sliderControllers.add);
 router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
