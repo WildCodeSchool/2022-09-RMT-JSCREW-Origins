@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-
-import apiConnection from "@services/apiConnection";
 import { ImFacebook2 } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
 import { SiLinkedin } from "react-icons/si";
 
+import apiConnection from "@services/apiConnection";
+
 function OneVideo() {
   const [video, setVideo] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     apiConnection
-      .get(`/videos/8`)
+      .get(`/videos/${id}`)
       .then((oneVideo) => {
         setVideo(oneVideo.data);
       })
@@ -60,7 +62,7 @@ function OneVideo() {
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-              <div className="p-10">
+              <div className="p-10 md:w-2/5">
                 <h1 className="text-3xl md:mb-5">{video.Name}</h1>
                 <h2 className="text-xl md:mb-5">{video.Category}</h2>
                 <p>{video.Description}</p>
@@ -68,7 +70,7 @@ function OneVideo() {
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }/videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{

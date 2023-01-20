@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/" element={<CustmrSite />}>
             <Route path="" element={<Home />} />
             <Route path="All-videos" element={<AllVideos />} />
-            <Route path="OneVideo" element={<OneVideo />} />
+            <Route path="Videos/:id" element={<OneVideo />} />
             <Route path="Dashboard" element={<Dashboard />} />
             <Route path="Login" element={<Login />} />
           </Route>
