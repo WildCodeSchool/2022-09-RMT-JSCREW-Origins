@@ -5,13 +5,14 @@ class SliderCategory extends AbstractManager {
     super({ table: "display_by_id" });
   }
 
-  findByCategory() {
+  findByCategory(id, limit) {
     return this.connection.query(
       `select ${this.table}.id, ${this.table}.Number, category.Name as category, video.Name as videoName, video.Url, video.premium from ${this.table}
       inner join category on ${this.table}.id_category = category.id
       inner join video on ${this.table}.id_category = video.id_Category
-      where ${this.table}.id=1
-      limit 2`
+      where ${this.table}.id = ?
+      limit ?`,
+      [id, limit]
     );
   }
 

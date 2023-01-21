@@ -1,8 +1,10 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const limit = parseInt(req.query.limit, 10);
   models.display_by_id
-    .findByCategory()
+    .findByCategory(id, limit)
     .then(([rows]) => {
       res.send(rows);
     })
