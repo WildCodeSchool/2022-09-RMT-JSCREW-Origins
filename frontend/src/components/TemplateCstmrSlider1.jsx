@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import apiConnection from "@services/apiConnection";
 import {
   CarouselProvider,
   Slider,
@@ -10,25 +9,12 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-function ClientSlider1() {
-  const [videos, setVideos] = useState([]);
-
-  const getSlider = () => {
-    apiConnection
-      .get(`/slider`)
-      .then((video) => setVideos(video.data))
-      .catch((error) => console.error(error));
-  };
-
-  useEffect(() => {
-    getSlider();
-  }, []);
-
+function TemplateCstmrSlider1({ videos, sliderTitle }) {
   return (
     <div className="w-full">
       <div className="w-full">
         <div className="flex flex-col items-start gap-1 w-full h-full py-8 sm:py-8 px-4">
-          <h1 className="text-white ">Slider name</h1>
+          <h1 className="text-white ">{sliderTitle}</h1>
           {/* Carousel for desktop and large size devices */}
           <CarouselProvider
             className="lg:block hidden"
@@ -304,4 +290,4 @@ function ClientSlider1() {
   );
 }
 
-export default ClientSlider1;
+export default TemplateCstmrSlider1;
