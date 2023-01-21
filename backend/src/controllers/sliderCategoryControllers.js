@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.display_by_id
-    .findAll()
+    .findByCategory()
     .then(([rows]) => {
       res.send(rows);
     })
