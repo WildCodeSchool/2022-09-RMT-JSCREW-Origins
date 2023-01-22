@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className="bg-primary">
       <Header />
-      <TemplateCstmrSlider1 url="/slider" sliderTitle="Slider Title" />
+      <TemplateCstmrSlider1 url="/slider" />
     </div>
   );
 }
