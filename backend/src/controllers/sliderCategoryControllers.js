@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const browse = (req, res) => {
+const read = (req, res) => {
   const id = parseInt(req.params.id, 10);
   const limit = parseInt(req.query.limit, 10);
   models.display_by_id
@@ -14,15 +14,11 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const browse = (req, res) => {
   models.display_by_id
-    .find(req.params.id)
-    .then(([slider]) => {
-      if (slider[0] == null) {
-        res.sendStatus(404);
-      } else {
-        res.send(slider[0]);
-      }
+    .findAllByCategory()
+    .then(([sliders]) => {
+      res.send(sliders);
     })
     .catch((err) => {
       console.error(err);
