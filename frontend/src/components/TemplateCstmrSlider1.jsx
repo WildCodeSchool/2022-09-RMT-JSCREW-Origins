@@ -36,7 +36,7 @@ function TemplateCstmrSlider1({ url }) {
             naturalSlideWidth={100}
             isIntrinsicHeight
             totalSlides={sliders.length}
-            visibleSlides={sliders.length}
+            visibleSlides={4}
             step={1}
             infinite
           >
