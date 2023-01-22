@@ -26,9 +26,9 @@ function TemplateCstmrSlider1({ url }) {
   return (
     <div className="w-full">
       <div className="w-full">
-        <div className="flex flex-col items-start gap-1 w-full h-full py-4 sm:py-2 px-2">
-          <h1 className="text-white ">
-            {sliders[0]?.category ? sliders[0].category : "titre"}
+        <div className="flex flex-col items-start gap-1 w-full h-full py-6 sm:py-6 px-2">
+          <h1 className="text-white mb-2 ml-3">
+            Best of {sliders[0]?.category ? sliders[0].category : "titre"}
           </h1>
           {/* Carousel for desktop and large size devices */}
           <CarouselProvider
@@ -36,7 +36,7 @@ function TemplateCstmrSlider1({ url }) {
             naturalSlideWidth={100}
             isIntrinsicHeight
             totalSlides={sliders.length}
-            visibleSlides={4}
+            visibleSlides={sliders.length < 4 ? 2 : 4}
             step={1}
             infinite
           >
