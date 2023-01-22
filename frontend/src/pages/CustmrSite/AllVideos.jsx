@@ -1,18 +1,14 @@
 import React from "react";
-// import apiConnection from "@services/apiConnection";
-import ClientGrid from "@components/ClientGrid";
+import TemplateCstmrSlider1 from "@components/TemplateCstmrSlider1";
 
 function AllVideos() {
-  const data = [1, 2, 3, 4, 5];
-  // Ici créer un script pour avoir le nombre de slider dans la table en dynamique
   return (
-    <div className="h-screen bg-primary">
-      <h1>All videos</h1>
-      <div>
-        {data.map((item) => (
-          <ClientGrid key={item} data={item} />
-        ))}
-      </div>
+    <div className="flex flex-col items-center bg-primary w-full pt-20">
+      <h1 className="my-5 text-white text-xl">All videos</h1>
+      <TemplateCstmrSlider1 url="/sliderCategory/2" />
+      <TemplateCstmrSlider1 url="/sliderCategory/3" />
+      <TemplateCstmrSlider1 url="/sliderCategory/4" />
+      <TemplateCstmrSlider1 url="/sliderCategory/5" />
     </div>
   );
 }
