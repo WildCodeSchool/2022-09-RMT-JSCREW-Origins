@@ -67,13 +67,24 @@ function NavCustmr() {
                 Dashboard
               </Link>
             )}
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
-              className="hover:text-secondary hover:font-bold mb-2"
-              to="/Login"
-            >
-              Login
-            </Link>
+            {user?.isAdmin === 1 && (
+              <Link
+                onClick={() => setIsMenuDisplayed(false)}
+                className="hover:text-secondary hover:font-bold mb-5"
+                to="/Profil"
+              >
+                Profil
+              </Link>
+            )}
+            {user?.isAdmin !== 1 && (
+              <Link
+                onClick={() => setIsMenuDisplayed(false)}
+                className="hover:text-secondary hover:font-bold mb-2"
+                to="/Login"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       )}
@@ -86,9 +97,16 @@ function NavCustmr() {
           <Link to="/All-videos">All videos</Link>
           <Link to="/OneVideo">One Video</Link>
           {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
-          <Link to="/Login">
-            <img className="w-6" src={iconeLogin} alt="icone login" />
-          </Link>
+          {user?.isAdmin !== 1 && (
+            <Link to="/Login">
+              <img className="w-6" src={iconeLogin} alt="icone login" />
+            </Link>
+          )}
+          {user?.isAdmin === 1 && (
+            <Link to="/Profil">
+              <img className="w-6" src={iconeLogin} alt="icone login" />
+            </Link>
+          )}
           <SearchBarLoupe />
         </div>
       </ul>

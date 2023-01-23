@@ -85,11 +85,6 @@ function Login() {
     }
   };
 
-  const handleLogOut = () => {
-    handleUser(null);
-    navigate("/");
-  };
-
   return (
     <>
       <Helmet>
@@ -114,20 +109,6 @@ function Login() {
         theme="dark"
       />
       <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
-        {user && (
-          <>
-            <h2 className="text-white text-xl">Your informations :</h2>
-            <div>
-              <p className="text-white text-md">{user?.email}</p>
-            </div>
-            <ButtonTemplate
-              buttonType="button"
-              buttonText="LOG OUT"
-              buttonStyle="cstm_cstmrButton"
-              methodOnClick={handleLogOut}
-            />
-          </>
-        )}
         {!displayRegisterForm && !user && (
           <>
             <p className="text-white">Enter your credentials to connect</p>
