@@ -113,11 +113,12 @@ function Profil() {
         pauseOnHover
         theme="dark"
       />
-      <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
+      <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-50 pb-60">
         {mySetting && (
           <>
             <ConnectForm
               dataUsers={mySetting}
+              cstmStyle="bg-white"
               handleInputOnChange={handleInputOnChange}
             />
             <div className="flex justify-around space-x-8 pt-5">
@@ -142,14 +143,11 @@ function Profil() {
             </div>
           </>
         )}
-        <div>
-          <p className="text-white text-md">{user?.email}</p>
-        </div>
         {user && (
           <ButtonTemplate
             buttonType="button"
             buttonText="LOG OUT"
-            buttonStyle="cstm_cstmrButton"
+            buttonStyle="cstm_cstmrButton mt-10"
             methodOnClick={handleLogOut}
           />
         )}
