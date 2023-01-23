@@ -85,9 +85,9 @@ function TemplateCstmrSlider1({ url }) {
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                             />
-                            {!user && (
+                            {!user && slider.Premium === 1 && (
                               <div className="absolute bottom-0 right-0">
-                                <RiLock2Fill className="text-4xl text-white" />
+                                <RiLock2Fill className="text-4xl text-white text-secondary" />
                               </div>
                             )}
                             <div className="bg-gray-800 bg-opacity-10 absolute w-full h-full p-6">
