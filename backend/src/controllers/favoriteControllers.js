@@ -13,7 +13,7 @@ const browse = (req, res) => {
 };
 
 const add = (req, res) => {
-  if (req.auth)
+  if (req.auth) {
     models.favorite
       .insert(req.auth.id, req.body.id_video)
       .then(([result]) => {
@@ -23,9 +23,33 @@ const add = (req, res) => {
         console.error(err);
         res.sendStatus(500);
       });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
+const destroy = (req, res) => {
+  if (req.auth) {
+    models.favorite
+      .delete(req.params.id)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
 };
 
 module.exports = {
   browse,
   add,
+  destroy,
 };

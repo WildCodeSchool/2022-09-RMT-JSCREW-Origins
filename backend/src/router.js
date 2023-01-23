@@ -68,5 +68,6 @@ router.post("/sliderCategory/:id", sliderCategoryControllers.add);
 
 router.get("/favorites", favoriteControllers.browse);
 router.post("/favorites", favoriteControllers.add);
+router.delete("/favorites/:id", favoriteControllers.destroy);
 
 module.exports = router;
