@@ -10,15 +10,16 @@ class ItemManager extends AbstractManager {
     return this.connection.query(
       `select ${this.table}.id_user, video.Name as videoName, video.Url from ${this.table}
     inner join video on ${this.table}.id_video = video.id
-    where ${this.table}.id = ?`,
+    inner join user on ${this.table}.id_user = user.id
+    where ${this.table}.id_user = ?`,
       [id]
     );
   }
 
-  insert(favorite) {
+  insert(idUser, idVideo) {
     return this.connection.query(
       `insert into ${this.table} (id_user, id_video) values (?, ?)`,
-      [favorite.title]
+      [idUser, idVideo]
     );
   }
 }
