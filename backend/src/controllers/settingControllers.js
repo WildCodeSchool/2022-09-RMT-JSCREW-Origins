@@ -98,7 +98,7 @@ const edit = async (req, res) => {
 const editRole = (req, res) => {
   if (req.auth.id)
     models.user
-      .updateRole({ ...req.auth })
+      .updateRole(req.body.isAdmin, req.params.id)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);

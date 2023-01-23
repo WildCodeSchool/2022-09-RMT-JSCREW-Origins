@@ -25,19 +25,24 @@ function Users() {
     setMyUsers(newUser);
   };
 
-  useEffect(() => {
+  const getUsers = () => {
     apiConnection
       .get(`/users`)
       .then((users) => setMyUsers(users.data))
       .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getUsers();
   }, []);
 
-  const handleUpdateUserRole = () => {
+  const handleUpdateUserRole = (id) => {
     apiConnection
-      .put(`/userRole`, { ...myUsers })
-      .then(() => {
+      .put(`/userRole/${id + 1}`, { ...myUsers[id] })
+      .then((users) => {
         notify("Updated has been successfully");
-        setMyUsers();
+        setMyUsers(users);
+        getUsers();
       })
       .catch((error) => console.error(error));
   };
@@ -113,18 +118,18 @@ function Users() {
                       <img src={corbeille} alt="corbeille" />
                     </button>
                   </td>
+                  <td>
+                    <ButtonTemplate
+                      buttonType="button"
+                      buttonText="UPDATE"
+                      buttonStyle="cstm_buttonSecondary"
+                      methodOnClick={() => handleUpdateUserRole(index)}
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className="mt-5">
-            <ButtonTemplate
-              buttonType="button"
-              buttonText="UPDATE"
-              buttonStyle="cstm_buttonSecondary"
-              methodOnClick={() => handleUpdateUserRole()}
-            />
-          </div>
         </div>
       </div>
     </>

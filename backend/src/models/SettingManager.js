@@ -19,10 +19,10 @@ class SettingManager extends AbstractManager {
     );
   }
 
-  updateRole(user) {
+  updateRole(isAdmin, id) {
     return this.connection.query(
       `update ${this.table} set isAdmin = ? where id = ?`,
-      [user.isAdmin, user.id]
+      [isAdmin, id]
     );
   }
 
