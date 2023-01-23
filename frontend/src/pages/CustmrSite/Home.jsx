@@ -1,13 +1,12 @@
 import React from "react";
-
 import Header from "@components/Header";
-import ClientSlider1 from "@components/ClientSlider1";
+import TemplateCstmrSlider1 from "@components/TemplateCstmrSlider1";
 
 function Home() {
   return (
     <div className="bg-primary">
       <Header />
-      <ClientSlider1 />
+      <TemplateCstmrSlider1 url="/slider" />
     </div>
   );
 }

@@ -22,9 +22,17 @@ function Slider3Template({ sliderId, searchBarWidth }) {
       notify("Please enter a value between 0 and 20");
       return;
     }
-    const newNumber = { ...sliderInfos };
-    newNumber[place] = value;
-    setSliderInfos(newNumber);
+    const newInfos = { ...sliderInfos };
+    newInfos[place] = value;
+    setSliderInfos(newInfos);
+  };
+
+  // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
+  /**
+   * @param {object} cat
+   */
+  const handleOneCategory = (cat) => {
+    handleInputOnChange("id_Category", cat.id);
   };
 
   // Fonction qui gère la récupération des données avec axios
@@ -36,11 +44,17 @@ function Slider3Template({ sliderId, searchBarWidth }) {
   };
 
   // Fonction qui gère la récupération des données avec axios
-  const displaySliderInfos = (id) => {
-    if (id) {
+  const displaySliderInfos = (idNbr) => {
+    if (idNbr) {
       apiConnection
-        .get(`/sliderCategory/${id}`)
-        .then((infos) => setSliderInfos(infos.data))
+        .get(`/sliderCategory/${idNbr}`)
+        .then((infos) => {
+          setSliderInfos({
+            id: infos.data[0].id,
+            id_Category: infos.data[0].id_Category,
+            Number: infos.data[0].Number,
+          });
+        })
         .catch((error) => console.error(error));
     }
   };
@@ -51,15 +65,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
     displaySliderInfos(sliderId);
   }, []);
 
-  // La fonction pre-rempli les input quand on clique sur une catégorie dans la searchBar
-  /**
-   * @param {object} cat
-   */
-  const handleOneCategory = (cat) => {
-    handleInputOnChange("id_Category", cat.id);
-  };
-
-  const handleAddCategory = (idNbr) => {
+  const handleAddSlider = (idNbr) => {
     apiConnection
       .post(`/sliderCategory/${idNbr}`, {
         ...sliderInfos,
@@ -72,7 +78,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
       .catch((error) => console.error(error));
   };
 
-  const handleEditCategory = (idNbr) => {
+  const handleEditSlider = (idNbr) => {
     apiConnection
       .put(`/sliderCategory/${idNbr}`, {
         ...sliderInfos,
@@ -120,7 +126,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
             buttonType="button"
             buttonText="UPDATE"
             buttonStyle="cstm_buttonSecondary"
-            methodOnClick={() => handleEditCategory(sliderId)}
+            methodOnClick={() => handleEditSlider(sliderId)}
           />
         )}
 
@@ -129,7 +135,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
             buttonType="button"
             buttonText="ADD"
             buttonStyle="cstm_buttonSecondary"
-            methodOnClick={() => handleAddCategory(sliderId)}
+            methodOnClick={() => handleAddSlider(sliderId)}
           />
         )}
       </form>
