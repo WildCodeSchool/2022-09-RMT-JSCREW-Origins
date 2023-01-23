@@ -13,7 +13,6 @@ function Home() {
           name="description"
           content="home page of origin's website, you can find videos and pictures of Esport"
         />
-        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <div className="bg-primary">
         <Header />
