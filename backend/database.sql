@@ -76,4 +76,4 @@ Foreign Key (id_user) REFERENCES user(id),
 Foreign Key (id_video) REFERENCES video(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8);
+INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8),(2, 7), (2, 4),(2, 5), (2, 6);
