@@ -7,7 +7,13 @@ import ButtonTemplate from "@components/ButtonTemplate";
 import corbeille from "@assets/poubelle-de-recyclage.png";
 
 function Users() {
-  const [myUsers, setMyUsers] = useState([]);
+  const [myUsers, setMyUsers] = useState([
+    {
+      id: null,
+      isAdmin: 0,
+      email: "",
+    },
+  ]);
 
   const notify = (msg) => {
     toast(msg);
@@ -34,6 +40,20 @@ function Users() {
       .catch((error) => console.error(error));
   };
 
+  const userDelete = (user) => {
+    if (myUsers.email !== "admin1@mail.com") {
+      apiConnection
+        .delete(`/userRole/${user.id}`)
+        .then(() => {
+          notify("User has been successfully Deleted");
+          getUsers();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      notify("unable to delete the superadmin");
+    }
+  };
+
   return (
     <>
       <ToastContainer
@@ -52,7 +72,7 @@ function Users() {
         <div className="flex flex-col items-center lg:w-6/12">
           {myUsers.length > 0 && (
             <table className="min-w-full text-center">
-              <thead className="bg-gray-800">
+              <thead className="bg-primary">
                 <tr>
                   <th
                     scope="col"
@@ -101,11 +121,17 @@ function Users() {
                         />
                       )}
                     </td>
-                    <td>
-                      <button type="button" className="m-3 w-5">
-                        <img src={corbeille} alt="corbeille" />
-                      </button>
-                    </td>
+                    {user.id !== 1 && (
+                      <td>
+                        <button
+                          type="button"
+                          className="m-3 w-5"
+                          onClick={() => userDelete(user)}
+                        >
+                          <img src={corbeille} alt="corbeille" />
+                        </button>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>

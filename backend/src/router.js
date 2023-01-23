@@ -40,6 +40,7 @@ router.put("/user", settingControllers.edit);
 router.delete("/user", settingControllers.destroy);
 
 router.put("/userRole/:id", settingControllers.editRole);
+router.delete("/userRole/:id", settingControllers.destroyRole);
 
 router.post(
   "/categories",
