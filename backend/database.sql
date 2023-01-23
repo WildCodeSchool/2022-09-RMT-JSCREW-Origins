@@ -67,3 +67,13 @@ Foreign Key (id_Category) REFERENCES category(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8), (2, 1, 8), (3, 2, 8), (4, 3, 8), (5, 4, 8);
+
+CREATE TABLE favorite (
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+id_user INT NOT NULL,
+id_video INT NOT NULL,
+Foreign Key (id_user) REFERENCES user(id),
+Foreign Key (id_video) REFERENCES video(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8);
