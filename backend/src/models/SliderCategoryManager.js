@@ -5,8 +5,25 @@ class SliderCategory extends AbstractManager {
     super({ table: "display_by_id" });
   }
 
-  findAll() {
-    return this.connection.query(`select * from ${this.table}`);
+  findAllByCategory() {
+    return this.connection
+      .query(`select ${this.table}.id, ${this.table}.Number, ${this.table}.id_category, category.Name as category, video.Name as videoName, video.Url, video.premium from ${this.table}
+    inner join category on ${this.table}.id_category = category.id
+    inner join video on ${this.table}.id_category = video.id_Category
+    order by ${this.table}.id`);
+  }
+
+  findByCategory(id, limit) {
+    let query = `select ${this.table}.id, ${this.table}.Number, ${this.table}.id_category, category.Name as category, video.Name as videoName, video.Url, video.premium from ${this.table}
+    inner join category on ${this.table}.id_category = category.id
+    inner join video on ${this.table}.id_category = video.id_Category
+    where ${this.table}.id = ?`;
+    const value = [id];
+    if (limit) {
+      query += " limit ?";
+      value.push(limit);
+    }
+    return this.connection.query(query, value);
   }
 
   insert(displayById) {

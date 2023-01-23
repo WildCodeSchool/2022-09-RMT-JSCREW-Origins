@@ -1,8 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-
 import Header from "@components/Header";
-import ClientSlider1 from "@components/ClientSlider1";
+import TemplateCstmrSlider1 from "@components/TemplateCstmrSlider1";
 
 function Home() {
   return (
