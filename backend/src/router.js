@@ -8,6 +8,7 @@ const settingControllers = require("./controllers/settingControllers");
 const sliderControllers = require("./controllers/sliderContollers");
 const sendMailControllers = require("./controllers/sendMailControllers");
 const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
+const favoriteControllers = require("./controllers/favoriteControllers");
 
 const validators = require("./services/validators");
 
@@ -64,5 +65,7 @@ router.get("/sliderCategory", sliderCategoryControllers.browse);
 router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
 router.post("/sliderCategory/:id", sliderCategoryControllers.add);
+
+router.get("/favorites", favoriteControllers.browse);
 
 module.exports = router;
