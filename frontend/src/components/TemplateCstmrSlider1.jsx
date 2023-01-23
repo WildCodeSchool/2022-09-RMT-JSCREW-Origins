@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import apiConnection from "@services/apiConnection";
 import {
@@ -9,8 +9,12 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { RiLock2Fill } from "react-icons/ri";
+
+import User from "../contexts/UserContext";
 
 function TemplateCstmrSlider1({ url }) {
+  const { user } = useContext(User.UserContext);
   const [sliders, setSliders] = useState([]);
 
   const getSlider = () => {
@@ -81,6 +85,11 @@ function TemplateCstmrSlider1({ url }) {
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                             />
+                            {!user && (
+                              <div className="absolute bottom-0 right-0">
+                                <RiLock2Fill className="text-4xl text-white" />
+                              </div>
+                            )}
                             <div className="bg-gray-800 bg-opacity-10 absolute w-full h-full p-6">
                               <div className="flex h-full items-end ">
                                 <h3 className="bg-gray-800 bg-opacity-80 font-semibold leading-5 lg:leading-6 text-white">
