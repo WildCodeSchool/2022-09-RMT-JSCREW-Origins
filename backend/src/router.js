@@ -67,5 +67,6 @@ router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
 router.post("/sliderCategory/:id", sliderCategoryControllers.add);
 
 router.get("/favorites", favoriteControllers.browse);
+router.post("/favorites", favoriteControllers.add);
 
 module.exports = router;
