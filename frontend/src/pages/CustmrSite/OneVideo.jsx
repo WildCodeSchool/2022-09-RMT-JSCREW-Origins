@@ -7,6 +7,7 @@ import { SiLinkedin } from "react-icons/si";
 import { RiLock2Fill } from "react-icons/ri";
 
 import apiConnection from "@services/apiConnection";
+import TemplateCstmrSlider1 from "@components/TemplateCstmrSlider1";
 import ButtonTemplate from "../../components/ButtonTemplate";
 import User from "../../contexts/UserContext";
 
@@ -126,8 +127,13 @@ function OneVideo() {
                   </a>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+            {video && (
+              <TemplateCstmrSlider1
+                url={`/sliderCategory/${video?.id_Category}`}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>
