@@ -1,15 +1,39 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.favorite
-    .findAllByUser(req.auth.id)
-    .then(([rows]) => {
-      res.status(200).json(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.auth) {
+    models.favorite
+      .findAllByUser(req.auth.id)
+      .then(([rows]) => {
+        res.status(200).json(rows);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
+const read = (req, res) => {
+  if (req.auth) {
+    models.favorite
+      .findFavoriteByUser(req.params.id, req.auth.id)
+      .then(([rows]) => {
+        if (rows[0] == null) {
+          res.sendStatus(404);
+        } else {
+          res.send(rows[0]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
 };
 
 const add = (req, res) => {
@@ -52,4 +76,5 @@ module.exports = {
   browse,
   add,
   destroy,
+  read,
 };
