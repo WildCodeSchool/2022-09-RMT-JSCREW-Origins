@@ -51,13 +51,13 @@ function OneVideo() {
           href={`${import.meta.env.VITE_FRONTEND_URL}/assets/logo.png`}
         />
       </Helmet>
-      <div className="h-screen bg-primary">
+      <div className="pt-5 bg-primary">
         <div className="pt-20 text-white h-full">
           {video && (
-            <div className="md:flex md:pl-10 h-full">
+            <div className="flex flex-col sm:flex sm:flex-row sm:pl-10 h-full">
               {(user || video.Premium === 0) && (
                 <iframe
-                  className="w-full h-2/4 md:w-3/5 md:h-4/6 md:pl-10"
+                  className="w-full px-5 sm:w-3/5 sm:pl-10"
                   title={video.Name}
                   src={video.Url}
                   frameBorder="0"
@@ -66,25 +66,25 @@ function OneVideo() {
                 />
               )}
               {!user && video.Premium === 1 && (
-                <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
-                  <RiLock2Fill className="text-7xl md:text-9xl mt-5 md:mt-20" />
-                  <p className="text-1xl mt-3 md:text-4xl md:mt-10">
+                <div className="sm:w-3/5 sm:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
+                  <RiLock2Fill className="text-7xl sm:text-9xl mt-5 sm:mt-20" />
+                  <p className="text-1xl mt-3 sm:text-4xl sm:mt-10">
                     This video is only available in premium
                   </p>
                   <ButtonTemplate
                     buttonType="button"
                     buttonText="SUBSCRIBE"
-                    buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                    buttonStyle="cstm_buttonSecondary mt-4 sm:mt-10 mb-6"
                     methodOnClick={() => navigate("/Login")}
                   />
                 </div>
               )}
-              <div className="p-10 md:w-2/5">
-                <h1 className="md:text-6xl text-2xl md:mb-5">{video.Name}</h1>
-                <h2 className="text-xl md:text-5xl md:mb-5">
+              <div className="px-5 pt-5 sm:px-10 sm:pb-10 sm:pt-0 sm:w-2/5">
+                <h1 className="sm:text-6xl text-2xl sm:mb-5">{video.Name}</h1>
+                <h2 className="text-xl sm:text-5xl sm:mb-5">
                   {video.Category}
                 </h2>
-                <p className="md:text-3xl">{video.Description}</p>
+                <p className="sm:text-3xl">{video.Description}</p>
                 <div className="flex items-center gap-3 mt-3">
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
@@ -130,9 +130,11 @@ function OneVideo() {
             </div>
           )}
           {video && (
-            <TemplateCstmrSlider1
-              url={`/sliderCategory/${video?.id_Category}`}
-            />
+            <div className="mt-3 sm:mt-10">
+              <TemplateCstmrSlider1
+                url={`/sliderCategory/${video?.id_Category}`}
+              />
+            </div>
           )}
         </div>
       </div>
