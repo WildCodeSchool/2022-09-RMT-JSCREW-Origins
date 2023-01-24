@@ -2,7 +2,7 @@ import InputTemplate from "./InputTemplate";
 
 function ConnectForm({ dataUsers, handleInputOnChange, cstmStyle }) {
   return (
-    <div className="flex flex-col items-center w-full gap-y-7">
+    <form className="flex flex-col items-center w-full gap-y-7">
       <InputTemplate
         customWidth={`cstm_width_XlInput ${cstmStyle}`}
         inputType="text"
@@ -27,7 +27,7 @@ function ConnectForm({ dataUsers, handleInputOnChange, cstmStyle }) {
         methodOnChange={handleInputOnChange}
         name="confirmPassword"
       />
-    </div>
+    </form>
   );
 }
 

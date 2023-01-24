@@ -94,7 +94,6 @@ function Login() {
           name="Login"
           content="Log in to your back-office dashboard to manage your website and its content. Keep your account information up to date and customize the appearance and functionality of your site."
         />
-        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <ToastContainer
         position="top-right"

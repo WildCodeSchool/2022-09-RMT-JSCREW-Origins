@@ -94,7 +94,6 @@ function Setting() {
           name="description"
           content="Configure the settings for your website from this page of your back office dashboard. Edit your account information, set up security, and customize the appearance of your site."
         />
-        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <ToastContainer
         position="top-right"
