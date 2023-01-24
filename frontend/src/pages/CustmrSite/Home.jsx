@@ -16,7 +16,7 @@ function Home() {
       </Helmet>
       <div className="bg-primary">
         <Header />
-        <ClientSlider1 />
+        <TemplateCstmrSlider1 url="/slider" />
       </div>
     </>
   );
