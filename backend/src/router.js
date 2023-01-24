@@ -41,8 +41,12 @@ router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 router.use(checkAuth);
 
 router.get("/user", settingControllers.read);
+router.get("/users", settingControllers.browse);
 router.put("/user", settingControllers.edit);
 router.delete("/user", settingControllers.destroy);
+
+router.put("/userRole/:id", settingControllers.editRole);
+router.delete("/userRole/:id", settingControllers.destroyRole);
 
 router.post(
   "/categories",

@@ -9,6 +9,7 @@ import OneVideo from "@pages/CustmrSite/OneVideo";
 
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
+import Users from "./pages/Back-office/Users";
 import Setting from "./pages/Back-office/Setting";
 import Slider1 from "./pages/Back-office/Sliders/Slider_1";
 import Slider2 from "./pages/Back-office/Sliders/Slider_2";
@@ -32,6 +33,7 @@ export default function App() {
           </Route>
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Category" element={<Category />} />
+            <Route path="Users" element={<Users />} />
             <Route path="Setting" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
