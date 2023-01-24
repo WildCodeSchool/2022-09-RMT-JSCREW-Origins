@@ -21,7 +21,7 @@ const add = (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.status(500).send("Video already in favorite");
       });
   } else {
     res.status(401).send("Unauthorized");
