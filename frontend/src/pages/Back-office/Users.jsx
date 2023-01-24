@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { CSVLink } from "react-csv";
 
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
 
 import corbeille from "@assets/poubelle-de-recyclage.png";
+import share from "@assets/share.png";
 
 function Users() {
   const [myUsers, setMyUsers] = useState([
@@ -91,6 +93,16 @@ function Users() {
                     className="text-xl rounded-tr-lg font-medium text-white px-6 py-4"
                   >
                     Role
+                  </th>
+                  <th scope="col" className="bg-white">
+                    <CSVLink
+                      data={myUsers}
+                      filename="Users.csv"
+                      asyncOnClick
+                      onClick={() => getUsers()}
+                    >
+                      <img className="m-3 w-8" src={share} alt="share" />
+                    </CSVLink>
                   </th>
                 </tr>
               </thead>
