@@ -116,6 +116,9 @@ function Profil() {
       <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-50 pb-60">
         {mySetting && (
           <>
+            <h2 className="text-white">
+              You can change your email address or password
+            </h2>
             <ConnectForm
               dataUsers={mySetting}
               cstmStyle="bg-white"
