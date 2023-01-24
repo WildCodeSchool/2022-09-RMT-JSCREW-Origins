@@ -54,7 +54,7 @@ function OneVideo() {
         <div className="pt-20 text-white h-full">
           {video && (
             <div className="md:flex md:pl-10 h-full">
-              {user && (
+              {(user || video.Premium === 0) && (
                 <iframe
                   className="w-full h-2/4 md:w-3/5 md:h-4/6 md:pl-10"
                   title={video.Name}
@@ -64,7 +64,7 @@ function OneVideo() {
                   allowFullScreen
                 />
               )}
-              {!user && (
+              {!user && video.Premium === 1 && (
                 <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
                   <RiLock2Fill className="text-7xl md:text-9xl mt-5 md:mt-20" />
                   <p className="text-1xl mt-3 md:text-4xl md:mt-10">
