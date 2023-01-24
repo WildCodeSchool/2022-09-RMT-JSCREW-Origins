@@ -127,13 +127,13 @@ function OneVideo() {
                   </a>
                 </div>
               </div>
-            )}
-            {video && (
-              <TemplateCstmrSlider1
-                url={`/sliderCategory/${video?.id_Category}`}
-              />
-            )}
-          </div>
+            </div>
+          )}
+          {video && (
+            <TemplateCstmrSlider1
+              url={`/sliderCategory/${video?.id_Category}`}
+            />
+          )}
         </div>
       </div>
     </>
