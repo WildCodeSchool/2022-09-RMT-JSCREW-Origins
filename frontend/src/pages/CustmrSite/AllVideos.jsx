@@ -1,9 +1,14 @@
 import React from "react";
+import TemplateCstmrSlider1 from "@components/TemplateCstmrSlider1";
 
 function AllVideos() {
   return (
-    <div className="h-screen bg-primary">
-      <h1>All videos</h1>
+    <div className="flex flex-col items-center bg-primary w-full pt-20">
+      <h1 className="my-5 text-white text-xl">All videos</h1>
+      <TemplateCstmrSlider1 url="/sliderCategory/2" />
+      <TemplateCstmrSlider1 url="/sliderCategory/3" />
+      <TemplateCstmrSlider1 url="/sliderCategory/4" />
+      <TemplateCstmrSlider1 url="/sliderCategory/5" />
     </div>
   );
 }

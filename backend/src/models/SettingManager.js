@@ -19,6 +19,13 @@ class SettingManager extends AbstractManager {
     );
   }
 
+  updateRole(isAdmin, id) {
+    return this.connection.query(
+      `update ${this.table} set isAdmin = ? where id = ?`,
+      [isAdmin, id]
+    );
+  }
+
   findOne(user) {
     return this.connection.query(
       `select * from  ${this.table} where email = ?`,
