@@ -28,7 +28,6 @@ export default function App() {
             <Route path="" element={<Home />} />
             <Route path="All-videos" element={<AllVideos />} />
             <Route path="Videos/:id" element={<OneVideo />} />
-            <Route path="Dashboard" element={<Dashboard />} />
             <Route path="Login" element={<Login />} />
             <Route path="Favorites" element={<Favorites />} />
           </Route>

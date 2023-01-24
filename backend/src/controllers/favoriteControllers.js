@@ -31,7 +31,7 @@ const add = (req, res) => {
 const destroy = (req, res) => {
   if (req.auth) {
     models.favorite
-      .deleteByVideoId(req.params.id)
+      .deleteByVideoId(req.params.id, req.auth.id)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);

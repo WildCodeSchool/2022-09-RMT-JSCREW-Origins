@@ -23,10 +23,10 @@ class ItemManager extends AbstractManager {
     );
   }
 
-  deleteByVideoId(videoId) {
+  deleteByVideoId(videoId, userId) {
     return this.connection.query(
-      `delete from ${this.table} where id_video = ?`,
-      [videoId]
+      `delete from ${this.table} where id_video = ? and id_user = ?`,
+      [videoId, userId]
     );
   }
 }
