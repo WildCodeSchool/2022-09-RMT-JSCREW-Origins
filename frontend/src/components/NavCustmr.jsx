@@ -100,6 +100,7 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
+          <Link to="/Favorites">Favorites</Link>
           {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
           {user?.isAdmin !== 1 && (
             <Link to="/Login">

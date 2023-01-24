@@ -1,5 +1,6 @@
 -- SQLBook: Code
 USE origin_database;
+DROP TABLE IF EXISTS favorite;
 DROP TABLE IF EXISTS display_by_id;
 DROP TABLE IF EXISTS play_by_id;
 DROP TABLE IF EXISTS user;
@@ -67,3 +68,14 @@ Foreign Key (id_Category) REFERENCES category(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8), (2, 1, 8), (3, 2, 8), (4, 3, 8), (5, 4, 8);
+
+CREATE TABLE favorite (
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+id_user INT NOT NULL,
+id_video INT NOT NULL,
+CONSTRAINT video_user UNIQUE (id_user,id_video),
+Foreign Key (id_user) REFERENCES user(id),
+Foreign Key (id_video) REFERENCES video(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8),(2, 7), (2, 4),(2, 5), (2, 6), (3, 3);
