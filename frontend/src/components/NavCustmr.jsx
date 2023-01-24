@@ -72,13 +72,24 @@ function NavCustmr() {
                 Dashboard
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => navToPages("/Login")}
-              className="hover:text-secondary hover:font-bold mb-2"
-            >
-              Login
-            </button>
+            {user?.isAdmin === 1 && (
+              <button
+                type="button"
+                onClick={() => navToPages("/Profil")}
+                className="hover:text-secondary hover:font-bold mb-2"
+              >
+                Profil
+              </button>
+            )}
+            {user?.isAdmin !== 1 && (
+              <button
+                type="button"
+                onClick={() => navToPages("/Login")}
+                className="hover:text-secondary hover:font-bold mb-2"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -90,9 +101,16 @@ function NavCustmr() {
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
           {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
-          <Link to="/Login">
-            <img className="w-6" src={iconeLogin} alt="icone login" />
-          </Link>
+          {user?.isAdmin !== 1 && (
+            <Link to="/Login">
+              <img className="w-6" src={iconeLogin} alt="icone login" />
+            </Link>
+          )}
+          {user?.isAdmin === 1 && (
+            <Link to="/Profil">
+              <img className="w-6" src={iconeLogin} alt="icone login" />
+            </Link>
+          )}
           <SearchBarLoupe />
         </div>
       </ul>

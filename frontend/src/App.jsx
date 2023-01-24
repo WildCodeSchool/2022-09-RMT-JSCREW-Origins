@@ -6,6 +6,7 @@ import Home from "@pages/CustmrSite/Home";
 import Login from "@pages/CustmrSite/Login";
 import AllVideos from "@pages/CustmrSite/AllVideos";
 import OneVideo from "@pages/CustmrSite/OneVideo";
+import Profil from "@pages/CustmrSite/Profil";
 
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="All-videos" element={<AllVideos />} />
             <Route path="Videos/:id" element={<OneVideo />} />
             <Route path="Dashboard" element={<Dashboard />} />
+            <Route path="Profil" element={<Profil />} />
             <Route path="Login" element={<Login />} />
           </Route>
           <Route path="/Dashboard" element={<Dashboard />}>
