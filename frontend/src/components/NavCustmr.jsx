@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logoOrigins from "@assets/logo-origins.png";
 import iconeLogin from "@assets/CompteClient.png";
@@ -11,6 +11,11 @@ function NavCustmr() {
   const { user } = useContext(User.UserContext);
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
+  const navigate = useNavigate();
+  const navToPages = (link) => {
+    setIsMenuDisplayed(false);
+    navigate(link);
+  };
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
@@ -51,39 +56,39 @@ function NavCustmr() {
       {isMenuDisplayed && (
         <div className="flex justify-center self-center py-5 w-screen">
           <div className="flex flex-col items-center text-xl">
-            <Link
-              onClick={() => setIsMenuDisplayed(false)}
+            <button
+              type="button"
+              onClick={() => navToPages("/All-videos")}
               className="hover:text-secondary hover:font-bold mb-5"
-              to="/All-videos"
             >
               All videos
-            </Link>
+            </button>
             {user?.isAdmin === 1 && (
-              <Link
-                onClick={() => setIsMenuDisplayed(false)}
+              <button
+                type="button"
+                onClick={() => navToPages("/Dashboard/Setting")}
                 className="hover:text-secondary hover:font-bold mb-5"
-                to="Dashboard/Setting"
               >
                 Dashboard
-              </Link>
+              </button>
             )}
             {user?.isAdmin === 1 && (
-              <Link
-                onClick={() => setIsMenuDisplayed(false)}
-                className="hover:text-secondary hover:font-bold mb-5"
-                to="/Profil"
+              <button
+                type="button"
+                onClick={() => navToPages("/Profil")}
+                className="hover:text-secondary hover:font-bold mb-2"
               >
                 Profil
-              </Link>
+              </button>
             )}
             {user?.isAdmin !== 1 && (
-              <Link
-                onClick={() => setIsMenuDisplayed(false)}
+              <button
+                type="button"
+                onClick={() => navToPages("/Login")}
                 className="hover:text-secondary hover:font-bold mb-2"
-                to="/Login"
               >
                 Login
-              </Link>
+              </button>
             )}
           </div>
         </div>
@@ -95,7 +100,6 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
-          <Link to="/OneVideo">One Video</Link>
           {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
           {user?.isAdmin !== 1 && (
             <Link to="/Login">
