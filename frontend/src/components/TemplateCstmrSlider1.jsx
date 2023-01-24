@@ -32,7 +32,7 @@ function TemplateCstmrSlider1({ url }) {
       <div className="w-full">
         <div className="flex flex-col items-start gap-1 w-full h-full py-6 sm:py-6 px-2">
           <h1 className="text-white mb-2 ml-3">
-            Best of {sliders[0]?.category ? sliders[0].category : "titre"}
+            {sliders[0]?.category ? sliders[0].category : "titre"}
           </h1>
           {/* Carousel for desktop and large size devices */}
           <CarouselProvider
