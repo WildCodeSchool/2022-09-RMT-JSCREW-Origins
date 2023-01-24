@@ -14,10 +14,10 @@ class SliderCategory extends AbstractManager {
   }
 
   findByCategory(id, limit) {
-    let query = `select ${this.table}.id, ${this.table}.Number, ${this.table}.id_category, category.Name as category, video.Name as videoName, video.Url, video.premium from ${this.table}
+    let query = `select ${this.table}.id, ${this.table}.Number, ${this.table}.id_category, category.Name as category, video.Name as videoName, video.Url, video.Premium from ${this.table}
     inner join category on ${this.table}.id_category = category.id
     inner join video on ${this.table}.id_category = video.id_Category
-    where ${this.table}.id = ?`;
+    where ${this.table}.id_category = ?`;
     const value = [id];
     if (limit) {
       query += " limit ?";

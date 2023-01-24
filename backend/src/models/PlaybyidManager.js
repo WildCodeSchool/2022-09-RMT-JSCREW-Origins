@@ -14,7 +14,7 @@ class PlaybyidManager extends AbstractManager {
 
   browseSlider1() {
     return this.connection.query(
-      `SELECT play_by_id.id, video.id AS video_id, video.Name, video.Url FROM ${this.table} INNER JOIN video ON video.id = id_Video WHERE Type = 1`
+      `SELECT play_by_id.id, video.id AS video_id, video.Name, video.Url ,video.Premium FROM ${this.table} INNER JOIN video ON video.id = id_Video WHERE Type = 1`
     );
   }
 

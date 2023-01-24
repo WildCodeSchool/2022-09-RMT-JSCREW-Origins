@@ -34,12 +34,20 @@ router.post("/login", validators.checkUser, settingControllers.validateUser);
 router.post("/sendEmail", sendMailControllers.sendMail);
 
 router.get("/slider", sliderControllers.browse);
+router.get("/slider/:id", sliderControllers.read);
+
+router.get("/sliderCategory", sliderCategoryControllers.browse);
+router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 
 router.use(checkAuth);
 
 router.get("/user", settingControllers.read);
+router.get("/users", settingControllers.browse);
 router.put("/user", settingControllers.edit);
 router.delete("/user", settingControllers.destroy);
+
+router.put("/userRole/:id", settingControllers.editRole);
+router.delete("/userRole/:id", settingControllers.destroyRole);
 
 router.post(
   "/categories",
@@ -57,12 +65,9 @@ router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
 router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
 
-router.get("/slider/:id", sliderControllers.read);
 router.post("/slider", sliderControllers.add);
 router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
 
-router.get("/sliderCategory", sliderCategoryControllers.browse);
-router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
 router.post("/sliderCategory/:id", sliderCategoryControllers.add);
 

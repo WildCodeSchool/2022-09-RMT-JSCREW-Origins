@@ -7,6 +7,7 @@ import { SiLinkedin } from "react-icons/si";
 import { RiLock2Fill } from "react-icons/ri";
 
 import apiConnection from "@services/apiConnection";
+import TemplateCstmrSlider1 from "@components/TemplateCstmrSlider1";
 import ButtonTemplate from "../../components/ButtonTemplate";
 import User from "../../contexts/UserContext";
 
@@ -42,11 +43,6 @@ function OneVideo() {
           property="og:description"
           content={video?.Description.slice(0, 55).replace(/\s/g, " ")}
         />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`${import.meta.env.VITE_FRONTEND_URL}/assets/logo.png`}
-        />
         <title>{video?.Name}</title>
         <meta name="description" content={video?.Description} />
         <link
@@ -59,7 +55,7 @@ function OneVideo() {
         <div className="pt-20 text-white h-full">
           {video && (
             <div className="md:flex md:pl-10 h-full">
-              {user && (
+              {(user || video.Premium === 0) && (
                 <iframe
                   className="w-full h-2/4 md:w-3/5 md:h-4/6 md:pl-10"
                   title={video.Name}
@@ -69,7 +65,7 @@ function OneVideo() {
                   allowFullScreen
                 />
               )}
-              {!user && (
+              {!user && video.Premium === 1 && (
                 <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
                   <RiLock2Fill className="text-7xl md:text-9xl mt-5 md:mt-20" />
                   <p className="text-1xl mt-3 md:text-4xl md:mt-10">
@@ -84,9 +80,11 @@ function OneVideo() {
                 </div>
               )}
               <div className="p-10 md:w-2/5">
-                <h1 className="text-3xl md:mb-5">{video.Name}</h1>
-                <h2 className="text-xl md:mb-5">{video.Category}</h2>
-                <p>{video.Description}</p>
+                <h1 className="md:text-6xl text-2xl md:mb-5">{video.Name}</h1>
+                <h2 className="text-xl md:text-5xl md:mb-5">
+                  {video.Category}
+                </h2>
+                <p className="md:text-3xl">{video.Description}</p>
                 <div className="flex items-center gap-3 mt-3">
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
@@ -130,6 +128,11 @@ function OneVideo() {
                 </div>
               </div>
             </div>
+          )}
+          {video && (
+            <TemplateCstmrSlider1
+              url={`/sliderCategory/${video?.id_Category}`}
+            />
           )}
         </div>
       </div>

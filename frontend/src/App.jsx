@@ -7,9 +7,11 @@ import Login from "@pages/CustmrSite/Login";
 import AllVideos from "@pages/CustmrSite/AllVideos";
 import OneVideo from "@pages/CustmrSite/OneVideo";
 import Favorites from "@pages/CustmrSite/Favorites";
+import Profil from "@pages/CustmrSite/Profil";
 
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
+import Users from "./pages/Back-office/Users";
 import Setting from "./pages/Back-office/Setting";
 import Slider1 from "./pages/Back-office/Sliders/Slider_1";
 import Slider2 from "./pages/Back-office/Sliders/Slider_2";
@@ -28,11 +30,13 @@ export default function App() {
             <Route path="" element={<Home />} />
             <Route path="All-videos" element={<AllVideos />} />
             <Route path="Videos/:id" element={<OneVideo />} />
+            <Route path="Profil" element={<Profil />} />
             <Route path="Login" element={<Login />} />
             <Route path="Favorites" element={<Favorites />} />
           </Route>
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Category" element={<Category />} />
+            <Route path="Users" element={<Users />} />
             <Route path="Setting" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
