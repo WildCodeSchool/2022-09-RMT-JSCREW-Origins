@@ -169,7 +169,6 @@ function Video() {
           name="description"
           content="Manage the videos on your website from this page of your back office dashboard. Add, edit, or delete videos, and configure their settings."
         />
-        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <ToastContainer
         position="top-right"

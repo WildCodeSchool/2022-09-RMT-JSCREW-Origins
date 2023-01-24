@@ -42,11 +42,6 @@ function OneVideo() {
           property="og:description"
           content={video?.Description.slice(0, 55).replace(/\s/g, " ")}
         />
-        <link
-          rel="icon"
-          type="image/png"
-          href={`${import.meta.env.VITE_FRONTEND_URL}/assets/logo.png`}
-        />
         <title>{video?.Name}</title>
         <meta name="description" content={video?.Description} />
         <link
@@ -84,9 +79,11 @@ function OneVideo() {
                 </div>
               )}
               <div className="p-10 md:w-2/5">
-                <h1 className="text-3xl md:mb-5">{video.Name}</h1>
-                <h2 className="text-xl md:mb-5">{video.Category}</h2>
-                <p>{video.Description}</p>
+                <h1 className="md:text-6xl text-2xl md:mb-5">{video.Name}</h1>
+                <h2 className="text-xl md:text-5xl md:mb-5">
+                  {video.Category}
+                </h2>
+                <p className="md:text-3xl">{video.Description}</p>
                 <div className="flex items-center gap-3 mt-3">
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
