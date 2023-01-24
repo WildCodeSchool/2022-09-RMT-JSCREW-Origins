@@ -18,13 +18,29 @@ function OneVideo() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
+  const getOneVideo = () => {
     apiConnection
       .get(`/videos/${id}`)
       .then((oneVideo) => {
         setVideo(oneVideo.data);
       })
       .catch((err) => console.error(err));
+  };
+
+  const checkIfFavorite = () => {
+    apiConnection
+      .get(`/favorites/${video.id}`)
+      .then((favorite) => {
+        if (favorite) {
+          setIsFavorite(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    getOneVideo();
+    checkIfFavorite();
   }, []);
 
   const handleAddToFavorite = () => {
