@@ -15,8 +15,8 @@ function OneVideo() {
   const { user } = useContext(User.UserContext);
   const [video, setVideo] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getOneVideo = () => {
     apiConnection
@@ -40,6 +40,24 @@ function OneVideo() {
     }
   };
 
+  const handleFavorite = (idVideo) => {
+    if (!isFavorite) {
+      apiConnection
+        .post(`/favorites/${idVideo}`)
+        .then(() => {
+          setIsFavorite(true);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      apiConnection
+        .delete(`/favorites/${idVideo}`)
+        .then(() => {
+          setIsFavorite(false);
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
   useEffect(() => {
     checkIfFavorite();
   }, [video]);
@@ -47,10 +65,6 @@ function OneVideo() {
   useEffect(() => {
     getOneVideo();
   }, []);
-
-  const handleAddToFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
 
   return (
     <>
@@ -110,7 +124,7 @@ function OneVideo() {
                 <div className="flex items-center gap-3 mt-3 md:hidden">
                   {/* Bouton favoris */}
                   <button
-                    onClick={handleAddToFavorite}
+                    onClick={() => handleFavorite(video.id)}
                     type="button"
                     className="pl-5 p-2 "
                   >
@@ -191,7 +205,7 @@ function OneVideo() {
               <div className="hidden md:flex items-center gap-3 m-5">
                 {/* Bouton favoris */}
                 <button
-                  onClick={handleAddToFavorite}
+                  onClick={() => handleFavorite(video.id)}
                   type="button"
                   className="pl-5 p-2 "
                 >
