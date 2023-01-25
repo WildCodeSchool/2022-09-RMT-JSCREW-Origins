@@ -16,6 +16,14 @@ class ItemManager extends AbstractManager {
     );
   }
 
+  findFavoriteByUser(videoId, userId) {
+    return this.connection.query(
+      `select * from ${this.table}
+      where id_user = ? and id_video = ?`,
+      [videoId, userId]
+    );
+  }
+
   insert(idUser, idVideo) {
     return this.connection.query(
       `insert into ${this.table} (id_user, id_video) values (?, ?)`,
