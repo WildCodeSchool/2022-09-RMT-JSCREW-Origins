@@ -19,7 +19,7 @@ function NavCustmr() {
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="flex flex-col fixed z-[2] text-white p-7 w-full bg-primary/75 md:bg-transparent">
+    <nav className="flex flex-col fixed z-[2] text-white p-7 w-full sm:bg-primary/75 md:bg-primary/0 md:bg-gradient-to-b md:from-primary md:h-20">
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between">
         <button
