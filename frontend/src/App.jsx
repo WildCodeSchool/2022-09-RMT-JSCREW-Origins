@@ -35,14 +35,14 @@ export default function App() {
             <Route path="Favorites" element={<Favorites />} />
           </Route>
           <Route path="/Dashboard" element={<Dashboard />}>
-            <Route path="Category" element={<Category />} />
+            <Route path="Categories" element={<Category />} />
             <Route path="Users" element={<Users />} />
-            <Route path="Setting" element={<Setting />} />
+            <Route path="Settings" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
             <Route path="Slider_3" element={<Slider3 />} />
             <Route path="Grid" element={<Grid />} />
-            <Route path="Video" element={<Video />} />
+            <Route path="Videos" element={<Video />} />
           </Route>
         </Routes>
       </div>
