@@ -107,7 +107,7 @@ function Login() {
         pauseOnHover
         theme="dark"
       />
-      <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
+      <div className="h-[60vh] bg-primary flex flex-col justify-center items-center gap-y-5 pt-20 md:h-[70vh]">
         {!displayRegisterForm && !user && (
           <>
             <p className="text-white">Enter your credentials to connect</p>
