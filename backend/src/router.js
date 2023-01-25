@@ -33,11 +33,11 @@ router.post("/login", validators.checkUser, settingControllers.validateUser);
 
 router.post("/sendEmail", sendMailControllers.sendMail);
 
-router.get("/slider", sliderControllers.browse);
-router.get("/slider/:id", sliderControllers.read);
+router.get("/sliders", sliderControllers.browse);
+router.get("/sliders/:id", sliderControllers.read);
 
-router.get("/sliderCategory", sliderCategoryControllers.browse);
-router.get("/sliderCategory/:id", sliderCategoryControllers.read);
+router.get("/slidersCategory", sliderCategoryControllers.browse);
+router.get("/slidersCategory/:id", sliderCategoryControllers.read);
 
 router.use(checkAuth);
 
