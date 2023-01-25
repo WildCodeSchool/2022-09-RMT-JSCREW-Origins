@@ -75,7 +75,7 @@ function TemplateCstmrSlider1({ url }) {
                   >
                     {sliders.map((slider) => (
                       <Slide key={slider.id}>
-                        <Link to={`/Videos/${slider.video_id}`}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
                             <iframe
                               className="w-full h-2/4 align-baseline"

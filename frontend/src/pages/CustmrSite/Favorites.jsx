@@ -53,8 +53,8 @@ function Favorites() {
           <h1 className="my-5 text-white text-xl">All my favorites videos</h1>
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 place-items-center mb-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {myFavorites.map((myFavorite) => (
-              <Link to={`/Videos/${myFavorite.id_video}`}>
-                <div className="relative">
+              <div className="relative">
+                <Link to={`/Videos/${myFavorite.id_video}`}>
                   <iframe
                     className="w-11/12"
                     title={myFavorite.Name}
@@ -63,20 +63,20 @@ function Favorites() {
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                  <button
-                    type="button"
-                    className="bg-red-700 absolute rounded-full p-1 w-6 h-6 -top-3 right-4 border-2"
-                    onClick={() => handleRemoveFavorite(myFavorite.id_video)}
-                  >
-                    <div
-                      className={`${genericLine} rotate-45 translate-y-0 opacity-95`}
-                    />
-                    <div
-                      className={`${genericLine} -rotate-45 -translate-y-2 opacity-95`}
-                    />
-                  </button>
-                </div>
-              </Link>
+                </Link>
+                <button
+                  type="button"
+                  className="bg-red-700 absolute rounded-full p-1 w-6 h-6 -top-3 right-4 border-2"
+                  onClick={() => handleRemoveFavorite(myFavorite.id_video)}
+                >
+                  <div
+                    className={`${genericLine} rotate-45 translate-y-0 opacity-95`}
+                  />
+                  <div
+                    className={`${genericLine} -rotate-45 -translate-y-2 opacity-95`}
+                  />
+                </button>
+              </div>
             ))}
           </div>
         </div>
