@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 
 const router = express.Router();
 
@@ -10,6 +11,8 @@ const sendMailControllers = require("./controllers/sendMailControllers");
 const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
 
 const validators = require("./services/validators");
+
+const upload = multer({ dest: "public/uploads" });
 
 const checkAuth = require("./middleware/auth");
 
@@ -37,6 +40,18 @@ router.get("/slider/:id", sliderControllers.read);
 
 router.get("/sliderCategory", sliderCategoryControllers.browse);
 router.get("/sliderCategory/:id", sliderCategoryControllers.read);
+router.put(
+  "/videos/:id",
+  upload.single("screenshot"),
+  validators.validateVideo,
+  videoControllers.edit
+);
+router.post(
+  "/videos",
+  upload.single("screenshot"),
+  validators.validateVideo,
+  videoControllers.add
+);
 
 router.use(checkAuth);
 
@@ -60,8 +75,6 @@ router.put(
 );
 
 router.delete("/categories/:id", categoryControllers.destroy);
-router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
-router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
 
 router.post("/slider", sliderControllers.add);

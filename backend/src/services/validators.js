@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const fs = require("fs");
 
 const categorySchema = Joi.object({
   Name: Joi.string().min(2).max(500).required(),
@@ -41,11 +42,14 @@ const videoSchema = Joi.object({
 });
 
 const validateVideo = (req, res, next) => {
-  const { error } = videoSchema.validate(req.body, { abortEarly: false });
+  const video = JSON.parse(req.body.data);
+  const { error } = videoSchema.validate(video, { abortEarly: false });
 
   if (error) {
+    fs.unlinkSync(`public/uploads/${req.file.filename}`);
     res.status(422).json({ validationErrors: error.details });
   } else {
+    req.video = video;
     next();
   }
 };

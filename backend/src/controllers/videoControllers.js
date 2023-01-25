@@ -1,3 +1,4 @@
+const fs = require("fs");
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -67,20 +68,30 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const video = req.body;
-
-  models.video
-    .insert(video)
-    .then(([result]) => {
-      res
-        .location(`/video/${result.insertId}`)
-        .status(201)
-        .json({ ...video, id: result.insertId });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  const { originalname, filename } = req.file;
+  const originalNameArray = originalname.split(".");
+  const ext = originalNameArray.pop();
+  const finalName = `${originalNameArray.join("")}_${Date.now()}.${ext}`;
+  fs.rename(
+    `public/uploads/${filename}`,
+    `public/uploads/${finalName}`,
+    (err) => {
+      if (err) throw err;
+      req.video.screenshot = finalName;
+      models.video
+        .insert(req.video)
+        .then(([result]) => {
+          res
+            .location(`/video/${result.insertId}`)
+            .status(201)
+            .json({ ...req.video, id: result.insertId });
+        })
+        .catch((error) => {
+          console.error(error);
+          res.sendStatus(500);
+        });
+    }
+  );
 };
 
 const destroy = (req, res) => {

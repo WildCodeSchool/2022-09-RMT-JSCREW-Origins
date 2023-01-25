@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 
@@ -17,6 +17,7 @@ function Video() {
   const [myVideo, setMyVideos] = useState([]);
   const [myCategory, setMyCategories] = useState([]);
   const [reset, setReset] = useState(false);
+  const inputRef = useRef(null);
   const [video, setVideo] = useState({
     id: null,
     Name: "",
@@ -107,8 +108,11 @@ function Video() {
     delete video.id;
     const { status, errorMessage } = validateVideo(video);
     if (status) {
+      const formData = new FormData();
+      formData.append("screenshot", inputRef.current.files[0]);
+      formData.append("data", JSON.stringify(video));
       apiConnection
-        .post(`/videos`, video)
+        .post(`/videos`, formData)
         .then((videos) => {
           notify("Video successfully added!");
           setVideo(videos.data);
@@ -219,6 +223,7 @@ function Video() {
             methodOnChange={handleInputOnChange}
             name="Url"
           />
+          <input type="file" name="screenshot" ref={inputRef} />
           <TextareaTemplate
             textPlaceholder="Description"
             customWidth="cstm_width_XlInput "

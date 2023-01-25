@@ -25,6 +25,7 @@ id_Category INTEGER,
 Url VARCHAR(1000) NOT NULL,
 Description VARCHAR(1000),
 Premium TINYINT NOT NULL,
+Screenshot VARCHAR(1000),
 Foreign Key (id_Category) REFERENCES category(id)
 ON DELETE SET NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
