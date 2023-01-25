@@ -9,7 +9,7 @@ function AllVideos() {
         <meta charSet="utf-8" />
         <title>Origin's - All Videos</title>
         <meta
-          name="Login"
+          name="description"
           content="Welcome to our all videos page, where you can find the latest and greatest e-sports videos. From top players to competitive matches, we have it all in one place. Whether you're a fan of League of Legends (LOL), Counter-Strike, Rocket League, or FIFA, we have videos for you to watch and enjoy."
         />
       </Helmet>

@@ -91,7 +91,7 @@ function Login() {
         <meta charSet="utf-8" />
         <title>Origin's - Login</title>
         <meta
-          name="Login"
+          name="description"
           content="Log in to your back-office dashboard to manage your website and its content. Keep your account information up to date and customize the appearance and functionality of your site."
         />
       </Helmet>

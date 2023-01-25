@@ -164,7 +164,7 @@ function Video() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - Video</title>
+        <title>Origin's Dashboard - Video Manager</title>
         <meta
           name="description"
           content="Manage the videos on your website from this page of your back office dashboard. Add, edit, or delete videos, and configure their settings."
