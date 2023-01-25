@@ -7,7 +7,11 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "../App.css";
 
+import ImageOne from "@assets/Image_header/Lol_2022_Origins.jpg";
+import ImageTwo from "@assets/Image_header/Rocket_league.jpg";
+import ImageThree from "@assets/Image_header/Fifa.jpg";
 import ButtonTemplate from "./ButtonTemplate";
 import User from "../contexts/UserContext";
 
@@ -31,34 +35,37 @@ function Header() {
     >
       <SwiperSlide>
         <img
-          className="object-fill w-full"
+          className="responsivImageHeader"
           style={{ maxHeight: "620px" }}
-          src="https://i.ytimg.com/vi/SZxvqmyb-d4/maxresdefault.jpg"
+          src={ImageOne}
           alt="slide 1"
         />
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
-            {!user && (
-              <ButtonTemplate
-                buttonType="button"
-                buttonText="SUBSCRIBE"
-                buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
-                methodOnClick={() => navigate("/Login")}
-              />
-            )}
+            <h1 className="mb-5">World Championship LOL 2022</h1>
+            <div className="text-center text-4xl text-white">
+              {!user && (
+                <ButtonTemplate
+                  buttonType="button"
+                  buttonText="SUBSCRIBE"
+                  buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                  methodOnClick={() => navigate("/Login")}
+                />
+              )}
+            </div>
           </div>
         </div>
       </SwiperSlide>
       <SwiperSlide>
         <img
-          className="object-fill w-full"
+          className="responsivImageHeader"
           style={{ maxHeight: "620px" }}
-          src="https://www.koobit.com/website/media/rocket-league-world-championship-29761"
+          src={ImageTwo}
           alt="slide 2"
         />
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
-            <h1 className="mb-5">Rocket League World Championship</h1>
+            <h1 className="mb-5">League Of Legend World Championship</h1>
             {!user && (
               <ButtonTemplate
                 buttonType="button"
@@ -72,14 +79,14 @@ function Header() {
       </SwiperSlide>
       <SwiperSlide>
         <img
-          className="object-fill w-full"
+          className="responsivImageHeader"
           style={{ maxHeight: "620px" }}
-          src="https://www.betus.com.pa/wp-content/uploads/2023/01/5-teams-to-watch-in-2023-cs-go-part-1-01-02-2022.webp"
+          src={ImageThree}
           alt="slide 3"
         />
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
-            <h1 className="mb-5">World Championship C S - G O 2022</h1>
+            <h1 className="mb-5">World Championship FIFA 2022</h1>
             {!user && (
               <ButtonTemplate
                 buttonType="button"

@@ -90,3 +90,9 @@ button {
 :root {
   --swiper-theme-color: #ff680a !important;
 }
+
+.responsivImageHeader {
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
