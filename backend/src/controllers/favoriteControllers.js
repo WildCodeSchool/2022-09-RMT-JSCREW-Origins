@@ -39,7 +39,7 @@ const read = (req, res) => {
 const add = (req, res) => {
   if (req.auth) {
     models.favorite
-      .insert(req.auth.id, req.body.id_video)
+      .insert(req.auth.id, req.params.id_video)
       .then(([result]) => {
         res.location(`/favorites/${result.insertId}`).sendStatus(201);
       })
