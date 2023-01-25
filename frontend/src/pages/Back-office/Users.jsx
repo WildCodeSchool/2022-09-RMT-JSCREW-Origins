@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { CSVLink } from "react-csv";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -68,6 +69,14 @@ function Users() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Users Management</title>
+        <meta
+          name="Login"
+          content="Manage your website users on this dashboard page. Update user information, assign roles, and view user activity in one convenient location."
+        />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={3000}
