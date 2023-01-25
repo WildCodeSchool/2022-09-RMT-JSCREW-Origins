@@ -28,19 +28,24 @@ function OneVideo() {
   };
 
   const checkIfFavorite = () => {
-    apiConnection
-      .get(`/favorites/${video.id}`)
-      .then((favorite) => {
-        if (favorite) {
-          setIsFavorite(true);
-        }
-      })
-      .catch((err) => console.error(err));
+    if (video && video.id !== null) {
+      apiConnection
+        .get(`/favorites/${video.id}`)
+        .then((favorite) => {
+          if (favorite.data !== null) {
+            setIsFavorite(true);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   useEffect(() => {
-    getOneVideo();
     checkIfFavorite();
+  }, [video]);
+
+  useEffect(() => {
+    getOneVideo();
   }, []);
 
   const handleAddToFavorite = () => {
