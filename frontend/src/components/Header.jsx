@@ -65,7 +65,7 @@ function Header() {
         />
         <div className="flex justify-center absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
           <div className="text-center text-4xl text-white">
-            <h1 className="mb-5">Rocket League World Championship</h1>
+            <h1 className="mb-5">League Of Legend World Championship</h1>
             {!user && (
               <ButtonTemplate
                 buttonType="button"
