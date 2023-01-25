@@ -66,7 +66,7 @@ function NavCustmr() {
             {user?.isAdmin === 1 && (
               <button
                 type="button"
-                onClick={() => navToPages("/Dashboard/Setting")}
+                onClick={() => navToPages("/Dashboard/Settings")}
                 className="hover:text-secondary hover:font-bold mb-5"
               >
                 Dashboard
@@ -109,7 +109,9 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
-          {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
+          {user?.isAdmin === 1 && (
+            <Link to="Dashboard/Settings">Dashboard</Link>
+          )}
           {!user && (
             <Link to="/Login">
               <img className="w-6" src={iconeLogin} alt="icone login" />
