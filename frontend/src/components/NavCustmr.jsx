@@ -72,16 +72,25 @@ function NavCustmr() {
                 Dashboard
               </button>
             )}
-            {user?.isAdmin === 1 && (
-              <button
-                type="button"
-                onClick={() => navToPages("/Profil")}
-                className="hover:text-secondary hover:font-bold mb-2"
-              >
-                Profil
-              </button>
+            {user && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => navToPages("/Profil")}
+                  className="hover:text-secondary hover:font-bold mb-2"
+                >
+                  Profil
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navToPages("/Favorites")}
+                  className="hover:text-secondary hover:font-bold mb-2"
+                >
+                  Favorites
+                </button>
+              </>
             )}
-            {user?.isAdmin !== 1 && (
+            {!user && (
               <button
                 type="button"
                 onClick={() => navToPages("/Login")}
@@ -100,17 +109,19 @@ function NavCustmr() {
         </Link>
         <div className="flex justify-end gap-4 items-center">
           <Link to="/All-videos">All videos</Link>
-          <Link to="/Favorites">Favorites</Link>
           {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
-          {user?.isAdmin !== 1 && (
+          {!user && (
             <Link to="/Login">
               <img className="w-6" src={iconeLogin} alt="icone login" />
             </Link>
           )}
-          {user?.isAdmin === 1 && (
-            <Link to="/Profil">
-              <img className="w-6" src={iconeLogin} alt="icone login" />
-            </Link>
+          {user && (
+            <>
+              <Link to="/Favorites">Favorites</Link>
+              <Link to="/Profil">
+                <img className="w-6" src={iconeLogin} alt="icone login" />
+              </Link>
+            </>
           )}
           <SearchBarLoupe />
         </div>
