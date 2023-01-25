@@ -74,7 +74,7 @@ id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 id_user INT NOT NULL,
 id_video INT NOT NULL,
 CONSTRAINT video_user UNIQUE (id_user,id_video),
-Foreign Key (id_user) REFERENCES user(id),
+Foreign Key (id_user) REFERENCES user(id) ON DELETE CASCADE,
 Foreign Key (id_video) REFERENCES video(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

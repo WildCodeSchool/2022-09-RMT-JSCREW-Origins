@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { CSVLink } from "react-csv";
+import { useNavigate } from "react-router-dom";
 
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -8,7 +9,10 @@ import ButtonTemplate from "@components/ButtonTemplate";
 import corbeille from "@assets/poubelle-de-recyclage.png";
 import share from "@assets/share.png";
 
+import User from "../../contexts/UserContext";
+
 function Users() {
+  const { user, handleUser } = useContext(User.UserContext);
   const [myUsers, setMyUsers] = useState([
     {
       id: null,
@@ -16,6 +20,8 @@ function Users() {
       email: "",
     },
   ]);
+
+  const navigate = useNavigate();
 
   const notify = (msg) => {
     toast(msg);
@@ -32,9 +38,9 @@ function Users() {
     getUsers();
   }, []);
 
-  const handleAdmin = (bool, user) => {
+  const handleAdmin = (bool, oneUser) => {
     apiConnection
-      .put(`/userRole/${user.id}`, { ...user, isAdmin: bool })
+      .put(`/userRole/${oneUser.id}`, { ...oneUser, isAdmin: bool })
       .then(() => {
         notify("Updated has been successfully");
         getUsers();
@@ -42,13 +48,17 @@ function Users() {
       .catch((error) => console.error(error));
   };
 
-  const userDelete = (user) => {
+  const userDelete = (oneUser) => {
     if (myUsers.email !== "admin1@mail.com") {
       apiConnection
-        .delete(`/userRole/${user.id}`)
+        .delete(`/userRole/${oneUser.id}`)
         .then(() => {
           notify("User has been successfully Deleted");
           getUsers();
+          if (user.id === oneUser.id) {
+            handleUser(null);
+            navigate("/");
+          }
         })
         .catch((error) => console.error(error));
     } else {
@@ -107,38 +117,38 @@ function Users() {
                 </tr>
               </thead>
               <tbody>
-                {myUsers.map((user) => (
-                  <tr key={user.id}>
+                {myUsers.map((OneUser) => (
+                  <tr key={OneUser.id}>
                     <td className="bg-gray-50 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {user.id}
+                      {OneUser.id}
                     </td>
                     <td className="bg-gray-50 text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {user.email}
+                      {OneUser.email}
                     </td>
                     <td className="bg-gray-50 text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {user.isAdmin === 0 && (
+                      {OneUser.isAdmin === 0 && (
                         <ButtonTemplate
                           buttonType="button"
                           buttonText="USER"
                           buttonStyle="border-solid text-sm border-gray-400 text-gray-400 border-2 rounded-md p-2 hover:bg-primary hover:text-white hover:border-primary"
-                          methodOnClick={() => handleAdmin(1, user)}
+                          methodOnClick={() => handleAdmin(1, OneUser)}
                         />
                       )}
-                      {user.isAdmin === 1 && (
+                      {OneUser.isAdmin === 1 && (
                         <ButtonTemplate
                           buttonType="button"
                           buttonText="ADMIN"
                           buttonStyle="bg-primary text-sm border-solid border-primary border-2 rounded-md p-2 text-white hover:bg-white hover:text-gray-400 hover:border-gray-400"
-                          methodOnClick={() => handleAdmin(0, user)}
+                          methodOnClick={() => handleAdmin(0, OneUser)}
                         />
                       )}
                     </td>
-                    {user.id !== 1 && (
+                    {OneUser.id !== 1 && (
                       <td>
                         <button
                           type="button"
                           className="m-3 w-5"
-                          onClick={() => userDelete(user)}
+                          onClick={() => userDelete(OneUser)}
                         >
                           <img src={corbeille} alt="corbeille" />
                         </button>
