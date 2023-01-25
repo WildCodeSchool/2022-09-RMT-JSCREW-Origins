@@ -278,7 +278,7 @@ function OneVideo() {
           {video && (
             <div className="mt-3 md:mt-10">
               <TemplateCstmrSlider1
-                url={`/sliderCategory/${video?.id_Category}`}
+                url={`/slidersCategory/${video?.id_Category}`}
               />
             </div>
           )}
