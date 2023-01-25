@@ -89,7 +89,7 @@ function Login() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - Login</title>
+        <title>Origin's - Login</title>
         <meta
           name="Login"
           content="Log in to your back-office dashboard to manage your website and its content. Keep your account information up to date and customize the appearance and functionality of your site."
