@@ -95,7 +95,7 @@ function OneVideo() {
         <div className="pt-20 text-white h-full">
           {video && (
             <>
-              <div className="flex flex-col h-full md:flex md:flex-row md:h-3/6">
+              <div className="flex flex-col md:flex md:flex-row">
                 {(user || video.Premium === 0) && (
                   <iframe
                     className="w-full px-5 md:w-3/5 md:pl-10"
@@ -194,11 +194,13 @@ function OneVideo() {
                 </div>
                 {/* Infos de la vidéo (titre, description, etc.) */}
                 <div className="px-5 md:px-10 md:pb-10 md:pt-0 md:w-2/5">
-                  <h1 className="md:text-5xl text-2xl md:mb-5">{video.Name}</h1>
-                  <h2 className="text-xl md:text-4xl md:mb-5">
+                  <h1 className="md:text-3xl text-2xl md:mb-5">{video.Name}</h1>
+                  <h2 className="text-xl md:text-2xl md:mb-5">
                     {video.Category}
                   </h2>
-                  <p className="md:text-2xl">{video.Description}</p>
+                  <p className="text-md overflow-y-auto h-36">
+                    {video.Description}
+                  </p>
                 </div>
               </div>
               {/* Boutons de partage v desktop */}
