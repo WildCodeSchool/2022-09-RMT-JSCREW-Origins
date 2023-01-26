@@ -22,9 +22,9 @@ export default function Nav() {
         <div className="flex flex-col">
           <div className="flex flex-col space-y-5">
             <Link
-              to="Setting"
+              to="Settings"
               className={`flex ${
-                location.pathname.endsWith("Dashboard/Setting")
+                location.pathname.endsWith("Dashboard/Settings")
                   ? "text-secondary"
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}
@@ -87,9 +87,9 @@ export default function Nav() {
               </div>
             </div>
             <Link
-              to="Video"
+              to="Videos"
               className={`flex ${
-                location.pathname.endsWith("Dashboard/Video")
+                location.pathname.endsWith("Dashboard/Videos")
                   ? "text-secondary"
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}
@@ -97,9 +97,9 @@ export default function Nav() {
               <p className="text-base leading-4">Videos</p>
             </Link>
             <Link
-              to="Category"
+              to="Categories"
               className={`flex ${
-                location.pathname.endsWith("Dashboard/Category")
+                location.pathname.endsWith("Dashboard/Categories")
                   ? "text-secondary"
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}

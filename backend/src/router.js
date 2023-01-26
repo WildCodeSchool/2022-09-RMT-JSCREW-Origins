@@ -5,7 +5,7 @@ const router = express.Router();
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
-const sliderControllers = require("./controllers/sliderContollers");
+const sliderControllers = require("./controllers/sliderControllers");
 const sendMailControllers = require("./controllers/sendMailControllers");
 const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
 const favoriteControllers = require("./controllers/favoriteControllers");
@@ -33,11 +33,11 @@ router.post("/login", validators.checkUser, settingControllers.validateUser);
 
 router.post("/sendEmail", sendMailControllers.sendMail);
 
-router.get("/slider", sliderControllers.browse);
-router.get("/slider/:id", sliderControllers.read);
+router.get("/sliders", sliderControllers.browse);
+router.get("/sliders/:id", sliderControllers.read);
 
-router.get("/sliderCategory", sliderCategoryControllers.browse);
-router.get("/sliderCategory/:id", sliderCategoryControllers.read);
+router.get("/slidersCategory", sliderCategoryControllers.browse);
+router.get("/slidersCategory/:id", sliderCategoryControllers.read);
 
 router.use(checkAuth);
 
