@@ -19,7 +19,7 @@ function NavCustmr() {
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="flex flex-col fixed z-[2] text-white p-4 w-full sm:bg-primary/75 md:bg-primary/0 md:bg-gradient-to-b md:from-primary md:h-60">
+    <nav className="flex flex-col fixed z-[2] text-white p-4 w-full sm:bg-primary/75 md:bg-primary/0 md:bg-gradient-to-b from-primary md:h-35">
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between">
         <button
@@ -59,15 +59,15 @@ function NavCustmr() {
             <button
               type="button"
               onClick={() => navToPages("/All-videos")}
-              className="hover:text-secondary hover:font-bold mb-5"
+              className="hover:text-secondary hover:font-bold text-2xl mb-5"
             >
               All videos
             </button>
             {user?.isAdmin === 1 && (
               <button
                 type="button"
-                onClick={() => navToPages("/Dashboard/Settings")}
-                className="hover:text-secondary hover:font-bold mb-5"
+                onClick={() => navToPages("/Dashboard/Setting")}
+                className="hover:text-secondary hover:font-bold text-2xl mb-5"
               >
                 Dashboard
               </button>
@@ -77,14 +77,14 @@ function NavCustmr() {
                 <button
                   type="button"
                   onClick={() => navToPages("/Profil")}
-                  className="hover:text-secondary hover:font-bold mb-2"
+                  className="hover:text-secondary hover:font-bold text-2xl mb-2"
                 >
                   Profil
                 </button>
                 <button
                   type="button"
                   onClick={() => navToPages("/Favorites")}
-                  className="hover:text-secondary hover:font-bold mb-2"
+                  className="hover:text-secondary hover:font-bold text-2xl mb-2"
                 >
                   Favorites
                 </button>
@@ -94,7 +94,7 @@ function NavCustmr() {
               <button
                 type="button"
                 onClick={() => navToPages("/Login")}
-                className="hover:text-secondary hover:font-bold mb-2"
+                className="hover:text-secondary hover:font-bold text-2xl mb-2"
               >
                 Login
               </button>
@@ -107,7 +107,7 @@ function NavCustmr() {
         <Link to="/">
           <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
-        <div className="flex justify-end gap-4 items-center">
+        <div className="flex justify-end gap-4 items-center text-2xl">
           <Link to="/All-videos">All videos</Link>
           {user?.isAdmin === 1 && (
             <Link to="Dashboard/Settings">Dashboard</Link>
