@@ -71,7 +71,7 @@ function Users() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - User Manager</title>
+        <title>Origin's Dashboard - Users</title>
         <meta
           name="description"
           content="Manage your website users on this dashboard page. Update user information, assign roles, and view user activity in one convenient location."
