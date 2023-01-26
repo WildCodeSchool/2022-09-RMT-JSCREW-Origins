@@ -95,7 +95,7 @@ function OneVideo() {
         <div className="pt-20 text-white h-full">
           {video && (
             <>
-              <div className="flex flex-col md:flex md:flex-row">
+              <div className="flex flex-col md:flex md:flex-row md:pt-10">
                 {(user || video.Premium === 0) && (
                   <iframe
                     className="w-full px-5 md:w-3/5 md:pl-10"
@@ -198,7 +198,7 @@ function OneVideo() {
                   <h2 className="text-xl md:text-2xl md:mb-5">
                     {video.Category}
                   </h2>
-                  <p className="text-md overflow-y-auto h-36">
+                  <p className="text-md overflow-y-auto md:h-36 lg:h-60">
                     {video.Description}
                   </p>
                 </div>
