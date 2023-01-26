@@ -12,7 +12,7 @@ const sliderCategoryControllers = require("./controllers/sliderCategoryControlle
 
 const validators = require("./services/validators");
 
-const upload = multer({ dest: "public/uploads" });
+const upload = multer({ dest: "public/uploads", limits: { fileSize: 500000 } });
 
 const checkAuth = require("./middleware/auth");
 
@@ -43,7 +43,7 @@ router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 router.put(
   "/videos/:id",
   upload.single("screenshot"),
-  validators.validateVideo,
+  validators.validateUpdateVideo,
   videoControllers.edit
 );
 router.post(

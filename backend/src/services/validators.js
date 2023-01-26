@@ -34,19 +34,32 @@ const checkUser = (req, res, next) => {
 };
 
 const videoSchema = Joi.object({
+  id: Joi.number().min(1).optional(),
   Name: Joi.string().min(2).max(500).required(),
   id_Category: Joi.number().min(1).required(),
   Url: Joi.string().max(1000).required(),
   Description: Joi.string().max(1000).required(),
+  Screenshot: Joi.string().max(1000).optional(),
   Premium: Joi.number().max(2).required(),
 });
 
 const validateVideo = (req, res, next) => {
   const video = JSON.parse(req.body.data);
   const { error } = videoSchema.validate(video, { abortEarly: false });
-
   if (error) {
     fs.unlinkSync(`public/uploads/${req.file.filename}`);
+    res.status(422).json({ validationErrors: error.details });
+  } else {
+    req.video = video;
+    next();
+  }
+};
+
+const validateUpdateVideo = (req, res, next) => {
+  const video = JSON.parse(req.body.data);
+  const { error } = videoSchema.validate(video, { abortEarly: false });
+  if (error) {
+    // fs.unlinkSync(`public/uploads/${req.file.filename}`);
     res.status(422).json({ validationErrors: error.details });
   } else {
     req.video = video;
@@ -58,4 +71,5 @@ module.exports = {
   validateCategory,
   checkUser,
   validateVideo,
+  validateUpdateVideo,
 };

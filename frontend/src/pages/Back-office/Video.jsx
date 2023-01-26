@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import { ImCross } from "react-icons/im";
 
 import apiConnection from "@services/apiConnection";
 import validateVideo from "@services/videoValidators";
@@ -69,7 +71,15 @@ function Video() {
       Description: "",
       Premium: "",
     });
+    inputRef.current.value = null;
     setReset(!reset);
+  };
+
+  /**
+   * Fonction qui gére la suppression du screenshot avec l'icone
+   */
+  const deleteScreenshot = () => {
+    setVideo({ ...video, Screenshot: "" });
   };
 
   /**
@@ -152,8 +162,11 @@ function Video() {
     const { status, errorMessage } = validateVideo(video);
 
     if (status) {
+      const formData = new FormData();
+      formData.append("screenshot", inputRef.current.files[0]);
+      formData.append("data", JSON.stringify(video));
       apiConnection
-        .put(`/videos/${video.id}`, video)
+        .put(`/videos/${video.id}`, formData)
         .then(() => {
           notify("video successfully updated!");
           getAllVideos();
@@ -223,7 +236,20 @@ function Video() {
             methodOnChange={handleInputOnChange}
             name="Url"
           />
-          <input type="file" name="screenshot" ref={inputRef} />
+          {video.Screenshot && (
+            <div>
+              <ImCross onClick={deleteScreenshot} />
+              <img
+                src={`${import.meta.env.VITE_BACKEND_URL}/${video.Screenshot}`}
+              />
+            </div>
+          )}
+          <input
+            className="w-3/4 lg:w-7/12 border-solid border-primary border-2 rounded-md p-3"
+            type="file"
+            name="screenshot"
+            ref={inputRef}
+          />
           <TextareaTemplate
             textPlaceholder="Description"
             customWidth="cstm_width_XlInput "

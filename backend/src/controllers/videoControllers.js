@@ -46,25 +46,48 @@ const readvideo = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const video = req.body;
-
-  // TODO validations (length, format...)
-
-  video.id = parseInt(req.params.id, 10);
-
-  models.video
-    .update(video)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
+  if (req.file) {
+    const { originalname, filename } = req.file;
+    const originalNameArray = originalname.split(".");
+    const ext = originalNameArray.pop();
+    const finalName = `${originalNameArray.join("")}_${Date.now()}.${ext}`;
+    fs.rename(
+      `public/uploads/${filename}`,
+      `public/uploads/${finalName}`,
+      (err) => {
+        if (err) throw err;
+        req.video.Screenshot = `uploads/${finalName}`;
+        models.video
+          .update(req.video)
+          .then(([result]) => {
+            if (result.affectedRows === 0) {
+              res.sendStatus(404);
+            } else {
+              res.sendStatus(204);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            res.sendStatus(500);
+          });
       }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+    );
+  } else {
+    delete req.video.Screenshot;
+    models.video
+      .update(req.video)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+  }
 };
 
 const add = (req, res) => {
@@ -77,7 +100,7 @@ const add = (req, res) => {
     `public/uploads/${finalName}`,
     (err) => {
       if (err) throw err;
-      req.video.screenshot = finalName;
+      req.video.Screenshot = `uploads/${finalName}`;
       models.video
         .insert(req.video)
         .then(([result]) => {
