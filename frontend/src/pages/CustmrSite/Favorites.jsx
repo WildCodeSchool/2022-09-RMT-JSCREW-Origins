@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 import apiConnection from "@services/apiConnection";
 import User from "../../contexts/UserContext";
 
@@ -36,6 +37,14 @@ function Favorites() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's - Favorites</title>
+        <meta
+          name="description"
+          content="View and manage your favorite e-sports videos on this page. Keep track of your favorite matches and players, and easily access your favorite content on Origin's."
+        />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
