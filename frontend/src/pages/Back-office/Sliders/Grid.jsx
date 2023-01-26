@@ -7,7 +7,7 @@ function Grid() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - Grid Manager</title>
+        <title>Origin's Dashboard - Grid</title>
         <meta
           name="description"
           content="Manage the video grid page. Add, edit, and delete videos to keep the grid up-to-date and relevant."
