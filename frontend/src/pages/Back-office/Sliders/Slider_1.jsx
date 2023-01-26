@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import apiConnection from "@services/apiConnection";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 import CardTemplate from "@components/CardTemplate";
 import SearchBarTemplate from "@components/SearchBarTemplate";
@@ -107,6 +108,14 @@ function Slider1() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's Dashboard - Slider 1</title>
+        <meta
+          name="description"
+          content="Manage the e-sports slider on this page. Add, edit, and delete e-sports videos to keep the slider up-to-date and relevant."
+        />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
