@@ -22,7 +22,7 @@ function Video() {
   const [video, setVideo] = useState({
     id: null,
     Name: "",
-    id_Category: "",
+    id_Category: null,
     Url: "",
     Description: "",
     Premium: 0,
@@ -141,7 +141,7 @@ function Video() {
         setVideo({
           id: null,
           Name: "",
-          id_Category: "",
+          id_Category: null,
           Url: "",
           Description: "",
           Premium: 0,
@@ -231,6 +231,7 @@ function Video() {
             textPlaceholder="Search category"
             textButton="Choose category"
             methodOnClick={handleCategoryVideo}
+            preSelectedValue={video.id_Category}
           />
           <InputTemplate
             textPlaceholder="URL"

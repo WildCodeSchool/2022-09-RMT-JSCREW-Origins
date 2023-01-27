@@ -15,6 +15,7 @@ function SearchBar({
   customWidth,
   methodOnClick,
   reset,
+  preSelectedValue,
 }) {
   const ref = useRef();
   const [displayData, setDisplayData] = useState(false);
@@ -36,6 +37,17 @@ function SearchBar({
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [displayData]);
+
+  useEffect(() => {
+    if (preSelectedValue) {
+      const selectedObj = data.find(
+        (el) => el.id === parseInt(preSelectedValue, 10)
+      );
+      setSearchData(selectedObj.Name);
+    } else {
+      setSearchData("");
+    }
+  }, [preSelectedValue]);
 
   useEffect(() => {
     setSearchData("");
