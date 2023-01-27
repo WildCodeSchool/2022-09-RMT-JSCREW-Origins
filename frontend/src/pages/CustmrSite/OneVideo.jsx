@@ -98,7 +98,7 @@ function OneVideo() {
               <div className="flex flex-col md:flex md:flex-row md:pt-10">
                 {(user || video.Premium === 0) && (
                   <iframe
-                    className="w-full px-5 md:w-3/5 md:pl-10"
+                    className="md:w-3/5 h-80 md:h-auto md:pl-10"
                     title={video.Name}
                     src={video.Url}
                     frameBorder="0"
