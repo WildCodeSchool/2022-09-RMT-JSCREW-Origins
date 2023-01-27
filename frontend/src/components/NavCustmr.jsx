@@ -19,7 +19,7 @@ function NavCustmr() {
 
   return (
     // Si on est dirigé vers le dashboard, la nav disparraît
-    <nav className="flex flex-col fixed z-[2] text-white p-7 w-full bg-primary/75 md:bg-transparent">
+    <nav className="flex flex-col fixed z-[2] text-white p-4 w-full bg-primary/75 md:bg-primary/0 md:bg-gradient-to-b md:from-primary md:h-35">
       {/* Version Mobile */}
       <ul className="md:hidden flex justify-between">
         <button
@@ -59,7 +59,7 @@ function NavCustmr() {
             <button
               type="button"
               onClick={() => navToPages("/All-videos")}
-              className="hover:text-secondary hover:font-bold mb-5"
+              className="hover:text-secondary hover:font-bold text-2xl mb-5"
             >
               All videos
             </button>
@@ -67,25 +67,34 @@ function NavCustmr() {
               <button
                 type="button"
                 onClick={() => navToPages("/Dashboard/Setting")}
-                className="hover:text-secondary hover:font-bold mb-5"
+                className="hover:text-secondary hover:font-bold text-2xl mb-5"
               >
                 Dashboard
               </button>
             )}
-            {user?.isAdmin === 1 && (
-              <button
-                type="button"
-                onClick={() => navToPages("/Profil")}
-                className="hover:text-secondary hover:font-bold mb-2"
-              >
-                Profil
-              </button>
+            {user && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => navToPages("/Profil")}
+                  className="hover:text-secondary hover:font-bold text-2xl mb-2"
+                >
+                  Profil
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navToPages("/Favorites")}
+                  className="hover:text-secondary hover:font-bold text-2xl mb-2"
+                >
+                  Favorites
+                </button>
+              </>
             )}
-            {user?.isAdmin !== 1 && (
+            {!user && (
               <button
                 type="button"
                 onClick={() => navToPages("/Login")}
-                className="hover:text-secondary hover:font-bold mb-2"
+                className="hover:text-secondary hover:font-bold text-2xl mb-2"
               >
                 Login
               </button>
@@ -94,22 +103,27 @@ function NavCustmr() {
         </div>
       )}
       {/* Version Desktop */}
-      <ul className="hidden md:flex justify-between row-span-full">
+      <ul className="hidden md:flex justify-between row-span-full m-2">
         <Link to="/">
           <img className="w-40" src={logoOrigins} alt="logo origins" />
         </Link>
-        <div className="flex justify-end gap-4 items-center">
+        <div className="flex justify-end gap-4 items-center text-2xl">
           <Link to="/All-videos">All videos</Link>
-          {user?.isAdmin === 1 && <Link to="Dashboard/Setting">Dashboard</Link>}
-          {user?.isAdmin !== 1 && (
+          {user?.isAdmin === 1 && (
+            <Link to="Dashboard/Settings">Dashboard</Link>
+          )}
+          {!user && (
             <Link to="/Login">
               <img className="w-6" src={iconeLogin} alt="icone login" />
             </Link>
           )}
-          {user?.isAdmin === 1 && (
-            <Link to="/Profil">
-              <img className="w-6" src={iconeLogin} alt="icone login" />
-            </Link>
+          {user && (
+            <>
+              <Link to="/Favorites">Favorites</Link>
+              <Link to="/Profil">
+                <img className="w-6" src={iconeLogin} alt="icone login" />
+              </Link>
+            </>
           )}
           <SearchBarLoupe />
         </div>

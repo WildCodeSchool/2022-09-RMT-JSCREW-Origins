@@ -31,7 +31,7 @@ function TemplateCstmrSlider1({ url }) {
     <div className="w-full">
       <div className="w-full">
         <div className="flex flex-col items-start gap-1 w-full h-full py-6 sm:py-6 px-2">
-          <h1 className="text-white mb-2 ml-3">
+          <h1 className="text-white mb-2 ml-3 text-2xl">
             {sliders[0]?.category ? sliders[0].category : "titre"}
           </h1>
           {/* Carousel for desktop and large size devices */}
@@ -75,7 +75,7 @@ function TemplateCstmrSlider1({ url }) {
                   >
                     {sliders.map((slider) => (
                       <Slide key={slider.id}>
-                        <Link to={`/Videos/${slider.id}`}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
                             <iframe
                               className="w-full h-2/4 align-baseline"

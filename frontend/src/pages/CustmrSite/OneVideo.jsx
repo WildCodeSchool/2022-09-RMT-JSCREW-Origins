@@ -14,16 +14,56 @@ import User from "../../contexts/UserContext";
 function OneVideo() {
   const { user } = useContext(User.UserContext);
   const [video, setVideo] = useState();
-  const navigate = useNavigate();
+  const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  const getOneVideo = () => {
     apiConnection
       .get(`/videos/${id}`)
       .then((oneVideo) => {
         setVideo(oneVideo.data);
       })
       .catch((err) => console.error(err));
+  };
+
+  const checkIfFavorite = () => {
+    if (video && video.id !== null) {
+      apiConnection
+        .get(`/favorites/${video.id}`)
+        .then((favorite) => {
+          if (favorite.data !== null) {
+            setIsFavorite(true);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  const handleFavorite = (idVideo) => {
+    if (!isFavorite) {
+      apiConnection
+        .post(`/favorites/${idVideo}`)
+        .then(() => {
+          setIsFavorite(true);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      apiConnection
+        .delete(`/favorites/${idVideo}`)
+        .then(() => {
+          setIsFavorite(false);
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  useEffect(() => {
+    checkIfFavorite();
+  }, [video]);
+
+  useEffect(() => {
+    getOneVideo();
   }, []);
 
   return (
@@ -51,41 +91,67 @@ function OneVideo() {
           href={`${import.meta.env.VITE_FRONTEND_URL}/assets/logo.png`}
         />
       </Helmet>
-      <div className="h-screen bg-primary">
+      <div className="pt-5 bg-primary">
         <div className="pt-20 text-white h-full">
           {video && (
-            <div className="md:flex md:pl-10 h-full">
-              {(user || video.Premium === 0) && (
-                <iframe
-                  className="w-full h-2/4 md:w-3/5 md:h-4/6 md:pl-10"
-                  title={video.Name}
-                  src={video.Url}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-              {!user && video.Premium === 1 && (
-                <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
-                  <RiLock2Fill className="text-7xl md:text-9xl mt-5 md:mt-20" />
-                  <p className="text-1xl mt-3 md:text-4xl md:mt-10">
-                    This video is only available in premium
-                  </p>
-                  <ButtonTemplate
-                    buttonType="button"
-                    buttonText="SUBSCRIBE"
-                    buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
-                    methodOnClick={() => navigate("/Login")}
+            <>
+              <div className="flex flex-col md:flex md:flex-row md:pt-10">
+                {(user || video.Premium === 0) && (
+                  <iframe
+                    className="md:w-3/5 h-80 md:h-auto md:pl-10"
+                    title={video.Name}
+                    src={video.Url}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
-                </div>
-              )}
-              <div className="p-10 md:w-2/5">
-                <h1 className="md:text-6xl text-2xl md:mb-5">{video.Name}</h1>
-                <h2 className="text-xl md:text-5xl md:mb-5">
-                  {video.Category}
-                </h2>
-                <p className="md:text-3xl">{video.Description}</p>
-                <div className="flex items-center gap-3 mt-3">
+                )}
+                {!user && video.Premium === 1 && (
+                  <div className="md:w-3/5 md:h-4/6  flex flex-col items-center justifier-center text-center mt-5 bg-[#00162B] rounded-3xl mx-5">
+                    <RiLock2Fill className="text-7xl md:text-9xl mt-5 md:mt-20" />
+                    <p className="text-1xl mt-3 md:text-4xl md:mt-10">
+                      This video is only available in premium
+                    </p>
+                    <ButtonTemplate
+                      buttonType="button"
+                      buttonText="SUBSCRIBE"
+                      buttonStyle="cstm_buttonSecondary mt-4 md:mt-10 mb-6"
+                      methodOnClick={() => navigate("/Login")}
+                    />
+                  </div>
+                )}
+                {/* Boutons de partage v mobile */}
+                <div className="flex items-center gap-3 mt-3 md:hidden">
+                  {/* Bouton favoris */}
+                  <button
+                    onClick={() => handleFavorite(video.id)}
+                    type="button"
+                    className="pl-5 p-2 "
+                  >
+                    {!isFavorite && (
+                      <svg
+                        width={25}
+                        height={25}
+                        fill="#f0f0f0"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21ZM7.22 6a3.2 3.2 0 0 0-2.28.94 3.24 3.24 0 0 0 0 4.57L12 18.58l7.06-7.07a3.24 3.24 0 0 0 0-4.57 3.32 3.32 0 0 0-4.56 0l-1.79 1.8a1 1 0 0 1-1.42 0L9.5 6.94A3.2 3.2 0 0 0 7.22 6Z" />
+                      </svg>
+                    )}
+                    {isFavorite && (
+                      <svg
+                        width={25}
+                        height={25}
+                        fill="#ff680a"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21Z" />
+                      </svg>
+                    )}
+                  </button>
+                  {/* Boutons de partage */}
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
                       import.meta.env.VITE_FRONTEND_URL
@@ -126,13 +192,97 @@ function OneVideo() {
                     <SiLinkedin />
                   </a>
                 </div>
+                {/* Infos de la vidéo (titre, description, etc.) */}
+                <div className="px-5 md:px-10 md:pb-10 md:pt-0 md:w-2/5">
+                  <h1 className="md:text-3xl text-2xl md:mb-5">{video.Name}</h1>
+                  <h2 className="text-xl md:text-2xl md:mb-5">
+                    {video.Category}
+                  </h2>
+                  <p className="text-md overflow-y-auto md:h-36 lg:h-60">
+                    {video.Description}
+                  </p>
+                </div>
               </div>
-            </div>
+              {/* Boutons de partage v desktop */}
+              <div className="hidden md:flex items-center gap-3 m-5">
+                {/* Bouton favoris */}
+                <button
+                  onClick={() => handleFavorite(video.id)}
+                  type="button"
+                  className="pl-5 p-2 "
+                >
+                  {!isFavorite && (
+                    <svg
+                      width={25}
+                      height={25}
+                      fill="#f0f0f0"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21ZM7.22 6a3.2 3.2 0 0 0-2.28.94 3.24 3.24 0 0 0 0 4.57L12 18.58l7.06-7.07a3.24 3.24 0 0 0 0-4.57 3.32 3.32 0 0 0-4.56 0l-1.79 1.8a1 1 0 0 1-1.42 0L9.5 6.94A3.2 3.2 0 0 0 7.22 6Z" />
+                    </svg>
+                  )}
+                  {isFavorite && (
+                    <svg
+                      width={25}
+                      height={25}
+                      fill="#ff680a"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21Z" />
+                    </svg>
+                  )}
+                </button>
+                {/* Boutons de partage */}
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
+                    import.meta.env.VITE_FRONTEND_URL
+                  }/videos/${id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    color: "#1b74e4",
+                    fontSize: "20px",
+                  }}
+                >
+                  <ImFacebook2 />
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=https%3A//${
+                    import.meta.env.VITE_FRONTEND_URL
+                  }/videos/8`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    color: "rgb(54 155 240)",
+                    fontSize: "23px",
+                  }}
+                >
+                  <FaTwitterSquare />
+                </a>
+                <a
+                  href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
+                    import.meta.env.VITE_FRONTEND_URL
+                  }/videos/8`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    color: "#2366c2",
+                    fontSize: "20px",
+                  }}
+                >
+                  <SiLinkedin />
+                </a>
+              </div>
+            </>
           )}
           {video && (
-            <TemplateCstmrSlider1
-              url={`/sliderCategory/${video?.id_Category}`}
-            />
+            <div className="mt-3 md:mt-10">
+              <TemplateCstmrSlider1
+                url={`/slidersCategory/${video?.id_Category}`}
+              />
+            </div>
           )}
         </div>
       </div>

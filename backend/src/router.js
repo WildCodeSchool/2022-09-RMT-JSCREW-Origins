@@ -6,9 +6,10 @@ const router = express.Router();
 const categoryControllers = require("./controllers/categoryControllers");
 const videoControllers = require("./controllers/videoControllers");
 const settingControllers = require("./controllers/settingControllers");
-const sliderControllers = require("./controllers/sliderContollers");
+const sliderControllers = require("./controllers/sliderControllers");
 const sendMailControllers = require("./controllers/sendMailControllers");
 const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
+const favoriteControllers = require("./controllers/favoriteControllers");
 
 const validators = require("./services/validators");
 
@@ -35,11 +36,9 @@ router.post("/login", validators.checkUser, settingControllers.validateUser);
 
 router.post("/sendEmail", sendMailControllers.sendMail);
 
-router.get("/slider", sliderControllers.browse);
-router.get("/slider/:id", sliderControllers.read);
+router.get("/sliders", sliderControllers.browse);
+router.get("/sliders/:id", sliderControllers.read);
 
-router.get("/sliderCategory", sliderCategoryControllers.browse);
-router.get("/sliderCategory/:id", sliderCategoryControllers.read);
 router.put(
   "/videos/:id",
   upload.single("screenshot"),
@@ -52,6 +51,10 @@ router.post(
   validators.validateVideo,
   videoControllers.add
 );
+
+router.get("/slidersCategory", sliderCategoryControllers.browse);
+router.get("/slidersCategory/:id", sliderCategoryControllers.read);
+
 
 router.use(checkAuth);
 
@@ -77,10 +80,15 @@ router.put(
 router.delete("/categories/:id", categoryControllers.destroy);
 router.delete("/videos/:id", videoControllers.destroy);
 
-router.post("/slider", sliderControllers.add);
-router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
+router.post("/sliders", sliderControllers.add);
+router.delete("/sliders/:id", sliderControllers.destroyByIdVideo);
 
 router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
 router.post("/sliderCategory/:id", sliderCategoryControllers.add);
+
+router.get("/favorites", favoriteControllers.browse);
+router.get("/favorites/:id", favoriteControllers.read);
+router.post("/favorites/:id_video", favoriteControllers.add);
+router.delete("/favorites/:id", favoriteControllers.destroy);
 
 module.exports = router;
