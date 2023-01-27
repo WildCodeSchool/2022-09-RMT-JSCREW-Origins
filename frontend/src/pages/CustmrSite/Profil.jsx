@@ -94,9 +94,9 @@ function Profil() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - Profil</title>
+        <title>Origin's - Profil</title>
         <meta
-          name="Profil"
+          name="description"
           content="The Profile section of a website allows users to create a personal account and fill in information about their identity, interests and preferences. This allows users to personalize their experience on the site and facilitate interactions with other users."
         />
         <link rel="icon" type="image/png" href="../src/assets/logo.png" />
@@ -113,10 +113,10 @@ function Profil() {
         pauseOnHover
         theme="dark"
       />
-      <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-50 pb-60">
+      <div className="h-[75vh] bg-primary flex flex-col justify-center items-center gap-y-5 md:h-[90vh]">
         {mySetting && (
           <>
-            <h2 className="text-white">
+            <h2 className="text-white text-2xl">
               You can change your email address or password
             </h2>
             <ConnectForm

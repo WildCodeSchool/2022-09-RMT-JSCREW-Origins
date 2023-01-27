@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 import apiConnection from "@services/apiConnection";
 import User from "../../contexts/UserContext";
 
@@ -36,6 +37,14 @@ function Favorites() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Origin's - Favorites</title>
+        <meta
+          name="description"
+          content="View and manage your favorite e-sports videos on this page. Keep track of your favorite matches and players, and easily access your favorite content on Origin's."
+        />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={4000}
@@ -50,7 +59,9 @@ function Favorites() {
       />
       {user && (
         <div className="bg-primary flex flex-col items-center gap-y-5 pt-20">
-          <h1 className="my-5 text-white text-xl">All my favorites videos</h1>
+          <h1 className="my-5 text-white text-3xl text-xl">
+            All my favorites videos
+          </h1>
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 place-items-center mb-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {myFavorites.map((myFavorite) => (
               <div className="relative">

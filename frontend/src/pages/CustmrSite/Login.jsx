@@ -89,9 +89,9 @@ function Login() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - Login</title>
+        <title>Origin's - Login</title>
         <meta
-          name="Login"
+          name="description"
           content="Log in to your back-office dashboard to manage your website and its content. Keep your account information up to date and customize the appearance and functionality of your site."
         />
       </Helmet>
@@ -107,7 +107,7 @@ function Login() {
         pauseOnHover
         theme="dark"
       />
-      <div className="h-screen bg-primary flex flex-col justify-center items-center gap-y-5 pt-20">
+      <div className="h-[60vh] bg-primary flex flex-col justify-center items-center gap-y-5 pt-20 md:h-[70vh]">
         {!displayRegisterForm && !user && (
           <>
             <p className="text-white">Enter your credentials to connect</p>

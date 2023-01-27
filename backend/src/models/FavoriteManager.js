@@ -19,7 +19,7 @@ class ItemManager extends AbstractManager {
   findFavoriteByUser(videoId, userId) {
     return this.connection.query(
       `select * from ${this.table}
-      where id_user = ? and id_video = ?`,
+      where id_video = ? and id_user = ?`,
       [videoId, userId]
     );
   }
