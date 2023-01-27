@@ -95,6 +95,24 @@ const edit = async (req, res) => {
   else res.sendStatus(401);
 };
 
+const editRole = (req, res) => {
+  if (req.auth.id)
+    models.user
+      .updateRole(req.body.isAdmin, req.params.id)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  else res.sendStatus(401);
+};
+
 const destroy = (req, res) => {
   if (req.auth.id)
     models.user
@@ -113,11 +131,31 @@ const destroy = (req, res) => {
   else res.sendStatus(401);
 };
 
+const destroyRole = (req, res) => {
+  if (req.params.id !== "1")
+    models.user
+      .delete(req.params.id)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  else res.sendStatus(401);
+};
+
 module.exports = {
   browse,
   read,
   edit,
+  editRole,
   add,
   destroy,
+  destroyRole,
   validateUser,
 };

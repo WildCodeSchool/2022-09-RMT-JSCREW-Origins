@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
+import ButtonTemplate from "@components/ButtonTemplate";
 import apiConnection from "@services/apiConnection";
 import ConnectForm from "@components/ConnectForm";
-import ButtonTemplate from "@components/ButtonTemplate";
 import ModalSuppression from "@components/ModalSuppression";
 import User from "../../contexts/UserContext";
 
-function Setting() {
+function Profil() {
   const navigate = useNavigate();
-  const { user } = useContext(User.UserContext);
+  const { user, handleUser } = useContext(User.UserContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [mySetting, setMySetting] = useState({
     id: null,
@@ -85,19 +85,25 @@ function Setting() {
     }
   };
 
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
+  };
+
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Origin's Dashboard - Setting</title>
+        <title>Origin's - Profil</title>
         <meta
           name="description"
-          content="Configure the settings for your website from this page of your back office dashboard. Edit your account information, set up security, and customize the appearance of your site."
+          content="The Profile section of a website allows users to create a personal account and fill in information about their identity, interests and preferences. This allows users to personalize their experience on the site and facilitate interactions with other users."
         />
+        <link rel="icon" type="image/png" href="../src/assets/logo.png" />
       </Helmet>
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -107,11 +113,15 @@ function Setting() {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex flex-col items-center w-full pt-10 gap-y-7">
+      <div className="h-[75vh] bg-primary flex flex-col justify-center items-center gap-y-5 md:h-[90vh]">
         {mySetting && (
           <>
+            <h2 className="text-white text-2xl">
+              You can change your email address or password
+            </h2>
             <ConnectForm
               dataUsers={mySetting}
+              cstmStyle="bg-white"
               handleInputOnChange={handleInputOnChange}
             />
             <div className="flex justify-around space-x-8 pt-5">
@@ -136,9 +146,17 @@ function Setting() {
             </div>
           </>
         )}
+        {user && (
+          <ButtonTemplate
+            buttonType="button"
+            buttonText="LOG OUT"
+            buttonStyle="cstm_cstmrButton mt-10"
+            methodOnClick={handleLogOut}
+          />
+        )}
       </div>
     </>
   );
 }
 
-export default Setting;
+export default Profil;

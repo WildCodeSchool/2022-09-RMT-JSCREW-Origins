@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import apiConnection from "@services/apiConnection";
 import {
@@ -9,33 +9,38 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { RiLock2Fill } from "react-icons/ri";
 
-function ClientSlider1() {
-  const [videos, setVideos] = useState([]);
+import User from "../contexts/UserContext";
+
+function TemplateCstmrSlider1({ url }) {
+  const { user } = useContext(User.UserContext);
+  const [sliders, setSliders] = useState([]);
 
   const getSlider = () => {
     apiConnection
-      .get(`/slider`)
-      .then((video) => setVideos(video.data))
+      .get(url)
+      .then((slider) => setSliders(slider.data))
       .catch((error) => console.error(error));
   };
 
   useEffect(() => {
     getSlider();
   }, []);
-
   return (
     <div className="w-full">
       <div className="w-full">
-        <div className="flex flex-col items-start gap-1 w-full h-full py-8 sm:py-8 px-4">
-          <h1 className="text-white ">Slider name</h1>
+        <div className="flex flex-col items-start gap-1 w-full h-full py-6 sm:py-6 px-2">
+          <h1 className="text-white mb-2 ml-3 text-2xl">
+            {sliders[0]?.category ? sliders[0].category : "titre"}
+          </h1>
           {/* Carousel for desktop and large size devices */}
           <CarouselProvider
             className="lg:block hidden"
             naturalSlideWidth={100}
             isIntrinsicHeight
-            totalSlides={6}
-            visibleSlides={4}
+            totalSlides={sliders.length}
+            visibleSlides={sliders.length < 4 ? 2 : 4}
             step={1}
             infinite
           >
@@ -68,22 +73,27 @@ function ClientSlider1() {
                     id="slider"
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
-                    {videos.map((video) => (
-                      <Slide key={video.id}>
-                        <Link to={`/Videos/${video.id}`}>
+                    {sliders.map((slider) => (
+                      <Slide key={slider.id}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
                             <iframe
                               className="w-full h-2/4 align-baseline"
-                              title={video.Name}
-                              src={video.Url}
+                              title={slider.Name}
+                              src={slider.Url}
                               frameBorder="0"
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                             />
+                            {!user && slider.Premium === 1 && (
+                              <div className="absolute bottom-0 right-0">
+                                <RiLock2Fill className="text-4xl text-white text-secondary" />
+                              </div>
+                            )}
                             <div className="bg-gray-800 bg-opacity-10 absolute w-full h-full p-6">
                               <div className="flex h-full items-end ">
                                 <h3 className="bg-gray-800 bg-opacity-80 font-semibold leading-5 lg:leading-6 text-white">
-                                  {video.Name}
+                                  {slider.Name}
                                 </h3>
                               </div>
                             </div>
@@ -124,7 +134,7 @@ function ClientSlider1() {
             className="lg:hidden sm:block hidden"
             naturalSlideWidth={100}
             isIntrinsicHeight
-            totalSlides={5}
+            totalSlides={sliders.length}
             visibleSlides={2}
             step={1}
             infinite
@@ -158,14 +168,14 @@ function ClientSlider1() {
                     id="slider"
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
-                    {videos.map((video) => (
-                      <Slide key={video.id}>
-                        <Link to={`/Videos/${video.id}`}>
+                    {sliders.map((slider) => (
+                      <Slide key={slider.id}>
+                        <Link to={`/Videos/${slider.id}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
                             <iframe
                               className="object-cover object-center w-full"
-                              title={video.Name}
-                              src={video.Url}
+                              title={slider.Name}
+                              src={slider.Url}
                               frameBorder="0"
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
@@ -173,7 +183,7 @@ function ClientSlider1() {
                             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                               <div className="flex h-full items-end pb-6">
                                 <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
-                                  {video.Name}
+                                  {slider.Name}
                                 </h3>
                               </div>
                             </div>
@@ -214,7 +224,7 @@ function ClientSlider1() {
             className="block sm:hidden "
             naturalSlideWidth={100}
             isIntrinsicHeight
-            totalSlides={8}
+            totalSlides={sliders.length}
             visibleSlides={1}
             step={1}
             infinite
@@ -248,14 +258,14 @@ function ClientSlider1() {
                     id="slider"
                     className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                   >
-                    {videos.map((video) => (
-                      <Slide key={video.id}>
-                        <Link to={`/Videos/${video.id}`}>
+                    {sliders.map((slider) => (
+                      <Slide key={slider.id}>
+                        <Link to={`/Videos/${slider.id}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
                             <iframe
                               className="object-cover object-center w-full"
-                              title={video.Name}
-                              src={video.Url}
+                              title={slider.Name}
+                              src={slider.Url}
                               frameBorder="0"
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
@@ -263,7 +273,7 @@ function ClientSlider1() {
                             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                               <div className="flex h-full items-end pb-6">
                                 <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
-                                  {video.Name}
+                                  {slider.Name}
                                 </h3>
                               </div>
                             </div>
@@ -304,4 +314,4 @@ function ClientSlider1() {
   );
 }
 
-export default ClientSlider1;
+export default TemplateCstmrSlider1;
