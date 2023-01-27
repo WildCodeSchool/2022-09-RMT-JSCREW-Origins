@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
-import { ImCross } from "react-icons/im";
 
 import apiConnection from "@services/apiConnection";
 import validateVideo from "@services/videoValidators";
@@ -16,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Video() {
   const [displayModal, setDisplayModal] = useState(false);
-  const [myVideo, setMyVideos] = useState([]);
+  const [myVideos, setMyVideos] = useState([]);
   const [myCategory, setMyCategories] = useState([]);
   const [reset, setReset] = useState(false);
   const inputRef = useRef(null);
@@ -27,6 +26,7 @@ function Video() {
     Url: "",
     Description: "",
     Premium: 0,
+    Screenshot: "",
   });
 
   const notify = (msg) => {
@@ -36,10 +36,15 @@ function Video() {
   /**
    * Fonction qui gère la récupération des données "video" avec axios
    */
-  const getAllVideos = () => {
+  const getAllVideos = (callback) => {
     apiConnection
       .get(`/videos`)
-      .then((videos) => setMyVideos(videos.data))
+      .then((videos) => {
+        setMyVideos(videos.data);
+        if (callback) {
+          callback(videos.data);
+        }
+      })
       .catch((error) => console.error(error));
   };
 
@@ -52,12 +57,6 @@ function Video() {
       .then((categories) => setMyCategories(categories.data))
       .catch((error) => console.error(error));
   };
-
-  // Pour que la donnée se mette à jour en live
-  useEffect(() => {
-    getAllVideos();
-    getAllCategories();
-  }, []);
 
   /**
    * Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une video
@@ -73,13 +72,6 @@ function Video() {
     });
     inputRef.current.value = null;
     setReset(!reset);
-  };
-
-  /**
-   * Fonction qui gére la suppression du screenshot avec l'icone
-   */
-  const deleteScreenshot = () => {
-    setVideo({ ...video, Screenshot: "" });
   };
 
   /**
@@ -109,6 +101,11 @@ function Video() {
 
   const handleCategoryVideo = (videoCategory) => {
     handleInputOnChange("id_Category", videoCategory.id);
+  };
+
+  const updateVideoState = (data) => {
+    const myVideo = data.find((vid) => vid.id === video.id);
+    setVideo(myVideo);
   };
 
   /**
@@ -169,13 +166,19 @@ function Video() {
         .put(`/videos/${video.id}`, formData)
         .then(() => {
           notify("video successfully updated!");
-          getAllVideos();
+          getAllVideos(updateVideoState);
         })
         .catch((error) => console.error(error));
     } else {
       notify(errorMessage);
     }
   };
+
+  // Pour que la donnée se mette à jour en live
+  useEffect(() => {
+    getAllVideos();
+    getAllCategories();
+  }, []);
 
   return (
     <>
@@ -203,7 +206,7 @@ function Video() {
         {/* SEARCHBAR */}
         <SearchBarTemplate
           reset={reset}
-          data={myVideo}
+          data={myVideos}
           customWidth="cstm_width_XlInput"
           searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search video"
@@ -238,7 +241,6 @@ function Video() {
           />
           {video.Screenshot && (
             <div>
-              <ImCross onClick={deleteScreenshot} />
               <img
                 src={`${import.meta.env.VITE_BACKEND_URL}/${video.Screenshot}`}
               />
