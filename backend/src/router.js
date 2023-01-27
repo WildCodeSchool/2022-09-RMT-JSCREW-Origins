@@ -65,8 +65,8 @@ router.put("/videos/:id", validators.validateVideo, videoControllers.edit);
 router.post("/videos", validators.validateVideo, videoControllers.add);
 router.delete("/videos/:id", videoControllers.destroy);
 
-router.post("/slider", sliderControllers.add);
-router.delete("/slider/:id", sliderControllers.destroyByIdVideo);
+router.post("/sliders", sliderControllers.add);
+router.delete("/sliders/:id", sliderControllers.destroyByIdVideo);
 
 router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
 router.post("/sliderCategory/:id", sliderCategoryControllers.add);
