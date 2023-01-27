@@ -58,7 +58,7 @@ Type INT NOT NULL,
 Foreign Key (id_Video) REFERENCES video(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1);
+INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 2);
 
 CREATE TABLE display_by_id (
 id INT NOT NULL PRIMARY KEY,

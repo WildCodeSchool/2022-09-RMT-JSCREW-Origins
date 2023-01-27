@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const { type } = req.query;
   models.play_by_id
-    .browseSlider1()
+    .browseSlider(type)
     .then(([playbyid]) => {
       res.send(playbyid);
     })
