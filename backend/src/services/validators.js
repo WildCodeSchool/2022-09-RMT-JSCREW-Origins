@@ -45,6 +45,7 @@ const videoSchema = Joi.object({
 
 const validateVideo = (req, res, next) => {
   const video = JSON.parse(req.body.data);
+  delete video.Screenshot;
   const { error } = videoSchema.validate(video, { abortEarly: false });
   if (error) {
     fs.unlinkSync(`public/uploads/${req.file.filename}`);

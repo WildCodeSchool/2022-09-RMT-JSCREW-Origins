@@ -56,6 +56,7 @@ const edit = (req, res) => {
       `public/uploads/${finalName}`,
       (err) => {
         if (err) throw err;
+        fs.unlinkSync(`public/${req.video.Screenshot}`);
         req.video.Screenshot = `uploads/${finalName}`;
         models.video
           .update(req.video)
