@@ -154,10 +154,7 @@ function Login() {
             <p className="text-white">
               Enter your credentials to create your account
             </p>
-            <form
-              onSubmit={validateCreateAccount}
-              className="flex flex-col items-center gap-y-7 w-full"
-            >
+            <form className="flex flex-col items-center gap-y-7 w-full">
               <ConnectForm
                 cstmStyle="bg-white"
                 dataUsers={infos}
