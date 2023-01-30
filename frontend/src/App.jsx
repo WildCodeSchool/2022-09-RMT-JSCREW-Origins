@@ -12,6 +12,7 @@ import Profil from "@pages/CustmrSite/Profil";
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
 import Users from "./pages/Back-office/Users";
+import HomeAdmin from "./pages/Back-office/HomeAdmin";
 import Setting from "./pages/Back-office/Setting";
 import Slider1 from "./pages/Back-office/Sliders/Slider_1";
 import Slider2 from "./pages/Back-office/Sliders/Slider_2";
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Categories" element={<Category />} />
             <Route path="Users" element={<Users />} />
+            <Route path="HomeAdmin" element={<HomeAdmin />} />
             <Route path="Settings" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
