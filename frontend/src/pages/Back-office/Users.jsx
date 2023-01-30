@@ -135,7 +135,7 @@ function Users() {
                       {OneUser.email}
                     </td>
                     <td className="bg-gray-50 text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {OneUser.isAdmin === 0 && (
+                      {OneUser.isAdmin === 0 && OneUser.id !== 1 && (
                         <ButtonTemplate
                           buttonType="button"
                           buttonText="USER"
@@ -143,7 +143,7 @@ function Users() {
                           methodOnClick={() => handleAdmin(1, OneUser)}
                         />
                       )}
-                      {OneUser.isAdmin === 1 && (
+                      {OneUser.isAdmin === 1 && OneUser.id !== 1 && (
                         <ButtonTemplate
                           buttonType="button"
                           buttonText="ADMIN"
