@@ -97,6 +97,10 @@ button {
   opacity: 0.7;
 }
 
-h1, h2, h3, nav, li {
-  font-family: 'Barlow Condensed', sans-serif;
+h1,
+h2,
+h3,
+nav,
+li {
+  font-family: "Barlow Condensed", sans-serif;
 }
