@@ -22,6 +22,16 @@ export default function Nav() {
         <div className="flex flex-col">
           <div className="flex flex-col space-y-5">
             <Link
+              to="HomeAdmin"
+              className={`flex ${
+                location.pathname.endsWith("Dashboard/HomeAdmin")
+                  ? "text-secondary"
+                  : "hover:text-secondary focus:text-secondary"
+              } text-white px-3 py-2 w-full`}
+            >
+              <p className="text-base leading-4">Home</p>
+            </Link>
+            <Link
               to="Settings"
               className={`flex ${
                 location.pathname.endsWith("Dashboard/Settings")
