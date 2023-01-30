@@ -48,7 +48,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonBack
                 role="button"
                 aria-label="slide backward"
-                className="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+                className="absolute z-30 bg-primary/75 p-3 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
                 id="prev"
               >
                 <svg
@@ -107,7 +107,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonNext
                 role="button"
                 aria-label="slide forward"
-                className="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                className="absolute z-30 bg-primary/75 p-3 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                 id="next"
               >
                 <svg
@@ -143,7 +143,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonBack
                 role="button"
                 aria-label="slide backward"
-                className="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+                className="absolute z-30 bg-primary/75 p-3 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
                 id="prev"
               >
                 <svg
@@ -197,7 +197,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonNext
                 role="button"
                 aria-label="slide forward"
-                className="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                className="absolute z-30 right-0 bg-primary/75 p-3 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                 id="next"
               >
                 <svg
@@ -233,7 +233,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonBack
                 role="button"
                 aria-label="slide backward"
-                className="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+                className="absolute z-30 left-0 bg-primary/75 p-3 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
                 id="prev"
               >
                 <svg
@@ -287,7 +287,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonNext
                 role="button"
                 aria-label="slide forward"
-                className="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                className="absolute z-30 right-0 bg-primary/75 p-3 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                 id="next"
               >
                 <svg
