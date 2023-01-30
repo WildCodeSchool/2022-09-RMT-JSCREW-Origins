@@ -59,6 +59,7 @@ router.get("/slidersCategory/:id", sliderCategoryControllers.read);
 router.use(checkAuth);
 
 router.get("/userCount", settingControllers.countUsers);
+router.get("/adminCount", settingControllers.countAdmin);
 router.get("/user", settingControllers.read);
 router.get("/users", settingControllers.browse);
 router.put("/user", settingControllers.edit);

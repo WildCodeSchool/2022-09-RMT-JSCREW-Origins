@@ -41,7 +41,15 @@ class SettingManager extends AbstractManager {
   }
 
   countUsers() {
-    return this.connection.query(`SELECT count(*) as count FROM ${this.table}`);
+    return this.connection.query(
+      `SELECT count(*) as count FROM ${this.table} WHERE isAdmin = false`
+    );
+  }
+
+  countAdmin() {
+    return this.connection.query(
+      `SELECT count(*) as count FROM ${this.table} WHERE isAdmin = true`
+    );
   }
 }
 

@@ -88,6 +88,18 @@ const countUsers = (req, res) => {
     });
 };
 
+const countAdmin = (req, res) => {
+  models.user
+    .countAdmin()
+    .then((data) => {
+      res.status(200).send(data[0]);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = async (req, res) => {
   const hashedpassword = await hashPass(req.body.password);
   if (req.auth.id)
@@ -171,4 +183,5 @@ module.exports = {
   destroyRole,
   validateUser,
   countUsers,
+  countAdmin,
 };
