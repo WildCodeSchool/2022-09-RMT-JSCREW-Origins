@@ -40,7 +40,7 @@ class SettingManager extends AbstractManager {
     );
   }
 
-  count() {
+  countUsers() {
     return this.connection.query(`SELECT count(*) as count FROM ${this.table}`);
   }
 }

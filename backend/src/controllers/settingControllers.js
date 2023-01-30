@@ -76,9 +76,9 @@ const read = (req, res) => {
     });
 };
 
-const count = (req, res) => {
+const countUsers = (req, res) => {
   models.user
-    .count()
+    .countUsers()
     .then((data) => {
       res.status(200).send(data[0]);
     })
@@ -170,5 +170,5 @@ module.exports = {
   destroy,
   destroyRole,
   validateUser,
-  count,
+  countUsers,
 };
