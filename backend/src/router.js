@@ -28,7 +28,6 @@ const checkAuth = require("./middleware/auth");
 router.get("/categories", categoryControllers.browse);
 router.get("/categories/:id", categoryControllers.read);
 
-router.get("/videoCount", videoControllers.countVideos);
 router.get("/videos", videoControllers.browse);
 router.get("/videos/:id", videoControllers.readvideo);
 
@@ -81,6 +80,7 @@ router.put(
 
 router.delete("/categories/:id", categoryControllers.destroy);
 router.delete("/videos/:id", videoControllers.destroy);
+router.get("/videoCount", videoControllers.countVideos);
 
 router.post("/sliders", sliderControllers.add);
 router.delete("/sliders/:id", sliderControllers.destroyByIdVideo);
