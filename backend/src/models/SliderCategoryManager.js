@@ -14,7 +14,7 @@ class SliderCategory extends AbstractManager {
   }
 
   findByCategory(id, limit) {
-    let query = `select ${this.table}.id, ${this.table}.Number, ${this.table}.id_category, category.Name as category, video.id as id_video, video.Name as videoName, video.Url, video.Premium from ${this.table}
+    let query = `select ${this.table}.id, ${this.table}.Number, ${this.table}.id_category, category.Name as category, video.id as id_video, video.Name as videoName, video.Url, video.Premium, video.Screenshot from ${this.table}
     inner join category on ${this.table}.id_category = category.id
     inner join video on ${this.table}.id_category = video.id_Category
     where ${this.table}.id_category = ?`;

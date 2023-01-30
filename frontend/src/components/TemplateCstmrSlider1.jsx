@@ -77,13 +77,13 @@ function TemplateCstmrSlider1({ url }) {
                       <Slide key={slider.id}>
                         <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
-                            <iframe
+                            <img
                               className="w-full h-2/4 align-baseline"
                               title={slider.Name}
-                              src={slider.Url}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
+                              src={`${import.meta.env.VITE_BACKEND_URL}/${
+                                slider.Screenshot
+                              }`}
+                              alt=""
                             />
                             {!user && slider.Premium === 1 && (
                               <div className="absolute bottom-0 right-0">
@@ -172,13 +172,13 @@ function TemplateCstmrSlider1({ url }) {
                       <Slide key={slider.id}>
                         <Link to={`/Videos/${slider.id}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                            <iframe
+                            <img
                               className="object-cover object-center w-full"
                               title={slider.Name}
-                              src={slider.Url}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
+                              src={`${import.meta.env.VITE_BACKEND_URL}/${
+                                slider.Screenshot
+                              }`}
+                              alt=""
                             />
                             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                               <div className="flex h-full items-end pb-6">

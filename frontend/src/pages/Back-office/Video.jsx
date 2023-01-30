@@ -68,7 +68,7 @@ function Video() {
       id_Category: "",
       Url: "",
       Description: "",
-      Premium: "",
+      Premium: 0,
     });
     inputRef.current.value = null;
     setReset(!reset);
@@ -241,7 +241,7 @@ function Video() {
             name="Url"
           />
           {video.Screenshot && (
-            <div>
+            <div className="w-96">
               <img
                 src={`${import.meta.env.VITE_BACKEND_URL}/${video.Screenshot}`}
               />
