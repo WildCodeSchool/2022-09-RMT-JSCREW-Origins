@@ -45,6 +45,10 @@ class VideoManager extends AbstractManager {
       [id]
     );
   }
+
+  countVideos() {
+    return this.connection.query(`SELECT count(*) as count FROM ${this.table}`);
+  }
 }
 
 module.exports = VideoManager;
