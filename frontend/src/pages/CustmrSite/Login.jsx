@@ -51,7 +51,8 @@ function Login() {
       });
   };
 
-  const validateLogin = () => {
+  const validateLogin = (e) => {
+    e.preventDefault();
     if (!validateEmail.test(infos.email)) {
       notify("Email is not correct");
     } else if (!validatePassword.test(infos.password)) {
@@ -71,7 +72,8 @@ function Login() {
       .catch((err) => console.error(err));
   };
 
-  const validateCreateAccount = async () => {
+  const validateCreateAccount = (e) => {
+    e.preventDefault();
     if (!validateEmail.test(infos.email)) {
       notify("Email is not correct");
     } else if (!validatePassword.test(infos.password)) {
@@ -129,7 +131,7 @@ function Login() {
                 name="password"
               />
               <ButtonTemplate
-                buttonType="button"
+                buttonType="submit"
                 buttonText="CONNECT"
                 buttonStyle="cstm_cstmrButton"
                 methodOnClick={validateLogin}
@@ -152,14 +154,17 @@ function Login() {
             <p className="text-white">
               Enter your credentials to create your account
             </p>
-            <form className="flex flex-col items-center gap-y-7 w-full">
+            <form
+              onSubmit={validateCreateAccount}
+              className="flex flex-col items-center gap-y-7 w-full"
+            >
               <ConnectForm
                 cstmStyle="bg-white"
                 dataUsers={infos}
                 handleInputOnChange={handleInputOnChange}
               />
               <ButtonTemplate
-                buttonType="button"
+                buttonType="submit"
                 buttonText="REGISTER"
                 buttonStyle="cstm_cstmrButton"
                 methodOnClick={validateCreateAccount}
