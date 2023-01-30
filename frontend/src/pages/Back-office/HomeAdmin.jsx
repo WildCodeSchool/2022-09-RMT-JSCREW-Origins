@@ -1,5 +1,18 @@
+import React, { useState, useEffect } from "react";
+
+import apiConnection from "@services/apiConnection";
+
 function HomeAdmin() {
-  return <h1>Hello</h1>;
+  const [totalRows, setTotalRows] = useState([]);
+
+  useEffect(() => {
+    apiConnection
+      .get(`/userCount`)
+      .then((users) => setTotalRows(users.data[0].count))
+      .catch((error) => console.error(error));
+  }, []);
+
+  return <div>Total Rows: {totalRows}</div>;
 }
 
 export default HomeAdmin;

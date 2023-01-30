@@ -39,6 +39,10 @@ class SettingManager extends AbstractManager {
       [id]
     );
   }
+
+  count() {
+    return this.connection.query(`SELECT count(*) as count FROM ${this.table}`);
+  }
 }
 
 module.exports = SettingManager;

@@ -76,6 +76,18 @@ const read = (req, res) => {
     });
 };
 
+const count = (req, res) => {
+  models.user
+    .count()
+    .then((data) => {
+      res.status(200).send(data[0]);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = async (req, res) => {
   const hashedpassword = await hashPass(req.body.password);
   if (req.auth.id)
@@ -158,4 +170,5 @@ module.exports = {
   destroy,
   destroyRole,
   validateUser,
+  count,
 };
