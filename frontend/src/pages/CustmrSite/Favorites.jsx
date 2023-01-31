@@ -80,7 +80,7 @@ function Favorites() {
                     src={`${import.meta.env.VITE_BACKEND_URL}/${
                       myFavorite.Screenshot
                     }`}
-                    alt=""
+                    alt={myFavorite.Description}
                   />
                 </Link>
                 <button
