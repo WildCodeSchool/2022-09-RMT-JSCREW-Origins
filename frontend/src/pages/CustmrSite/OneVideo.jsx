@@ -153,9 +153,9 @@ function OneVideo() {
                   </button>
                   {/* Boutons de partage */}
                   <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/${id}`}
+                    }/Videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -166,9 +166,9 @@ function OneVideo() {
                     <ImFacebook2 />
                   </a>
                   <a
-                    href={`https://twitter.com/intent/tweet?text=https%3A//${
+                    href={`https://twitter.com/intent/tweet?url=https://${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }/Videos/${id}&text=`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -181,7 +181,7 @@ function OneVideo() {
                   <a
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }/Videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
