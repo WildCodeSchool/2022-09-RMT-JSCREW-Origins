@@ -6,7 +6,6 @@ import page404 from "../../assets/page-404.jpg";
 function Page404() {
   const navigate = useNavigate();
   return (
-    // <div className={`h-screen bg-cover bg-[url(${page404})]`} />
     <div className="h-screen relative">
       <ButtonTemplate
         buttonType="button"
