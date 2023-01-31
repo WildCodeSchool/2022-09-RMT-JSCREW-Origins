@@ -83,7 +83,7 @@ function TemplateCstmrSlider1({ url }) {
                               src={`${import.meta.env.VITE_BACKEND_URL}/${
                                 slider.Screenshot
                               }`}
-                              alt=""
+                              alt={slider.Description}
                             />
                             {!user && slider.Premium === 1 && (
                               <div className="absolute bottom-0 right-0">
@@ -178,7 +178,7 @@ function TemplateCstmrSlider1({ url }) {
                               src={`${import.meta.env.VITE_BACKEND_URL}/${
                                 slider.Screenshot
                               }`}
-                              alt=""
+                              alt={slider.Description}
                             />
                             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                               <div className="flex h-full items-end pb-6">
@@ -268,7 +268,7 @@ function TemplateCstmrSlider1({ url }) {
                               src={`${import.meta.env.VITE_BACKEND_URL}/${
                                 slider.Screenshot
                               }`}
-                              alt=""
+                              alt={slider.Description}
                             />
                             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                               <div className="flex h-full items-end pb-6">
