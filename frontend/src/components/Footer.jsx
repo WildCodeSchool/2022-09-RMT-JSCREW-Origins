@@ -6,12 +6,7 @@ import InputTemplate from "@components/InputTemplate";
 import TextareaTemplate from "@components/TextareaTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
-import Facebook from "@assets/Icone_reseaux_s/facebook.png";
-import Instagram from "@assets/Icone_reseaux_s/instagram.png";
-import Linkedin from "@assets/Icone_reseaux_s/linkedin.png";
-import Twitter from "@assets/Icone_reseaux_s/twitter.png";
-import Youtube from "@assets/Icone_reseaux_s/youtube.png";
-
+import { SiLinkedin } from "react-icons/si";
 import "react-toastify/dist/ReactToastify.css";
 
 function Footer() {
@@ -65,61 +60,21 @@ function Footer() {
         theme="dark"
       />
       <div className="flex flex-col items-center bg-gray-900">
-        {/* -----------------------début contact et reseaux--------------------------------------------------------------------- */}
         <div className="flex justify-center pt-5">
           <ul className="flex flex-row">
-            <img className="w-6 m-2" src={Facebook} alt="Facebook" />
-            <img className="w-6 m-2" src={Instagram} alt="Instagram" />
-            <img className="w-6 m-2" src={Linkedin} alt="Linkedin" />
-            <img className="w-6 m-2" src={Youtube} alt="Youtube" />
-            <img className="w-6 m-2" src={Twitter} alt="Twitter" />
+            <a
+              href="https://www.linkedin.com/company/origins-digital-emg/"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                color: "#2366c2",
+                fontSize: "30px",
+              }}
+            >
+              <SiLinkedin />
+            </a>
           </ul>
         </div>
-        {/* -----------------------début du form --------------------------------------------------------------------- */}
-        {/* <form className="flex">
-          <div className="mt-4">
-            <div className="flex justify-center">
-              <div className="flex justify-end mr-1 w-6/12">
-                <InputTemplate
-                  textPlaceholder="Name"
-                  inputType="text"
-                  customWidth="cstm_width_XlInput bg-white"
-                  value={myMessage.name}
-                  methodOnChange={handleInputOnChange}
-                  name="name"
-                />
-              </div>
-              <div className="flex justify-start ml-1 w-6/12">
-                <InputTemplate
-                  textPlaceholder="Email"
-                  inputType="text"
-                  customWidth="cstm_width_XlInput bg-white"
-                  value={myMessage.email}
-                  methodOnChange={handleInputOnChange}
-                  name="email"
-                />
-              </div>
-            </div>
-            <div className="flex justify-center w-screen mb-2 mt-2">
-              <TextareaTemplate
-                textPlaceholder="Description"
-                inputType="text"
-                customWidth="cstm_width_XlInput"
-                value={myMessage.description}
-                methodOnChange={handleInputOnChange}
-                name="description"
-              />
-            </div>
-            <div className="flex justify-center">
-              <ButtonTemplate
-                buttonType="button"
-                buttonText="SEND"
-                buttonStyle="cstm_buttonSecondary"
-                methodOnClick={submitForm}
-              />
-            </div>
-          </div>
-        </form> */}
         <form className="flex flex-col items-center mt-5 gap-5 w-full lg:w-10/12">
           <div className="flex w-3/4 gap-5">
             <InputTemplate
@@ -154,7 +109,6 @@ function Footer() {
             methodOnClick={submitForm}
           />
         </form>
-        {/* ------------------------debut service----------------------------------------------------------------------------------------------- */}
         <div className="text-white text-center m-5">
           <h1>Services</h1>
           <div className="flex justify-center">
