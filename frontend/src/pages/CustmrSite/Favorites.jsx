@@ -66,13 +66,13 @@ function Favorites() {
             {myFavorites.map((myFavorite) => (
               <div className="relative">
                 <Link to={`/Videos/${myFavorite.id_video}`}>
-                  <iframe
-                    className="w-11/12"
+                  <img
+                    className="w-full h-2/4 align-baseline"
                     title={myFavorite.Name}
-                    src={myFavorite.Url}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                    src={`${import.meta.env.VITE_BACKEND_URL}/${
+                      myFavorite.Screenshot
+                    }`}
+                    alt=""
                   />
                 </Link>
                 <button
