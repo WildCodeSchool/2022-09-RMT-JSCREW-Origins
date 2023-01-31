@@ -66,26 +66,18 @@ function Favorites() {
             {myFavorites.map((myFavorite) => (
               <div className="relative">
                 <Link to={`/Videos/${myFavorite.id_video}`}>
-                  <iframe
-                    className="w-11/12"
-                    title={myFavorite.Name}
-                    src={myFavorite.Url}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
                   <img
                     className="w-full h-2/4 align-baseline"
                     title={myFavorite.Name}
                     src={`${import.meta.env.VITE_BACKEND_URL}/${
                       myFavorite.Screenshot
                     }`}
-                    alt={myFavorite.Description}
+                    alt={myFavorite.Name}
                   />
                 </Link>
                 <button
                   type="button"
-                  className="bg-red-700 absolute rounded-full p-1 w-6 h-6 -top-3 right-4 border-2"
+                  className="bg-red-700 absolute rounded-full p-1 w-6 h-6 -top-3 -right-3 border-2"
                   onClick={() => handleRemoveFavorite(myFavorite.id_video)}
                 >
                   <div
