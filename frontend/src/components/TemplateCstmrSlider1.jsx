@@ -259,29 +259,30 @@ function TemplateCstmrSlider1({ url }) {
                       id="slider"
                       className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                     >
-                      {sliders.map((slider) => (
-                        <Slide key={slider.id_video}>
-                          <Link to={`/Videos/${slider.id_video}`}>
-                            <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                              <iframe
-                                className="object-cover object-center w-full"
-                                title={slider.Name}
-                                src={slider.Url}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                              />
-                              <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                <div className="flex h-full items-end pb-6">
-                                  <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
-                                    {slider.Name}
-                                  </h3>
+                      {sliders &&
+                        sliders.map((slider) => (
+                          <Slide key={slider.id_video}>
+                            <Link to={`/Videos/${slider.id_video}`}>
+                              <div className="flex flex-shrink-0 relative w-full sm:w-auto">
+                                <iframe
+                                  className="object-cover object-center w-full"
+                                  title={slider.Name}
+                                  src={slider.Url}
+                                  frameBorder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
+                                />
+                                <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+                                  <div className="flex h-full items-end pb-6">
+                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
+                                      {slider.Name}
+                                    </h3>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </Link>
-                        </Slide>
-                      ))}
+                            </Link>
+                          </Slide>
+                        ))}
                     </div>
                   </Slider>
                 </div>
