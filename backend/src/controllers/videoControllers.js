@@ -29,6 +29,18 @@ const read = (req, res) => {
     });
 };
 
+const countVideos = (req, res) => {
+  models.video
+    .countVideos()
+    .then((data) => {
+      res.status(200).send(data[0]);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const readvideo = (req, res) => {
   models.video
     .findCategory(req.params.id)
@@ -141,4 +153,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  countVideos,
 };
