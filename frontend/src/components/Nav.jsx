@@ -77,7 +77,7 @@ export default function Nav() {
                 {displaySlider && (
                   <>
                     <Link
-                      to="Slider_1"
+                      to="Slider/1"
                       className={`flex ${
                         location.pathname.endsWith("Dashboard/Slider_1")
                           ? "text-secondary"
@@ -87,7 +87,7 @@ export default function Nav() {
                       <p className="text-base leading-4 ml-3">1: By videos</p>
                     </Link>
                     <Link
-                      to="Slider_2"
+                      to="Slider/2"
                       className={`flex ${
                         location.pathname.endsWith("Dashboard/Slider_2")
                           ? "text-secondary"
@@ -97,7 +97,7 @@ export default function Nav() {
                       <p className="text-base leading-4">2: By videos</p>
                     </Link>
                     <Link
-                      to="Slider_3"
+                      to="Slider/3"
                       className={`flex ${
                         location.pathname.endsWith("Dashboard/Slider_3")
                           ? "text-secondary"
@@ -107,7 +107,7 @@ export default function Nav() {
                       <p className="text-base leading-4">3: By videos</p>
                     </Link>
                     <Link
-                      to="Slider_4"
+                      to="Slider/4"
                       className={`flex ${
                         location.pathname.endsWith("Dashboard/Slider_4")
                           ? "text-secondary"

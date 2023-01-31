@@ -14,10 +14,7 @@ import Category from "./pages/Back-office/Category";
 import Users from "./pages/Back-office/Users";
 import HomeAdmin from "./pages/Back-office/HomeAdmin";
 import Setting from "./pages/Back-office/Setting";
-import SliderByVideo1 from "./pages/Back-office/Sliders/SliderByVideo_1";
-import SliderByVideo2 from "./pages/Back-office/Sliders/SliderByVideo_2";
-import SliderByVideo3 from "./pages/Back-office/Sliders/SliderByVideo_3";
-import SliderByVideo4 from "./pages/Back-office/Sliders/SliderByVideo_4";
+import SliderByVideoTemplate from "./pages/Back-office/Sliders/SliderByVideoTemplate";
 import SliderByCategory from "./pages/Back-office/Sliders/SliderByCategory";
 import Grid from "./pages/Back-office/Sliders/Grid";
 import Video from "./pages/Back-office/Video";
@@ -42,10 +39,22 @@ export default function App() {
             <Route path="Users" element={<Users />} />
             <Route path="HomeAdmin" element={<HomeAdmin />} />
             <Route path="Settings" element={<Setting />} />
-            <Route path="Slider_1" element={<SliderByVideo1 />} />
-            <Route path="Slider_2" element={<SliderByVideo2 />} />
-            <Route path="Slider_3" element={<SliderByVideo3 />} />
-            <Route path="Slider_4" element={<SliderByVideo4 />} />
+            <Route
+              path="Slider/1"
+              element={<SliderByVideoTemplate sliderId={1} />}
+            />
+            <Route
+              path="Slider/2"
+              element={<SliderByVideoTemplate sliderId={2} />}
+            />
+            <Route
+              path="Slider/3"
+              element={<SliderByVideoTemplate sliderId={3} />}
+            />
+            <Route
+              path="Slider/4"
+              element={<SliderByVideoTemplate sliderId={4} />}
+            />
             <Route path="SliderByCat" element={<SliderByCategory />} />
             <Route path="Grid" element={<Grid />} />
             <Route path="Videos" element={<Video />} />
