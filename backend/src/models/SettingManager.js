@@ -8,7 +8,7 @@ class SettingManager extends AbstractManager {
   insert(user) {
     return this.connection.query(
       `insert into ${this.table} (isAdmin, email, hashedpassword) values (?, ?, ?)`,
-      [1, user.email, user.hashedpassword]
+      [0, user.email, user.hashedpassword]
     );
   }
 
@@ -37,6 +37,18 @@ class SettingManager extends AbstractManager {
     return this.connection.query(
       `delete from ${this.table} where id = ? and isDeletable is null`,
       [id]
+    );
+  }
+
+  countUsers() {
+    return this.connection.query(
+      `SELECT count(*) as count FROM ${this.table} WHERE isAdmin = false`
+    );
+  }
+
+  countAdmin() {
+    return this.connection.query(
+      `SELECT count(*) as count FROM ${this.table} WHERE isAdmin = true`
     );
   }
 }

@@ -1,6 +1,12 @@
 import { useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { MdOutlineImportantDevices } from "react-icons/md";
+import { AiOutlineImport, AiOutlineSetting } from "react-icons/ai";
+import { FiUsers } from "react-icons/fi";
+import { BiCategory, BiHomeAlt } from "react-icons/bi";
+import { BsCameraVideo } from "react-icons/bs";
+import { TfiLayoutSliderAlt } from "react-icons/tfi";
 import User from "../contexts/UserContext";
 
 export default function Nav() {
@@ -22,6 +28,22 @@ export default function Nav() {
         <div className="flex flex-col">
           <div className="flex flex-col space-y-5">
             <Link
+              to="HomeAdmin"
+              className={`flex ${
+                location.pathname.endsWith("Dashboard/HomeAdmin")
+                  ? "text-secondary"
+                  : "hover:text-secondary focus:text-secondary"
+              } text-white px-3 py-2 w-full`}
+            >
+              <BiHomeAlt
+                style={{
+                  color: "#fff",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-base leading-4 ml-3">Home</p>
+            </Link>
+            <Link
               to="Settings"
               className={`flex ${
                 location.pathname.endsWith("Dashboard/Settings")
@@ -29,7 +51,13 @@ export default function Nav() {
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}
             >
-              <p className="text-base leading-4">Settings</p>
+              <AiOutlineSetting
+                style={{
+                  color: "#fff",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-base leading-4 ml-3">Settings</p>
             </Link>
             <div className="flex flex-col">
               <button
@@ -37,7 +65,13 @@ export default function Nav() {
                 type="button"
                 onClick={handleDisplaymenu}
               >
-                <p className="text-base leading-4">Sliders</p>
+                <TfiLayoutSliderAlt
+                  style={{
+                    color: "#fff",
+                    fontSize: "20px",
+                  }}
+                />
+                <p className="text-base leading-4 ml-3">Sliders</p>
               </button>
               <div className="block pl-2">
                 {displaySlider && (
@@ -50,7 +84,7 @@ export default function Nav() {
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4">1: By videos</p>
+                      <p className="text-base leading-4 ml-3">1: By videos</p>
                     </Link>
                     <Link
                       to="Slider_2"
@@ -94,7 +128,13 @@ export default function Nav() {
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}
             >
-              <p className="text-base leading-4">Videos</p>
+              <BsCameraVideo
+                style={{
+                  color: "#fff",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-base leading-4 ml-3">Videos</p>
             </Link>
             <Link
               to="Categories"
@@ -104,7 +144,13 @@ export default function Nav() {
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}
             >
-              <p className="text-base leading-4">Categories</p>
+              <BiCategory
+                style={{
+                  color: "#fff",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-base leading-4 ml-3">Categories</p>
             </Link>
             <Link
               to="Users"
@@ -114,13 +160,25 @@ export default function Nav() {
                   : "hover:text-secondary focus:text-secondary"
               } text-white px-3 py-2 w-full`}
             >
-              <p className="text-base leading-4">Users</p>
+              <FiUsers
+                style={{
+                  color: "#fff",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-base leading-4 ml-3">Users</p>
             </Link>
             <Link
               to="/"
               className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2  w-full"
             >
-              <p className="text-base leading-4">⮌ Website</p>
+              <MdOutlineImportantDevices
+                style={{
+                  color: "#fff",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-base leading-4 ml-3">Website</p>
             </Link>
           </div>
         </div>
@@ -130,7 +188,13 @@ export default function Nav() {
             className="flex hover:text-secondary focus:text-secondary text-white px-3 py-2  w-full"
             onClick={handleLogOut}
           >
-            <p className="text-base leading-4">Log out</p>
+            <AiOutlineImport
+              style={{
+                color: "#fff",
+                fontSize: "20px",
+              }}
+            />
+            <p className="text-base leading-4 ml-3">Log out</p>
           </Link>
         </div>
       </div>

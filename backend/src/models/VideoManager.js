@@ -17,29 +17,26 @@ class VideoManager extends AbstractManager {
 
   insert(video) {
     return this.connection.query(
-      `insert into ${this.table} (Name, id_Category, Url, Description, Premium) values (?,?,?,?,0)`,
+      `insert into ${this.table} (Name, id_Category, Url, Description, Premium, Screenshot) values (?,?,?,?,?,?)`,
       [
         video.Name,
         video.id_Category,
         video.Url,
         video.Description,
         video.Premium,
+        video.Screenshot,
       ]
     );
   }
 
   update(video) {
-    return this.connection.query(
-      `update ${this.table} set Name = ?, id_Category = ?, Url = ?, Description = ?, Premium = ? where id = ?`,
-      [
-        video.Name,
-        video.id_Category,
-        video.Url,
-        video.Description,
-        video.Premium,
-        video.id,
-      ]
-    );
+    const { id } = video;
+    const myVideo = { ...video };
+    delete myVideo.id;
+    return this.connection.query(`update ${this.table} set ? where id = ?`, [
+      myVideo,
+      id,
+    ]);
   }
 
   findCategory(id) {
@@ -47,6 +44,10 @@ class VideoManager extends AbstractManager {
       `select video.id, video.Name, video.Url, video.Description, video.id_Category, video.Premium, category.Name as Category from video inner join category on video.id_category = category.id where video.id = ?`,
       [id]
     );
+  }
+
+  countVideos() {
+    return this.connection.query(`SELECT count(*) as count FROM ${this.table}`);
   }
 }
 

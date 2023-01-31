@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 
@@ -14,16 +15,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Video() {
   const [displayModal, setDisplayModal] = useState(false);
-  const [myVideo, setMyVideos] = useState([]);
+  const [myVideos, setMyVideos] = useState([]);
   const [myCategory, setMyCategories] = useState([]);
   const [reset, setReset] = useState(false);
+  const inputRef = useRef(null);
   const [video, setVideo] = useState({
     id: null,
     Name: "",
-    id_Category: "",
+    id_Category: null,
     Url: "",
     Description: "",
     Premium: 0,
+    Screenshot: "",
   });
 
   const notify = (msg) => {
@@ -33,10 +36,15 @@ function Video() {
   /**
    * Fonction qui gère la récupération des données "video" avec axios
    */
-  const getAllVideos = () => {
+  const getAllVideos = (callback) => {
     apiConnection
       .get(`/videos`)
-      .then((videos) => setMyVideos(videos.data))
+      .then((videos) => {
+        setMyVideos(videos.data);
+        if (callback) {
+          callback(videos.data);
+        }
+      })
       .catch((error) => console.error(error));
   };
 
@@ -50,12 +58,6 @@ function Video() {
       .catch((error) => console.error(error));
   };
 
-  // Pour que la donnée se mette à jour en live
-  useEffect(() => {
-    getAllVideos();
-    getAllCategories();
-  }, []);
-
   /**
    * Remise à zéro des inputs pour ANNULER l'édition ou l'ajout d'une video
    */
@@ -66,8 +68,9 @@ function Video() {
       id_Category: "",
       Url: "",
       Description: "",
-      Premium: "",
+      Premium: 0,
     });
+    inputRef.current.value = null;
     setReset(!reset);
   };
 
@@ -100,6 +103,11 @@ function Video() {
     handleInputOnChange("id_Category", videoCategory.id);
   };
 
+  const updateVideoState = (data) => {
+    const myVideo = data.find((vid) => vid.id === video.id);
+    setVideo(myVideo);
+  };
+
   /**
    * Fonction qui gère l'ajout d'une nouvelle video
    */
@@ -107,8 +115,11 @@ function Video() {
     delete video.id;
     const { status, errorMessage } = validateVideo(video);
     if (status) {
+      const formData = new FormData();
+      formData.append("screenshot", inputRef.current.files[0]);
+      formData.append("data", JSON.stringify(video));
       apiConnection
-        .post(`/videos`, video)
+        .post(`/videos`, formData)
         .then((videos) => {
           notify("Video successfully added!");
           setVideo(videos.data);
@@ -130,7 +141,7 @@ function Video() {
         setVideo({
           id: null,
           Name: "",
-          id_Category: "",
+          id_Category: null,
           Url: "",
           Description: "",
           Premium: 0,
@@ -148,17 +159,26 @@ function Video() {
     const { status, errorMessage } = validateVideo(video);
 
     if (status) {
+      const formData = new FormData();
+      formData.append("screenshot", inputRef.current.files[0]);
+      formData.append("data", JSON.stringify(video));
       apiConnection
-        .put(`/videos/${video.id}`, video)
+        .put(`/videos/${video.id}`, formData)
         .then(() => {
           notify("video successfully updated!");
-          getAllVideos();
+          getAllVideos(updateVideoState);
         })
         .catch((error) => console.error(error));
     } else {
       notify(errorMessage);
     }
   };
+
+  // Pour que la donnée se mette à jour en live
+  useEffect(() => {
+    getAllVideos();
+    getAllCategories();
+  }, []);
 
   return (
     <>
@@ -186,7 +206,7 @@ function Video() {
         {/* SEARCHBAR */}
         <SearchBarTemplate
           reset={reset}
-          data={myVideo}
+          data={myVideos}
           customWidth="cstm_width_XlInput"
           searchBarContainer="flex flex-col items-center w-full relative"
           textPlaceholder="Search video"
@@ -211,6 +231,7 @@ function Video() {
             textPlaceholder="Search category"
             textButton="Choose category"
             methodOnClick={handleCategoryVideo}
+            preSelectedValue={video.id_Category}
           />
           <InputTemplate
             textPlaceholder="URL"
@@ -218,6 +239,19 @@ function Video() {
             value={video.Url}
             methodOnChange={handleInputOnChange}
             name="Url"
+          />
+          {video.Screenshot && (
+            <div className="w-96">
+              <img
+                src={`${import.meta.env.VITE_BACKEND_URL}/${video.Screenshot}`}
+              />
+            </div>
+          )}
+          <input
+            className="w-3/4 lg:w-7/12 border-solid border-primary border-2 rounded-md p-3"
+            type="file"
+            name="screenshot"
+            ref={inputRef}
           />
           <TextareaTemplate
             textPlaceholder="Description"

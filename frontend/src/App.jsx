@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Page404 from "@pages/Page404";
 import CustmrSite from "@pages/Layout/CustmrSite";
 import Home from "@pages/CustmrSite/Home";
 import Login from "@pages/CustmrSite/Login";
@@ -12,6 +13,7 @@ import Profil from "@pages/CustmrSite/Profil";
 import Dashboard from "./pages/Layout/Dashboard";
 import Category from "./pages/Back-office/Category";
 import Users from "./pages/Back-office/Users";
+import HomeAdmin from "./pages/Back-office/HomeAdmin";
 import Setting from "./pages/Back-office/Setting";
 import Slider1 from "./pages/Back-office/Sliders/Slider_1";
 import Slider2 from "./pages/Back-office/Sliders/Slider_2";
@@ -37,6 +39,7 @@ export default function App() {
           <Route path="/Dashboard" element={<Dashboard />}>
             <Route path="Categories" element={<Category />} />
             <Route path="Users" element={<Users />} />
+            <Route path="HomeAdmin" element={<HomeAdmin />} />
             <Route path="Settings" element={<Setting />} />
             <Route path="Slider_1" element={<Slider1 />} />
             <Route path="Slider_2" element={<Slider2 />} />
@@ -44,6 +47,7 @@ export default function App() {
             <Route path="Grid" element={<Grid />} />
             <Route path="Videos" element={<Video />} />
           </Route>
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </Router>

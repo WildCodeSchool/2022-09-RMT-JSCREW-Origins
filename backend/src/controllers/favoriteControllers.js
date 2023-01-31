@@ -36,6 +36,18 @@ const read = (req, res) => {
   }
 };
 
+const countFavorites = (req, res) => {
+  models.favorite
+    .countFavorites()
+    .then((data) => {
+      res.status(200).send(data[0]);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const add = (req, res) => {
   if (req.auth) {
     models.favorite
@@ -77,4 +89,5 @@ module.exports = {
   add,
   destroy,
   read,
+  countFavorites,
 };

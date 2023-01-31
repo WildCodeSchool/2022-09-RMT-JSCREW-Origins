@@ -48,7 +48,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonBack
                 role="button"
                 aria-label="slide backward"
-                className="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+                className="absolute z-30 bg-primary/75 p-3 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
                 id="prev"
               >
                 <svg
@@ -74,16 +74,16 @@ function TemplateCstmrSlider1({ url }) {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {sliders.map((slider) => (
-                      <Slide key={slider.id}>
+                      <Slide key={slider.id_video}>
                         <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
-                            <iframe
+                            <img
                               className="w-full h-2/4 align-baseline"
                               title={slider.Name}
-                              src={slider.Url}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
+                              src={`${import.meta.env.VITE_BACKEND_URL}/${
+                                slider.Screenshot
+                              }`}
+                              alt=""
                             />
                             {!user && slider.Premium === 1 && (
                               <div className="absolute bottom-0 right-0">
@@ -107,7 +107,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonNext
                 role="button"
                 aria-label="slide forward"
-                className="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                className="absolute z-30 bg-primary/75 p-3 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                 id="next"
               >
                 <svg
@@ -143,7 +143,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonBack
                 role="button"
                 aria-label="slide backward"
-                className="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+                className="absolute z-30 bg-primary/75 p-3 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
                 id="prev"
               >
                 <svg
@@ -169,16 +169,16 @@ function TemplateCstmrSlider1({ url }) {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {sliders.map((slider) => (
-                      <Slide key={slider.id}>
-                        <Link to={`/Videos/${slider.id}`}>
+                      <Slide key={slider.id_video}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                            <iframe
+                            <img
                               className="object-cover object-center w-full"
                               title={slider.Name}
-                              src={slider.Url}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
+                              src={`${import.meta.env.VITE_BACKEND_URL}/${
+                                slider.Screenshot
+                              }`}
+                              alt=""
                             />
                             <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                               <div className="flex h-full items-end pb-6">
@@ -197,7 +197,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonNext
                 role="button"
                 aria-label="slide forward"
-                className="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                className="absolute z-30 right-0 bg-primary/75 p-3 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                 id="next"
               >
                 <svg
@@ -233,7 +233,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonBack
                 role="button"
                 aria-label="slide backward"
-                className="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
+                className="absolute z-30 left-0 bg-primary/75 p-3 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer"
                 id="prev"
               >
                 <svg
@@ -259,8 +259,8 @@ function TemplateCstmrSlider1({ url }) {
                     className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                   >
                     {sliders.map((slider) => (
-                      <Slide key={slider.id}>
-                        <Link to={`/Videos/${slider.id}`}>
+                      <Slide key={slider.id_video}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
                             <iframe
                               className="object-cover object-center w-full"
@@ -287,7 +287,7 @@ function TemplateCstmrSlider1({ url }) {
               <ButtonNext
                 role="button"
                 aria-label="slide forward"
-                className="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+                className="absolute z-30 right-0 bg-primary/75 p-3 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
                 id="next"
               >
                 <svg
