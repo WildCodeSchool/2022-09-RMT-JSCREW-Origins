@@ -7,7 +7,7 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
-function Slider1Template({ sliderType }) {
+function SliderByVideoTemplate({ sliderType }) {
   const [myVideo, setMyVideo] = useState([]); // Liste des videos
   const [videoList, setVideoList] = useState([]); // Liste des videos en slider
 
@@ -155,4 +155,4 @@ function Slider1Template({ sliderType }) {
   );
 }
 
-export default Slider1Template;
+export default SliderByVideoTemplate;
