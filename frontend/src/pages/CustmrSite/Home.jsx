@@ -17,6 +17,9 @@ function Home() {
       <div className="bg-primary">
         <Header />
         <TemplateCstmrSlider1 url="/sliders?type=1" />
+        <TemplateCstmrSlider1 url="/sliders?type=2" />
+        <TemplateCstmrSlider1 url="/sliders?type=3" />
+        <TemplateCstmrSlider1 url="/sliders?type=4" />
       </div>
     </>
   );

@@ -104,6 +104,26 @@ export default function Nav() {
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
+                      <p className="text-base leading-4">3: By videos</p>
+                    </Link>
+                    <Link
+                      to="Slider_4"
+                      className={`flex ${
+                        location.pathname.endsWith("Dashboard/Slider_4")
+                          ? "text-secondary"
+                          : "hover:text-secondary focus:text-secondary"
+                      } text-white px-3 py-2 w-full`}
+                    >
+                      <p className="text-base leading-4">4: By videos</p>
+                    </Link>
+                    <Link
+                      to="SliderByCat"
+                      className={`flex ${
+                        location.pathname.endsWith("Dashboard/SliderByCat")
+                          ? "text-secondary"
+                          : "hover:text-secondary focus:text-secondary"
+                      } text-white px-3 py-2 w-full`}
+                    >
                       <p className="text-base leading-4">By Category</p>
                     </Link>
                     <Link
