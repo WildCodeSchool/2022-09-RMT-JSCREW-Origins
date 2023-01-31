@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonTemplate from "@components/ButtonTemplate";
-// eslint-disable-next-line import/no-relative-packages
-import page404 from "../../../backend/public/page-404.jpg";
+import page404 from "../../assets/page-404.jpg";
 
 function Page404() {
   const navigate = useNavigate();

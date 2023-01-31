@@ -55,7 +55,6 @@ router.post(
 router.get("/slidersCategory", sliderCategoryControllers.browse);
 router.get("/slidersCategory/:id", sliderCategoryControllers.read);
 
-
 router.use(checkAuth);
 
 router.get("/user", settingControllers.read);
