@@ -77,7 +77,7 @@ CREATE TABLE display_by_id (
 id INT NOT NULL PRIMARY KEY,
 id_Category INT NOT NULL,
 Number INT NOT NULL,
-Foreign Key (id_Category) REFERENCES category(id)
+Foreign Key (id_Category) REFERENCES category(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8), (2, 1, 8), (3, 2, 8), (4, 3, 8), (5, 4, 8);
