@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Page404 from "@pages/Page404";
 import CustmrSite from "@pages/Layout/CustmrSite";
 import Home from "@pages/CustmrSite/Home";
 import Login from "@pages/CustmrSite/Login";
@@ -46,6 +47,7 @@ export default function App() {
             <Route path="Grid" element={<Grid />} />
             <Route path="Videos" element={<Video />} />
           </Route>
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </Router>

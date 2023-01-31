@@ -35,7 +35,7 @@ function SearchBarLoupe() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="text-gray-900 rounded p-1"
           />
-          <div className="absolute flex flex-col items-start gap-4 mt-4">
+          <div className="absolute flex flex-col items-center gap-4 mr-5 md-mr-6 md-px-5 bg-primary/75 overflow-y-auto h-80">
             {datas.map((video) => {
               return (
                 <button
