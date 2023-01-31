@@ -74,6 +74,14 @@ function Favorites() {
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
+                  <img
+                    className="w-full h-2/4 align-baseline"
+                    title={myFavorite.Name}
+                    src={`${import.meta.env.VITE_BACKEND_URL}/${
+                      myFavorite.Screenshot
+                    }`}
+                    alt=""
+                  />
                 </Link>
                 <button
                   type="button"
