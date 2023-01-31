@@ -74,7 +74,7 @@ function TemplateCstmrSlider1({ url }) {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {sliders.map((slider) => (
-                      <Slide key={slider.id}>
+                      <Slide key={slider.id_video}>
                         <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative sm:w-auto ">
                             <img
@@ -169,8 +169,8 @@ function TemplateCstmrSlider1({ url }) {
                     className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                   >
                     {sliders.map((slider) => (
-                      <Slide key={slider.id}>
-                        <Link to={`/Videos/${slider.id}`}>
+                      <Slide key={slider.id_video}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
                             <img
                               className="object-cover object-center w-full"
@@ -259,8 +259,8 @@ function TemplateCstmrSlider1({ url }) {
                     className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                   >
                     {sliders.map((slider) => (
-                      <Slide key={slider.id}>
-                        <Link to={`/Videos/${slider.id}`}>
+                      <Slide key={slider.id_video}>
+                        <Link to={`/Videos/${slider.id_video}`}>
                           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
                             <iframe
                               className="object-cover object-center w-full"

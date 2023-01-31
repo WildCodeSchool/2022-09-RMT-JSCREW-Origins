@@ -28,7 +28,7 @@ function OneVideo() {
   };
 
   const checkIfFavorite = () => {
-    if (video && video.id !== null) {
+    if (user && video && video.id !== null) {
       apiConnection
         .get(`/favorites/${video.id}`)
         .then((favorite) => {
@@ -64,7 +64,7 @@ function OneVideo() {
 
   useEffect(() => {
     getOneVideo();
-  }, []);
+  }, [id]);
 
   return (
     <>
