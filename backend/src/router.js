@@ -85,8 +85,8 @@ router.get("/videoCount", videoControllers.countVideos);
 router.post("/sliders", sliderControllers.add);
 router.delete("/sliders/:id", sliderControllers.destroyByIdVideo);
 
-router.put("/sliderCategory/:id", sliderCategoryControllers.edit);
-router.post("/sliderCategory/:id", sliderCategoryControllers.add);
+router.put("/slidersCategory/:id", sliderCategoryControllers.edit);
+router.post("/slidersCategory/:id", sliderCategoryControllers.add);
 
 router.get("/favoritesCount", favoriteControllers.countFavorites);
 router.get("/favorites", favoriteControllers.browse);

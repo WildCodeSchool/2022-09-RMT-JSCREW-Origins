@@ -6,7 +6,7 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import InputTemplate from "@components/InputTemplate";
 
-function Slider3Template({ sliderId, searchBarWidth }) {
+function SliderByVideoTemplate({ sliderId, searchBarWidth }) {
   const [myCategories, setMyCategories] = useState([]);
   const [sliderInfos, setSliderInfos] = useState({
     id: null,
@@ -47,7 +47,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
   const displaySliderInfos = (idNbr) => {
     if (idNbr) {
       apiConnection
-        .get(`/sliderCategory/${idNbr}`)
+        .get(`/slidersCategory/${idNbr}`)
         .then((infos) => {
           setSliderInfos({
             id: infos.data[0].id,
@@ -67,7 +67,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
 
   const handleAddSlider = (idNbr) => {
     apiConnection
-      .post(`/sliderCategory/${idNbr}`, {
+      .post(`/slidersCategory/${idNbr}`, {
         ...sliderInfos,
         id: idNbr,
       })
@@ -80,7 +80,7 @@ function Slider3Template({ sliderId, searchBarWidth }) {
 
   const handleEditSlider = (idNbr) => {
     apiConnection
-      .put(`/sliderCategory/${idNbr}`, {
+      .put(`/slidersCategory/${idNbr}`, {
         ...sliderInfos,
       })
       .then((slider) => {
@@ -143,4 +143,4 @@ function Slider3Template({ sliderId, searchBarWidth }) {
   );
 }
 
-export default Slider3Template;
+export default SliderByVideoTemplate;
