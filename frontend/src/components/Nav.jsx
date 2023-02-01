@@ -84,7 +84,7 @@ export default function Nav() {
                           : "hover:text-secondary focus:text-secondary"
                       } text-white px-3 py-2 w-full`}
                     >
-                      <p className="text-base leading-4 ml-3">1: By videos</p>
+                      <p className="text-base leading-4">1: By videos</p>
                     </Link>
                     <Link
                       to="Slider/2"
