@@ -185,7 +185,7 @@ function OneVideo() {
                     <a
                       href={`https://www.linkedin.com/shareArticle?mini=true&url=${
                         import.meta.env.VITE_FRONTEND_URL
-                      }/Videos/${id}`}
+                      }Videos/${id}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -271,7 +271,7 @@ function OneVideo() {
                   <a
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/Videos/${id}`}
+                    }Videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
