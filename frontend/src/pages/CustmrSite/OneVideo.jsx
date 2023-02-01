@@ -18,6 +18,21 @@ function OneVideo() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const checkIfFavorite = () => {
+    if (user && video) {
+      apiConnection
+        .get(`/favorites/${video.id}`)
+        .then((favorite) => {
+          if (favorite.data[0] && favorite.data[0].id_video === video.id) {
+            setIsFavorite(true);
+          } else {
+            setIsFavorite(false);
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
   const getOneVideo = () => {
     apiConnection
       .get(`/videos/${id}`)
@@ -25,19 +40,6 @@ function OneVideo() {
         setVideo(oneVideo.data);
       })
       .catch((err) => console.error(err));
-  };
-
-  const checkIfFavorite = () => {
-    if (user && video && video.id !== null) {
-      apiConnection
-        .get(`/favorites/${video.id}`)
-        .then((favorite) => {
-          if (favorite.data !== null) {
-            setIsFavorite(true);
-          }
-        })
-        .catch((err) => console.error(err));
-    }
   };
 
   const handleFavorite = (idVideo) => {
