@@ -157,9 +157,9 @@ function OneVideo() {
                   {/* Boutons de partage */}
                   <div className="flex gap-3 items-center">
                     <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=https://${
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${
                         import.meta.env.VITE_FRONTEND_URL
-                      }/Videos/${id}`}
+                      }Videos/${id}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -170,9 +170,9 @@ function OneVideo() {
                       <ImFacebook2 />
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?url=https://${
+                      href={`https://twitter.com/intent/tweet?url=${
                         import.meta.env.VITE_FRONTEND_URL
-                      }/Videos/${id}&text=`}
+                      }Videos/${id}&text=`}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -183,9 +183,9 @@ function OneVideo() {
                       <FaTwitterSquare />
                     </a>
                     <a
-                      href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${
                         import.meta.env.VITE_FRONTEND_URL
-                      }/Videos/${id}`}
+                      }Videos/${id}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{
@@ -243,9 +243,9 @@ function OneVideo() {
                 {/* Boutons de partage */}
                 <div className="flex gap-3 items-center">
                   <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
+                    href={`https://twitter.com/intent/tweet?url=${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/${id}`}
+                    }Videos/${id}&text=`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -256,9 +256,9 @@ function OneVideo() {
                     <ImFacebook2 />
                   </a>
                   <a
-                    href={`https://twitter.com/intent/tweet?text=https%3A//${
+                    href={`https://twitter.com/intent/tweet?url=${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }Videos/${id}&text=`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -269,9 +269,9 @@ function OneVideo() {
                     <FaTwitterSquare />
                   </a>
                   <a
-                    href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
+                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/videos/8`}
+                    }Videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
