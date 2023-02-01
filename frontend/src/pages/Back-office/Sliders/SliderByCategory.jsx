@@ -1,8 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Slider3Template from "@components/Slider3Template";
+import SliderByCatTemplate from "@components/SliderByCatTemplate";
 
-function Slider3() {
+function SliderByCategory() {
   return (
     <>
       <Helmet>
@@ -14,10 +14,10 @@ function Slider3() {
         />
       </Helmet>
       <div className="flex flex-col items-center w-full pt-10">
-        <Slider3Template sliderId={1} searchBarWidth="cstm_width_XlInput" />
+        <SliderByCatTemplate sliderId={1} searchBarWidth="cstm_width_XlInput" />
       </div>
     </>
   );
 }
 
-export default Slider3;
+export default SliderByCategory;

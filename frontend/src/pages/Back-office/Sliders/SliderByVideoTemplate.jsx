@@ -7,7 +7,7 @@ import SearchBarTemplate from "@components/SearchBarTemplate";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
-function Slider1Template({ sliderType }) {
+function SliderByVideoTemplate({ sliderId }) {
   const [myVideo, setMyVideo] = useState([]); // Liste des videos
   const [videoList, setVideoList] = useState([]); // Liste des videos en slider
 
@@ -28,7 +28,7 @@ function Slider1Template({ sliderType }) {
    */
   const getAllSlider = (persistance) => {
     apiConnection
-      .get(`/sliders?type=${sliderType}`)
+      .get(`/sliders?type=${sliderId}`)
       .then((slider) => {
         if (persistance) {
           // recupération des videos non validée
@@ -63,7 +63,7 @@ function Slider1Template({ sliderType }) {
   const handleValidateButton = () => {
     const videoToPost = [];
     videoList.filter(
-      (video) => video.toAdd && videoToPost.push([video.video_id, sliderType])
+      (video) => video.toAdd && videoToPost.push([video.video_id, sliderId])
     );
     if (videoToPost.length > 0) {
       apiConnection
@@ -155,4 +155,4 @@ function Slider1Template({ sliderType }) {
   );
 }
 
-export default Slider1Template;
+export default SliderByVideoTemplate;

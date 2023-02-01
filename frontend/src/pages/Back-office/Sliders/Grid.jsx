@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Slider3Template from "@components/Slider3Template";
+import Slider3Template from "@components/SliderByCatTemplate";
 
 function Grid() {
   return (
