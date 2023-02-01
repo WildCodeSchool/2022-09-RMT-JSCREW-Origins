@@ -62,7 +62,49 @@ isDeletable TINYINT
 
 INSERT INTO user (id,isAdmin, email, hashedpassword, isDeletable) VALUES (1,1, 'admin1@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA", 1);
 INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (2,1, 'admin2@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
-INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (3,0, 'admin3@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (3,1, 'admin3@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (4,0, 'julien.richard@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (5,0, 'anthony.gorski@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (6,0, 'kevin.lavigne@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (7,0, 'jean.francois.morin@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (8,0, 'cloé.truel@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (9,0, 'nicolas.robichet@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (10,0, 'alexandre.rouxel@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (11,0, 'amina.hakimi@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (12,0, 'charlie.piancatelli@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (13,0, 'christopher.guichard@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (14,0, 'emmanuel.martinez@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (15,0, 'gaëtan.lemoine@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (16,0, 'jordan.vaxelaire@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (17,0, 'guillaume.wernert@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (18,0, 'joy.markarian@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (19,0, 'sylvain.tormo@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (20,0, 'karim.aoudia@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (21,0, 'sebastien.petaccia@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (22,0, 'tsiry.ralambotsirofo@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (23,0, 'vassili.papadopoulos@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
+
+INSERT INTO user (id,isAdmin, email, hashedpassword) VALUES (24,0, 'yanis.viot@mail.com', "$argon2id$v=19$m=65536,t=5,p=1$BCdEiXsQ67+VfP/x/RxEFQ$+Rov1GY2hUrZvULi9NfH1sfah5uz1dKXs4mhXcL33tA");
 
 CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -71,7 +113,7 @@ Type INT NOT NULL,
 Foreign Key (id_Video) REFERENCES video(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 2);
+INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (11, 2), (12, 2), (13, 2), (14, 2), (15, 2), (16, 2), (17, 2), (18, 2), (8, 3), (7, 3), (3, 3), (1, 3), (10, 3), (15, 3), (20, 3), (19, 3), (11, 4), (12, 4), (7, 4), (18, 4), (14, 4), (11, 4), (15, 4), (20, 4), (19, 4), (11, 4);
 
 CREATE TABLE display_by_id (
 id INT NOT NULL PRIMARY KEY,
@@ -91,4 +133,4 @@ Foreign Key (id_user) REFERENCES user(id) ON DELETE CASCADE,
 Foreign Key (id_video) REFERENCES video(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8),(2, 7), (2, 4),(2, 5), (2, 6), (3, 3);
+INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8),(2, 7), (2, 4),(2, 5), (2, 6), (3, 3), (3, 4), (3, 6), (3, 7), (4, 3), (4, 1), (4, 7), (5, 3), (5, 6), (5, 2), (6, 3), (6, 2), (6, 7), (7, 7), (7, 3), (8, 4), (8, 3), (8, 1), (9, 1), (9, 3), (10, 3), (10, 4), (11, 1), (11, 3), (11, 4), (12, 3), (13, 5), (14, 3), (14, 4), (15, 3), (16, 1), (17, 7), (18, 2), (19, 5), (20, 3), (20, 2), (21, 6), (22, 3), (23, 5), (24, 1);
