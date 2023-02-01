@@ -121,12 +121,98 @@ function OneVideo() {
                   </div>
                 )}
                 {/* Boutons de partage v mobile */}
-                <div className="flex items-center gap-3 mt-3 md:hidden">
+                <div className="flex items-center gap-3 my-3 pl-5 md:hidden">
                   {/* Bouton favoris */}
+                  {user && (
+                    <button
+                      onClick={() => handleFavorite(video.id)}
+                      type="button"
+                    >
+                      {!isFavorite && (
+                        <svg
+                          width={25}
+                          height={25}
+                          fill="#f0f0f0"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21ZM7.22 6a3.2 3.2 0 0 0-2.28.94 3.24 3.24 0 0 0 0 4.57L12 18.58l7.06-7.07a3.24 3.24 0 0 0 0-4.57 3.32 3.32 0 0 0-4.56 0l-1.79 1.8a1 1 0 0 1-1.42 0L9.5 6.94A3.2 3.2 0 0 0 7.22 6Z" />
+                        </svg>
+                      )}
+                      {isFavorite && (
+                        <svg
+                          width={25}
+                          height={25}
+                          fill="#ff680a"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21Z" />
+                        </svg>
+                      )}
+                    </button>
+                  )}
+                  {/* Boutons de partage */}
+                  <div className="flex gap-3 items-center">
+                    <a
+                      href={`https://www.facebook.com/sharer/sharer.php?u=https://${
+                        import.meta.env.VITE_FRONTEND_URL
+                      }/Videos/${id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        color: "#1b74e4",
+                        fontSize: "20px",
+                      }}
+                    >
+                      <ImFacebook2 />
+                    </a>
+                    <a
+                      href={`https://twitter.com/intent/tweet?url=https://${
+                        import.meta.env.VITE_FRONTEND_URL
+                      }/Videos/${id}&text=`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        color: "rgb(54 155 240)",
+                        fontSize: "23px",
+                      }}
+                    >
+                      <FaTwitterSquare />
+                    </a>
+                    <a
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
+                        import.meta.env.VITE_FRONTEND_URL
+                      }/Videos/${id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        color: "#2366c2",
+                        fontSize: "20px",
+                      }}
+                    >
+                      <SiLinkedin />
+                    </a>
+                  </div>
+                </div>
+                {/* Infos de la vidéo (titre, description, etc.) */}
+                <div className="px-5 md:px-10 md:pb-10 md:pt-0 md:w-2/5">
+                  <h1 className="md:text-3xl text-2xl md:mb-5">{video.Name}</h1>
+                  <h2 className="text-xl md:text-2xl md:mb-5">
+                    {video.Category}
+                  </h2>
+                  <p className="text-md overflow-y-auto md:h-36 lg:h-60">
+                    {video.Description}
+                  </p>
+                </div>
+              </div>
+              {/* Boutons de partage v desktop */}
+              <div className="hidden md:flex items-center gap-3 my-5 pl-10">
+                {/* Bouton favoris */}
+                {user && (
                   <button
                     onClick={() => handleFavorite(video.id)}
                     type="button"
-                    className="pl-5 p-2 "
                   >
                     {!isFavorite && (
                       <svg
@@ -151,11 +237,13 @@ function OneVideo() {
                       </svg>
                     )}
                   </button>
-                  {/* Boutons de partage */}
+                )}
+                {/* Boutons de partage */}
+                <div className="flex gap-3 items-center">
                   <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=https://${
+                    href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/Videos/${id}`}
+                    }/videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -166,9 +254,9 @@ function OneVideo() {
                     <ImFacebook2 />
                   </a>
                   <a
-                    href={`https://twitter.com/intent/tweet?url=https://${
+                    href={`https://twitter.com/intent/tweet?text=https%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/Videos/${id}&text=`}
+                    }/videos/8`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -181,7 +269,7 @@ function OneVideo() {
                   <a
                     href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
                       import.meta.env.VITE_FRONTEND_URL
-                    }/Videos/${id}`}
+                    }/videos/8`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -192,88 +280,6 @@ function OneVideo() {
                     <SiLinkedin />
                   </a>
                 </div>
-                {/* Infos de la vidéo (titre, description, etc.) */}
-                <div className="px-5 md:px-10 md:pb-10 md:pt-0 md:w-2/5">
-                  <h1 className="md:text-3xl text-2xl md:mb-5">{video.Name}</h1>
-                  <h2 className="text-xl md:text-2xl md:mb-5">
-                    {video.Category}
-                  </h2>
-                  <p className="text-md overflow-y-auto md:h-36 lg:h-60">
-                    {video.Description}
-                  </p>
-                </div>
-              </div>
-              {/* Boutons de partage v desktop */}
-              <div className="hidden md:flex items-center gap-3 m-5">
-                {/* Bouton favoris */}
-                <button
-                  onClick={() => handleFavorite(video.id)}
-                  type="button"
-                  className="pl-5 p-2 "
-                >
-                  {!isFavorite && (
-                    <svg
-                      width={25}
-                      height={25}
-                      fill="#f0f0f0"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21ZM7.22 6a3.2 3.2 0 0 0-2.28.94 3.24 3.24 0 0 0 0 4.57L12 18.58l7.06-7.07a3.24 3.24 0 0 0 0-4.57 3.32 3.32 0 0 0-4.56 0l-1.79 1.8a1 1 0 0 1-1.42 0L9.5 6.94A3.2 3.2 0 0 0 7.22 6Z" />
-                    </svg>
-                  )}
-                  {isFavorite && (
-                    <svg
-                      width={25}
-                      height={25}
-                      fill="#ff680a"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 21a.998.998 0 0 1-.71-.29l-7.77-7.78a5.26 5.26 0 0 1 0-7.4 5.24 5.24 0 0 1 7.4 0L12 6.61l1.08-1.08a5.24 5.24 0 0 1 7.4 0 5.26 5.26 0 0 1 0 7.4l-7.77 7.78A1.001 1.001 0 0 1 12 21Z" />
-                    </svg>
-                  )}
-                </button>
-                {/* Boutons de partage */}
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=http%3A//${
-                    import.meta.env.VITE_FRONTEND_URL
-                  }/videos/${id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    color: "#1b74e4",
-                    fontSize: "20px",
-                  }}
-                >
-                  <ImFacebook2 />
-                </a>
-                <a
-                  href={`https://twitter.com/intent/tweet?text=https%3A//${
-                    import.meta.env.VITE_FRONTEND_URL
-                  }/videos/8`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    color: "rgb(54 155 240)",
-                    fontSize: "23px",
-                  }}
-                >
-                  <FaTwitterSquare />
-                </a>
-                <a
-                  href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A//${
-                    import.meta.env.VITE_FRONTEND_URL
-                  }/videos/8`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    color: "#2366c2",
-                    fontSize: "20px",
-                  }}
-                >
-                  <SiLinkedin />
-                </a>
               </div>
             </>
           )}
