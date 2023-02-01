@@ -21,11 +21,7 @@ const read = (req, res) => {
     models.favorite
       .findFavoriteByUser(req.params.id, req.auth.id)
       .then(([rows]) => {
-        if (rows[0] == null) {
-          res.sendStatus(404);
-        } else {
-          res.send(rows[0]);
-        }
+        res.status(200).send(rows);
       })
       .catch((err) => {
         console.error(err);
