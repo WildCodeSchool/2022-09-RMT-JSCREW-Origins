@@ -181,6 +181,11 @@ function TemplateCstmrSlider1({ url }) {
                                 }`}
                                 alt={slider.Name}
                               />
+                              {!user && slider.Premium === 1 && (
+                                <div className="absolute bottom-0 right-0">
+                                  <RiLock2Fill className="text-4xl text-white text-secondary" />
+                                </div>
+                              )}
                               <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                                 <div className="flex h-full items-end pb-6">
                                   <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
@@ -272,6 +277,11 @@ function TemplateCstmrSlider1({ url }) {
                                   }`}
                                   alt={slider.Name}
                                 />
+                                {!user && slider.Premium === 1 && (
+                                  <div className="absolute bottom-0 right-0">
+                                    <RiLock2Fill className="text-4xl text-white text-secondary" />
+                                  </div>
+                                )}
                                 <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
                                   <div className="flex h-full items-end pb-6">
                                     <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">
