@@ -68,7 +68,7 @@ CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_Video INT NOT NULL,
 Type INT NOT NULL,
-Foreign Key (id_Video) REFERENCES video(id)
+Foreign Key (id_Video) REFERENCES video(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 2);
@@ -77,7 +77,7 @@ CREATE TABLE display_by_id (
 id INT NOT NULL PRIMARY KEY,
 id_Category INT NOT NULL,
 Number INT NOT NULL,
-Foreign Key (id_Category) REFERENCES category(id)
+Foreign Key (id_Category) REFERENCES category(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO display_by_id (id, id_Category, Number) VALUES (1, 2, 8), (2, 1, 8), (3, 2, 8), (4, 3, 8), (5, 4, 8);
@@ -88,7 +88,7 @@ id_user INT NOT NULL,
 id_video INT NOT NULL,
 CONSTRAINT video_user UNIQUE (id_user,id_video),
 Foreign Key (id_user) REFERENCES user(id) ON DELETE CASCADE,
-Foreign Key (id_video) REFERENCES video(id)
+Foreign Key (id_video) REFERENCES video(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO favorite ( id_user, id_video) VALUES (2, 2), (2, 3), (3, 8),(2, 7), (2, 4),(2, 5), (2, 6), (3, 3);

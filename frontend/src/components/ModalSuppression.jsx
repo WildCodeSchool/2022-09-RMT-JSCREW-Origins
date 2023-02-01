@@ -40,7 +40,7 @@ function Modal({ setDisplayModal, confirmDelete }) {
                 methodOnClick={handleButtonCancel}
               />
               <ButtonTemplate
-                buttonType="submit"
+                buttonType="button"
                 buttonText="DELETE"
                 buttonStyle="cstm_buttonSecondary"
                 methodOnClick={confirmDelete}

@@ -147,7 +147,9 @@ function Video() {
           Premium: 0,
         });
         notify("Video deleted!");
+        setReset(!reset);
         getAllVideos();
+        setDisplayModal(false);
       })
       .catch((error) => console.error(error));
   };

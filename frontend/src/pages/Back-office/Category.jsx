@@ -102,7 +102,9 @@ function Category() {
           Description: "",
         });
         notify("Category deleted!");
+        setReset(!reset);
         getAllCategories();
+        setDisplayModal(false);
       })
       .catch((error) => console.error(error));
   };
