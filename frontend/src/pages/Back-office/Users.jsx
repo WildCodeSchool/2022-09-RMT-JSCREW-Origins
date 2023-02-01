@@ -89,11 +89,11 @@ function Users() {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex flex-col items-center w-full m-4 pt-10">
-        <div className="flex flex-col items-center lg:w-6/12">
+      <div className="flex flex-col w-full items-center m-4 mt-20">
+        <div className="flex w-full flex-col h-[38rem] overflow-y-scroll items-center">
           {myUsers.length > 0 && (
-            <table className="min-w-full text-center">
-              <thead className="bg-primary">
+            <table className="text-center w-9/12">
+              <thead className="bg-primary sticky top-0">
                 <tr>
                   <th
                     scope="col"
