@@ -243,9 +243,9 @@ function OneVideo() {
                 {/* Boutons de partage */}
                 <div className="flex gap-3 items-center">
                   <a
-                    href={`https://twitter.com/intent/tweet?url=${
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${
                       import.meta.env.VITE_FRONTEND_URL
-                    }Videos/${id}&text=`}
+                    }Videos/${id}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{

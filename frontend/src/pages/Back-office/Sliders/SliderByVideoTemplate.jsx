@@ -103,7 +103,7 @@ function SliderByVideoTemplate({ sliderId }) {
   useEffect(() => {
     getAllVideo();
     getAllSlider(false);
-  }, []);
+  }, [sliderId]);
 
   return (
     <>

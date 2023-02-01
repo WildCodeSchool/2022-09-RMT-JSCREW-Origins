@@ -15,10 +15,10 @@ function AllVideos() {
       </Helmet>
       <div className="flex flex-col items-center bg-primary w-full pt-20">
         <h1 className="my-5 text-white text-3xl">All videos</h1>
-        <TemplateCstmrSlider1 url="/slidersCategory/1" />
         <TemplateCstmrSlider1 url="/slidersCategory/2" />
         <TemplateCstmrSlider1 url="/slidersCategory/3" />
         <TemplateCstmrSlider1 url="/slidersCategory/4" />
+        <TemplateCstmrSlider1 url="/slidersCategory/5" />
       </div>
     </>
   );
