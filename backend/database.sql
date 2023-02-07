@@ -2,6 +2,7 @@
 USE origin_database;
 DROP TABLE IF EXISTS favorite;
 DROP TABLE IF EXISTS display_by_id;
+DROP TABLE IF EXISTS title;
 DROP TABLE IF EXISTS play_by_id;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS video;
@@ -110,10 +111,20 @@ CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_Video INT NOT NULL,
 Type INT NOT NULL,
+INDEX (Type),
 Foreign Key (id_Video) REFERENCES video(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (11, 2), (12, 2), (13, 2), (14, 2), (15, 2), (16, 2), (17, 2), (18, 2), (8, 3), (7, 3), (3, 3), (1, 3), (10, 3), (15, 3), (20, 3), (19, 3), (11, 4), (12, 4), (7, 4), (18, 4), (14, 4), (11, 4), (15, 4), (20, 4), (19, 4), (11, 4);
+
+CREATE TABLE title (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+slider_title VARCHAR(255) NOT NULL,
+id_type INT NOT NULL,
+Foreign Key (id_type) REFERENCES play_by_id(Type)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO title (slider_title, id_type) VALUES ("Slider Type 1", 1), ("Slider Type 2", 2), ("Slider Type 3", 3), ("Slider Type 4", 4);
 
 CREATE TABLE display_by_id (
 id INT NOT NULL PRIMARY KEY,
