@@ -94,7 +94,9 @@ function TemplateCstmrSlider1({ url }) {
                               <div className="bg-gray-800 bg-opacity-10 absolute w-full h-full p-6">
                                 <div className="flex h-full items-end ">
                                   <h3 className="bg-gray-800 bg-opacity-80 font-semibold leading-5 lg:leading-6 text-white">
-                                    {slider.Name}
+                                    {slider.Name.length > 40
+                                      ? `${slider.Name.slice(0, 40)}...`
+                                      : slider.Name}
                                   </h3>
                                 </div>
                               </div>
