@@ -10,15 +10,29 @@ import ButtonTemplate from "@components/ButtonTemplate";
 function SliderByVideoTemplate({ sliderId }) {
   const [myVideo, setMyVideo] = useState([]); // Liste des videos
   const [videoList, setVideoList] = useState([]); // Liste des videos en slider
+  const [title, setTitle] = useState();
 
   const notify = (msg) => {
     toast(msg);
+  };
+
+  const handleInputOnChange = (place, value) => {
+    const newTitle = { ...title };
+    newTitle[place] = value;
+    setTitle(newTitle);
   };
 
   const getAllVideo = () => {
     apiConnection
       .get(`/videos`)
       .then((videos) => setMyVideo(videos.data))
+      .catch((error) => console.error(error));
+  };
+
+  const getTitle = () => {
+    apiConnection
+      .get(`/sliderTitle/${sliderId}`)
+      .then((oneTitle) => setTitle(oneTitle.data))
       .catch((error) => console.error(error));
   };
 
@@ -80,6 +94,11 @@ function SliderByVideoTemplate({ sliderId }) {
     }
   };
 
+  // const handleEditTitle = () => {
+  //   apiConnection
+  //     .put(`sliderTitle/${sliderId}`)
+  // }
+
   /**
    * fonction permet de supprimer le slider dans la base de donnée et en dur avant de post.
    * @param {number} id
@@ -102,6 +121,7 @@ function SliderByVideoTemplate({ sliderId }) {
   // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllVideo();
+    getTitle();
     getAllSlider(false);
   }, [sliderId]);
 
@@ -123,6 +143,9 @@ function SliderByVideoTemplate({ sliderId }) {
         <InputTemplate
           textPlaceholder="Title"
           customWidth="cstm_width_XlInput"
+          value={title?.slider_title}
+          methodOnChange={handleInputOnChange}
+          name="slider_title"
         />
         {/* SEARCHBAR */}
         <SearchBarTemplate
