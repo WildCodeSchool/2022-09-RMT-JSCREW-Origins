@@ -58,7 +58,7 @@ function Favorites() {
         theme="dark"
       />
       {user && (
-        <div className="bg-primary flex flex-col items-center gap-y-5 pt-20 px-7 sm:px-10">
+        <div className="bg-primary flex flex-col pb-56 items-center gap-y-5 pt-20 px-7 sm:px-10">
           <h1 className="my-5 text-white text-3xl text-xl">
             All my favorites videos
           </h1>
