@@ -10,6 +10,7 @@ const sliderControllers = require("./controllers/sliderControllers");
 const sendMailControllers = require("./controllers/sendMailControllers");
 const sliderCategoryControllers = require("./controllers/sliderCategoryControllers");
 const favoriteControllers = require("./controllers/favoriteControllers");
+const titleControllers = require("./controllers/titleControllers");
 
 const validators = require("./services/validators");
 
@@ -93,5 +94,7 @@ router.get("/favorites", favoriteControllers.browse);
 router.get("/favorites/:id", favoriteControllers.read);
 router.post("/favorites/:id_video", favoriteControllers.add);
 router.delete("/favorites/:id", favoriteControllers.destroy);
+
+router.put("/sliderTitle/:id", titleControllers.edit);
 
 module.exports = router;
