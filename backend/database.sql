@@ -111,7 +111,6 @@ CREATE TABLE play_by_id (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_Video INT NOT NULL,
 Type INT NOT NULL,
-INDEX (Type),
 Foreign Key (id_Video) REFERENCES video(id) ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -120,8 +119,7 @@ INSERT INTO play_by_id (id_Video, Type) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (
 CREATE TABLE title (
 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 slider_title VARCHAR(255) NOT NULL,
-id_type INT NOT NULL,
-Foreign Key (id_type) REFERENCES play_by_id(Type)
+id_type INT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO title (slider_title, id_type) VALUES ("Slider Type 1", 1), ("Slider Type 2", 2), ("Slider Type 3", 3), ("Slider Type 4", 4);
