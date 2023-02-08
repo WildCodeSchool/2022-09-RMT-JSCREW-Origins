@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import apiConnection from "@services/apiConnection";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -13,7 +13,6 @@ function SliderByVideoTemplate({ sliderId }) {
   const [title, setTitle] = useState({
     slider_title: "",
   });
-  const titleRef = useRef(title?.slider_title);
 
   const notify = (msg) => {
     toast(msg);
@@ -77,7 +76,7 @@ function SliderByVideoTemplate({ sliderId }) {
   };
 
   const handleEditTitle = () => {
-    if (titleRef.current !== title.slider_title) {
+    if (title.slider_title !== "") {
       apiConnection
         .put(`sliderTitle/${sliderId}`, title)
         .then(() => {
@@ -93,19 +92,20 @@ function SliderByVideoTemplate({ sliderId }) {
     videoList.filter(
       (video) => video.toAdd && videoToPost.push([video.video_id, sliderId])
     );
-    if (titleRef.current !== title.slider_title) {
+    if (title.slider_title !== "") {
       handleEditTitle();
       notify("Title successfully updated");
-    } else if (videoToPost.length > 0) {
-      apiConnection
-        .post(`/sliders`, {
-          videoToPost,
-        })
-        .then(() => {
-          notify("Slider successfully updated!");
-          getAllSlider();
-        })
-        .catch((error) => console.error(error));
+      if (videoToPost.length > 0) {
+        apiConnection
+          .post(`/sliders`, {
+            videoToPost,
+          })
+          .then(() => {
+            notify("Slider successfully updated!");
+            getAllSlider();
+          })
+          .catch((error) => console.error(error));
+      }
     } else if (title.slider_title === "") {
       notify("Please provide a new title!");
     } else {
