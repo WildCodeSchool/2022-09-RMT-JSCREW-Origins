@@ -16,11 +16,13 @@ import User from "../contexts/UserContext";
 function TemplateCstmrSlider1({ url, idTitle }) {
   const { user } = useContext(User.UserContext);
   const [sliders, setSliders] = useState([]);
+  const [limit, setLimit] = useState();
   const [title, setTitle] = useState();
+
 
   const getSlider = () => {
     apiConnection
-      .get(url)
+      .get(`${url}?limit=${limit}`)
       .then((slider) => setSliders(slider.data))
       .catch((error) => console.error(error));
   };
@@ -31,8 +33,22 @@ function TemplateCstmrSlider1({ url, idTitle }) {
       .catch((error) => console.error(error));
   };
 
+  const getlimit = () => {
+    apiConnection
+      .get(url)
+      .then((slider) => setLimit(slider.data[0].Number))
+      .catch((error) => console.error(error));
+  };
+
   useEffect(() => {
+    if (limit !== undefined) {
+      getSlider();
+    }
     getSlider();
+  }, [limit]);
+
+  useEffect(() => {
+    getlimit();
     getTitle();
   }, []);
   return (
