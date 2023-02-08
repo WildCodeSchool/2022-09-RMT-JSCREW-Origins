@@ -95,7 +95,9 @@ function TemplateCstmrSlider1({ url }) {
                                 <div className="flex h-full items-end ">
                                   <h3 className="bg-gray-800 bg-opacity-80 font-semibold leading-5 lg:leading-6 text-white">
                                     {slider.Name.length > 40
-                                      ? `${slider.Name.slice(0, 40)}...`
+                                      ? `${slider.Name.split(" ")
+                                          .slice(0, 5)
+                                          .join(" ")}...`
                                       : slider.Name}
                                   </h3>
                                 </div>
