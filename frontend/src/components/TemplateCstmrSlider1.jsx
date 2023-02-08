@@ -13,9 +13,10 @@ import { RiLock2Fill } from "react-icons/ri";
 
 import User from "../contexts/UserContext";
 
-function TemplateCstmrSlider1({ url }) {
+function TemplateCstmrSlider1({ url, idTitle }) {
   const { user } = useContext(User.UserContext);
   const [sliders, setSliders] = useState([]);
+  const [title, setTitle] = useState();
 
   const getSlider = () => {
     apiConnection
@@ -23,9 +24,16 @@ function TemplateCstmrSlider1({ url }) {
       .then((slider) => setSliders(slider.data))
       .catch((error) => console.error(error));
   };
+  const getTitle = () => {
+    apiConnection
+      .get(`/sliderTitle/${idTitle}`)
+      .then((videos) => setTitle(videos.data))
+      .catch((error) => console.error(error));
+  };
 
   useEffect(() => {
     getSlider();
+    getTitle();
   }, []);
   return (
     <div className="w-full">
@@ -33,7 +41,7 @@ function TemplateCstmrSlider1({ url }) {
         <div className="w-full">
           <div className="flex flex-col items-start gap-1 w-full h-full py-6 sm:py-6 px-2">
             <h1 className="text-white mb-2 ml-3 text-2xl">
-              {sliders[0]?.category ? sliders[0].category : "titre"}
+              {sliders[0]?.category ? sliders[0].category : title?.slider_title}
             </h1>
             {/* Carousel for desktop and large size devices */}
             <CarouselProvider
