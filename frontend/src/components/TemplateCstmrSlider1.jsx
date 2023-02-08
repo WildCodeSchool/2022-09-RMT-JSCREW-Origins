@@ -36,6 +36,7 @@ function TemplateCstmrSlider1({ url }) {
     if (limit !== undefined) {
       getSlider();
     }
+    getSlider();
   }, [limit]);
 
   useEffect(() => {
