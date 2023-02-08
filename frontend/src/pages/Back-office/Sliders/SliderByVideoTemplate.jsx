@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import apiConnection from "@services/apiConnection";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -10,7 +10,10 @@ import ButtonTemplate from "@components/ButtonTemplate";
 function SliderByVideoTemplate({ sliderId }) {
   const [myVideo, setMyVideo] = useState([]); // Liste des videos
   const [videoList, setVideoList] = useState([]); // Liste des videos en slider
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState({
+    slider_title: "",
+  });
+  const titleRef = useRef(title?.slider_title);
 
   const notify = (msg) => {
     toast(msg);
@@ -73,13 +76,27 @@ function SliderByVideoTemplate({ sliderId }) {
     }
   };
 
+  const handleEditTitle = () => {
+    if (titleRef.current !== title.slider_title) {
+      apiConnection
+        .put(`sliderTitle/${sliderId}`, title)
+        .then(() => {
+          getTitle();
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+
   // fonction permetant de post dans la db la liste choisie avec le type 1
   const handleValidateButton = () => {
     const videoToPost = [];
     videoList.filter(
       (video) => video.toAdd && videoToPost.push([video.video_id, sliderId])
     );
-    if (videoToPost.length > 0) {
+    if (titleRef.current !== title.slider_title) {
+      handleEditTitle();
+      notify("Title successfully updated");
+    } else if (videoToPost.length > 0) {
       apiConnection
         .post(`/sliders`, {
           videoToPost,
@@ -89,15 +106,12 @@ function SliderByVideoTemplate({ sliderId }) {
           getAllSlider();
         })
         .catch((error) => console.error(error));
+    } else if (title.slider_title === "") {
+      notify("Please provide a new title!");
     } else {
       notify("No updated data detected!");
     }
   };
-
-  // const handleEditTitle = () => {
-  //   apiConnection
-  //     .put(`sliderTitle/${sliderId}`)
-  // }
 
   /**
    * fonction permet de supprimer le slider dans la base de donnée et en dur avant de post.
