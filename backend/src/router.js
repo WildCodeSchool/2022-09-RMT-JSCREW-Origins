@@ -56,6 +56,8 @@ router.post(
 router.get("/slidersCategory", sliderCategoryControllers.browse);
 router.get("/slidersCategory/:id", sliderCategoryControllers.read);
 
+router.get("/sliderTitle/:id", titleControllers.read);
+
 router.use(checkAuth);
 
 router.get("/userCount", settingControllers.countUsers);
@@ -95,7 +97,6 @@ router.get("/favorites/:id", favoriteControllers.read);
 router.post("/favorites/:id_video", favoriteControllers.add);
 router.delete("/favorites/:id", favoriteControllers.destroy);
 
-router.get("/sliderTitle/:id", titleControllers.read);
 router.put("/sliderTitle/:id", titleControllers.edit);
 
 module.exports = router;
