@@ -89,7 +89,7 @@ function SearchBar({
       </label>
       {(displayData || searchData.length > 0) && (
         <div
-          className={`${customWidth} bg-primary rounded-md absolute z-10 top-12 mt-1`}
+          className={`${customWidth} bg-primary rounded-md absolute z-10 top-12 mt-1 max-h-96 overflow-y-auto`}
         >
           <ul className="flex flex-col">
             {data

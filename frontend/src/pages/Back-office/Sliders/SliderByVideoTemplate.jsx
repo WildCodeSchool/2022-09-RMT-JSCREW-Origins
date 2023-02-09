@@ -10,15 +10,31 @@ import ButtonTemplate from "@components/ButtonTemplate";
 function SliderByVideoTemplate({ sliderId }) {
   const [myVideo, setMyVideo] = useState([]); // Liste des videos
   const [videoList, setVideoList] = useState([]); // Liste des videos en slider
+  const [title, setTitle] = useState({
+    slider_title: "",
+  });
 
   const notify = (msg) => {
     toast(msg);
+  };
+
+  const handleInputOnChange = (place, value) => {
+    const newTitle = { ...title };
+    newTitle[place] = value;
+    setTitle(newTitle);
   };
 
   const getAllVideo = () => {
     apiConnection
       .get(`/videos`)
       .then((videos) => setMyVideo(videos.data))
+      .catch((error) => console.error(error));
+  };
+
+  const getTitle = () => {
+    apiConnection
+      .get(`/sliderTitle/${sliderId}`)
+      .then((oneTitle) => setTitle(oneTitle.data))
       .catch((error) => console.error(error));
   };
 
@@ -59,22 +75,39 @@ function SliderByVideoTemplate({ sliderId }) {
     }
   };
 
+  const handleEditTitle = () => {
+    if (title.slider_title !== "") {
+      apiConnection
+        .put(`sliderTitle/${sliderId}`, title)
+        .then(() => {
+          getTitle();
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+
   // fonction permetant de post dans la db la liste choisie avec le type 1
   const handleValidateButton = () => {
     const videoToPost = [];
     videoList.filter(
       (video) => video.toAdd && videoToPost.push([video.video_id, sliderId])
     );
-    if (videoToPost.length > 0) {
-      apiConnection
-        .post(`/sliders`, {
-          videoToPost,
-        })
-        .then(() => {
-          notify("Slider successfully updated!");
-          getAllSlider();
-        })
-        .catch((error) => console.error(error));
+    if (title.slider_title !== "") {
+      handleEditTitle();
+      notify("Title successfully updated");
+      if (videoToPost.length > 0) {
+        apiConnection
+          .post(`/sliders`, {
+            videoToPost,
+          })
+          .then(() => {
+            notify("Slider successfully updated!");
+            getAllSlider();
+          })
+          .catch((error) => console.error(error));
+      }
+    } else if (title.slider_title === "") {
+      notify("Please provide a new title!");
     } else {
       notify("No updated data detected!");
     }
@@ -102,6 +135,7 @@ function SliderByVideoTemplate({ sliderId }) {
   // Pour que la donnée se mette à jour en live
   useEffect(() => {
     getAllVideo();
+    getTitle();
     getAllSlider(false);
   }, [sliderId]);
 
@@ -123,6 +157,9 @@ function SliderByVideoTemplate({ sliderId }) {
         <InputTemplate
           textPlaceholder="Title"
           customWidth="cstm_width_XlInput"
+          value={title?.slider_title}
+          methodOnChange={handleInputOnChange}
+          name="slider_title"
         />
         {/* SEARCHBAR */}
         <SearchBarTemplate

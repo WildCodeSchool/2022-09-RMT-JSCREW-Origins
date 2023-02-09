@@ -13,19 +13,42 @@ import { RiLock2Fill } from "react-icons/ri";
 
 import User from "../contexts/UserContext";
 
-function TemplateCstmrSlider1({ url }) {
+function TemplateCstmrSlider1({ url, idTitle }) {
   const { user } = useContext(User.UserContext);
   const [sliders, setSliders] = useState([]);
+  const [limit, setLimit] = useState();
+  const [title, setTitle] = useState();
 
   const getSlider = () => {
     apiConnection
-      .get(url)
+      .get(`${url}?limit=${limit}`)
       .then((slider) => setSliders(slider.data))
+      .catch((error) => console.error(error));
+  };
+  const getTitle = () => {
+    apiConnection
+      .get(`/sliderTitle/${idTitle}`)
+      .then((videos) => setTitle(videos.data))
+      .catch((error) => console.error(error));
+  };
+
+  const getlimit = () => {
+    apiConnection
+      .get(url)
+      .then((slider) => setLimit(slider.data[0].Number))
       .catch((error) => console.error(error));
   };
 
   useEffect(() => {
+    if (limit !== undefined) {
+      getSlider();
+    }
     getSlider();
+  }, [limit]);
+
+  useEffect(() => {
+    getlimit();
+    getTitle();
   }, []);
   return (
     <div className="w-full">
@@ -33,7 +56,7 @@ function TemplateCstmrSlider1({ url }) {
         <div className="w-full">
           <div className="flex flex-col items-start gap-1 w-full h-full py-6 sm:py-6 px-2">
             <h1 className="text-white mb-2 ml-3 text-2xl">
-              {sliders[0]?.category ? sliders[0].category : "titre"}
+              {sliders[0]?.category ? sliders[0].category : title?.slider_title}
             </h1>
             {/* Carousel for desktop and large size devices */}
             <CarouselProvider
@@ -94,7 +117,11 @@ function TemplateCstmrSlider1({ url }) {
                               <div className="bg-gray-800 bg-opacity-10 absolute w-full h-full p-6">
                                 <div className="flex h-full items-end ">
                                   <h3 className="bg-gray-800 bg-opacity-80 font-semibold leading-5 lg:leading-6 text-white">
-                                    {slider.Name}
+                                    {slider.Name.length > 40
+                                      ? `${slider.Name.split(" ")
+                                          .slice(0, 5)
+                                          .join(" ")}...`
+                                      : slider.Name}
                                   </h3>
                                 </div>
                               </div>
