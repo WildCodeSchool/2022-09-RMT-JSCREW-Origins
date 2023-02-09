@@ -19,7 +19,6 @@ function TemplateCstmrSlider1({ url, idTitle }) {
   const [limit, setLimit] = useState();
   const [title, setTitle] = useState();
 
-
   const getSlider = () => {
     apiConnection
       .get(`${url}?limit=${limit}`)
